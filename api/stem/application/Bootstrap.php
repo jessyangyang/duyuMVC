@@ -10,6 +10,7 @@
 
 use \Yaf\Dispatcher;
 use \stem\db\MySQL;
+use \duyuu\rest\RegisterRest;
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract 
 {
@@ -20,18 +21,9 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
     }
 
     public function _initRoute(Dispatcher $dispatcher) {
-        $router = \Yaf\Dispatcher::getInstance()->getRouter();
-        $config = array(
-            "name" => array(
-               "type"  => "rewrite",        //Yaf_Route_Rewrite route
-               "match" => "/test/:id", //match only /user/list/?/
-               "route" => array(
-                   'controller' => "api",  //route to user controller,
-                   'action'     => "test",  //route to list action
-               ),
-            ),
-        );
-        $router->addConfig(new \Yaf\Config\Simple($config));
+        $router = Dispatcher::getInstance()->getRouter();
+       
+        $router->addConfig(new \Yaf\Config\Simple(RegisterRest::initRegister()));
     }
 }
 

@@ -9,4 +9,17 @@
  * 
  */
 
-namespace 
+namespace duyuu\rest;
+
+use \duyuu\rest\Restful;
+
+class RegisterRest {
+
+    public static function initRegister()
+    {
+        Restful::regRestURL('test','/test/:id','test','test');
+        
+        return Restful::$restURL;
+    }
+
+}
