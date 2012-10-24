@@ -9,7 +9,7 @@
  */
 
 use \Yaf\Dispatcher;
-use \stem\db\MySQL;
+use \local\db\MySQL;
 use \duyuu\rest\RegisterRest;
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract 

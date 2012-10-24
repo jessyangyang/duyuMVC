@@ -10,7 +10,7 @@
  */
 namespace duyuu\rest;
 
-class Restful extends \stem\rest\REST
+class Restful extends \local\rest\REST
 {
 
     private static  $routeType = 'rewrite';
