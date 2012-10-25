@@ -252,7 +252,7 @@ abstract class ORM {
                 return self::$db->insert_id();
             }
         }
-        return 0;
+        return false;
     }
 
     /**
@@ -269,14 +269,13 @@ abstract class ORM {
                     'where' => "`$this->primaryKey` " . " = '" .$dbData[$this->primaryKey] . "'"
                     );
             }
-
             $tmpOption = $this->_options($tmpOption);
 
             // Updata
-            if ($dbData and $tmpOption['where']) {
+            if ($dbData and isset($tmpOption['where']) and $tmpOption['where'])
+            {
                 foreach ($dbData as $key => $value) {
-                    $value = self::$db->escapeString($value);
-                    $setarr[] = "`$key`='$value'";
+                    $setarr[] = $this->fields[$key]['type'] == 'bit' ? "`$key`=b'$value'" :"`$key`='$value'";
                 }
                 $sql = "UPDATE " . $tmpOption['table'] . " SET " . implode(',', $setarr) . " WHERE " . $tmpOption['where'];
                 self::$db->query($sql);
