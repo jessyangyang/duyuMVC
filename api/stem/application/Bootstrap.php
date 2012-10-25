@@ -21,9 +21,9 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
     }
 
     public function _initRoute(Dispatcher $dispatcher) {
-        $router = Dispatcher::getInstance()->getRouter();
-       
-        $router->addConfig(new \Yaf\Config\Simple(RegisterRest::initRegister()));
+        $router = $dispatcher->getRouter();
+        $rest = RegisterRest::initRegister();
+        $router->addConfig(new Yaf\Config\Simple($rest));
     }
 }
 

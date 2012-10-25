@@ -17,12 +17,6 @@ class apiController extends \Yaf\Controller_Abstract
         exit();
     }
 
-    public function testAction($id)
-    {
-        echo "test:$id";
-        exit();
-    }
-
 }
 
 ?>

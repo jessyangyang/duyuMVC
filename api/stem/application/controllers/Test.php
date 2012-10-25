@@ -23,6 +23,12 @@ class testController extends \Yaf\Controller_Abstract
         exit();
     }
 
+    public function test2Action($id)
+    {
+        echo "test2:$id";
+        exit();
+    }
+
 }
 
 ?>

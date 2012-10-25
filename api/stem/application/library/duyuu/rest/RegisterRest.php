@@ -18,26 +18,26 @@ class RegisterRest {
     public static function initRegister()
     {
         //test
-        Restful::regRestURL('test','/test/:id','test','test');
+        Restful::regRestURL('test','/api/test/:id','test','test');
 
         /**User
         ************************/
 
         // userLogin
-        Restful::regRestURL('userLogin','/api/user/register/:email/:password','user','login');
+        Restful::regRestURL('userLogin','/api/user/login/:email/:password','user','login');
         // userRegister
-        Restful::regRestURL('userRegister','/api/user/login/:email/:name/:password','user','register');
+        Restful::regRestURL('userRegister','/api/user/register/:email/:name/:password','user','register');
         // userLogout
         Restful::regRestURL('userLogout','/api/user/logout','user','logout');
         // userProfile
         Restful::regRestURL('userProfile','/api/user/profile','user','profile');
         
         // user Buylist
-        Restful::regRestURL('userBuyList','/api/user/buyList/:offset/:limit','user','buyList');
+        Restful::regRestURL('userBuyList','/api/user/buyList/:offset/:limit','userShelf','buyList');
         // user Anthor BuyList
-        Restful::regRestURL('userOtherBuyList','/api/user/buyList/:type','user','otherList');
+        Restful::regRestURL('userOtherBuyList','/api/user/otherList/:type','userShelf','otherList');
         // user Delete book
-        Restful::regRestURL('userDeleteBook','/api/user/book/delete/:bid','user','delete');
+        Restful::regRestURL('userDeleteBook','/api/user/book/delete/:bid','userShelf','delete');
 
 
 
