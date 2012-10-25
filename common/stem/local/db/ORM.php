@@ -238,16 +238,16 @@ abstract class ORM {
     function insert($dbData) {
         if ($this->_filter($dbData)) {
             foreach ($dbData as $key => $value) {
+                $dbData["`$key`"] = "'$dbData[$key]'";
                 if (array_key_exists($key,$this->fields) and $this->fields[$key]['type'] == "bit") {
-                    $dbData[$key] = "b'$value'";
+                    $dbData["`$key`"] = "b'$value'";
                 }
-                $dbData["`$key`"] = $dbData[$key];
                 unset($dbData[$key]);
             }
             $tmpField = implode(',',array_keys($dbData));
-            $tmpValue = implode("','",$dbData);
+            $tmpValue = implode(",",$dbData);
 
-            $sql = "INSERT INTO $this->table($tmpField) VALUES('$tmpValue')";
+            $sql = "INSERT INTO $this->table($tmpField) VALUES($tmpValue)";
             if (self::$db->query($sql)) {
                 return self::$db->insert_id();
             }
@@ -299,7 +299,7 @@ abstract class ORM {
         if ($param = func_get_args()) {
             $sql = "DELETE FROM $this->table WHERE ";
             if (intval($param) || count($param) > 0) {
-                $sql.= $this->primaryKey . " IN(" . implode(',', self::$db->escapeString($param)) . ")";
+                $sql.= $this->primaryKey . " IN(" . implode(',', $param) . ")";
                 return self::$db->query($sql);
             }
         }
@@ -334,10 +334,10 @@ abstract class ORM {
     /**
      * Query field ( In view of fetchOne )
      * @param String $dbField
-     * @return Array | false
+     * @return String | false
      */
     function fetchOne($dbField) {
-        $this->fields($dbField);
+        $this->field($dbField);
         if(($tmpRow = $this->fetchRow()) and isset($tmpRow[$dbField])){
             return $tmpRow[$dbField];
         }
@@ -369,45 +369,4 @@ abstract class ORM {
      * @return array
      */
     function fetchHash() {}
-
-
-    /** APC
-    *******************************************/
-
-    /**
-     * Store a value in the cache
-     *
-     * @param string $key name
-     * @param mixed $value to store
-     */
-    public static function cache_set($key, $value){}
-
-
-    /**
-     * Fetch a value from the cache
-     *
-     * @param string $key name
-     * @return mixed
-     */
-    public static function cache_get($key){}
-
-
-    /**
-     * Delete a value from the cache
-     *
-     * @param string $key name
-     * @return boolean
-     */
-    public static function cache_delete($key){}
-
-
-    /**
-     * Check that a value exists in the cache
-     *
-     * @param string $key name
-     * @return boolean
-     */
-    public static function cache_exists($key){}
-    
 }
-
