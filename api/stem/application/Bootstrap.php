@@ -16,6 +16,7 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
 {
     public function _initConfig(Dispatcher $dispatcher)
     {
+        Yaf\Registry::set("common", new \duyuu\common());
         $config = Yaf\Application::app()->getConfig()->get("mysql")->toArray();
         MySQL::setInstance('default', $config, true);
     }

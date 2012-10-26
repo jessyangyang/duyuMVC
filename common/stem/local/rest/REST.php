@@ -136,6 +136,34 @@ class REST
     }
 
     /**
+    * Return String with decodes a JSON
+    * @return String
+    */
+    public function decode($data)
+    {
+        return json_decode($data);
+    }
+
+    /**
+    * Returns the JSON representation of a value
+    * @return Json
+    */
+    public function display($data)
+    {
+        echo json_encode($data);
+        exit();
+    }
+
+    /**
+    * Returns the last error (if any) occurred during the last JSON encoding/decoding
+    * @return String for json last error
+    */
+    public function errorForJson()
+    {
+
+    }
+
+    /**
      * [filter of the request data]
      * @param  [Array] $pData [description]
      * @return [Array]        [description]
