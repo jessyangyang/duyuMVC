@@ -23,16 +23,6 @@ class common extends \local\base\Base
     }
 
     /**
-     * Create a random 32 character MD5 token
-     *
-     * @return string
-     */
-    function token()
-    {
-        return md5(str_shuffle(chr(mt_rand(32, 126)) . uniqid() . microtime(TRUE)));
-    }
-
-    /**
      * Encode a string so it is safe to pass through the URL
      *
      * @param string | $string to encode
