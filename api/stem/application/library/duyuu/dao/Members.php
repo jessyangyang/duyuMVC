@@ -1,6 +1,6 @@
 <?php
 /**
-* Books DAO 
+* Members DAO 
 *
 * @package     DuyuMvc
 * @author      Jess

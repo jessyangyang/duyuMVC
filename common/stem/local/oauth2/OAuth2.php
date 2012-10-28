@@ -41,9 +41,9 @@
 
 namespace local\oauth2;
 
-// use local\oauth2\OAuth2ServerException.php;
-// use local\oauth2\OAuth2AuthenticateException.php;
-// use local\oauth2\OAuth2RedirectException.php;
+use local\oauth2\OAuth2ServerException;
+use local\oauth2\OAuth2AuthenticateException;
+use local\oauth2\OAuth2RedirectException;
 
 class OAuth2 {
 	
