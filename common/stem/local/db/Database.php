@@ -23,7 +23,7 @@ abstract class Database {
 
     static function hasInstance(){}
 
-    static function setInstance(){}
+    static function setInstance($dbConfigName,$dbParams,$dbHasDaufalt = false){}
 
     /**Methods of the data
     *******************************************/
@@ -34,7 +34,7 @@ abstract class Database {
     *******************************************/
     function selectTable($table){}
 
-    function insertId(){}
+    function insertID(){}
 
     function getTables(){}
 
@@ -60,5 +60,3 @@ abstract class Database {
     function rollback(){}
 
 }
-
-?>

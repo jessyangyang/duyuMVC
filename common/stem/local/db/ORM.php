@@ -238,19 +238,19 @@ abstract class ORM {
     function insert($dbData) {
         if ($this->_filter($dbData)) {
             foreach ($dbData as $key => $value) {
-                $dbData["`$key`"] = "'$dbData[$key]'";
                 if (array_key_exists($key,$this->fields) and $this->fields[$key]['type'] == "bit") {
-                    $dbData["`$key`"] = "b'$value'";
+                    $dbData[$key] = "b'$value'";
                 }
+                $dbData["`$key`"] = $dbData[$key];
                 unset($dbData[$key]);
             }
             $tmpField = implode(',',array_keys($dbData));
-            $tmpValue = implode(",",$dbData);
+            $tmpValue = implode("','",$dbData);
 
-            $sql = "INSERT INTO $this->table($tmpField) VALUES($tmpValue)";
-            if (self::$db->query($sql)) {
-                return self::$db->insert_id();
-            }
+            $sql = "INSERT INTO $this->table($tmpField) VALUES('$tmpValue')";
+            self::$db->query($sql);
+            
+            if(self::$db->insertID()) return true;
         }
         return false;
     }
@@ -269,13 +269,14 @@ abstract class ORM {
                     'where' => "`$this->primaryKey` " . " = '" .$dbData[$this->primaryKey] . "'"
                     );
             }
+
             $tmpOption = $this->_options($tmpOption);
 
             // Updata
-            if ($dbData and isset($tmpOption['where']) and $tmpOption['where'])
-            {
+            if ($dbData and $tmpOption['where']) {
                 foreach ($dbData as $key => $value) {
-                    $setarr[] = $this->fields[$key]['type'] == 'bit' ? "`$key`=b'$value'" :"`$key`='$value'";
+                    $value = self::$db->escapeString($value);
+                    $setarr[] = "`$key`='$value'";
                 }
                 $sql = "UPDATE " . $tmpOption['table'] . " SET " . implode(',', $setarr) . " WHERE " . $tmpOption['where'];
                 self::$db->query($sql);
@@ -333,10 +334,10 @@ abstract class ORM {
     /**
      * Query field ( In view of fetchOne )
      * @param String $dbField
-     * @return String | false
+     * @return Array | false
      */
     function fetchOne($dbField) {
-        $this->field($dbField);
+        $this->fields($dbField);
         if(($tmpRow = $this->fetchRow()) and isset($tmpRow[$dbField])){
             return $tmpRow[$dbField];
         }
@@ -369,3 +370,4 @@ abstract class ORM {
      */
     function fetchHash() {}
 }
+

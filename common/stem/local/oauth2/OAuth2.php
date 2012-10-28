@@ -1,7 +1,4 @@
 <?php
-require 'OAuth2ServerException.php';
-require 'OAuth2AuthenticateException.php';
-require 'OAuth2RedirectException.php';
 
 /**
  * @mainpage
@@ -41,6 +38,13 @@ require 'OAuth2RedirectException.php';
  * @author Debug, coding style clean up and documented by Edison Wong <hswong3i@pantarei-design.com>.
  * @author Refactored (including separating from raw POST/GET) and updated to draft v20 by David Rochwerger <catch.dave@gmail.com>.
  */
+
+namespace local\oauth2;
+
+// use local\oauth2\OAuth2ServerException.php;
+// use local\oauth2\OAuth2AuthenticateException.php;
+// use local\oauth2\OAuth2RedirectException.php;
+
 class OAuth2 {
 	
 	/**

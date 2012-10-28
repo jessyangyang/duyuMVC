@@ -11,6 +11,9 @@
  * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-6
  * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-1.5
  */
+
+namespace local\oauth2;
+
 interface IOAuth2RefreshTokens extends IOAuth2Storage {
 
 	/**

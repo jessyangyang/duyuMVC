@@ -21,9 +21,6 @@ class MySQL extends Database
     // Instantiate the Mysqli Object
     static $instance = array();
 
-    // Use cache
-    private $cache = array();
-
 
     /**
     * Constructor
@@ -130,17 +127,6 @@ class MySQL extends Database
     ******************************************************/
 
     /**
-     * Open query cache in self
-     * @param str $key MemKey
-     * @param int $expire Active Time
-     */
-    function cache($key = 'md5', $expire = 86400){
-        $this->cache['key'] = $key;
-        $this->cache['expire'] = $expire;
-        return $this;
-    }
-
-    /**
     * Query 
     * @param string | sql
     * @param boolean | hasArray , if not array type,return mysqli_result object
@@ -149,20 +135,7 @@ class MySQL extends Database
         $tmpParams = func_get_args();
         $tmpNums = func_num_args();
         $tmpSql = array_shift($tmpParams);
-        //$hasArray = false;
-
-        // use cache
-        if($this->cache){
-            $memory = & Cache_Memcache::instance('session');
-            if('md5' == $this->cache['key']){
-                $this->cache['key'] = md5($tmpSql.($tmpParams? join(',', $tmpParams): ''));
-            }
-            if(empty($_GET['duyu.upcache'])){
-                if(false !== ($resule = $memory->get($this->cache['key']))){
-                    return $resule;
-                }
-            }
-        }
+        $hasArray = false;
 
         // Query Database
         if ($tmpParams) {
@@ -172,12 +145,6 @@ class MySQL extends Database
         } 
         else {
             $resule = self::$db->query($tmpSql);
-        }
-
-        if(!$resule) return array();
-        // not cache query result
-        if(!$this->cache){
-            return $resule->fetchAll(PDO::FETCH_ASSOC);
         }
         if (isset($resule->num_rows) and $resule->num_rows > 0) {
             return $resule->fetch_all(MYSQLI_ASSOC);
@@ -192,7 +159,7 @@ class MySQL extends Database
         return self::$db->select_db($tableName);
     }
 
-    function insertId() {
+    function insertID() {
         return self::$db->insert_id;
     }
 
@@ -253,7 +220,7 @@ class MySQL extends Database
     }
 
 
-    /** Transaction
+    /**Transaction
     *******************************************/
 
     /**
@@ -270,6 +237,7 @@ class MySQL extends Database
      * Rollback transaction 
      */
     function rollback(){}
+
 
     /**Debug output
     *******************************************/
@@ -291,5 +259,6 @@ class MySQL extends Database
         //      </div>";
         // exit();
     }
+
+
 }
-?>

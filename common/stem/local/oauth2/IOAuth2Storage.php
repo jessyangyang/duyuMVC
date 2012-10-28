@@ -8,6 +8,9 @@
  * @version     1.0
  * @license     http://wiki.duyu.com/duyuMvc
  */
+
+namespace local\oauth2;
+
 interface IOAuth2Storage {
 
 	/**

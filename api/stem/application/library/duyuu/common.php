@@ -10,7 +10,7 @@
 
 namespace duyuu;
 
-class common extends \local\base\Base
+class common
 {
     /**
      * Create a random 32 character MD5 token

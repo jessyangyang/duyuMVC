@@ -10,6 +10,9 @@
  * @license     http://wiki.duyu.com/duyuMvc
  * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.5
  */
+
+namespace local\oauth2;
+
 interface IOAuth2GrantExtension extends IOAuth2Storage {
 
 	/**

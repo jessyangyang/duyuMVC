@@ -8,7 +8,7 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace duyuu\dao\;
+namespace duyuu\dao;
 
 class Books extends \local\db\ORM 
 {

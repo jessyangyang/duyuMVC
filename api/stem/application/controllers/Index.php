@@ -13,7 +13,7 @@ class IndexController extends \Yaf\Controller_Abstract
 
     public function indexAction() 
     {
-        echo "hello";
+        $this->getView()->assign("title", "Hello Wrold");
     }
 
 }

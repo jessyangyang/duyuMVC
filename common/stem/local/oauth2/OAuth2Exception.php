@@ -10,6 +10,9 @@
  *
  * @sa <a href="https://github.com/facebook/php-sdk">Facebook PHP SDK</a>.
  */
+
+namespace local\oauth2;
+
 class OAuth2Exception extends Exception {
 	
 	/**

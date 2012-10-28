@@ -23,10 +23,29 @@ class testController extends \Yaf\Controller_Abstract
         exit();
     }
 
-    public function test2Action($id)
+    public function regAction($id)
     {
-        echo "test2:$id";
-        exit();
+        $display = $this->getView();
+        $user = new \duyuu\dao\Members();
+        $message = "invild!";
+        if ($_POST) {
+            if($user->where("email='".$_POST['email']."'")->fetchRow()) 
+            {
+                $message = "already register!!";
+
+            }
+            else {
+
+                $arr = array(
+                    'email' => $_POST['email'],
+                    'username' => $_POST['username'],
+                    'password' => md5(trim($_POST['password'])));
+                if($user->insert($arr)) $message = "sussceful!!";
+            }
+        }
+
+        $display->assign("title", "Hello Wrold");
+        $display->assign("message", $message);
     }
 
 }

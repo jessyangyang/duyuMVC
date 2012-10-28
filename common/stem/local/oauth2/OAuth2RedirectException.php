@@ -7,6 +7,10 @@
  *
  * @ingroup oauth2_error
  */
+
+namespace local\oauth2;
+
+
 class OAuth2RedirectException extends OAuth2ServerException {
 	
 	protected $redirectUri;

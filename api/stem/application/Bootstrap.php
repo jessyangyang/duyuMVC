@@ -11,6 +11,7 @@
 use \Yaf\Dispatcher;
 use \local\db\MySQL;
 use \duyuu\rest\RegisterRest;
+use \local\template\SmartyAdapter;
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract 
 {
@@ -25,6 +26,12 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
         $router = $dispatcher->getRouter();
         $rest = RegisterRest::initRegister();
         $router->addConfig(new Yaf\Config\Simple($rest));
+    }
+
+    public function _initSmarty(Dispatcher $dispatcher)
+    {
+        $smarty = new SmartyAdapter(null, Yaf\Application::app()->getConfig()->smarty);
+        $dispatcher->setView($smarty);
     }
 }
 

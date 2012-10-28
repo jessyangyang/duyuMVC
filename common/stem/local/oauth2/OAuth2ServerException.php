@@ -5,6 +5,9 @@
  * an error.
  *
  */
+
+namespace local\oauth2;
+
 class OAuth2ServerException extends Exception {
 	
 	protected $httpCode;
