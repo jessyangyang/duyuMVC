@@ -23,6 +23,14 @@ class common
     }
 
     /**
+    * Changging the data and salt to hashdata
+    */
+    public function md5($data,$salt)
+    {
+        return md5($data.$salt);
+    }
+
+    /**
      * Encode a string so it is safe to pass through the URL
      *
      * @param string | $string to encode

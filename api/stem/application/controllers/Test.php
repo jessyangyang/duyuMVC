@@ -13,7 +13,7 @@ class testController extends \Yaf\Controller_Abstract
 
     public function indexAction() 
     {
-        echo "hello";
+        echo "index";
         exit();
     }
 
@@ -23,10 +23,10 @@ class testController extends \Yaf\Controller_Abstract
         exit();
     }
 
-    public function regAction($id)
+    public function regAction($id = false)
     {
         $display = $this->getView();
-        $user = new \duyuu\dao\Members();
+        $user = new \duyuu\dao\Members($id);
         $message = "invild!";
         if ($_POST) {
             if($user->where("email='".$_POST['email']."'")->fetchRow()) 
@@ -48,6 +48,20 @@ class testController extends \Yaf\Controller_Abstract
         $display->assign("message", $message);
     }
 
+    public function addAction()
+    {
+        $display = $this->getView();
+
+        $client = new \duyuu\dao\OAuthClient();
+
+        if ($_POST) {
+            $title = $_POST['title'];
+            $summary = $_POST['summary'];
+
+        }
+
+        $display->assign();
+    }
 }
 
 ?>

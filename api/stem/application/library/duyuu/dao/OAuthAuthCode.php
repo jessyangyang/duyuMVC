@@ -42,4 +42,11 @@ class OAuthAuthCode extends \local\db\ORM
         );
 
     public $primary_key = "code";
+
+    protected static $instance;
+
+    public static function instance($key = false)
+    {
+        return new OAuthAuthCode($key);
+    }
 }
