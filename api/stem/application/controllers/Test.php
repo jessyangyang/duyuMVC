@@ -17,29 +17,31 @@ class testController extends \Yaf\Controller_Abstract
         exit();
     }
 
-    public function testAction($id)
+    public function testAction($id = false)
     {
         echo "test:$id";
         exit();
     }
 
-    public function regAction($id = false)
+    public function regAction()
     {
         $display = $this->getView();
-        $user = new \duyuu\dao\Members($id);
+        $user = new \duyuu\dao\Members();
+
+        $data = $this->getRequest();
         $message = "invild!";
-        if ($_POST) {
-            if($user->where("email='".$_POST['email']."'")->fetchRow()) 
+        if ($data->isPost() and $data->getPost('state') == 'reg') {
+            if($user->where("email='".$data->getPost('email')."'")->fetchRow()) 
             {
                 $message = "already register!!";
 
             }
             else {
-
                 $arr = array(
-                    'email' => $_POST['email'],
-                    'username' => $_POST['username'],
-                    'password' => md5(trim($_POST['password'])));
+                    'email' => $data->getPost('email'),
+                    'username' => $data->getPost('username'),
+                    'password' => md5(trim($data->getPost('password')))
+                    );
                 if($user->insert($arr)) $message = "sussceful!!";
             }
         }
@@ -48,19 +50,39 @@ class testController extends \Yaf\Controller_Abstract
         $display->assign("message", $message);
     }
 
-    public function addAction()
+    public function addClientAction()
     {
         $display = $this->getView();
 
         $client = new \duyuu\dao\OAuthClient();
 
-        if ($_POST) {
-            $title = $_POST['title'];
-            $summary = $_POST['summary'];
+        $data = $this->getRequest();
+
+        if ($data->isPost() and $data->getPost('state') == "addClient") {
+            $title = $data->getPost('title');
+            $summary = $data->getPost('summary');
 
         }
 
-        $display->assign();
+        $display->assign('title',"addClient");
+    }
+
+    public function loginAction()
+    {
+        $display = $this->getView();
+
+        $data = $this->getRequest();
+        if ($data->isPost() and $data->getPost('state') == 'login') {
+            $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";
+            $user = \duyuu\dao\Members::instance()->where($wherearr)->fetchRow();
+            if ($user) {
+                $session = Yaf\Session::getInstance();
+                $session->set('current_id',$user['id']);
+                header("Location:/api/test/addClient");
+            }
+        }
+
+        $display->assign('title','login');
     }
 }
 

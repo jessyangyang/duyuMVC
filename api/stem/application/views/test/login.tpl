@@ -5,16 +5,14 @@
         <title>{$title}</title>
     </head>
     <body>
-        <form action="/api/test/reg" method="POST">
+        <h1>login</h1>
+        <form action="/api/test/login" method="POST">
             <label for="email">email</label>
             <input type="text" name="email"/><br/>
-            <label for="username">username</label>
-            <input type="text" name="username"/><br/>
             <label for="password">password</label>
             <input type="password" name="password"/><br/>
             <input type="submit" value="commit"/>
-            <input type="hidden" name="state" value="reg"/>
+            <input type="hidden" name="state" value="login"/>
         </form>
-        <h2>{$message}</h2>
     </body>
 </html>

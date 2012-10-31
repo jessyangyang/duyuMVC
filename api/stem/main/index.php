@@ -36,6 +36,9 @@ define('DOMAIN', (strtolower(getenv('HTTPS')) == 'on' ? 'https' : 'http') . '://
 // The current site path
 define('PATH', parse_url(getenv('REQUEST_URI'), PHP_URL_PATH));
 
+// PHP ini Settings
+ini_set('session.name',"duyuAPI");
+
 $app = new Yaf\Application(APPLICATION_PATH . "/settings/setting.ini");
 $app->bootstrap()->run();
 

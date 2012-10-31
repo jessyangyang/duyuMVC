@@ -18,8 +18,10 @@ class RegisterRest {
     public static function initRegister()
     {
         //test
-        Restful::regRestURL('test','/api/test/:id','test','test');
-        Restful::regRestURL('test','/api/test/:id','test','reg');
+        Restful::regRestURL('testIndex','/api/test/test/:id','test','test');
+        Restful::regRestURL('testReg','/api/test/reg','test','reg');
+        Restful::regRestURL('testLogin','/api/test/login','test','login');
+        Restful::regRestURL('testAdd','/api/test/addClient','test','addClient');
 
         /**User
         ************************/

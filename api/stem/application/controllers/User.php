@@ -12,8 +12,6 @@ class UserController extends \Yaf\Controller_Abstract
 {
     public function loginAction($email,$password)
     {
-        echo "login";
-        exit();
     }
 
     public function registerAction($email,$password)

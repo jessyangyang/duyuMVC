@@ -34,4 +34,16 @@ class Members extends \local\db\ORM
         );
 
     public $primary_key = "id";
+
+    protected static $instance;
+
+    public static function instance($key = false)
+    {
+        return self::$instance ? self::$instance : new Members($key);
+    }
+
+    public function getByID($id)
+    {
+        return self::instance(intval($id));
+    }
 }
