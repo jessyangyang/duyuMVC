@@ -53,5 +53,5 @@ class Books extends \local\db\ORM
             'comment' => 'summary')
         );
 
-    public $primary_key = "bid";
+    public $primaryKey = "bid";
 }

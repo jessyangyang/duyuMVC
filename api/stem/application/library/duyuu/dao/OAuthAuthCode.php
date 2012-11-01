@@ -41,7 +41,7 @@ class OAuthAuthCode extends \local\db\ORM
             'comment' => 'scope')
         );
 
-    public $primary_key = "code";
+    public $primaryKey = "code";
 
     protected static $instance;
 

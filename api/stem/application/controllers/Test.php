@@ -8,6 +8,8 @@
  * @license     http://wiki.duyu.com/duyuMvc
  */
 
+use \duyuu\dao\Members;
+
 class testController extends \Yaf\Controller_Abstract 
 {
 
@@ -54,17 +56,31 @@ class testController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
 
-        $client = new \duyuu\dao\OAuthClient();
+        // $client = new \duyuu\dao\OAuthClient();
+        $message = '';
 
         $data = $this->getRequest();
 
-        if ($data->isPost() and $data->getPost('state') == "addClient") {
+        if ($data->isPost() and $data->getPost('state') == "add") {
             $title = $data->getPost('title');
             $summary = $data->getPost('summary');
-
+            $summary = $data->getPost('summary');
+            $redirectUrl = $data->getPost('redirect_url');
+            $user = Members::getCurrentUser();
+            if ($user) {
+                $data = array(
+                    'client_id' => md5($user->email),
+                    'client_secret' => md5($user->email.$user->password),
+                    'redirect_url' => $redirectUrl);
+                if ($user->insert($data)) {
+                    $message = "success!!";
+                }
+            }
+            
         }
 
         $display->assign('title',"addClient");
+        $display->assign('message',$message);
     }
 
     public function loginAction()

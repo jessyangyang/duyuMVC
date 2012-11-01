@@ -19,7 +19,10 @@ class MySQL extends Database
     protected static $db;
 
     // Instantiate the Mysqli Object
-    static $instance = array();
+    protected static $instance;
+
+    // Config Database List
+    protected static $config;
 
 
     /**
@@ -29,13 +32,13 @@ class MySQL extends Database
     private function __construct($dbConfig = false)
     {
 
-        self::$db = self::$instance;
+        // self::$db = self::$instance;
 
     }
 
     static function hasInstance() 
     {
-        return isset($GLOBALS['dbGlobalInstance']);
+        return isset(self::$config['dbGlobalInstance']);
     }
 
     /**
@@ -58,15 +61,15 @@ class MySQL extends Database
     */
     static function setInstance($dbConfigName,$dbParams,$dbHasDaufalt = false)
     {
-        if (!isset($GLOBALS['dbGlobalConfig'][$dbConfigName])) {
-            $GLOBALS['dbGlobalConfig'][$dbConfigName]['name'] = $dbConfigName;
-            $GLOBALS['dbGlobalConfig'][$dbConfigName]['params'] = $dbParams;
-            $GLOBALS['dbGlobalConfig'][$dbConfigName]['daufalt'] = $dbHasDaufalt;
+        if (!isset(self::$config[$dbConfigName])) {
+            self::$config[$dbConfigName]['name'] = $dbConfigName;
+            self::$config[$dbConfigName]['params'] = $dbParams;
+            self::$config[$dbConfigName]['daufalt'] = $dbHasDaufalt;
         }
-        elseif (isset($GLOBALS['dbGlobalConfig'][$dbConfigName]) and $GLOBALS['dbGlobalConfig'] != $dbConfigName) {
-            $GLOBALS['dbGlobalConfig'][$dbConfigName]['name'] = $dbConfigName;
-            $GLOBALS['dbGlobalConfig'][$dbConfigName]['params'] = $dbParams;
-            $GLOBALS['dbGlobalConfig'][$dbConfigName]['daufalt'] = $dbHasDaufalt;
+        elseif (isset(self::$config[$dbConfigName]) and self::$config != $dbConfigName) {
+            self::$config[$dbConfigName]['name'] = $dbConfigName;
+            self::$config[$dbConfigName]['params'] = $dbParams;
+            self::$config[$dbConfigName]['daufalt'] = $dbHasDaufalt;
         }
     }
 
@@ -76,9 +79,9 @@ class MySQL extends Database
     * @param Boolean | dbConfigName
     * @return  Object | mysqli
     */
-    static function instance($key = 0,$dbConfigName = false) 
+    static function instance($dbConfigName = false) 
     {
-        $socket = & $GLOBALS['dbGlobalConfig'];
+        $socket = & self::$config;
         $param = $mysql = array();
 
         if (!$dbConfigName) {
@@ -99,19 +102,19 @@ class MySQL extends Database
 
         if ($socket) {
             try {
-                self::$instance = new \mysqli($param['host'],$param['user'],$param['password'],$param['schema']);
+                self::$db = new \mysqli($param['host'],$param['user'],$param['password'],$param['schema']);
 
-                if (self::$instance->connect_error) {
+                if (self::$db->connect_error) {
                     throw new \mysqli_sql_exception('Connect error!',100);
                 }
 
-                if (isset($GLOBALS['dbGlobalInstance'])) {
-                    $mysql = $GLOBALS['dbGlobalInstance'];
+                if (isset(self::$instance)) {
+                    $mysql = self::$instance;
                 }
                 else
                 {
                     $mysql = new Mysql($socket);
-                    $GLOBALS['dbGlobalInstance'] = $mysql;
+                    self::$instance = $mysql;
                 }
 
                 return $mysql;

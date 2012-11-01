@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.12, created on 2012-10-31 17:31:01
+<?php /* Smarty version Smarty-3.1.12, created on 2012-11-01 23:37:43
          compiled from "/home/wwwroot/duyuMVC/api/stem/application/views/test/addclient.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17703097405090efd52a7e55-92626389%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '928871e96f365de4525052278312f4b16e9cdc1a' => 
     array (
       0 => '/home/wwwroot/duyuMVC/api/stem/application/views/test/addclient.tpl',
-      1 => 1351675859,
+      1 => 1351784245,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.12',
+  'unifunc' => 'content_5090efd531e542_13365284',
   'variables' => 
   array (
     'title' => 0,
+    'message' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.12',
-  'unifunc' => 'content_5090efd531e542_13365284',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5090efd531e542_13365284')) {function content_5090efd531e542_13365284($_smarty_tpl) {?><!DOYTYPE html>
 <html lang="zh">
@@ -36,11 +37,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <label for="title">title :</label>
             <input type="text" name="title"/><br/>
             <label for="summary">summary : </label>
-            <input type="password" name="summary"/><br/>
+            <input type="text" name="summary"/><br/>
             <label for="redirect_url">redirect_url :</label>
-            <input type="password" name="redirect_url"/><br/>
+            <input type="text" name="redirect_url"/><br/>
             <input type="submit" value="commit"/>
-            <input type="hidden" name="state" value="login"/>
+            <input type="hidden" name="state" value="add"/>
         </form>
+        <h3><?php echo $_smarty_tpl->tpl_vars['message']->value;?>
+</h3>
     </body>
 </html><?php }} ?>

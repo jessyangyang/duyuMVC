@@ -10,11 +10,12 @@
             <label for="title">title :</label>
             <input type="text" name="title"/><br/>
             <label for="summary">summary : </label>
-            <input type="password" name="summary"/><br/>
+            <input type="text" name="summary"/><br/>
             <label for="redirect_url">redirect_url :</label>
-            <input type="password" name="redirect_url"/><br/>
+            <input type="text" name="redirect_url"/><br/>
             <input type="submit" value="commit"/>
-            <input type="hidden" name="state" value="login"/>
+            <input type="hidden" name="state" value="add"/>
         </form>
+        <h3>{$message}</h3>
     </body>
 </html>

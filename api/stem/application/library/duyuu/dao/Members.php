@@ -33,17 +33,32 @@ class Members extends \local\db\ORM
             'comment' => 'username')
         );
 
-    public $primary_key = "id";
+    public $primaryKey = "id";
 
     protected static $instance;
 
+    private static $currentUser;
+
     public static function instance($key = false)
     {
-        return self::$instance ? self::$instance : new Members($key);
+        return isset(self::$instance) ? self::$instance : new Members($key);
     }
 
-    public function getByID($id)
+    public static function getByID($id)
     {
         return self::instance(intval($id));
+    }
+
+    public static function getCurrentUser()
+    {
+        if (!isset(self::$currentUser)) {
+            
+            // $session = \Yaf\Session::getInstance();
+            // print_r($session);
+            // if ($session->has('current_id')) {
+            //     self::$currentUser = self::getByID($session->current_id);
+            // }
+        }
+        // return self::$currentUser;
     }
 }

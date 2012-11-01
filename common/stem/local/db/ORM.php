@@ -12,7 +12,7 @@ namespace local\db;
 
 use local\db\MySQL;
 
-abstract class ORM {
+class ORM extends MySQL{
 
     // Query params
     public $options = array();
@@ -26,6 +26,10 @@ abstract class ORM {
     // Mysql object
     protected static $db;
 
+    // Instance
+    protected static $instance;
+
+
     // Allow Methods
     private $allowDBOMethods = array('table','field','group','where','order','having','distinct','lock','limit','offset','page');
 
@@ -37,7 +41,7 @@ abstract class ORM {
     * @param int | dbPrimaryKey , if not, param = false
     * @param string | dbConfig , if emptu = "default"
     */
-    function __construct($dbPrimaryKey = false ,$dbConfigName = "default" ) {
+    function __construct($dbPrimaryKey = 0 ,$dbConfigName = "default" ) {
 
         self::$db = Mysql::instance($dbConfigName);
 
@@ -69,7 +73,10 @@ abstract class ORM {
             $dbPrimaryKey = $param[0];
             $dbConfigName = $param[1];
         }
-        return new ORM($dbPrimaryKey = 0 ,$dbConfigName = "default");
+        if (!self::$instance) {
+            self::$instance = new ORM($dbPrimaryKey = 0 ,$dbConfigName = "default");
+        }
+        return self::$instance;
     }
 
     /**

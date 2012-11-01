@@ -15,14 +15,6 @@ class OAuthClient extends \local\db\ORM
     public $table = 'oauth_client';
 
     public $fields = array(
-        'title' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'title'),
-        'summary' => array(
-            'type' => 'varchar',
-            'default'=> 0,
-            'comment' => 'summary'),
         'client_id' => array(
             'type' => 'varchar',
             'default' => 0,
@@ -37,7 +29,7 @@ class OAuthClient extends \local\db\ORM
             'comment' => 'redirect_url')
         );
 
-    public $primary_key = "client_id";
+    public $primaryKey = "client_id";
 
     protected static $instance;
 
