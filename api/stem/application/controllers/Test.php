@@ -94,10 +94,11 @@ class testController extends \Yaf\Controller_Abstract
         $data = $this->getRequest();
         if ($data->isPost() and $data->getPost('state') == 'login') {
             $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";
-            $user = Members::instance()->where($wherearr)->fetchRow();
-            if ($user) {
+            $user = new Members();
+            $row = $user->where($wherearr)->fetchRow();
+            if ($row) {
                 $session = Yaf\Session::getInstance();
-                $session->set('current_id',$user['id']);
+                $session->set('current_id',$row['id']);
                 header("Location:/api/test/addClient");
             }
         }

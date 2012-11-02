@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.12, created on 2012-11-02 09:08:25
+<?php /* Smarty version Smarty-3.1.12, created on 2012-11-03 00:57:53
          compiled from "/home/wwwroot/duyuMVC/api/stem/application/views/test/addclient.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17703097405090efd52a7e55-92626389%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '928871e96f365de4525052278312f4b16e9cdc1a' => 
     array (
       0 => '/home/wwwroot/duyuMVC/api/stem/application/views/test/addclient.tpl',
-      1 => 1351816754,
+      1 => 1351874377,
       2 => 'file',
     ),
   ),
@@ -45,5 +45,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </form>
         <h3><?php echo $_smarty_tpl->tpl_vars['message']->value;?>
 </h3>
+
     </body>
 </html><?php }} ?>
