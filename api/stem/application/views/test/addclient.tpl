@@ -17,5 +17,6 @@
             <input type="hidden" name="state" value="add"/>
         </form>
         <h3>{$message}</h3>
+
     </body>
 </html>

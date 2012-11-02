@@ -12,7 +12,7 @@ namespace duyuu\dao;
 
 class OAuthAuthCode extends \local\db\ORM 
 {
-    public $table = 'oauth_auth_code';
+    public $table = 'oauth_auth_codes';
 
     public $fields = array(
         'code' => array(

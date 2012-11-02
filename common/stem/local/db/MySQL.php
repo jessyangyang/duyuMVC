@@ -21,7 +21,7 @@ class MySQL extends Database
     // Instantiate the Mysqli Object
     protected static $instance;
 
-    // Config Database List
+    // Config Instance
     protected static $config;
 
 
@@ -29,16 +29,14 @@ class MySQL extends Database
     * Constructor
     * @param string | dbConfig , if emptu = "default"
     */
-    private function __construct($dbConfig = false)
+    public function __construct()
     {
-
-        // self::$db = self::$instance;
 
     }
 
     static function hasInstance() 
     {
-        return isset(self::$config['dbGlobalInstance']);
+        return isset(self::$db);
     }
 
     /**
@@ -66,7 +64,7 @@ class MySQL extends Database
             self::$config[$dbConfigName]['params'] = $dbParams;
             self::$config[$dbConfigName]['daufalt'] = $dbHasDaufalt;
         }
-        elseif (isset(self::$config[$dbConfigName]) and self::$config != $dbConfigName) {
+        elseif (isset(self::$config[$dbConfigName]) and $config != $dbConfigName) {
             self::$config[$dbConfigName]['name'] = $dbConfigName;
             self::$config[$dbConfigName]['params'] = $dbParams;
             self::$config[$dbConfigName]['daufalt'] = $dbHasDaufalt;
@@ -79,19 +77,18 @@ class MySQL extends Database
     * @param Boolean | dbConfigName
     * @return  Object | mysqli
     */
-    static function instance($dbConfigName = false) 
+    static function instance($primary_key = 0,$dbConfigName = false) 
     {
         $socket = & self::$config;
         $param = $mysql = array();
-
-        if (!$dbConfigName) {
+        if (!$dbConfigName and is_array($socket)) {
             foreach ($socket as $key => $value) {
                 if (isset($value['daufalt']) and $value['daufalt'] == true ) {
                     $param = $value['params'];
                 }
             }
         }
-        else
+        elseif (is_array($socket))
         {
             foreach ($socket as $key => $value) {
                 if (isset($value['name']) and $dbConfigName == $value['name']) {
@@ -108,16 +105,12 @@ class MySQL extends Database
                     throw new \mysqli_sql_exception('Connect error!',100);
                 }
 
-                if (isset(self::$instance)) {
-                    $mysql = self::$instance;
-                }
-                else
-                {
-                    $mysql = new Mysql($socket);
-                    self::$instance = $mysql;
+                if (!isset(self::$instance)) {
+                    self::$instance = new Mysql($socket);
                 }
 
-                return $mysql;
+                return self::$instance;
+
             }
             catch (\mysqli_sql_exception $e) {
                 $e->getMessage();
@@ -162,8 +155,13 @@ class MySQL extends Database
         return self::$db->select_db($tableName);
     }
 
-    function insertID() {
+    function insertId() {
         return self::$db->insert_id;
+    }
+
+    function setCharset($charset = "UTF8")
+    {
+        return self::$db->set_charset($charset);
     }
 
     /**

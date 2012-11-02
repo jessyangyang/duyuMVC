@@ -42,7 +42,9 @@ class testController extends \Yaf\Controller_Abstract
                 $arr = array(
                     'email' => $data->getPost('email'),
                     'username' => $data->getPost('username'),
-                    'password' => md5(trim($data->getPost('password')))
+                    'password' => md5(trim($data->getPost('password'))),
+                    'published' => time(),
+                    'role_id' => 3
                     );
                 if($user->insert($arr)) $message = "sussceful!!";
             }
@@ -56,7 +58,7 @@ class testController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
 
-        // $client = new \duyuu\dao\OAuthClient();
+        $client = new \duyuu\dao\OAuthClient();
         $message = '';
 
         $data = $this->getRequest();
@@ -67,12 +69,14 @@ class testController extends \Yaf\Controller_Abstract
             $summary = $data->getPost('summary');
             $redirectUrl = $data->getPost('redirect_url');
             $user = Members::getCurrentUser();
+
             if ($user) {
                 $data = array(
                     'client_id' => md5($user->email),
                     'client_secret' => md5($user->email.$user->password),
                     'redirect_url' => $redirectUrl);
-                if ($user->insert($data)) {
+                
+                if ($client->insert($data)) {
                     $message = "success!!";
                 }
             }
@@ -90,7 +94,7 @@ class testController extends \Yaf\Controller_Abstract
         $data = $this->getRequest();
         if ($data->isPost() and $data->getPost('state') == 'login') {
             $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";
-            $user = \duyuu\dao\Members::instance()->where($wherearr)->fetchRow();
+            $user = Members::instance()->where($wherearr)->fetchRow();
             if ($user) {
                 $session = Yaf\Session::getInstance();
                 $session->set('current_id',$user['id']);
@@ -99,6 +103,13 @@ class testController extends \Yaf\Controller_Abstract
         }
 
         $display->assign('title','login');
+    }
+
+    public function authAction()
+    {
+        $appKey = $_SERVER[''];
+
+        exit();
     }
 }
 

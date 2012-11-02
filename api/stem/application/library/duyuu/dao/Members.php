@@ -30,35 +30,41 @@ class Members extends \local\db\ORM
         'username' => array(
             'type' => 'varchar',
             'default' => 0,
-            'comment' => 'username')
+            'comment' => 'username'),
+        'published' => array(
+            'type' => 'int',
+            'default' => 0,
+            'comment' => 'published'),
+        'role_id' => array(
+            'type' => 'int',
+            'default' => 0,
+            'comment' => 'role_id')
         );
 
     public $primaryKey = "id";
 
     protected static $instance;
 
-    private static $currentUser;
-
-    public static function instance($key = false)
-    {
-        return isset(self::$instance) ? self::$instance : new Members($key);
-    }
-
     public static function getByID($id)
     {
-        return self::instance(intval($id));
+        $member = new Members($id);
+        return $member;
     }
 
     public static function getCurrentUser()
     {
-        if (!isset(self::$currentUser)) {
-            
-            // $session = \Yaf\Session::getInstance();
-            // print_r($session);
-            // if ($session->has('current_id')) {
-            //     self::$currentUser = self::getByID($session->current_id);
-            // }
+        if (!isset(self::$instance)) {
+            $session = \Yaf\Session::getInstance();
+            if ($session->has('current_id')) {
+                $member = self::getByID($session->current_id);
+                self::$instance =  $member;
+            }
         }
-        // return self::$currentUser;
+        return self::$instance;
+    }
+
+    public function __get($fieldName)
+    {
+        return $this->$fieldName;
     }
 }

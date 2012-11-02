@@ -22,6 +22,7 @@ class RegisterRest {
         Restful::regRestURL('testReg','/api/test/reg','test','reg');
         Restful::regRestURL('testLogin','/api/test/login','test','login');
         Restful::regRestURL('testAdd','/api/test/addClient','test','addClient');
+        Restful::regRestURL('testAuth','/api/test/auth','test','auth');
 
         /**User
         ************************/

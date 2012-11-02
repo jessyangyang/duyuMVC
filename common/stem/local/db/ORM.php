@@ -12,7 +12,7 @@ namespace local\db;
 
 use local\db\MySQL;
 
-class ORM extends MySQL{
+class ORM{
 
     // Query params
     public $options = array();
@@ -26,9 +26,8 @@ class ORM extends MySQL{
     // Mysql object
     protected static $db;
 
-    // Instance
+    // Instance Object
     protected static $instance;
-
 
     // Allow Methods
     private $allowDBOMethods = array('table','field','group','where','order','having','distinct','lock','limit','offset','page');
@@ -41,14 +40,15 @@ class ORM extends MySQL{
     * @param int | dbPrimaryKey , if not, param = false
     * @param string | dbConfig , if emptu = "default"
     */
-    function __construct($dbPrimaryKey = 0 ,$dbConfigName = "default" ) {
+    public function __construct($dbPrimaryKey = false ,$dbConfigName = "default" ) {
 
-        self::$db = Mysql::instance($dbConfigName);
+        self::$db = Mysql::instance($dbPrimaryKey,$dbConfigName);
 
-        if ($dbPrimaryKey and $dbPrimaryKey = abs($dbPrimaryKey)) {    
+        if ($dbPrimaryKey) {    
             if ($tmpRow = $this->fetchRow($dbPrimaryKey)) {
                 foreach ($tmpRow as $key => $value) 
                 {
+                    // $this->attributes[$key] = $value;
                     $this->$key = $value;
                 }
 
@@ -56,6 +56,7 @@ class ORM extends MySQL{
             else {
                 foreach ($this->fields as $key => $value) 
                 {
+                    // $this->attributes[$key] = false;
                     $this->$key = false;
                 }
             }
@@ -67,14 +68,14 @@ class ORM extends MySQL{
     * @param string | dbConfig
     * @return  Object | mysqli
     */
-    static function instance() {
+    public static function instance() {
         $dbConfigName = $dbPrimaryKey = array();
         if ($param  = func_get_args()) {
-            $dbPrimaryKey = $param[0];
-            $dbConfigName = $param[1];
+            $dbPrimaryKey = isset($param[0]) ? $param[0] : false;
+            $dbConfigName = isset($param[1]) ? $param[1] : "default";
         }
-        if (!self::$instance) {
-            self::$instance = new ORM($dbPrimaryKey = 0 ,$dbConfigName = "default");
+        if (!isset(self::$instance)) {
+            self::$instance = new ORM($dbPrimaryKey ,$dbConfigName);
         }
         return self::$instance;
     }
@@ -204,6 +205,22 @@ class ORM extends MySQL{
     }
 
     /**
+    * SQL ADDSLASHES
+    * @param Array | Stirng : $string
+    * @return Array | Streing
+    */
+    public function saddslashes($string) {
+        if(is_array($string)) {
+            foreach($string as $key => $val) {
+                $string[$key] = saddslashes($val);
+            }
+        } else {
+            $string = addslashes($string);
+        }
+        return $string;
+    }
+
+    /**
     * Join table query
     * @param String | dbTable
     * @param String | dbSqlarr
@@ -245,21 +262,20 @@ class ORM extends MySQL{
     function insert($dbData) {
         if ($this->_filter($dbData)) {
             foreach ($dbData as $key => $value) {
+                $dbData["`$key`"] = "'$dbData[$key]'";
                 if (array_key_exists($key,$this->fields) and $this->fields[$key]['type'] == "bit") {
-                    $dbData[$key] = "b'$value'";
+                    $dbData["`$key`"] = "b'$value'";
                 }
-                $dbData["`$key`"] = $dbData[$key];
                 unset($dbData[$key]);
             }
             $tmpField = implode(',',array_keys($dbData));
-            $tmpValue = implode("','",$dbData);
+            $tmpValue = implode(",",$dbData);
 
-            $sql = "INSERT INTO $this->table($tmpField) VALUES('$tmpValue')";
+            $sql = "INSERT INTO $this->table($tmpField) VALUES($tmpValue)";
             self::$db->query($sql);
-            
-            if(self::$db->insertID()) return true;
+            return self::$db->insertID();
         }
-        return false;
+        return 0;
     }
 
     /**
@@ -276,14 +292,13 @@ class ORM extends MySQL{
                     'where' => "`$this->primaryKey` " . " = '" .$dbData[$this->primaryKey] . "'"
                     );
             }
-
             $tmpOption = $this->_options($tmpOption);
 
             // Updata
-            if ($dbData and $tmpOption['where']) {
+            if ($dbData and isset($tmpOption['where']) and $tmpOption['where'])
+            {
                 foreach ($dbData as $key => $value) {
-                    $value = self::$db->escapeString($value);
-                    $setarr[] = "`$key`='$value'";
+                    $setarr[] = $this->fields[$key]['type'] == 'bit' ? "`$key`=b'$value'" :"`$key`='$value'";
                 }
                 $sql = "UPDATE " . $tmpOption['table'] . " SET " . implode(',', $setarr) . " WHERE " . $tmpOption['where'];
                 self::$db->query($sql);
@@ -327,7 +342,7 @@ class ORM extends MySQL{
      * @return Array 
      */
     function fetchRow($key = false) {
-        $tmpOption = $key? $this->_options(array('where' => $this->primaryKey.'='.abs($key))): $this->_options();
+        $tmpOption = $key ? $this->_options(array('where' => $this->primaryKey.'='.$key)): $this->_options();
 
         $tmpOption['where'] = empty($tmpOption['where'])? '': ' WHERE '.$tmpOption['where'];
         //Return record of wrong sql in base,when the sql make wrong.
@@ -341,10 +356,10 @@ class ORM extends MySQL{
     /**
      * Query field ( In view of fetchOne )
      * @param String $dbField
-     * @return Array | false
+     * @return String | false
      */
     function fetchOne($dbField) {
-        $this->fields($dbField);
+        $this->field($dbField);
         if(($tmpRow = $this->fetchRow()) and isset($tmpRow[$dbField])){
             return $tmpRow[$dbField];
         }
@@ -377,4 +392,3 @@ class ORM extends MySQL{
      */
     function fetchHash() {}
 }
-

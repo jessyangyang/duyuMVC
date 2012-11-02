@@ -74,7 +74,7 @@ class OAuth2Storage implements IOAuth2GrantCode, IOAuth2RefreshTokens
             $client = OAuthClient::instance();
 
             $data = array(
-                'client_id'=> $client->escapeString($client_id),\
+                'client_id'=> $client->escapeString($client_id),
                 'client_secret' => $client_secret,
                 'redirect_url' => $redirect_url);
             if ($client->insert($data)) return true;

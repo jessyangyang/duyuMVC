@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="api/stem/application"/>
+	<buildpathentry kind="src" path="api/stem/cache/templates_c"/>
+	<buildpathentry kind="src" path="api/stem/main"/>
+	<buildpathentry kind="src" path="common/stem/local/base"/>
+	<buildpathentry kind="src" path="common/stem/local/db"/>
+	<buildpathentry kind="src" path="common/stem/local/exception"/>
+	<buildpathentry kind="src" path="common/stem/local/oauth2"/>
+	<buildpathentry kind="src" path="common/stem/local/rest"/>
+	<buildpathentry kind="src" path="common/stem/local/template"/>
+	<buildpathentry kind="src" path="common/third/smarty"/>
+	<buildpathentry kind="src" path="front/stem/main"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
