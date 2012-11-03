@@ -18,17 +18,17 @@ class StoreController extends \Yaf\Controller_Abstract
 
         $booklist = $book->limit(4)->fetchList();
 
-        echo "<pre>";
         $json = array(
             "code" => 200,
             "message" => "sucessful!",
             "topBanner" => array(
-            ),
+                ),
             "recommondList" => array(
                 $booklist
-            ),
+                ),
             "bestList" => array(
-                $booklist)
+                $booklist
+                )
             );
         echo json_encode($json);
         exit();
