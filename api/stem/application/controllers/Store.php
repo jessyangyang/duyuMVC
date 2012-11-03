@@ -9,26 +9,20 @@
 */
 
 use \duyuu\dao\Books;
+use \duyuu\dao\BookRecommend;
 
 class StoreController extends \Yaf\Controller_Abstract 
 {
     public function recommendAction()
     {
-        $book = new Books();
+        $book = new BookRecommend();
 
-        $booklist = $book->limit(4)->fetchList();
+        $booklist = $book->getIndexRecommend();
 
         $json = array(
             "code" => 200,
             "message" => "sucessful!",
-            "topBanner" => array(
-                ),
-            "recommondList" => array(
-                $booklist
-                ),
-            "bestList" => array(
-                $booklist
-                )
+            "bookList" => $booklist
             );
         echo json_encode($json);
         exit();

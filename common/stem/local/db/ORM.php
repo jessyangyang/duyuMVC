@@ -382,6 +382,7 @@ class ORM{
         empty($tmpOption['group']) || $tmpSql.= ' GROUP BY '.$tmpOption['group'];
         empty($tmpOption['order']) || $tmpSql.= ' ORDER BY '.$tmpOption['order'];
         empty($tmpOption['limit']) || $tmpSql.= ' LIMIT '.$tmpOption['limit'];
+
         return self::$db->query($tmpSql);
     }
 

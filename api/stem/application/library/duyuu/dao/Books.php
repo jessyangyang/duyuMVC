@@ -54,4 +54,13 @@ class Books extends \local\db\ORM
         );
 
     public $primaryKey = "bid";
+
+    // Instance Self
+    protected static $instance;
+
+
+    public static function instance($key = 0)
+    {
+        return self::$instance ? self::$instance : new Books($key);
+    }
 }
