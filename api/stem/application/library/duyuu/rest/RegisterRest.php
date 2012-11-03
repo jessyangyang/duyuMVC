@@ -49,7 +49,7 @@ class RegisterRest {
         ************************/
         
         // store recommond books
-        Restful::regRestURL('storeIndexRecommend','/api/store/recommend','store','recommond');
+        Restful::regRestURL('storeIndexRecommend','/api/store/recommend','store','recommend');
         // store top list
         Restful::regRestURL('storeTopList','/api/store/top','store','top');
 
