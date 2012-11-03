@@ -24,6 +24,7 @@ class StoreController extends \Yaf\Controller_Abstract
             "message" => "sucessful!",
             "bookList" => $booklist
             );
+
         echo json_encode($json);
         exit();
     }

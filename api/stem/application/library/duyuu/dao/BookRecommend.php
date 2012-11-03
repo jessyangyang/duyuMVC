@@ -61,7 +61,10 @@ class BookRecommend extends \local\db\ORM
 
         foreach ($categoryList as $key => $value) {
             if (isset($value['cid'])) {
-                $list[$value['name']] = $recommend->field("b.bid,b.title,c.name,b.cover,$table.sort")->joinQuery("book_category as c","c.cid=$table.cid")->joinQuery("books as b","b.bid=$table.bid")->where("c.type = 1 AND $table.cid='".$value['cid']."'")->limit(4)->fetchList();
+                $list[] = array(
+                    'cid' => $value['cid'],
+                    'name' => $value['name'],
+                    'list' => $recommend->field("b.bid,b.title,c.name,b.cover,$table.sort")->joinQuery("book_category as c","c.cid=$table.cid")->joinQuery("books as b","b.bid=$table.bid")->where("c.type = 1 AND $table.cid='".$value['cid']."'")->limit(4)->fetchList());
                 $recommend->joinTables = array();
             }
         }
