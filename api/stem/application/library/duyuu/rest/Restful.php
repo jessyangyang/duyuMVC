@@ -14,7 +14,12 @@ class Restful extends \local\rest\REST
 {
 
     private static  $routeType = 'rewrite';
-    static  $restURL = array();
+    
+    public static  $restURL = array();
+
+    public static $instance;
+
+    public $responseData = array();
 
     public function __construct()
     {
@@ -49,8 +54,20 @@ class Restful extends \local\rest\REST
 
     }
 
+    public static function instance()
+    {
+        return self::$instance ? self::$instance : new Restful();
+    }
+
     static function getRouteName($restName)
     {
         return self::$restURL[$restName];
+    }
+
+    /**
+    */
+    public function setData($key, $data)
+    {
+        $this->responseData[$key] = $data;
     }
 }

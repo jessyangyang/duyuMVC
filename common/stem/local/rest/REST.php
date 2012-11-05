@@ -13,7 +13,7 @@ namespace local\rest;
 
 class REST
 {
-    const CONTENT_TYPE = "application/json";
+    const CONTENT_TYPE = 'application/json';
 
     public $_allow = array(); 
     public $_request = array();
@@ -37,15 +37,16 @@ class REST
 
     /**
      * [response description]
-     * @param  [String] $pData
-     * @param  [String] $pStatus
+     * @param  [String] $data
+     * @param  [String] $status
      * @return [Json]
      */
-    public function response($pData,$pStatus)
+    public function response($data = false,$status = 200)
     {
-        $this->_code = ($pStatus) ? $status : 200;
+        $this->_code = ($status) ? $status : 200;
         $this->setHeaders();
-        echo $data;
+        $data = $data ? $data : $this->responseData;
+        echo $this->encode($data);
         exit;
     }
 
@@ -53,7 +54,7 @@ class REST
      * [getStatusMsg description]
      * @return [type] [description]
      */
-    private function getStatusMsg()
+    protected function getStatusMsg()
     {
         $status = array(
                         100 => 'Continue',  
@@ -148,7 +149,7 @@ class REST
     * Returns the JSON representation of a value
     * @return Json
     */
-    public function display($data)
+    public function encode($data)
     {
         echo json_encode($data);
         exit();
@@ -165,28 +166,30 @@ class REST
 
     /**
      * [filter of the request data]
-     * @param  [Array] $pData [description]
+     * @param  [Array] $data [description]
      * @return [Array]        [description]
      */
-    private function _filter($pData)
+    private function _filter($data)
     {
         $_filter = array();
-        if (is_array($pData)) 
+        if (is_array($data)) 
         {
-            foreach ($pData as $key => $value) {
+            foreach ($data as $key => $value) {
                 $_filter[$key] = $this->_filter($value);
             }
         }
         else
         {
             if (get_magic_quotes_gpc()) {
-                $pData = trim(stripcslashes($pData));
+                $data = trim(stripcslashes($data));
             }
-            $pData = strip_tags($pData);
-            $_filter = trim($pData);
+            $data = strip_tags($data);
+            $_filter = trim($data);
         }
         return $_filter;
     }
+
+
 
     /**
      * Set HTTP headers
@@ -194,6 +197,6 @@ class REST
     private function setHeaders()
     {
         header("HTTP/1.1 " . $this->_code . " " . $this->getStatusMsg());
-        header("Content-Type:" . CONTENT_TYPE);
+        header("Content-Type:" . self::CONTENT_TYPE);
     }
 }

@@ -11,37 +11,35 @@
 
 namespace duyuu\rest;
 
-use \duyuu\rest\Restful;
-
-class RegisterRest {
+class RegisterRest extends Restful{
 
     public static function initRegister()
     {
         //test
-        Restful::regRestURL('testIndex','/api/test/test/:id','test','test');
-        Restful::regRestURL('testReg','/api/test/reg','test','reg');
-        Restful::regRestURL('testLogin','/api/test/login','test','login');
-        Restful::regRestURL('testAdd','/api/test/addClient','test','addClient');
-        Restful::regRestURL('testAuth','/api/test/auth','test','auth');
+        self::regRestURL('testIndex','/api/test/test/:id','test','test');
+        self::regRestURL('testReg','/api/test/reg','test','reg');
+        self::regRestURL('testLogin','/api/test/login','test','login');
+        self::regRestURL('testAdd','/api/test/addClient','test','addClient');
+        self::regRestURL('testAuth','/api/test/auth','test','auth');
 
         /**User
         ************************/
 
         // userLogin
-        Restful::regRestURL('userLogin','/api/user/login/:email/:password','user','login');
+        self::regRestURL('userLogin','/api/user/login/:email/:password','user','login');
         // userRegister
-        Restful::regRestURL('userRegister','/api/user/register/:email/:name/:password','user','register');
+        self::regRestURL('userRegister','/api/user/register/:email/:name/:password','user','register');
         // userLogout
-        Restful::regRestURL('userLogout','/api/user/logout','user','logout');
+        self::regRestURL('userLogout','/api/user/logout','user','logout');
         // userProfile
-        Restful::regRestURL('userProfile','/api/user/profile','user','profile');
+        self::regRestURL('userProfile','/api/user/profile','user','profile');
         
         // user Buylist
-        Restful::regRestURL('userBuyList','/api/user/buyList/:offset/:limit','userShelf','buyList');
+        self::regRestURL('userBuyList','/api/user/buyList/:offset/:limit','userShelf','buyList');
         // user Anthor BuyList
-        Restful::regRestURL('userOtherBuyList','/api/user/otherList/:type','userShelf','otherList');
+        self::regRestURL('userOtherBuyList','/api/user/otherList/:type','userShelf','otherList');
         // user Delete book
-        Restful::regRestURL('userDeleteBook','/api/user/book/delete/:bid','userShelf','delete');
+        self::regRestURL('userDeleteBook','/api/user/book/delete/:bid','userShelf','delete');
 
 
 
@@ -49,30 +47,30 @@ class RegisterRest {
         ************************/
         
         // store recommond books
-        Restful::regRestURL('storeIndexRecommend','/api/store/recommend','store','recommend');
+        self::regRestURL('storeIndexRecommend','/api/store/recommend','store','recommend');
         // store top list
-        Restful::regRestURL('storeTopList','/api/store/top','store','top');
+        self::regRestURL('storeTopList','/api/store/top','store','top');
 
         // store The Book of category
-        Restful::regRestURL('storeCategory','/api/store/category','store','category');
+        self::regRestURL('storeCategory','/api/store/category','store','category');
         // store Sub category
-        Restful::regRestURL('storeSubCategory','/api/store/category/:cid','store','subCategory');
+        self::regRestURL('storeSubCategory','/api/store/category/:cid','store','subCategory');
         // store Book Infomation
-        Restful::regRestURL('storeBookInfo','/api/store/book/:bid','store','bookInfo');
+        self::regRestURL('storeBookInfo','/api/store/book/:bid','store','bookInfo');
         // store Book Chapter
-        Restful::regRestURL('storeBookChapter','/api/store/book/chapter/:bid','store','bookChapter');
+        self::regRestURL('storeBookChapter','/api/store/book/chapter/:bid','store','bookChapter');
 
         // store Download Book
-        Restful::regRestURL('storeDownLoadBook','/api/store/download/book/:bid','store','download');
+        self::regRestURL('storeDownLoadBook','/api/store/download/book/:bid','store','download');
 
         /** Payment
         *************************/
 
         // Payment For Apple
-        Restful::regRestURL('paymentForApple','/api/payment/apple/feedback','store','paymentForApple');
+        self::regRestURL('paymentForApple','/api/payment/apple/feedback','store','paymentForApple');
         
         
-        return Restful::$restURL;
+        return self::$restURL;
     }
 
 }

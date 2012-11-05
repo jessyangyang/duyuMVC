@@ -36,10 +36,9 @@ class BookInfo extends \local\db\ORM
             'default' => 0,
             'comment' => 'apple_price'),
         'download_path' => array(
-            'type' => array(
                 'type' => 'varchar',
                 'default' => 0,
-                'comment' => 'download_path'))
+                'comment' => 'download_path')
         );
 
     public $primaryKey = "bid";

@@ -10,23 +10,25 @@
 
 use \duyuu\dao\Books;
 use \duyuu\dao\BookRecommend;
+use \duyuu\rest\Restful;
 
 class StoreController extends \Yaf\Controller_Abstract 
 {
+
     public function recommendAction()
     {
+        $rest = Restful::instance();
         $book = new BookRecommend();
 
         $booklist = $book->getIndexRecommend();
 
-        $json = array(
-            "code" => 200,
-            "message" => "sucessful!",
-            "bookList" => $booklist
-            );
+        if ($booklist) {
+            $rest->setData('code',200);
+            $rest->setData('message',"ok");
+            $rest->setData('bookList',$booklist);
+        }
 
-        echo json_encode($json);
-        exit();
+        $rest->response();
     }
 
     public function topAction()
