@@ -26,6 +26,9 @@ define('DS', '/');
 // Absolute path to the system folder
 define('SP', realpath(__DIR__). DS);
 
+// Base Path for API
+define("BASE_PATH", realpath((phpversion() >= "5.3"? __DIR__: dirname(__FILE__)).'/../../'));
+
 // Is this an AJAX request?
 define('AJAX_REQUEST', strtolower(getenv('HTTP_X_REQUESTED_WITH')) === 'xmlhttprequest');
 

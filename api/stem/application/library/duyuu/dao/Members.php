@@ -51,6 +51,10 @@ class Members extends \local\db\ORM
         return $member;
     }
 
+    /**
+     * [getCurrentUser description]
+     * @return [type] [description]
+     */
     public static function getCurrentUser()
     {
         if (!isset(self::$instance)) {

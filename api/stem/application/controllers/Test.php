@@ -103,6 +103,13 @@ class testController extends \Yaf\Controller_Abstract
             }
         }
 
+        $user = \duyuu\dao\Members::getCurrentUser();
+        if ($user) {
+            $display->assign('user',array(
+                'id' => $user->id,
+                'email' => $user->email));
+        }
+        
         $display->assign('title','login');
     }
 
@@ -111,6 +118,23 @@ class testController extends \Yaf\Controller_Abstract
         $appKey = $_SERVER[''];
 
         exit();
+    }
+
+    public function uploadAction()
+    {
+        $display = $this->getView();
+
+        $data = $this->getRequest();
+
+        if ($data->isPost() and $data->getPost('state') == "upload") {
+            
+            $file  = $data->getFiles();
+            $image = new \duyuu\image\ImageControl();
+
+            $image->save($file['file']);
+        }
+
+        $display->assign('title', 'upload');
     }
 }
 

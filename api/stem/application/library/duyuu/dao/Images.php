@@ -59,7 +59,6 @@ class Images extends \local\db\ORM
 
     public $primaryKey = "pid";
 
-
     protected static $instance;
 
     /**
@@ -68,7 +67,7 @@ class Images extends \local\db\ORM
      * @param String $key ,primary_key
      * @return Images Object
      */
-    public function $instance($key = false)
+    public static function instance($key = false)
     {
         return self::$instance ? self::$instance : new Images($key);
     }

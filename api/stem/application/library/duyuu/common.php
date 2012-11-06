@@ -110,4 +110,21 @@ class common
         return $object;
     }
 
+    /**
+     * [random description]
+     * @param  [type]  $length  [description]
+     * @param  integer $numeric [description]
+     * @return [type]           [description]
+     */
+    function random($length, $numeric = 0) {
+        PHP_VERSION < '4.2.0' ? mt_srand((double)microtime() * 1000000) : mt_srand();
+        $seed = base_convert(md5(print_r($_SERVER, 1).microtime()), 16, $numeric ? 10 : 35);
+        $seed = $numeric ? (str_replace('0', '', $seed).'012340567890') : ($seed.'zZ'.strtoupper($seed));
+        $hash = '';
+        $max = strlen($seed) - 1;
+        for($i = 0; $i < $length; $i++) {
+            $hash .= $seed[mt_rand(0, $max)];
+        }
+        return $hash;
+    }
 }

@@ -21,6 +21,7 @@ class RegisterRest extends Restful{
         self::regRestURL('testLogin','/api/test/login','test','login');
         self::regRestURL('testAdd','/api/test/addClient','test','addClient');
         self::regRestURL('testAuth','/api/test/auth','test','auth');
+        self::regRestURL('testAuth','/api/test/upload','test','upload');
 
         /**User
         ************************/
