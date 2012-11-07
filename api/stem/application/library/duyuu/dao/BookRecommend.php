@@ -83,22 +83,24 @@ class BookRecommend extends \local\db\ORM
     }
 
     /**
-     * [topIndex description]
+     * [topRecommendIndex description]
      * @return [type] [description]
      */
-    public function topIndex()
+    public function topRecommendIndex()
     {
         $recommend = self::instance();
         $table = $this->table;
 
         $list =  $recommend->field("b.bid,b.title,i.path as cover,b.cid,c.name")->joinQuery("books as b","b.bid=$table.bid")->joinQuery('book_category as c','c.cid=b.cid')->joinQuery('book_image as p','b.bid=p.bid')->joinQuery('images as i','i.pid=p.pid')->where("p.type = 2 AND $table.cid='2'")->limit(4)->fetchList();
         
-        foreach ($list as $key => $value) {
-            if (isset($value['cover']) and $value['cover']) {
-                $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+        if (is_array($list)) {
+            foreach ($list as $key => $value) {
+                if (isset($value['cover']) and $value['cover']) {
+                   $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                }
             }
+            $recommend->joinTables = array();
         }
-        $recommend->joinTables = array();
 
         return $list;
     }
