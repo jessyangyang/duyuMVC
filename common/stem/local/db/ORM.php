@@ -12,7 +12,7 @@ namespace local\db;
 
 use local\db\MySQL;
 
-class ORM{
+class ORM extends MySQL{
 
     // Query params
     public $options = array();

@@ -19,7 +19,7 @@ class ImageControl extends \local\image\Images
         // file_exists($file) and $this->_file = $file;
     }
 
-    public function save($FILE,$thumb = false)
+    public function save($FILE, $class = 1, $thumb = false)
     {
         $user = \duyuu\dao\Members::getCurrentUser();
 
@@ -57,15 +57,16 @@ class ImageControl extends \local\image\Images
 
         $imageParam = array(
             'uid' => $user->id,
-            'class' => 1,
+            'class' => $class,
             'title' => $FILE['name'],
             'filename' => $FILE['name'],
             'type' => $FILE['type'],
             'size' => $FILE['size'],
-            'path' => $this->_file,
+            'path' => $image->escapeString($this->_file),
             'thumb' => 0,
             'published' => time()
             );
+
         $image->insert($imageParam);
 
     }

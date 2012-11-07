@@ -21,11 +21,14 @@ class StoreController extends \Yaf\Controller_Abstract
         $book = new BookRecommend();
 
         $booklist = $book->getIndexRecommend();
+        
+        $top = $book->topIndex();
 
         if ($booklist) {
-            $rest->setData('code',200);
-            $rest->setData('message',"ok");
-            $rest->setData('bookList',$booklist);
+            $rest->assign('code',200);
+            $rest->assign('message',"ok");
+            $rest->assign('topBanner',$top);
+            $rest->assign('bookList',$booklist);
         }
 
         $rest->response();

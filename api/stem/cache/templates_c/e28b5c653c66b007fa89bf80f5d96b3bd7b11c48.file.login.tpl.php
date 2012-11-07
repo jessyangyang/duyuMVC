@@ -1,29 +1,30 @@
-<?php /* Smarty version Smarty-3.1.12, created on 2012-11-01 21:18:15
+<?php /* Smarty version Smarty-3.1.12, created on 2012-11-07 15:17:43
          compiled from "/home/wwwroot/duyuMVC/api/stem/application/views/test/login.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:14137789025090e3d44d3f98-77775485%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1022588804509a0b17e5e803-75158480%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'e28b5c653c66b007fa89bf80f5d96b3bd7b11c48' => 
     array (
       0 => '/home/wwwroot/duyuMVC/api/stem/application/views/test/login.tpl',
-      1 => 1351774028,
+      1 => 1352190973,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '14137789025090e3d44d3f98-77775485',
+  'nocache_hash' => '1022588804509a0b17e5e803-75158480',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.12',
-  'unifunc' => 'content_5090e3d455a922_36375915',
   'variables' => 
   array (
     'title' => 0,
+    'user' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.12',
+  'unifunc' => 'content_509a0b18190352_99257972',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5090e3d455a922_36375915')) {function content_5090e3d455a922_36375915($_smarty_tpl) {?><!DOYTYPE html>
+<?php if ($_valid && !is_callable('content_509a0b18190352_99257972')) {function content_509a0b18190352_99257972($_smarty_tpl) {?><!DOYTYPE html>
 <html lang="zh">
     <head>
         <meta charset="UTF-8"/>
@@ -32,6 +33,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     </head>
     <body>
         <h1>login</h1>
+        <?php if ($_smarty_tpl->tpl_vars['user']->value){?>
+        <h2>id:[<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
+] <span><?php echo $_smarty_tpl->tpl_vars['user']->value['email'];?>
+</span></h2>
+        <?php }else{ ?>
         <form action="/api/test/login" method="POST">
             <label for="email">email</label>
             <input type="text" name="email"/><br/>
@@ -40,5 +46,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <input type="submit" value="commit"/>
             <input type="hidden" name="state" value="login"/>
         </form>
+        <?php }?>
     </body>
 </html><?php }} ?>
