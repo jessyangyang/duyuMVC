@@ -62,11 +62,18 @@ class BookRecommend extends \local\db\ORM
         foreach ($categoryList as $key => $value) {
             if (isset($value['cid'])) {
                 
+                $tmplist = $recommend->field("b.bid,b.title,i.path as cover,b.cid,c.name")->joinQuery("books as b","b.bid=$table.bid")->joinQuery('book_category as c','c.cid=b.cid')->joinQuery('book_image as p','b.bid=p.bid')->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND $table.cid='" . $value['cid'] . "'")->limit(4)->fetchList();
+
+                foreach ($tmplist as $key => $value) {
+                    if (isset($value['cover']) and $value['cover']) {
+                        $tmplist[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                    }
+                }
 
                 $list[] = array(
                     'cid' => $value['cid'],
                     'name' => $value['name'],
-                    'list' => $recommend->field("b.bid,b.title,i.path as cover,b.cid,c.name")->joinQuery("books as b","b.bid=$table.bid")->joinQuery('book_category as c','c.cid=b.cid')->joinQuery('book_image as p','b.bid=p.bid')->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND $table.cid='" . $value['cid'] . "'")->limit(4)->fetchList());
+                    'list' => $tmplist);
                 $recommend->joinTables = array();
             }
         }
@@ -86,6 +93,11 @@ class BookRecommend extends \local\db\ORM
 
         $list =  $recommend->field("b.bid,b.title,i.path as cover,b.cid,c.name")->joinQuery("books as b","b.bid=$table.bid")->joinQuery('book_category as c','c.cid=b.cid')->joinQuery('book_image as p','b.bid=p.bid')->joinQuery('images as i','i.pid=p.pid')->where("p.type = 2 AND $table.cid='2'")->limit(4)->fetchList();
         
+        foreach ($list as $key => $value) {
+            if (isset($value['cover']) and $value['cover']) {
+                $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+            }
+        }
         $recommend->joinTables = array();
 
         return $list;

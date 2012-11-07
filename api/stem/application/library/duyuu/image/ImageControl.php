@@ -78,7 +78,7 @@ class ImageControl extends \local\image\Images
      * @param  string  $type     [$type = {'head','image','book'}
      * @return [type]            [description]
      */
-    public function getFilePath($fileType,$mkdir = false, $type = 'head')
+    public function getFilePath($fileType,$mkdir = false)
     {
         $imagePath = \Yaf\Application::app()->getConfig()->toArray();
         $pathOne = gmdate("Ym");
@@ -126,5 +126,11 @@ class ImageControl extends \local\image\Images
             }
             return true;
         }
+    }
+
+    public static function getRelativeImage($path)
+    {
+        $imagePath = \Yaf\Application::app()->getConfig()->toArray();
+        return $imagePath['server']['imagesBook'].$path;
     }
 }
