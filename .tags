@@ -7,12 +7,14 @@
 AJAX_REQUEST	api/stem/main/index.php	/^define('AJAX_REQUEST', strtolower(getenv('HTTP_X_REQUESTED_WITH')) === 'xmlhttprequest');$/;"	d
 APC	common/stem/local/db/APC.php	/^class APC extends ORM$/;"	c
 APPLICATION_PATH	api/stem/main/index.php	/^define("APPLICATION_PATH", realpath((phpversion() >= "5.3"? __DIR__: dirname(__FILE__)).'\/..\/'));$/;"	d
+BASE_PATH	api/stem/main/index.php	/^define("BASE_PATH", realpath((phpversion() >= "5.3"? __DIR__: dirname(__FILE__)).'\/..\/..\/'));$/;"	d
 Base	common/stem/local/base/Base.php	/^abstract class Base$/;"	c
 BookCategory	api/stem/application/library/duyuu/dao/BookCategory.php	/^class BookCategory extends \\local\\db\\ORM $/;"	c
 BookChapter	api/stem/application/library/duyuu/dao/BookChapter.php	/^class BookChapter extends \\local\\db\\ORM $/;"	c
 BookInfo	api/stem/application/library/duyuu/dao/BookInfo.php	/^class BookInfo extends \\local\\db\\ORM $/;"	c
 BookMenu	api/stem/application/library/duyuu/dao/BookMenu.php	/^class BookMenu extends \\local\\db\\ORM $/;"	c
 BookRecommend	api/stem/application/library/duyuu/dao/BookRecommend.php	/^class BookRecommend extends \\local\\db\\ORM $/;"	c
+BookRecommendMenu	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^class BookRecommendMenu extends \\local\\db\\ORM $/;"	c
 Books	api/stem/application/library/duyuu/dao/Books.php	/^class Books extends \\local\\db\\ORM $/;"	c
 Bootstrap	api/stem/application/Bootstrap.php	/^class Bootstrap extends \\Yaf\\Bootstrap_Abstract $/;"	c
 CURL_OPTS	common/stem/local/oauth2/OAuth2Client.php	/^	public static $CURL_OPTS = array($/;"	v
@@ -21,7 +23,10 @@ DS	api/stem/main/index.php	/^define('DS', '\/');$/;"	d
 DS	common/third/smarty/Smarty.class.php	/^    define('DS', DIRECTORY_SEPARATOR);$/;"	d
 DUYU_TYPE	api/stem/main/index.php	/^define('DUYU_TYPE', ".php");$/;"	d
 Database	common/stem/local/db/Database.php	/^abstract class Database {$/;"	c
+Download	common/stem/local/download/Download.php	/^class Download $/;"	c
+DownloadController	api/stem/application/controllers/Download.php	/^class DownloadController extends \\Yaf\\Controller_Abstract $/;"	c
 Exception	common/stem/local/exception/Exception.php	/^class Exception extends \\Exception $/;"	c
+Files	common/stem/local/files/Files.php	/^class Files extends \\Filesystem$/;"	c
 IOAuth2GrantClient	common/stem/local/oauth2/IOAuth2GrantClient.php	/^interface IOAuth2GrantClient extends IOAuth2Storage {$/;"	i
 IOAuth2GrantCode	common/stem/local/oauth2/IOAuth2GrantCode.php	/^interface IOAuth2GrantCode extends IOAuth2Storage {$/;"	i
 IOAuth2GrantExtension	common/stem/local/oauth2/IOAuth2GrantExtension.php	/^interface IOAuth2GrantExtension extends IOAuth2Storage {$/;"	i
@@ -29,6 +34,9 @@ IOAuth2GrantImplicit	common/stem/local/oauth2/IOAuth2GrantImplicit.php	/^interfa
 IOAuth2GrantUser	common/stem/local/oauth2/IOAuth2GrantUser.php	/^interface IOAuth2GrantUser extends IOAuth2Storage {$/;"	i
 IOAuth2RefreshTokens	common/stem/local/oauth2/IOAuth2RefreshTokens.php	/^interface IOAuth2RefreshTokens extends IOAuth2Storage {$/;"	i
 IOAuth2Storage	common/stem/local/oauth2/IOAuth2Storage.php	/^interface IOAuth2Storage {$/;"	i
+ImageControl	api/stem/application/library/duyuu/image/ImageControl.php	/^class ImageControl extends \\local\\image\\Images $/;"	c
+Images	api/stem/application/library/duyuu/dao/Images.php	/^class Images extends \\local\\db\\ORM $/;"	c
+Images	common/stem/local/image/Images.php	/^abstract class Images {$/;"	c
 IndexController	api/stem/application/controllers/Index.php	/^class IndexController extends \\Yaf\\Controller_Abstract $/;"	c
 ItemVarName	common/third/smarty/sysplugins/smarty_internal_compile_foreach.php	/^        $ItemVarName = '$' . trim($item, '\\'"') . '@';$/;"	v
 Members	api/stem/application/library/duyuu/dao/Members.php	/^class Members extends \\local\\db\\ORM $/;"	c
@@ -45,7 +53,7 @@ OAuth2ServerException	common/stem/local/oauth2/OAuth2ServerException.php	/^class
 OAuth2Storage	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^class OAuth2Storage implements IOAuth2GrantCode, IOAuth2RefreshTokens $/;"	c
 OAuthAuthCode	api/stem/application/library/duyuu/dao/OAuthAuthCode.php	/^class OAuthAuthCode extends \\local\\db\\ORM $/;"	c
 OAuthClient	api/stem/application/library/duyuu/dao/OAuthClient.php	/^class OAuthClient extends \\local\\db\\ORM $/;"	c
-ORM	common/stem/local/db/ORM.php	/^class ORM{$/;"	c
+ORM	common/stem/local/db/ORM.php	/^class ORM extends MySQL{$/;"	c
 PATH	api/stem/main/index.php	/^define('PATH', parse_url(getenv('REQUEST_URI'), PHP_URL_PATH));$/;"	d
 PrintTrace	common/third/smarty/sysplugins/smarty_internal_configfileparser.php	/^    static function PrintTrace()$/;"	f
 PrintTrace	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^    static function PrintTrace()$/;"	f
@@ -157,7 +165,7 @@ Smarty_Template_Cached	common/third/smarty/sysplugins/smarty_cacheresource.php	/
 Smarty_Template_Compiled	common/third/smarty/sysplugins/smarty_resource.php	/^class Smarty_Template_Compiled {$/;"	c
 Smarty_Template_Source	common/third/smarty/sysplugins/smarty_resource.php	/^class Smarty_Template_Source {$/;"	c
 Smarty_Variable	common/third/smarty/sysplugins/smarty_internal_data.php	/^class Smarty_Variable {$/;"	c
-StoreBookController	api/stem/application/controllers/StoreBook.php	/^class StoreBookController extends \\Yaf\\Controller_Abstract $/;"	c
+StoreBookController	api/stem/application/controllers/Storebook.php	/^class StoreBookController extends \\Yaf\\Controller_Abstract $/;"	c
 StoreController	api/stem/application/controllers/Store.php	/^class StoreController extends \\Yaf\\Controller_Abstract $/;"	c
 StoreDownloadController	api/stem/application/controllers/Payment.php	/^class StoreDownloadController extends \\Yaf\\Controller_Abstract $/;"	c
 StoreDownloadController	api/stem/application/controllers/StoreDownload.php	/^class StoreDownloadController extends \\Yaf\\Controller_Abstract $/;"	c
@@ -182,6 +190,7 @@ __call	common/stem/local/db/ORM.php	/^    function __call($dbMethod, $dbFields) 
 __call	common/third/smarty/sysplugins/smarty_internal_templatebase.php	/^    public function __call($name, $args)$/;"	f
 __clone	common/third/smarty/Smarty.class.php	/^    public function __clone()$/;"	f
 __compile_dir	common/third/smarty/sysplugins/smarty_internal_utility.php	/^        $__compile_dir = $smarty->getCompileDir();$/;"	v
+__construct	api/stem/application/library/duyuu/image/ImageControl.php	/^    public function __construct()$/;"	f
 __construct	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^    public function __construct() {$/;"	f
 __construct	api/stem/application/library/duyuu/rest/Restful.php	/^    public function __construct()$/;"	f
 __construct	common/stem/local/db/MySQL.php	/^    public function __construct()$/;"	f
@@ -416,6 +425,8 @@ _error_count	common/third/smarty/sysplugins/smarty_internal_utility.php	/^      
 _error_reporting	common/third/smarty/sysplugins/smarty_internal_write_file.php	/^        $_error_reporting = error_reporting();$/;"	v
 _extra	common/third/smarty/plugins/function.html_select_date.php	/^        $_extra = '';$/;"	v
 _extra	common/third/smarty/plugins/function.html_select_time.php	/^        $_extra = '';$/;"	v
+_file	api/stem/application/library/duyuu/image/ImageControl.php	/^        \/\/ file_exists($file) and $this->_file = $file;$/;"	v
+_file	common/stem/local/image/Images.php	/^    public $_file;$/;"	v
 _file	common/third/smarty/sysplugins/smarty_internal_resource_file.php	/^            $_file = substr($_file, $_pos + 1);$/;"	v
 _file	common/third/smarty/sysplugins/smarty_internal_resource_file.php	/^        $_file = $source->name;$/;"	v
 _file	common/third/smarty/sysplugins/smarty_internal_utility.php	/^                $_file = $_fileinfo->getFilename();$/;"	v
@@ -464,6 +475,8 @@ _has_vars	common/third/smarty/sysplugins/smarty_internal_compile_include.php	/^ 
 _has_vars	common/third/smarty/sysplugins/smarty_internal_compile_include.php	/^            $_has_vars = false;$/;"	v
 _hash	common/third/smarty/sysplugins/smarty_internal_compile_call.php	/^        $_hash = str_replace('-', '_', $compiler->template->properties['nocache_hash']);$/;"	v
 _hash	common/third/smarty/sysplugins/smarty_internal_compile_include.php	/^            $_hash = $compiler->smarty->merged_templates_func[$tpl_name]['nocache_hash'];$/;"	v
+_height	common/stem/local/image/Images.php	/^        $this->_height = $size;$/;"	v
+_height	common/stem/local/image/Images.php	/^    public $_height;$/;"	v
 _hour	common/third/smarty/plugins/function.html_select_time.php	/^            $_hour = $_minute = $_second = $time = null;$/;"	v
 _hour12	common/third/smarty/plugins/function.html_select_time.php	/^                $_hour12 = $_hour == 0$/;"	v
 _html	common/third/smarty/plugins/function.html_select_date.php	/^    $_html = '';$/;"	v
@@ -1066,10 +1079,6 @@ _val	common/third/smarty/plugins/function.html_options.php	/^            $_val =
 _val	common/third/smarty/plugins/function.html_radios.php	/^            $_val = isset($output[$_i]) ? $output[$_i] : '';$/;"	v
 _val	common/third/smarty/plugins/function.html_select_date.php	/^            $_val = sprintf('%02d', $i);$/;"	v
 _val	common/third/smarty/plugins/function.html_select_time.php	/^            $_val = sprintf('%02d', $i);$/;"	v
-_valid	api/stem/cache/templates_c/76f8216fdde324037cbf84e69b135185e6dd3ae8.file.reg.tpl.php	/^$_valid = $_smarty_tpl->decodeProperties(array ($/;"	v
-_valid	api/stem/cache/templates_c/8071b958d9288e886a02c1e1d21ed7e60505e07b.file.index.tpl.php	/^$_valid = $_smarty_tpl->decodeProperties(array ($/;"	v
-_valid	api/stem/cache/templates_c/928871e96f365de4525052278312f4b16e9cdc1a.file.addclient.tpl.php	/^$_valid = $_smarty_tpl->decodeProperties(array ($/;"	v
-_valid	api/stem/cache/templates_c/e28b5c653c66b007fa89bf80f5d96b3bd7b11c48.file.login.tpl.php	/^$_valid = $_smarty_tpl->decodeProperties(array ($/;"	v
 _value	common/third/smarty/plugins/function.html_select_date.php	/^            $_value = $day_value_format ==  '%02d' ? $_val : sprintf($day_value_format, $i);$/;"	v
 _value	common/third/smarty/plugins/function.html_select_date.php	/^            $_value = $month_value_format == "%m" ? $_val : strftime($month_value_format, $_month_timestamps[$i]);$/;"	v
 _value	common/third/smarty/plugins/function.html_select_time.php	/^            $_value = $hour_value_format == '%02d' ? $_val : sprintf($hour_value_format, $i);$/;"	v
@@ -1085,6 +1094,8 @@ _vars	common/third/smarty/sysplugins/smarty_internal_compile_include.php	/^     
 _version	common/third/smarty/SmartyBC.class.php	/^    public $_version = self::SMARTY_VERSION;$/;"	v
 _version	common/third/smarty/sysplugins/smarty_internal_compile_private_special_variable.php	/^                $_version = Smarty::SMARTY_VERSION;$/;"	v
 _was_relative	common/third/smarty/sysplugins/smarty_resource.php	/^            $_was_relative = true;$/;"	v
+_width	common/stem/local/image/Images.php	/^        $this->_width = $size;$/;"	v
+_width	common/stem/local/image/Images.php	/^    public $_width;$/;"	v
 _win_from	common/third/smarty/plugins/modifier.date_format.php	/^            $_win_from = array('%D', '%h', '%n', '%r', '%R', '%t', '%T');$/;"	v
 _win_to	common/third/smarty/plugins/modifier.date_format.php	/^            $_win_to = array('%m\/%d\/%y', '%b', "\\n", '%I:%M:%S %p', '%H:%M', "\\t", '%H:%M:%S');$/;"	v
 _year	common/third/smarty/plugins/function.html_select_date.php	/^            $_year = $_month = $_day = $time = null;$/;"	v
@@ -1163,6 +1174,7 @@ args	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^ 
 args	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^                    $args = array();$/;"	v
 arr	api/stem/application/controllers/Test.php	/^                $arr = array($/;"	v
 asp_tags	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^        $this->asp_tags = (ini_get('asp_tags') != '0');$/;"	v
+assign	api/stem/application/library/duyuu/rest/Restful.php	/^    public function assign($key, $data)$/;"	f
 assign	common/stem/local/template/SmartyAdapter.php	/^    public function assign($spec, $value = null) {$/;"	f
 assign	common/third/smarty/plugins/block.textformat.php	/^    $assign = null;$/;"	v
 assign	common/third/smarty/sysplugins/smarty_internal_compile_capture.php	/^        $assign = isset($_attr['assign']) ? $_attr['assign'] : 'null';$/;"	v
@@ -1193,7 +1205,7 @@ base_tag	common/third/smarty/sysplugins/smarty_internal_compile_private_register
 base_tag	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^                $base_tag = substr($tag, 0, -5);$/;"	v
 basedir	common/third/smarty/plugins/function.html_image.php	/^    $basedir = isset($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '';$/;"	v
 begin	common/stem/local/db/Database.php	/^    function begin(){}$/;"	f
-begin	common/stem/local/db/MySQL.php	/^    function begin(){}$/;"	f
+begin	common/stem/local/db/MySQL.php	/^    function begin(){$/;"	f
 block_content	common/third/smarty/sysplugins/smarty_internal_compile_block.php	/^                            $block_content = preg_replace("!({$_ldl}{$al}block[\\s\\S]*?{$name}[\\s\\S]*?{$_rdl}[\\s\\S]*?{$_ldl}{$al}\/block\\s*{$_rdl})!", '', $block_content);$/;"	v
 block_content	common/third/smarty/sysplugins/smarty_internal_compile_block.php	/^                            $block_content = preg_replace($search, $replace, $block_content);$/;"	v
 block_content	common/third/smarty/sysplugins/smarty_internal_compile_block.php	/^                    $block_content = preg_replace("!({$_ldl}{$al}\\\\\\$smarty\\.block\\.child\\s*{$_rdl})!", $replacement, $block_content);$/;"	v
@@ -1201,11 +1213,15 @@ block_data	common/third/smarty/sysplugins/smarty_internal_template.php	/^       
 block_data	common/third/smarty/sysplugins/smarty_internal_template.php	/^    public $block_data = array();$/;"	v
 block_nesting_level	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^        $this->block_nesting_level = 0;$/;"	v
 block_nesting_level	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^    $this->block_nesting_level = count($this->compiler->_tag_stack);$/;"	v
-book	api/stem/application/controllers/Store.php	/^        $book = new BookRecommend();$/;"	v
-bookAction	api/stem/application/controllers/StoreBook.php	/^    public function bookAction($bid)$/;"	f
+book	api/stem/application/controllers/Store.php	/^        $book = BookRecommend::instance();$/;"	v
+book	api/stem/application/controllers/Store.php	/^        $book = Books::instance();$/;"	v
+book	api/stem/application/controllers/Storebook.php	/^        $book = Books::instance();$/;"	v
+bookAction	api/stem/application/controllers/Download.php	/^    public function bookAction($bid = 1) $/;"	f
 bookAction	api/stem/application/controllers/StoreDownload.php	/^    public function bookAction()$/;"	f
-bookChapterAction	api/stem/application/controllers/StoreBook.php	/^    public function bookChapterAction($bid)$/;"	f
+bookAction	api/stem/application/controllers/Storebook.php	/^    public function bookAction($bid)$/;"	f
+bookChapterAction	api/stem/application/controllers/Storebook.php	/^    public function bookChapterAction($bid)$/;"	f
 booklist	api/stem/application/controllers/Store.php	/^        $booklist = $book->getIndexRecommend();$/;"	v
+books	api/stem/application/library/duyuu/dao/Books.php	/^        $books = self::instance();$/;"	v
 buffer	common/third/smarty/sysplugins/smarty_internal_compile_capture.php	/^        $buffer = isset($_attr['name']) ? $_attr['name'] : "'default'";$/;"	v
 buildCompiledFilepath	common/third/smarty/sysplugins/smarty_internal_config.php	/^    public function buildCompiledFilepath()$/;"	f
 buildFilepath	common/third/smarty/sysplugins/smarty_resource.php	/^    protected function buildFilepath(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)$/;"	f
@@ -1277,8 +1293,10 @@ callback	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php
 called_functions	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^    public $called_functions = array();$/;"	v
 caption	common/third/smarty/plugins/function.html_table.php	/^    $caption = '';$/;"	v
 capture_error	common/third/smarty/sysplugins/smarty_internal_template.php	/^    public function capture_error()$/;"	f
-category	api/stem/application/controllers/Store.php	/^    public function category()$/;"	f
-category	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $category = new \\duyuu\\dao\\BookCategory();$/;"	v
+category	api/stem/application/controllers/Store.php	/^        $category = BookCategory::instance();$/;"	v
+category	api/stem/application/library/duyuu/dao/BookCategory.php	/^        $category = self::instance();$/;"	v
+category	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $category = \\duyuu\\dao\\BookRecommendMenu::instance();$/;"	v
+categoryAction	api/stem/application/controllers/Store.php	/^    public function categoryAction()$/;"	f
 categoryList	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $categoryList = $category->where('type = 1')->fetchList();$/;"	v
 ch	api/stem/application/library/duyuu/common.php	/^        $ch = curl_init($url);$/;"	v
 ch	common/stem/local/oauth2/OAuth2Client.php	/^			$ch = curl_init();$/;"	v
@@ -1299,6 +1317,8 @@ checkUserCredentials	common/stem/local/oauth2/IOAuth2GrantUser.php	/^	public fun
 checks	common/third/smarty/sysplugins/smarty_internal_compilebase.php	/^     * This function checks if the attributes passed are valid$/;"	f
 cid	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^        $cid = $uid . '#' . $this->sanitize($resource_name) . '#' . $this->sanitize($cache_id) . '#' . $this->sanitize($compile_id);$/;"	v
 cid	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^        $cid = trim($cache_id, '|');$/;"	v
+class	api/stem/application/controllers/Test.php	/^            $class = $data->getPost('type') ? $data->getPost('type') : 1;$/;"	v
+class	api/stem/application/library/duyuu/image/ImageControl.php	/^    public function save($FILE, $class = 1, $thumb = false)$/;"	v
 class	common/third/smarty/plugins/function.html_options.php	/^    $class = null;$/;"	v
 class_name	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^        $class_name = 'Smarty_Internal_Compile_' . $tag;$/;"	v
 clear	common/third/smarty/sysplugins/smarty_cacheresource.php	/^    public abstract function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time);$/;"	f
@@ -1335,6 +1355,8 @@ close	common/stem/local/db/Database.php	/^    function close(){}$/;"	f
 close	common/stem/local/db/MySQL.php	/^    function close() {}$/;"	f
 closeTag	common/third/smarty/sysplugins/smarty_internal_compilebase.php	/^    public function closeTag($compiler, $expectedTag)$/;"	f
 cnt	common/third/smarty/sysplugins/smarty_internal_parsetree.php	/^        for ($key = 0, $cnt = count($this->subtrees); $key < $cnt; $key++) {$/;"	v
+code	api/stem/application/controllers/Store.php	/^        $code = 200;$/;"	v
+code	api/stem/application/controllers/Storebook.php	/^        $code = 200;$/;"	v
 code	common/stem/local/exception/Exception.php	/^     public function __construct($message, $code = 0, Exception $previous = null) {$/;"	v
 code	common/stem/local/oauth2/OAuth2.php	/^		$code = $this->genAuthCode();$/;"	v
 code	common/stem/local/oauth2/OAuth2Exception.php	/^		$code = isset($result['code']) ? $result['code'] : 0;$/;"	v
@@ -1362,8 +1384,9 @@ cols_count	common/third/smarty/plugins/function.html_table.php	/^               
 cols_count	common/third/smarty/plugins/function.html_table.php	/^                    $cols_count = count($cols);$/;"	v
 cols_count	common/third/smarty/plugins/function.html_table.php	/^            $cols_count = ceil($loop_count \/ $rows);$/;"	v
 commit	common/stem/local/db/Database.php	/^    function commit(){}$/;"	f
-commit	common/stem/local/db/MySQL.php	/^    function commit(){}$/;"	f
+commit	common/stem/local/db/MySQL.php	/^    function commit(){$/;"	f
 common	api/stem/application/library/duyuu/common.php	/^class common$/;"	c
+common	api/stem/application/library/duyuu/image/ImageControl.php	/^        $common =  \\Yaf\\Registry::get('common');$/;"	v
 compile	common/third/smarty/sysplugins/smarty_internal_compile_append.php	/^    public function compile($args, $compiler, $parameter)$/;"	f
 compile	common/third/smarty/sysplugins/smarty_internal_compile_assign.php	/^    public function compile($args, $compiler, $parameter)$/;"	f
 compile	common/third/smarty/sysplugins/smarty_internal_compile_block.php	/^    public function compile($args, $compiler) {$/;"	f
@@ -1503,6 +1526,8 @@ content	common/third/smarty/sysplugins/smarty_resource.php	/^                ret
 contents	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^    protected $contents = array();$/;"	v
 cookie_name	common/stem/local/oauth2/OAuth2Client.php	/^				$cookie_name = $this->getSessionCookieName();$/;"	v
 cookie_name	common/stem/local/oauth2/OAuth2Client.php	/^		$cookie_name = $this->getSessionCookieName();$/;"	v
+count	api/stem/application/library/duyuu/dao/Books.php	/^        $count = $books->field("count(*) as count")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND cid='$cid'")->fetchList();$/;"	v
+count	api/stem/application/library/duyuu/dao/Books.php	/^        $count = $count ? $count[0]['count'] : 0;$/;"	v
 count	common/third/smarty/plugins/shared.mb_str_replace.php	/^            $count = count($parts) - 1;$/;"	v
 count	common/third/smarty/sysplugins/smarty_internal_compile_private_print_expression.php	/^                            for ($i = 0, $count = count($mod_array[0]);$i < $count;$i++) {$/;"	v
 counter	common/third/smarty/plugins/function.counter.php	/^    $counter =& $counters[$name];$/;"	v
@@ -1534,6 +1559,7 @@ data	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^            $d
 data	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^            $data = array($/;"	v
 data	common/stem/local/rest/REST.php	/^                $data = trim(stripcslashes($data));$/;"	v
 data	common/stem/local/rest/REST.php	/^            $data = strip_tags($data);$/;"	v
+data	common/stem/local/rest/REST.php	/^        $data = $data ? $data : $this->responseData;$/;"	v
 data	common/third/smarty/Smarty.class.php	/^            $data = $parent;$/;"	v
 data	common/third/smarty/Smarty.class.php	/^            $data = null;$/;"	v
 data	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^        $data = $this->read(array($key));$/;"	v
@@ -1607,7 +1633,6 @@ disableSecurity	common/third/smarty/Smarty.class.php	/^    public function disab
 disabled_modifiers	common/third/smarty/sysplugins/smarty_security.php	/^    public $disabled_modifiers = array();$/;"	v
 disabled_tags	common/third/smarty/sysplugins/smarty_security.php	/^    public $disabled_tags = array();$/;"	v
 display	api/stem/application/controllers/Test.php	/^        $display = $this->getView();$/;"	v
-display	common/stem/local/rest/REST.php	/^    public function display($data)$/;"	f
 display	common/stem/local/template/SmartyAdapter.php	/^    public function display($name, $value = NULL) {$/;"	f
 display	common/third/smarty/sysplugins/smarty_internal_templatebase.php	/^    public function display($template = null, $cache_id = null, $compile_id = null, $parent = null)$/;"	f
 display_days	common/third/smarty/plugins/function.html_select_date.php	/^    $display_days = true;$/;"	v
@@ -1629,6 +1654,7 @@ does	common/third/smarty/sysplugins/smarty_security.php	/^ * This class does con
 done	common/third/smarty/sysplugins/smarty_internal_configfileparser.php	/^                $done = 0;$/;"	v
 done	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^                $done = 0;$/;"	v
 double_encode	common/third/smarty/plugins/modifiercompiler.escape.php	/^        $double_encode = smarty_literal_compiler_param($params, 3, true);$/;"	v
+download	common/stem/local/download/Download.php	/^    public static function download($filePath, $params = false)$/;"	f
 dpi_default	common/third/smarty/plugins/function.html_image.php	/^            $dpi_default = 72;$/;"	v
 dpi_default	common/third/smarty/plugins/function.html_image.php	/^            $dpi_default = 96;$/;"	v
 dropSchema	common/stem/local/base/Base.php	/^    abstract public function dropSchema();$/;"	f
@@ -1636,6 +1662,7 @@ ds	common/third/smarty/sysplugins/smarty_resource.php	/^    protected function n
 e	common/stem/local/oauth2/OAuth2Client.php	/^			$e = new OAuth2Exception($result);$/;"	v
 e	common/stem/local/oauth2/OAuth2Client.php	/^			$e = new OAuth2Exception(array('code' => curl_errno($ch), 'message' => curl_error($ch)));$/;"	v
 enableSecurity	common/third/smarty/Smarty.class.php	/^    public function enableSecurity($security_class = null)$/;"	f
+encode	common/stem/local/rest/REST.php	/^    public function encode($data)$/;"	f
 encode	common/third/smarty/plugins/function.mailto.php	/^    $encode = (empty($params['encode'])) ? 'none' : $params['encode'];$/;"	v
 encoding	common/third/smarty/plugins/shared.mb_unicode.php	/^        $encoding = mb_internal_encoding();$/;"	v
 encoding	common/third/smarty/plugins/shared.mb_unicode.php	/^function smarty_mb_from_unicode($unicode, $encoding=null) {$/;"	v
@@ -1702,6 +1729,7 @@ expire	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^ 
 expires	common/stem/local/oauth2/OAuth2Client.php	/^			$expires = isset($session['expires']) ? $session['expires'] : time() + $this->getVariable('expires_in', self::DEFAULT_EXPIRES_IN);$/;"	v
 expires	common/stem/local/oauth2/OAuth2Client.php	/^		$expires = time() - 3600;$/;"	v
 expressions	common/third/smarty/plugins/outputfilter.trimwhitespace.php	/^    $expressions = array($/;"	v
+extensions	common/stem/local/image/Images.php	/^        $extensions = array($/;"	v
 extra	common/third/smarty/plugins/function.html_checkboxes.php	/^    $extra = '';$/;"	v
 extra	common/third/smarty/plugins/function.html_image.php	/^    $extra = '';$/;"	v
 extra	common/third/smarty/plugins/function.html_options.php	/^    $extra = '';$/;"	v
@@ -1731,10 +1759,13 @@ fields	api/stem/application/library/duyuu/dao/BookChapter.php	/^    public $fiel
 fields	api/stem/application/library/duyuu/dao/BookInfo.php	/^    public $fields = array($/;"	v
 fields	api/stem/application/library/duyuu/dao/BookMenu.php	/^    public $fields = array($/;"	v
 fields	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public $fields = array($/;"	v
+fields	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^    public $fields = array($/;"	v
 fields	api/stem/application/library/duyuu/dao/Books.php	/^    public $fields = array($/;"	v
+fields	api/stem/application/library/duyuu/dao/Images.php	/^    public $fields = array($/;"	v
 fields	api/stem/application/library/duyuu/dao/Members.php	/^    public $fields = array($/;"	v
 fields	api/stem/application/library/duyuu/dao/OAuthAuthCode.php	/^    public $fields = array($/;"	v
 fields	api/stem/application/library/duyuu/dao/OAuthClient.php	/^    public $fields = array($/;"	v
+file	api/stem/application/controllers/Test.php	/^            $file  = $data->getFiles();$/;"	v
 file	common/third/smarty/Smarty.class.php	/^                        $file = Smarty_Internal_Get_Include_Path::getIncludePath($file);$/;"	v
 file	common/third/smarty/Smarty.class.php	/^                        $file = stream_resolve_include_path($file);$/;"	v
 file	common/third/smarty/Smarty.class.php	/^                $file = realpath($key);$/;"	v
@@ -1747,6 +1778,8 @@ file	common/third/smarty/sysplugins/smarty_resource.php	/^            $file = di
 file	common/third/smarty/sysplugins/smarty_resource.php	/^        $file = $source->name;$/;"	v
 file	common/third/smarty/sysplugins/smarty_resource.php	/^        $file = rtrim($_path, '\/\\\\');$/;"	v
 fileExists	common/third/smarty/sysplugins/smarty_resource.php	/^    protected function fileExists(Smarty_Template_Source $source, $file)$/;"	f
+fileExt	api/stem/application/library/duyuu/image/ImageControl.php	/^        $fileExt = $this->getImageType($FILE['name']);$/;"	v
+filePath	api/stem/application/library/duyuu/image/ImageControl.php	/^        $filePath = $user->id."_".$common->random(4)."$fileType";$/;"	v
 filename	common/third/smarty/sysplugins/smarty_internal_utility.php	/^                    $filename = $file->getFilename();$/;"	v
 filepath	common/third/smarty/sysplugins/smarty_cacheresource.php	/^    public $filepath = false;$/;"	v
 filepath	common/third/smarty/sysplugins/smarty_internal_compile_extends.php	/^        $filepath = $compiler->template->source->filepath;$/;"	v
@@ -1818,9 +1851,11 @@ getBasename	common/third/smarty/sysplugins/smarty_internal_resource_string.php	/
 getBasename	common/third/smarty/sysplugins/smarty_resource.php	/^    protected function getBasename(Smarty_Template_Source $source)$/;"	f
 getBasename	common/third/smarty/sysplugins/smarty_resource_custom.php	/^    protected function getBasename(Smarty_Template_Source $source)$/;"	f
 getBearerToken	common/stem/local/oauth2/OAuth2.php	/^	public function getBearerToken() {$/;"	f
+getBookInfo	api/stem/application/library/duyuu/dao/Books.php	/^    public function getBookInfo($bid)$/;"	f
 getByID	api/stem/application/library/duyuu/dao/Members.php	/^    public static function getByID($id)$/;"	f
 getCacheDir	common/third/smarty/Smarty.class.php	/^    public function getCacheDir()$/;"	f
 getCachedContent	common/third/smarty/sysplugins/smarty_cacheresource.php	/^    public function getCachedContent(Smarty_Internal_Template $_template)$/;"	f
+getCategory	api/stem/application/library/duyuu/dao/BookCategory.php	/^    public function getCategory()$/;"	f
 getClientCredentials	common/stem/local/oauth2/OAuth2.php	/^	protected function getClientCredentials(array $inputData, array $authHeaders) {$/;"	f
 getClientDetails	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^    public function getClientDetails($client_id) $/;"	f
 getClientDetails	common/stem/local/oauth2/IOAuth2Storage.php	/^	public function getClientDetails($client_id);$/;"	f
@@ -1849,8 +1884,11 @@ getDescription	common/stem/local/oauth2/OAuth2ServerException.php	/^	public func
 getEngine	common/stem/local/template/SmartyAdapter.php	/^    public function getEngine() {$/;"	f
 getFields	common/stem/local/db/Database.php	/^    function getFields($dbTable){}$/;"	f
 getFields	common/stem/local/db/MySQL.php	/^    function getFields($dbTable) {$/;"	f
+getFilePath	api/stem/application/library/duyuu/image/ImageControl.php	/^    public function getFilePath($fileType,$mkdir = false)$/;"	f
+getFilePath	common/stem/local/image/Images.php	/^    \/\/ public function getFilePath()$/;"	f
 getGlobal	common/third/smarty/Smarty.class.php	/^    public function getGlobal($varname = null)$/;"	f
 getHttpCode	common/stem/local/oauth2/OAuth2ServerException.php	/^	public function getHttpCode() {$/;"	f
+getImageType	common/stem/local/image/Images.php	/^    public function getImageType()$/;"	f
 getIncludePath	common/third/smarty/sysplugins/smarty_internal_get_include_path.php	/^    public static function getIncludePath($filepath)$/;"	f
 getIndexRecommend	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public function getIndexRecommend($limit = 4)$/;"	f
 getLatestInvalidationTimestamp	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^    protected function getLatestInvalidationTimestamp($cid, $resource_name = null, $cache_id = null, $compile_id = null, $resource_uid = null)$/;"	f
@@ -1862,6 +1900,7 @@ getReferer	common/stem/local/rest/REST.php	/^    public function getReferer()$/;
 getRefreshToken	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^    public function getRefreshToken()$/;"	f
 getRefreshToken	common/stem/local/oauth2/IOAuth2RefreshTokens.php	/^	public function getRefreshToken($refresh_token);$/;"	f
 getRegisteredObject	common/third/smarty/sysplugins/smarty_internal_templatebase.php	/^    public function getRegisteredObject($name)$/;"	f
+getRelativeImage	api/stem/application/library/duyuu/image/ImageControl.php	/^    public static function getRelativeImage($path)$/;"	f
 getRequest	common/stem/local/rest/REST.php	/^    private function getRequest()$/;"	f
 getRequestMethod	common/stem/local/rest/REST.php	/^    public function getRequestMethod()$/;"	f
 getRequestUri	common/stem/local/oauth2/OAuth2Client.php	/^	function getRequestUri() {$/;"	f
@@ -1873,8 +1912,10 @@ getScriptPath	common/stem/local/template/SmartyAdapter.php	/^    public function
 getSession	common/stem/local/oauth2/OAuth2Client.php	/^	public function getSession() {$/;"	f
 getSessionCookieName	common/stem/local/oauth2/OAuth2Client.php	/^	private function getSessionCookieName() {$/;"	f
 getSessionObject	common/stem/local/oauth2/OAuth2Client.php	/^	protected function getSessionObject($access_token = NULL) {$/;"	f
-getStatusMsg	common/stem/local/rest/REST.php	/^    private function getStatusMsg()$/;"	f
+getSize	common/stem/local/image/Images.php	/^    public function getSize()$/;"	f
+getStatusMsg	common/stem/local/rest/REST.php	/^    protected function getStatusMsg()$/;"	f
 getStreamVariable	common/third/smarty/sysplugins/smarty_internal_data.php	/^    public function getStreamVariable($variable)$/;"	f
+getSubCategory	api/stem/application/library/duyuu/dao/Books.php	/^    public function getSubCategory($cid,$limit = 10,$page = 1)$/;"	f
 getSubTemplate	common/third/smarty/sysplugins/smarty_internal_template.php	/^    public function getSubTemplate($template, $cache_id, $compile_id, $caching, $cache_lifetime, $data, $parent_scope)$/;"	f
 getTables	common/stem/local/db/Database.php	/^    function getTables(){}$/;"	f
 getTables	common/stem/local/db/MySQL.php	/^    function getTables() {$/;"	f
@@ -1884,6 +1925,7 @@ getTemplateDir	common/third/smarty/Smarty.class.php	/^    public function getTem
 getTemplateTimestamp	common/third/smarty/sysplugins/smarty_internal_resource_registered.php	/^    public function getTemplateTimestamp(Smarty_Template_Source $source)$/;"	f
 getTemplateUid	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^    protected function getTemplateUid(Smarty $smarty, $resource_name, $cache_id, $compile_id)$/;"	f
 getTemplateVars	common/third/smarty/sysplugins/smarty_internal_data.php	/^    public function getTemplateVars($varname = null, $_ptr = null, $search_parents = true)$/;"	f
+getThumb	api/stem/application/library/duyuu/dao/Images.php	/^    public static function getThumb()$/;"	f
 getToken	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^    public function getToken();$/;"	f
 getType	common/stem/local/oauth2/OAuth2Exception.php	/^	public function getType() {$/;"	f
 getUniqueTemplateName	common/third/smarty/sysplugins/smarty_resource.php	/^    public static function getUniqueTemplateName($smarty, $template_resource)$/;"	f
@@ -1891,6 +1933,8 @@ getUri	common/stem/local/oauth2/OAuth2Client.php	/^	protected function getUri($p
 getVariable	common/stem/local/oauth2/OAuth2.php	/^	public function getVariable($name, $default = NULL) {$/;"	f
 getVariable	common/stem/local/oauth2/OAuth2Client.php	/^	public function getVariable($name, $default = NULL) {$/;"	f
 getVariable	common/third/smarty/sysplugins/smarty_internal_data.php	/^    public function getVariable($variable, $_ptr = null, $search_parents = true, $error_enable = true)$/;"	f
+getX	common/stem/local/image/Images.php	/^    public function getX()$/;"	f
+getY	common/stem/local/image/Images.php	/^    public function getY()$/;"	f
 get_config_vars	common/third/smarty/SmartyBC.class.php	/^    public function get_config_vars($name=null)$/;"	f
 get_debug_vars	common/third/smarty/sysplugins/smarty_internal_debug.php	/^    public static function get_debug_vars($obj)$/;"	f
 get_key	common/third/smarty/sysplugins/smarty_internal_debug.php	/^    private static function get_key($template)$/;"	f
@@ -1910,6 +1954,7 @@ handler	common/third/smarty/sysplugins/smarty_resource.php	/^        $this->hand
 handler	common/third/smarty/sysplugins/smarty_resource.php	/^    public $handler = null;$/;"	v
 handles	common/third/smarty/sysplugins/smarty_internal_function_call_handler.php	/^     * This function handles calls to template functions defined by {function}$/;"	f
 hasArray	common/stem/local/db/MySQL.php	/^        $hasArray = false;$/;"	v
+hasImageType	common/stem/local/image/Images.php	/^    public function hasImageType($type)$/;"	f
 hasInstance	common/stem/local/db/Database.php	/^    static function hasInstance(){}$/;"	f
 hasInstance	common/stem/local/db/MySQL.php	/^    static function hasInstance() $/;"	f
 hasLock	common/third/smarty/sysplugins/smarty_cacheresource.php	/^    public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)$/;"	f
@@ -1926,7 +1971,9 @@ has_nocache_code	common/third/smarty/sysplugins/smarty_internal_template.php	/^ 
 has_nocache_code	common/third/smarty/sysplugins/smarty_internal_template.php	/^        $this->has_nocache_code = $properties['has_nocache_code'];$/;"	v
 has_nocache_code	common/third/smarty/sysplugins/smarty_internal_template.php	/^    public $has_nocache_code = false;$/;"	v
 has_output	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^        $this->has_output = false;$/;"	v
+hash	api/stem/application/library/duyuu/common.php	/^        $hash = '';$/;"	v
 hdir	common/third/smarty/plugins/function.html_table.php	/^    $hdir = 'right';$/;"	v
+head	api/stem/application/controllers/Download.php	/^        $head = array($/;"	v
 header	common/stem/local/oauth2/OAuth2AuthenticateException.php	/^		$this->header = sprintf('WWW-Authenticate: %s realm="%s"', ucwords($tokenType), $realm);$/;"	v
 header	common/stem/local/oauth2/OAuth2AuthenticateException.php	/^	protected $header;$/;"	v
 headers	common/stem/local/oauth2/OAuth2.php	/^				$headers = trim($requestHeaders['Authorization']);$/;"	v
@@ -1955,6 +2002,11 @@ id	common/third/smarty/plugins/function.html_options.php	/^    $id = null;$/;"	v
 id	common/third/smarty/sysplugins/smarty_cacheresource_custom.php	/^        $id = $cached->filepath;$/;"	v
 idx	common/third/smarty/plugins/modifier.regex_replace.php	/^        foreach($search as $idx => $s) {$/;"	v
 if	common/stem/local/oauth2/OAuth2.php	/^	 * Implementing classes may need to override this function if need be.$/;"	f
+image	api/stem/application/controllers/Test.php	/^            $image = new \\duyuu\\image\\ImageControl();$/;"	v
+image	api/stem/application/library/duyuu/dao/Images.php	/^        $image = self::instance();$/;"	v
+image	api/stem/application/library/duyuu/image/ImageControl.php	/^        $image = new \\duyuu\\dao\\Images();$/;"	v
+imageParam	api/stem/application/library/duyuu/image/ImageControl.php	/^        $imageParam = array($/;"	v
+imagePath	api/stem/application/library/duyuu/image/ImageControl.php	/^        $imagePath = \\Yaf\\Application::app()->getConfig()->toArray();$/;"	v
 implements	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^ * This class implements the functionality required to use simple key\/value stores$/;"	c
 in	common/stem/local/oauth2/IOAuth2Storage.php	/^ * All storage engines need to implement this interface in order to use OAuth2 server$/;"	i
 in	common/third/smarty/sysplugins/smarty_internal_compile_insert.php	/^            \/\/ function in PHP script ?$/;"	f
@@ -1982,13 +2034,19 @@ instance	api/stem/application/library/duyuu/dao/BookCategory.php	/^    protected
 instance	api/stem/application/library/duyuu/dao/BookCategory.php	/^    public static function instance($key = 0)$/;"	f
 instance	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    protected static $instance;$/;"	v
 instance	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public static function instance($key = 0)$/;"	f
+instance	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^    protected static $instance;$/;"	v
+instance	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^    public static function instance($key = 0)$/;"	f
 instance	api/stem/application/library/duyuu/dao/Books.php	/^    protected static $instance;$/;"	v
 instance	api/stem/application/library/duyuu/dao/Books.php	/^    public static function instance($key = 0)$/;"	f
+instance	api/stem/application/library/duyuu/dao/Images.php	/^    protected static $instance;$/;"	v
+instance	api/stem/application/library/duyuu/dao/Images.php	/^    public static function instance($key = false)$/;"	f
 instance	api/stem/application/library/duyuu/dao/Members.php	/^    protected static $instance;$/;"	v
 instance	api/stem/application/library/duyuu/dao/OAuthAuthCode.php	/^    protected static $instance;$/;"	v
 instance	api/stem/application/library/duyuu/dao/OAuthAuthCode.php	/^    public static function instance($key = false)$/;"	f
 instance	api/stem/application/library/duyuu/dao/OAuthClient.php	/^    protected static $instance;$/;"	v
 instance	api/stem/application/library/duyuu/dao/OAuthClient.php	/^    public static function instance($key = false)$/;"	f
+instance	api/stem/application/library/duyuu/rest/Restful.php	/^    public static $instance;$/;"	v
+instance	api/stem/application/library/duyuu/rest/Restful.php	/^    public static function instance()$/;"	f
 instance	common/stem/local/db/Database.php	/^    static function instance(){}$/;"	f
 instance	common/stem/local/db/MySQL.php	/^    protected static $instance;$/;"	v
 instance	common/stem/local/db/MySQL.php	/^    static function instance($primary_key = 0,$dbConfigName = false) $/;"	f
@@ -2043,13 +2101,13 @@ isset_par	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^  
 item	common/third/smarty/sysplugins/smarty_internal_compile_foreach.php	/^        $item = $_attr['item'];$/;"	v
 iterator	common/third/smarty/sysplugins/smarty_internal_utility.php	/^            $iterator = new DirectoryIterator($source);$/;"	v
 joinQuery	common/stem/local/db/ORM.php	/^    function joinQuery($dbTable,$dbSqlarr,$dbPrefix = "LEFT") {$/;"	f
+joinTables	common/stem/local/db/ORM.php	/^        $this->joinTables = array();$/;"	v
 joinTables	common/stem/local/db/ORM.php	/^    public $joinTables = array();$/;"	v
 joined_config_dir	common/third/smarty/Smarty.class.php	/^        $this->joined_config_dir = join(DIRECTORY_SEPARATOR, $this->config_dir);$/;"	v
 joined_config_dir	common/third/smarty/Smarty.class.php	/^    public $joined_config_dir = null;$/;"	v
 joined_template_dir	common/third/smarty/Smarty.class.php	/^        $this->joined_template_dir = join(DIRECTORY_SEPARATOR, $this->template_dir);$/;"	v
 joined_template_dir	common/third/smarty/Smarty.class.php	/^    public $joined_template_dir = null;$/;"	v
 js_encode	common/third/smarty/plugins/function.mailto.php	/^        $js_encode = '';$/;"	v
-json	api/stem/application/controllers/Store.php	/^        $json = array($/;"	v
 k	common/stem/local/oauth2/OAuth2.php	/^		foreach ( $params as $k => $v ) {$/;"	v
 k	common/stem/local/oauth2/OAuth2RedirectException.php	/^		foreach ( $params as $k => $v ) {$/;"	v
 k	common/third/smarty/Smarty.class.php	/^            foreach ($config_dir as $k => $v) {$/;"	v
@@ -2058,7 +2116,12 @@ k	common/third/smarty/Smarty.class.php	/^            foreach ($template_dir as $
 k	common/third/smarty/Smarty.class.php	/^        foreach ((array) $config_dir as $k => $v) {$/;"	v
 k	common/third/smarty/Smarty.class.php	/^        foreach ((array) $template_dir as $k => $v) {$/;"	v
 k	common/third/smarty/Smarty.class.php	/^        foreach ((array)$plugins_dir as $k => $v) {$/;"	v
+key	api/stem/application/library/duyuu/dao/BookCategory.php	/^            foreach ($list as $key => $value) {$/;"	v
+key	api/stem/application/library/duyuu/dao/BookRecommend.php	/^                foreach ($tmplist as $key => $value) {$/;"	v
+key	api/stem/application/library/duyuu/dao/BookRecommend.php	/^            foreach ($list as $key => $value) {$/;"	v
 key	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        foreach ($categoryList as $key => $value) {$/;"	v
+key	api/stem/application/library/duyuu/dao/Books.php	/^            foreach ($list as $key => $value) {$/;"	v
+key	api/stem/application/library/duyuu/dao/Books.php	/^            foreach ($list["list"] as $key => $value) {$/;"	v
 key	common/stem/local/db/MySQL.php	/^            foreach ($socket as $key => $value) {$/;"	v
 key	common/stem/local/db/ORM.php	/^                foreach ($dbData as $key => $value) {$/;"	v
 key	common/stem/local/db/ORM.php	/^                foreach ($this->fields as $key => $value) $/;"	v
@@ -2069,6 +2132,7 @@ key	common/stem/local/db/ORM.php	/^            foreach($string as $key => $val) 
 key	common/stem/local/db/ORM.php	/^           foreach ($this->fields as $key => $value) {$/;"	v
 key	common/stem/local/db/ORM.php	/^        \/\/     foreach ($this->fields as $key => &$value) {$/;"	v
 key	common/stem/local/db/ORM.php	/^        foreach ($dbData as $key => $value){$/;"	v
+key	common/stem/local/download/Download.php	/^            foreach ($params as $key => $value) {$/;"	v
 key	common/stem/local/oauth2/OAuth2AuthenticateException.php	/^			$this->header .= ", $key=\\"$value\\"";$/;"	v
 key	common/stem/local/oauth2/OAuth2AuthenticateException.php	/^		foreach ( $this->errorData as $key => $value ) {$/;"	v
 key	common/stem/local/oauth2/OAuth2Client.php	/^		foreach ( $params as $key => $value ) {$/;"	v
@@ -2153,8 +2217,14 @@ line	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^ 
 line	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^    public function trigger_template_error($args = null, $line = null) {$/;"	v
 line	common/third/smarty/sysplugins/smarty_internal_templatelexer.php	/^        $this->line = 1;$/;"	v
 line	common/third/smarty/sysplugins/smarty_internal_templatelexer.php	/^    public $line;$/;"	v
+list	api/stem/application/controllers/Store.php	/^        $list = $book->getSubCategory(intval($cid),$limit,$page);$/;"	v
+list	api/stem/application/controllers/Storebook.php	/^        $list = $book->getBookInfo(intval($bid));$/;"	v
+list	api/stem/application/library/duyuu/dao/BookCategory.php	/^        $list = $category->field("$table.cid,$table.name,i.path as cover")->joinQuery("images as i","$table.pid=i.pid")->limit(20)->fetchList();$/;"	v
+list	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $list =  $recommend->field("b.bid,b.title,i.path as cover,b.cid,c.name")->joinQuery("books as b","b.bid=$table.bid")->joinQuery('book_category as c','c.cid=b.cid')->joinQuery('book_image as p','b.bid=p.bid')->joinQuery('images as i','i.pid=p.pid')->where("p.type = 2 AND $table.cid='2'")->limit(4)->fetchList();$/;"	v
 list	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $list = array();$/;"	v
 list	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        \/\/ $list = $recommend->field("b.bid,b.title,c.name,b.cover,$table.sort")->joinQuery("book_category as c","c.cid=$table.cid")->joinQuery("books as b","b.bid=$table.bid")->where("c.type = 1")->limit(4)->fetchList();$/;"	v
+list	api/stem/application/library/duyuu/dao/Books.php	/^        $list =  $books->field("books.bid,books.cid,i.path as cover,books.title,books.author")->joinQuery('book_category as c',"c.cid=$table.cid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->limit(10)->fetchList();$/;"	v
+list	api/stem/application/library/duyuu/dao/Books.php	/^        $list = $books->field("$table.bid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.press,f.apple_price as price,$table.summary")->joinQuery("book_info as f","$table.bid=f.bid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND $table.bid='$bid'")->order("$table.published")->limit(1)->fetchList();$/;"	v
 listInvalidationKeys	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^    protected function listInvalidationKeys($cid, $resource_name = null, $cache_id = null, $compile_id = null, $resource_uid = null)$/;"	f
 load	common/third/smarty/sysplugins/smarty_cacheresource.php	/^    public static function load(Smarty $smarty, $type = null)$/;"	f
 load	common/third/smarty/sysplugins/smarty_resource.php	/^    public static function load(Smarty $smarty, $type)$/;"	f
@@ -2183,6 +2253,7 @@ makeOAuth2Request	common/stem/local/oauth2/OAuth2Client.php	/^	protected functio
 makeRequest	common/stem/local/oauth2/OAuth2Client.php	/^	protected function makeRequest($path, $method = 'GET', $params = array(), $ch = NULL) {$/;"	f
 match	common/third/smarty/sysplugins/smarty_internal_config_file_compiler.php	/^        $match = preg_split("\/\\n\/", $this->lex->data);$/;"	v
 match	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^        $match = preg_split("\/\\n\/", $this->lex->data);$/;"	v
+max	api/stem/application/library/duyuu/common.php	/^        $max = strlen($seed) - 1;$/;"	v
 mbstring_overload	common/third/smarty/sysplugins/smarty_internal_compile_extends.php	/^        $this->mbstring_overload = ini_get('mbstring.func_overload') & 2;$/;"	v
 mbstring_overload	common/third/smarty/sysplugins/smarty_internal_compile_extends.php	/^    public $mbstring_overload = 0;$/;"	v
 mbstring_overload	common/third/smarty/sysplugins/smarty_internal_configfilelexer.php	/^        $this->mbstring_overload = ini_get('mbstring.func_overload') & 2;$/;"	v
@@ -2203,6 +2274,8 @@ meridian_empty	common/third/smarty/plugins/function.html_select_time.php	/^    $
 meridian_extra	common/third/smarty/plugins/function.html_select_time.php	/^    $meridian_extra = null;$/;"	v
 meridian_id	common/third/smarty/plugins/function.html_select_time.php	/^    $meridian_id = null;$/;"	v
 meridian_size	common/third/smarty/plugins/function.html_select_time.php	/^    $meridian_size = null;$/;"	v
+message	api/stem/application/controllers/Store.php	/^        $message = "ok";$/;"	v
+message	api/stem/application/controllers/Storebook.php	/^        $message = "ok";$/;"	v
 message	api/stem/application/controllers/Test.php	/^                    $message = "success!!";$/;"	v
 message	api/stem/application/controllers/Test.php	/^                $message = "already register!!";$/;"	v
 message	api/stem/application/controllers/Test.php	/^                if($user->insert($arr)) $message = "sussceful!!";$/;"	v
@@ -2351,6 +2424,7 @@ name	common/third/smarty/sysplugins/smarty_resource.php	/^            $name = $r
 name	common/third/smarty/sysplugins/smarty_resource.php	/^        $this->name = $name;$/;"	v
 name	common/third/smarty/sysplugins/smarty_resource.php	/^    public $name = null;$/;"	v
 names	common/third/smarty/Smarty.class.php	/^            $names = array($/;"	v
+newFilePath	api/stem/application/library/duyuu/image/ImageControl.php	/^            $newFilePath = $imagePath['path']['image'].$pathOne;$/;"	v
 new_args	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^                                    $new_args = array_merge($new_args, $mixed);$/;"	v
 new_args	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^                                $new_args = array_merge($new_args, $mixed);$/;"	v
 new_args	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^                            $new_args = array();$/;"	v
@@ -2370,10 +2444,13 @@ node	common/third/smarty/sysplugins/smarty_internal_templatelexer.php	/^    publ
 normalizePath	common/third/smarty/sysplugins/smarty_resource.php	/^    protected function normalizePath($_path, $ds=true)$/;"	f
 now	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^        $now = microtime(true);$/;"	v
 null	common/third/smarty/sysplugins/smarty_internal_template.php	/^        $null = null;$/;"	v
+numeric	api/stem/application/library/duyuu/common.php	/^    function random($length, $numeric = 0) {$/;"	v
 oauth_token	common/stem/local/oauth2/OAuth2Client.php	/^		if ((!isset($params['oauth_token']) || empty($params['oauth_token'])) && $oauth_token = $this->getAccessToken()) {$/;"	v
 object	api/stem/application/library/duyuu/common.php	/^        $object = new stdClass;$/;"	v
 object_vars	common/third/smarty/plugins/modifier.debug_print_var.php	/^            $object_vars = get_object_vars($var);$/;"	v
 of	common/third/smarty/sysplugins/smarty_internal_filter_handler.php	/^                        \/\/ loaded class of filter plugin$/;"	c
+offset	api/stem/application/library/duyuu/dao/Books.php	/^        $offset = $limit * ($page - 1);$/;"	v
+offset	api/stem/application/library/duyuu/dao/Books.php	/^        $offset = 0;$/;"	v
 offset	common/third/smarty/sysplugins/smarty_internal_configfileparser.php	/^            $offset = count($this->metadata);$/;"	v
 offset	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^            $offset = count($this->metadata);$/;"	v
 offset	common/third/smarty/sysplugins/smarty_resource.php	/^                $offset = $_parent + 3;$/;"	v
@@ -2507,12 +2584,18 @@ output	common/third/smarty/sysplugins/smarty_internal_template.php	/^           
 output	common/third/smarty/sysplugins/smarty_internal_template.php	/^        $output = '';$/;"	v
 output	common/third/smarty/sysplugins/smarty_internal_templatebase.php	/^                    $output = Smarty_Internal_Filter_Handler::runFilter('output', $output, $_template);$/;"	v
 output	common/third/smarty/sysplugins/smarty_internal_templatebase.php	/^                $output = '';$/;"	v
+page	api/stem/application/library/duyuu/dao/Books.php	/^        $page = $page < 1 ? 1 : $page;$/;"	v
+page	api/stem/application/library/duyuu/dao/Books.php	/^        $page = $page > $pages ? $pages : $page;$/;"	v
+pages	api/stem/application/library/duyuu/dao/Books.php	/^        $pages = $count\/$limit;$/;"	v
+pages	api/stem/application/library/duyuu/dao/Books.php	/^        $pages = $pages < 1 ? 1 : $pages;$/;"	v
+pages	api/stem/application/library/duyuu/dao/Books.php	/^        $pages = is_float($pages) ? intval($pages)+1 : $pages;$/;"	v
 par	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^                $par = implode(',',$this->yystack[$this->yyidx + -1]->minor);$/;"	v
 param	common/stem/local/db/MySQL.php	/^                    $param = $value['params'];$/;"	v
 param	common/stem/local/db/MySQL.php	/^        $param = $mysql = array();$/;"	v
 param1	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^    public function callTagCompiler($tag, $args, $param1 = null, $param2 = null, $param3 = null) {$/;"	v
 param_key	common/third/smarty/plugins/function.fetch.php	/^            foreach($params as $param_key => $param_value) {$/;"	v
 parameter	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^    public function compileTag($tag, $args, $parameter = array()) {$/;"	v
+params	common/stem/local/download/Download.php	/^    public static function download($filePath, $params = false)$/;"	v
 params	common/stem/local/oauth2/OAuth2.php	/^		$params = $this->getAuthorizeParams($params);$/;"	v
 params	common/stem/local/oauth2/OAuth2Client.php	/^			$params = $method;$/;"	v
 params	common/stem/local/oauth2/OAuth2Client.php	/^			$params = array();$/;"	v
@@ -2558,7 +2641,10 @@ parts	common/third/smarty/plugins/shared.mb_str_replace.php	/^            $parts
 parts	common/third/smarty/sysplugins/smarty_resource.php	/^        $parts = explode(':', $resource_name, 2);$/;"	v
 pass	common/third/smarty/plugins/function.fetch.php	/^                            $pass = $param_value;$/;"	v
 pass	common/third/smarty/plugins/function.fetch.php	/^                $pass = $uri_parts['pass'];$/;"	v
+path	api/stem/application/controllers/Download.php	/^        $path = "";$/;"	v
 path	common/third/smarty/sysplugins/smarty_internal_compile_private_print_expression.php	/^        $path = $compiler->smarty->loadPlugin($plugin_name, false);$/;"	v
+pathOne	api/stem/application/library/duyuu/image/ImageControl.php	/^        $pathOne = gmdate("Ym");$/;"	v
+pathTwo	api/stem/application/library/duyuu/image/ImageControl.php	/^        $pathTwo = gmdate('j');$/;"	v
 path_prefix	common/third/smarty/plugins/function.html_image.php	/^    $path_prefix = '';$/;"	v
 php_functions	common/third/smarty/sysplugins/smarty_security.php	/^     * To disable all PHP functions set $php_functions = null.$/;"	v
 php_functions	common/third/smarty/sysplugins/smarty_security.php	/^    public $php_functions = array($/;"	v
@@ -2647,7 +2733,9 @@ primaryKey	api/stem/application/library/duyuu/dao/BookChapter.php	/^    public $
 primaryKey	api/stem/application/library/duyuu/dao/BookInfo.php	/^    public $primaryKey = "bid";$/;"	v
 primaryKey	api/stem/application/library/duyuu/dao/BookMenu.php	/^    public $primaryKey = "id";$/;"	v
 primaryKey	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public $primaryKey = "rid";$/;"	v
+primaryKey	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^    public $primaryKey = "cid";$/;"	v
 primaryKey	api/stem/application/library/duyuu/dao/Books.php	/^    public $primaryKey = "bid";$/;"	v
+primaryKey	api/stem/application/library/duyuu/dao/Images.php	/^    public $primaryKey = "pid";$/;"	v
 primaryKey	api/stem/application/library/duyuu/dao/Members.php	/^    public $primaryKey = "id";$/;"	v
 primaryKey	api/stem/application/library/duyuu/dao/OAuthAuthCode.php	/^    public $primaryKey = "code";$/;"	v
 primaryKey	api/stem/application/library/duyuu/dao/OAuthClient.php	/^    public $primaryKey = "client_id";$/;"	v
@@ -2698,6 +2786,7 @@ r	common/third/smarty/sysplugins/smarty_internal_templatelexer.php	/^           
 r	common/third/smarty/sysplugins/smarty_internal_templatelexer.php	/^                $r = $this->{'yy_r2_' . $this->token}($yysubmatches);$/;"	v
 r	common/third/smarty/sysplugins/smarty_internal_templatelexer.php	/^                $r = $this->{'yy_r3_' . $this->token}($yysubmatches);$/;"	v
 r	common/third/smarty/sysplugins/smarty_internal_templatelexer.php	/^                $r = $this->{'yy_r4_' . $this->token}($yysubmatches);$/;"	v
+random	api/stem/application/library/duyuu/common.php	/^    function random($length, $numeric = 0) {$/;"	f
 randomData	common/stem/local/oauth2/OAuth2.php	/^			$randomData = file_get_contents('\/dev\/urandom', false, null, 0, 100) . uniqid(mt_rand(), true);$/;"	v
 randomData	common/stem/local/oauth2/OAuth2.php	/^			$randomData = mt_rand() . mt_rand() . mt_rand() . mt_rand() . microtime(true) . uniqid(mt_rand(), true);$/;"	v
 rdel	common/third/smarty/sysplugins/smarty_internal_templatelexer.php	/^        $this->rdel = preg_quote($this->smarty->right_delimiter,'\/');$/;"	v
@@ -2793,10 +2882,13 @@ resource_name	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.
 resource_name	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^    protected function listInvalidationKeys($cid, $resource_name = null, $cache_id = null, $compile_id = null, $resource_uid = null)$/;"	v
 resources	common/third/smarty/sysplugins/smarty_cacheresource.php	/^    public static $resources = array();$/;"	v
 resources	common/third/smarty/sysplugins/smarty_resource.php	/^    public static $resources = array();$/;"	v
-response	common/stem/local/rest/REST.php	/^    public function response($data,$status)$/;"	f
+response	common/stem/local/rest/REST.php	/^    public function response($data = false,$status = 200)$/;"	f
+responseData	api/stem/application/library/duyuu/rest/Restful.php	/^    public $responseData = array();$/;"	v
 rest	api/stem/application/Bootstrap.php	/^        $rest = RegisterRest::initRegister();$/;"	v
+rest	api/stem/application/controllers/Store.php	/^        $rest = Restful::instance();$/;"	v
+rest	api/stem/application/controllers/Storebook.php	/^        $rest = Restful::instance();$/;"	v
 restOptions	api/stem/application/library/duyuu/rest/Restful.php	/^     * $restOptions = array ($/;"	v
-restURL	api/stem/application/library/duyuu/rest/Restful.php	/^    static  $restURL = array();$/;"	v
+restURL	api/stem/application/library/duyuu/rest/Restful.php	/^    public static  $restURL = array();$/;"	v
 resule	common/stem/local/db/MySQL.php	/^            $resule = self::$db->prepare($tmpSql);$/;"	v
 resule	common/stem/local/db/MySQL.php	/^            $resule = self::$db->query($tmpSql);$/;"	v
 result	common/stem/local/oauth2/OAuth2Client.php	/^			$result = array('code' => 0, 'message' => '');$/;"	v
@@ -2842,7 +2934,7 @@ retvalue	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^   
 reverse_years	common/third/smarty/plugins/function.html_select_date.php	/^    $reverse_years = false;$/;"	v
 right_delimiter	common/third/smarty/Smarty.class.php	/^    public $right_delimiter = "}";$/;"	v
 rollback	common/stem/local/db/Database.php	/^    function rollback(){}$/;"	f
-rollback	common/stem/local/db/MySQL.php	/^    function rollback(){}$/;"	f
+rollback	common/stem/local/db/MySQL.php	/^    function rollback(){$/;"	f
 routeType	api/stem/application/library/duyuu/rest/Restful.php	/^    private static  $routeType = 'rewrite';$/;"	v
 router	api/stem/application/Bootstrap.php	/^        $router = $dispatcher->getRouter();$/;"	v
 routerShutdown	api/stem/application/plugins/OAUTH2.php	/^    public function routerShutdown(Request_Abstract $request, Response_Abstract $response) $/;"	f
@@ -2856,6 +2948,8 @@ s	common/third/smarty/sysplugins/smarty_internal_configfileparser.php	/^        
 s	common/third/smarty/sysplugins/smarty_internal_resource_extends.php	/^            $s = Smarty_Resource::source(null, $source->smarty, $component);$/;"	v
 saddslashes	common/stem/local/db/ORM.php	/^    public function saddslashes($string) {$/;"	f
 sanitize	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^    protected function sanitize($string)$/;"	f
+save	api/stem/application/library/duyuu/dao/Images.php	/^    public function save()$/;"	f
+save	api/stem/application/library/duyuu/image/ImageControl.php	/^    public function save($FILE, $class = 1, $thumb = false)$/;"	f
 save	common/stem/local/db/ORM.php	/^    function save($dbData = false) {$/;"	f
 save	common/third/smarty/Smarty.class.php	/^        $save = $this->template_objects;$/;"	v
 save	common/third/smarty/sysplugins/smarty_cacheresource_custom.php	/^    protected abstract function save($id, $name, $cache_id, $compile_id, $exp_time, $content);$/;"	f
@@ -2914,6 +3008,8 @@ security_policy	common/third/smarty/Smarty.class.php	/^            $this->securi
 security_policy	common/third/smarty/Smarty.class.php	/^            $this->security_policy = new $security_class($this);$/;"	v
 security_policy	common/third/smarty/Smarty.class.php	/^        $this->security_policy = null;$/;"	v
 security_policy	common/third/smarty/Smarty.class.php	/^    public $security_policy = null;$/;"	v
+seed	api/stem/application/library/duyuu/common.php	/^        $seed = $numeric ? (str_replace('0', '', $seed).'012340567890') : ($seed.'zZ'.strtoupper($seed));$/;"	v
+seed	api/stem/application/library/duyuu/common.php	/^        $seed = base_convert(md5(print_r($_SERVER, 1).microtime()), 16, $numeric ? 10 : 35);$/;"	v
 selectTable	common/stem/local/db/Database.php	/^    function selectTable($table){}$/;"	f
 selectTable	common/stem/local/db/MySQL.php	/^    function selectTable($tableName) {$/;"	f
 selected	common/third/smarty/plugins/function.html_checkboxes.php	/^                        $selected = smarty_function_escape_special_chars((string) $_val->__toString());$/;"	v
@@ -2962,11 +3058,12 @@ setCharset	common/stem/local/db/MySQL.php	/^    function setCharset($charset = "
 setCompileDir	common/third/smarty/Smarty.class.php	/^    public function setCompileDir($compile_dir)$/;"	f
 setConfigDir	common/third/smarty/Smarty.class.php	/^    public function setConfigDir($config_dir)$/;"	f
 setCookieFromSession	common/stem/local/oauth2/OAuth2Client.php	/^	protected function setCookieFromSession($session = NULL) {$/;"	f
-setData	api/stem/application/library/duyuu/rest/Restful.php	/^    public function setData()$/;"	f
 setDebugTemplate	common/third/smarty/Smarty.class.php	/^    public function setDebugTemplate($tpl_name)$/;"	f
 setDefaultModifiers	common/third/smarty/Smarty.class.php	/^    public function setDefaultModifiers($modifiers)$/;"	f
 setDefaultOptions	common/stem/local/oauth2/OAuth2.php	/^	protected function setDefaultOptions() {$/;"	f
+setHeader	common/stem/local/download/Download.php	/^    public static function setHeader($content, $param)$/;"	f
 setHeaders	common/stem/local/rest/REST.php	/^    private function setHeaders()$/;"	f
+setHeight	common/stem/local/image/Images.php	/^    public function setHeight($size)$/;"	f
 setInstance	common/stem/local/db/Database.php	/^    static function setInstance($dbConfigName,$dbParams,$dbHasDaufalt = false){}$/;"	f
 setInstance	common/stem/local/db/MySQL.php	/^    static function setInstance($dbConfigName,$dbParams,$dbHasDaufalt = false)$/;"	f
 setPluginsDir	common/third/smarty/Smarty.class.php	/^    public function setPluginsDir($plugins_dir)$/;"	f
@@ -2978,6 +3075,7 @@ setTemplateDir	common/third/smarty/Smarty.class.php	/^    public function setTem
 setToken	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^    public function setToken()$/;"	f
 setVariable	common/stem/local/oauth2/OAuth2.php	/^	public function setVariable($name, $value) {$/;"	f
 setVariable	common/stem/local/oauth2/OAuth2Client.php	/^	public function setVariable($name, $value) {$/;"	f
+setWidth	common/stem/local/image/Images.php	/^    public function setWidth($size)$/;"	f
 set_var	common/third/smarty/sysplugins/smarty_internal_configfileparser.php	/^    private function set_var(Array $var, Array &$target_array) {$/;"	f
 setupInlineSubTemplate	common/third/smarty/sysplugins/smarty_internal_template.php	/^    public function setupInlineSubTemplate($template, $cache_id, $compile_id, $caching, $cache_lifetime, $data, $parent_scope, $hash)$/;"	f
 short_open_tag	common/third/smarty/sysplugins/smarty_internal_resource_php.php	/^        $this->short_open_tag = ini_get( 'short_open_tag' );$/;"	v
@@ -3201,7 +3299,7 @@ strip	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^    $t
 strip	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^    $this->strip = true;$/;"	v
 strip	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^    private $strip = false;$/;"	v
 style	common/third/smarty/plugins/block.textformat.php	/^    $style = null;$/;"	v
-subCategoryAction	api/stem/application/controllers/Store.php	/^    public function subCategoryAction($cid)$/;"	f
+subCategoryAction	api/stem/application/controllers/Store.php	/^    public function subCategoryAction($cid,$limit = 10,$page = 1)$/;"	f
 subject	common/third/smarty/plugins/shared.mb_str_replace.php	/^                    $subject = smarty_mb_str_replace($string, $replace, $subject, $c);$/;"	v
 subject	common/third/smarty/plugins/shared.mb_str_replace.php	/^                    $subject = smarty_mb_str_replace(current($search), current($replace), $subject, $c);$/;"	v
 subject	common/third/smarty/plugins/shared.mb_str_replace.php	/^            $subject = implode($replace, $parts);$/;"	v
@@ -3237,13 +3335,18 @@ t	common/third/smarty/sysplugins/smarty_internal_resource_registered.php	/^     
 t	common/third/smarty/sysplugins/smarty_internal_resource_stream.php	/^        $t = '';$/;"	v
 tKey	common/stem/local/db/ORM.php	/^        $tKey = false;$/;"	v
 tKey	common/stem/local/db/ORM.php	/^        isset($this->primaryKey) and $tKey = $this->primaryKey;$/;"	v
+table	api/stem/application/library/duyuu/dao/BookCategory.php	/^        $table = $this->table;$/;"	v
 table	api/stem/application/library/duyuu/dao/BookCategory.php	/^    public $table = 'book_category';$/;"	v
 table	api/stem/application/library/duyuu/dao/BookChapter.php	/^    public $table = 'book_chapter';$/;"	v
 table	api/stem/application/library/duyuu/dao/BookInfo.php	/^    public $table = 'book_info';$/;"	v
 table	api/stem/application/library/duyuu/dao/BookMenu.php	/^    public $table = 'book_menu';$/;"	v
 table	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $table = $this->table;$/;"	v
 table	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public $table = 'book_recommend';$/;"	v
+table	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^    public $table = 'book_recommend_menu';$/;"	v
+table	api/stem/application/library/duyuu/dao/Books.php	/^        $table = $books->table;$/;"	v
+table	api/stem/application/library/duyuu/dao/Books.php	/^        $table = $this->table;$/;"	v
 table	api/stem/application/library/duyuu/dao/Books.php	/^    public $table = 'books';$/;"	v
+table	api/stem/application/library/duyuu/dao/Images.php	/^    public $table = 'images';$/;"	v
 table	api/stem/application/library/duyuu/dao/Members.php	/^    public $table = 'members';$/;"	v
 table	api/stem/application/library/duyuu/dao/OAuthAuthCode.php	/^    public $table = 'oauth_auth_codes';$/;"	v
 table	api/stem/application/library/duyuu/dao/OAuthClient.php	/^    public $table = 'oauth_client';$/;"	v
@@ -3303,6 +3406,7 @@ text	common/third/smarty/plugins/function.mailto.php	/^    $text = $address;$/;"
 text_encode	common/third/smarty/plugins/function.mailto.php	/^        $text_encode = '';$/;"	v
 th_attr	common/third/smarty/plugins/function.html_table.php	/^    $th_attr = '';$/;"	v
 that	common/stem/local/oauth2/OAuth2.php	/^	 * This is a convenience function that can be used to get the token, which can then$/;"	f
+thumb	common/stem/local/image/Images.php	/^    public function thumb()$/;"	f
 time	common/third/smarty/plugins/function.html_select_date.php	/^                    $time = smarty_make_timestamp($_value);$/;"	v
 time	common/third/smarty/plugins/function.html_select_date.php	/^            $time = mktime(0, 0, 0, $_month, $_day, $_year);$/;"	v
 time	common/third/smarty/plugins/function.html_select_date.php	/^            list($_year, $_month, $_day) = $time = explode('-', date('Y-m-d'));$/;"	v
@@ -3352,6 +3456,7 @@ tmpSql	common/stem/local/db/MySQL.php	/^        $tmpSql = array_shift($tmpParams
 tmpSql	common/stem/local/db/ORM.php	/^        $tmpSql = 'SELECT '.$tmpOption['field'].' FROM '.$tmpOption['table'];$/;"	v
 tmpValue	common/stem/local/db/ORM.php	/^            $tmpValue = implode(",",$dbData);$/;"	v
 tmp_array	common/third/smarty/sysplugins/smarty_internal_compilebase.php	/^            $tmp_array = array_merge($this->required_attributes, $this->optional_attributes, $this->option_flags);$/;"	v
+tmplist	api/stem/application/library/duyuu/dao/BookRecommend.php	/^                $tmplist = $recommend->field("b.bid,b.title,i.path as cover,b.cid,c.name")->joinQuery("books as b","b.bid=$table.bid")->joinQuery('book_category as c','c.cid=b.cid')->joinQuery('book_image as p','b.bid=p.bid')->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND $table.cid='" . $value['cid'] . "'")->limit(4)->fetchList();$/;"	v
 to	common/stem/local/base/Base.php	/^ * Base class to the extended by the Database wrapper.$/;"	c
 to	common/stem/local/oauth2/IOAuth2Storage.php	/^	 * Implement this function to grab the stored URI for a given client id.$/;"	f
 to	common/stem/local/oauth2/OAuth2.php	/^	 * Implementing classes may want to override this function to implement$/;"	f
@@ -3500,7 +3605,10 @@ tokenType	common/stem/local/oauth2/OAuth2.php	/^		$tokenType = $this->getVariabl
 token_length	common/third/smarty/plugins/shared.mb_wordwrap.php	/^                $token_length = mb_strlen($token, Smarty::$_CHARSET);$/;"	v
 token_length	common/third/smarty/plugins/shared.mb_wordwrap.php	/^            $token_length = mb_strlen($_token, Smarty::$_CHARSET);$/;"	v
 tokens	common/third/smarty/plugins/shared.mb_wordwrap.php	/^        $tokens = preg_split('!(\\s)!S' . Smarty::$_UTF8_MODIFIER, $str, -1, PREG_SPLIT_NO_EMPTY + PREG_SPLIT_DELIM_CAPTURE);$/;"	v
+top	api/stem/application/controllers/Store.php	/^        $top = $book->topRecommendIndex();$/;"	v
 topAction	api/stem/application/controllers/Store.php	/^    public function topAction()$/;"	f
+topList	api/stem/application/library/duyuu/dao/Books.php	/^    public function topList()$/;"	f
+topRecommendIndex	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public function topRecommendIndex()$/;"	f
 tpl	common/third/smarty/Smarty.class.php	/^                $tpl = $this->template_objects[$_templateId];$/;"	v
 tpl	common/third/smarty/Smarty.class.php	/^                $tpl = clone $this->template_objects[$_templateId];$/;"	v
 tpl	common/third/smarty/Smarty.class.php	/^                $tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id);$/;"	v
@@ -3581,6 +3689,8 @@ unregister_resource	common/third/smarty/SmartyBC.class.php	/^    public function
 unsetRefreshToken	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^    public function unsetRefreshToken()$/;"	f
 unsetRefreshToken	common/stem/local/oauth2/IOAuth2RefreshTokens.php	/^	public function unsetRefreshToken($refresh_token);$/;"	f
 update	common/stem/local/db/ORM.php	/^    function update($dbData) {$/;"	f
+upload	api/stem/application/library/duyuu/image/ImageControl.php	/^    public function upload($tmpName)$/;"	f
+uploadAction	api/stem/application/controllers/Test.php	/^    public function uploadAction()$/;"	f
 upper_string	common/third/smarty/plugins/modifier.capitalize.php	/^                    $upper_string = substr_replace($upper_string, mb_strtolower($match[0], Smarty::$_CHARSET), $match[1], strlen($match[0]));$/;"	v
 upper_string	common/third/smarty/plugins/modifier.capitalize.php	/^                $upper_string = substr_replace($upper_string, strtolower($match[0]), $match[1], strlen($match[0]));$/;"	v
 upper_string	common/third/smarty/plugins/modifier.capitalize.php	/^            $upper_string = mb_convert_case( $string, MB_CASE_TITLE, Smarty::$_CHARSET );$/;"	v
@@ -3606,7 +3716,9 @@ used	common/third/smarty/sysplugins/smarty_internal_data.php	/^     * name of cl
 used_tags	common/third/smarty/sysplugins/smarty_internal_template.php	/^    public $used_tags = array();$/;"	v
 user	api/stem/application/controllers/Test.php	/^            $user = Members::getCurrentUser();$/;"	v
 user	api/stem/application/controllers/Test.php	/^            $user = new Members();$/;"	v
+user	api/stem/application/controllers/Test.php	/^        $user = \\duyuu\\dao\\Members::getCurrentUser();$/;"	v
 user	api/stem/application/controllers/Test.php	/^        $user = new \\duyuu\\dao\\Members();$/;"	v
+user	api/stem/application/library/duyuu/image/ImageControl.php	/^        $user = \\duyuu\\dao\\Members::getCurrentUser();$/;"	v
 user	common/third/smarty/plugins/function.fetch.php	/^                            $user = $param_value;$/;"	v
 user	common/third/smarty/plugins/function.fetch.php	/^                $user = $uri_parts['user'];$/;"	v
 user_id	common/stem/local/oauth2/OAuth2.php	/^		$user_id = isset($stored['user_id']) ? $stored['user_id'] : null;$/;"	v
@@ -3685,6 +3797,7 @@ vdir	common/third/smarty/plugins/function.html_table.php	/^    $vdir = 'down';$/
 verifyAccessToken	common/stem/local/oauth2/OAuth2.php	/^	public function verifyAccessToken($token_param, $scope = NULL) {$/;"	f
 version	common/stem/local/db/Database.php	/^    function version(){}$/;"	f
 version	common/stem/local/db/MySQL.php	/^    function version() {}$/;"	f
+waterMake	common/stem/local/image/Images.php	/^    public function waterMake()$/;"	f
 wherearr	api/stem/application/controllers/Test.php	/^            $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";$/;"	v
 width	common/third/smarty/plugins/function.html_image.php	/^            $width = $_image_data[0];$/;"	v
 width	common/third/smarty/plugins/function.html_image.php	/^        $width = round($width * $_resize);$/;"	v
@@ -3706,6 +3819,7 @@ writeCachedContent	common/third/smarty/sysplugins/smarty_cacheresource_custom.ph
 writeCachedContent	common/third/smarty/sysplugins/smarty_cacheresource_keyvaluestore.php	/^    public function writeCachedContent(Smarty_Internal_Template $_template, $content)$/;"	f
 writeCachedContent	common/third/smarty/sysplugins/smarty_internal_cacheresource_file.php	/^    public function writeCachedContent(Smarty_Internal_Template $_template, $content)$/;"	f
 writeCachedContent	common/third/smarty/sysplugins/smarty_internal_template.php	/^    public function writeCachedContent($content)$/;"	f
+writeFile	common/stem/local/image/Images.php	/^    public function writeFile()$/;"	f
 writeFile	common/third/smarty/sysplugins/smarty_internal_write_file.php	/^    public static function writeFile($_filepath, $_contents, Smarty $smarty)$/;"	f
 write_compiled_code	common/third/smarty/sysplugins/smarty_internal_templatecompilerbase.php	/^    public $write_compiled_code = true;$/;"	v
 write_cookie	common/stem/local/oauth2/OAuth2Client.php	/^					$write_cookie = empty($session);$/;"	v

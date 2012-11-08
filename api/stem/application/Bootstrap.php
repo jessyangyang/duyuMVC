@@ -28,6 +28,8 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
         $router->addConfig(new Yaf\Config\Simple($rest));
     }
 
+
+
     public function _initSmarty(Dispatcher $dispatcher)
     {
         $smarty = new SmartyAdapter(null, Yaf\Application::app()->getConfig()->smarty);

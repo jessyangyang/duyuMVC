@@ -129,4 +129,23 @@ class Books extends \local\db\ORM
 
         return "";
     }
+
+    public function getBookInfo($bid)
+    {
+        $books = self::instance();
+        $table = $books->table;
+
+        $list = $books->field("$table.bid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.press,f.apple_price as price,$table.summary")->joinQuery("book_info as f","$table.bid=f.bid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND $table.bid='$bid'")->order("$table.published")->limit(1)->fetchList();
+
+        if (is_array($list)) {
+            foreach ($list as $key => $value) {
+                if (isset($value['cover']) and $value['cover']) {
+                    $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                }
+            }
+            return $list;
+        }
+
+        return "";
+    }
 }

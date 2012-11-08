@@ -13,6 +13,10 @@ router	api/stem/application/Bootstrap.php	/^        $router = $dispatcher->getRo
 smarty	api/stem/application/Bootstrap.php	/^        $smarty = new SmartyAdapter(null, Yaf\\Application::app()->getConfig()->smarty);$/;"	v
 apiController	api/stem/application/controllers/Api.php	/^class apiController extends \\Yaf\\Controller_Abstract $/;"	c
 indexAction	api/stem/application/controllers/Api.php	/^    public function indexAction() $/;"	f
+DownloadController	api/stem/application/controllers/Download.php	/^class DownloadController extends \\Yaf\\Controller_Abstract $/;"	c
+bookAction	api/stem/application/controllers/Download.php	/^    public function bookAction($bid = 1) $/;"	f
+head	api/stem/application/controllers/Download.php	/^        $head = array($/;"	v
+path	api/stem/application/controllers/Download.php	/^        $path = "";$/;"	v
 IndexController	api/stem/application/controllers/Index.php	/^class IndexController extends \\Yaf\\Controller_Abstract $/;"	c
 indexAction	api/stem/application/controllers/Index.php	/^    public function indexAction() $/;"	f
 OAUTH2Controller	api/stem/application/controllers/OAUTH2.php	/^class OAUTH2Controller extends \\Yaf\\Controller_Abstract $/;"	c
@@ -20,26 +24,40 @@ authorizeAction	api/stem/application/controllers/OAUTH2.php	/^    public functio
 StoreDownloadController	api/stem/application/controllers/Payment.php	/^class StoreDownloadController extends \\Yaf\\Controller_Abstract $/;"	c
 applePaymentAction	api/stem/application/controllers/Payment.php	/^    public function applePaymentAction()$/;"	f
 StoreController	api/stem/application/controllers/Store.php	/^class StoreController extends \\Yaf\\Controller_Abstract $/;"	c
-book	api/stem/application/controllers/Store.php	/^        $book = new BookRecommend();$/;"	v
+book	api/stem/application/controllers/Store.php	/^        $book = BookRecommend::instance();$/;"	v
+book	api/stem/application/controllers/Store.php	/^        $book = Books::instance();$/;"	v
 booklist	api/stem/application/controllers/Store.php	/^        $booklist = $book->getIndexRecommend();$/;"	v
-category	api/stem/application/controllers/Store.php	/^    public function category()$/;"	f
-json	api/stem/application/controllers/Store.php	/^        $json = array($/;"	v
+category	api/stem/application/controllers/Store.php	/^        $category = BookCategory::instance();$/;"	v
+categoryAction	api/stem/application/controllers/Store.php	/^    public function categoryAction()$/;"	f
+code	api/stem/application/controllers/Store.php	/^        $code = 200;$/;"	v
+list	api/stem/application/controllers/Store.php	/^        $list = $book->getSubCategory(intval($cid),$limit,$page);$/;"	v
+message	api/stem/application/controllers/Store.php	/^        $message = "ok";$/;"	v
 recommendAction	api/stem/application/controllers/Store.php	/^    public function recommendAction()$/;"	f
-subCategoryAction	api/stem/application/controllers/Store.php	/^    public function subCategoryAction($cid)$/;"	f
+rest	api/stem/application/controllers/Store.php	/^        $rest = Restful::instance();$/;"	v
+subCategoryAction	api/stem/application/controllers/Store.php	/^    public function subCategoryAction($cid,$limit = 10,$page = 1)$/;"	f
+top	api/stem/application/controllers/Store.php	/^        $top = $book->topRecommendIndex();$/;"	v
 topAction	api/stem/application/controllers/Store.php	/^    public function topAction()$/;"	f
-StoreBookController	api/stem/application/controllers/StoreBook.php	/^class StoreBookController extends \\Yaf\\Controller_Abstract $/;"	c
-bookAction	api/stem/application/controllers/StoreBook.php	/^    public function bookAction($bid)$/;"	f
-bookChapterAction	api/stem/application/controllers/StoreBook.php	/^    public function bookChapterAction($bid)$/;"	f
 StoreDownloadController	api/stem/application/controllers/StoreDownload.php	/^class StoreDownloadController extends \\Yaf\\Controller_Abstract $/;"	c
 bookAction	api/stem/application/controllers/StoreDownload.php	/^    public function bookAction()$/;"	f
+StoreBookController	api/stem/application/controllers/Storebook.php	/^class StoreBookController extends \\Yaf\\Controller_Abstract $/;"	c
+book	api/stem/application/controllers/Storebook.php	/^        $book = Books::instance();$/;"	v
+bookAction	api/stem/application/controllers/Storebook.php	/^    public function bookAction($bid)$/;"	f
+bookChapterAction	api/stem/application/controllers/Storebook.php	/^    public function bookChapterAction($bid)$/;"	f
+code	api/stem/application/controllers/Storebook.php	/^        $code = 200;$/;"	v
+list	api/stem/application/controllers/Storebook.php	/^        $list = $book->getBookInfo(intval($bid));$/;"	v
+message	api/stem/application/controllers/Storebook.php	/^        $message = "ok";$/;"	v
+rest	api/stem/application/controllers/Storebook.php	/^        $rest = Restful::instance();$/;"	v
 addClientAction	api/stem/application/controllers/Test.php	/^    public function addClientAction()$/;"	f
 appKey	api/stem/application/controllers/Test.php	/^        $appKey = $_SERVER[''];$/;"	v
 arr	api/stem/application/controllers/Test.php	/^                $arr = array($/;"	v
 authAction	api/stem/application/controllers/Test.php	/^    public function authAction()$/;"	f
+class	api/stem/application/controllers/Test.php	/^            $class = $data->getPost('type') ? $data->getPost('type') : 1;$/;"	v
 client	api/stem/application/controllers/Test.php	/^        $client = new \\duyuu\\dao\\OAuthClient();$/;"	v
 data	api/stem/application/controllers/Test.php	/^                $data = array($/;"	v
 data	api/stem/application/controllers/Test.php	/^        $data = $this->getRequest();$/;"	v
 display	api/stem/application/controllers/Test.php	/^        $display = $this->getView();$/;"	v
+file	api/stem/application/controllers/Test.php	/^            $file  = $data->getFiles();$/;"	v
+image	api/stem/application/controllers/Test.php	/^            $image = new \\duyuu\\image\\ImageControl();$/;"	v
 indexAction	api/stem/application/controllers/Test.php	/^    public function indexAction() $/;"	f
 loginAction	api/stem/application/controllers/Test.php	/^    public function loginAction()$/;"	f
 message	api/stem/application/controllers/Test.php	/^                    $message = "success!!";$/;"	v
@@ -55,8 +73,10 @@ summary	api/stem/application/controllers/Test.php	/^            $summary = $data
 testAction	api/stem/application/controllers/Test.php	/^    public function testAction($id = false)$/;"	f
 testController	api/stem/application/controllers/Test.php	/^class testController extends \\Yaf\\Controller_Abstract $/;"	c
 title	api/stem/application/controllers/Test.php	/^            $title = $data->getPost('title');$/;"	v
+uploadAction	api/stem/application/controllers/Test.php	/^    public function uploadAction()$/;"	f
 user	api/stem/application/controllers/Test.php	/^            $user = Members::getCurrentUser();$/;"	v
 user	api/stem/application/controllers/Test.php	/^            $user = new Members();$/;"	v
+user	api/stem/application/controllers/Test.php	/^        $user = \\duyuu\\dao\\Members::getCurrentUser();$/;"	v
 user	api/stem/application/controllers/Test.php	/^        $user = new \\duyuu\\dao\\Members();$/;"	v
 wherearr	api/stem/application/controllers/Test.php	/^            $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";$/;"	v
 UserController	api/stem/application/controllers/User.php	/^class UserController extends \\Yaf\\Controller_Abstract $/;"	c
@@ -75,16 +95,27 @@ common	api/stem/application/library/duyuu/common.php	/^class common$/;"	c
 curl_request	api/stem/application/library/duyuu/common.php	/^    function curl_request($url, array $options = NULL)$/;"	f
 defaults	api/stem/application/library/duyuu/common.php	/^        $defaults = array($/;"	v
 h	api/stem/application/library/duyuu/common.php	/^    function h($string)$/;"	f
+hash	api/stem/application/library/duyuu/common.php	/^        $hash = '';$/;"	v
+max	api/stem/application/library/duyuu/common.php	/^        $max = strlen($seed) - 1;$/;"	v
 md5	api/stem/application/library/duyuu/common.php	/^    public function md5($data,$salt)$/;"	f
+numeric	api/stem/application/library/duyuu/common.php	/^    function random($length, $numeric = 0) {$/;"	v
 object	api/stem/application/library/duyuu/common.php	/^        $object = new stdClass;$/;"	v
 options	api/stem/application/library/duyuu/common.php	/^    function curl_request($url, array $options = NULL)$/;"	v
+random	api/stem/application/library/duyuu/common.php	/^    function random($length, $numeric = 0) {$/;"	f
+seed	api/stem/application/library/duyuu/common.php	/^        $seed = $numeric ? (str_replace('0', '', $seed).'012340567890') : ($seed.'zZ'.strtoupper($seed));$/;"	v
+seed	api/stem/application/library/duyuu/common.php	/^        $seed = base_convert(md5(print_r($_SERVER, 1).microtime()), 16, $numeric ? 10 : 35);$/;"	v
 sql_date	api/stem/application/library/duyuu/common.php	/^    function sql_date($timestamp = NULL)$/;"	f
 token	api/stem/application/library/duyuu/common.php	/^    public function token()$/;"	f
 BookCategory	api/stem/application/library/duyuu/dao/BookCategory.php	/^class BookCategory extends \\local\\db\\ORM $/;"	c
+category	api/stem/application/library/duyuu/dao/BookCategory.php	/^        $category = self::instance();$/;"	v
 fields	api/stem/application/library/duyuu/dao/BookCategory.php	/^    public $fields = array($/;"	v
+getCategory	api/stem/application/library/duyuu/dao/BookCategory.php	/^    public function getCategory()$/;"	f
 instance	api/stem/application/library/duyuu/dao/BookCategory.php	/^    protected static $instance;$/;"	v
 instance	api/stem/application/library/duyuu/dao/BookCategory.php	/^    public static function instance($key = 0)$/;"	f
+key	api/stem/application/library/duyuu/dao/BookCategory.php	/^            foreach ($list as $key => $value) {$/;"	v
+list	api/stem/application/library/duyuu/dao/BookCategory.php	/^        $list = $category->field("$table.cid,$table.name,i.path as cover")->joinQuery("images as i","$table.pid=i.pid")->limit(20)->fetchList();$/;"	v
 primaryKey	api/stem/application/library/duyuu/dao/BookCategory.php	/^    public $primaryKey = "cid";$/;"	v
+table	api/stem/application/library/duyuu/dao/BookCategory.php	/^        $table = $this->table;$/;"	v
 table	api/stem/application/library/duyuu/dao/BookCategory.php	/^    public $table = 'book_category';$/;"	v
 BookChapter	api/stem/application/library/duyuu/dao/BookChapter.php	/^class BookChapter extends \\local\\db\\ORM $/;"	c
 fields	api/stem/application/library/duyuu/dao/BookChapter.php	/^    public $fields = array($/;"	v
@@ -99,25 +130,64 @@ fields	api/stem/application/library/duyuu/dao/BookMenu.php	/^    public $fields 
 primaryKey	api/stem/application/library/duyuu/dao/BookMenu.php	/^    public $primaryKey = "id";$/;"	v
 table	api/stem/application/library/duyuu/dao/BookMenu.php	/^    public $table = 'book_menu';$/;"	v
 BookRecommend	api/stem/application/library/duyuu/dao/BookRecommend.php	/^class BookRecommend extends \\local\\db\\ORM $/;"	c
-category	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $category = new \\duyuu\\dao\\BookCategory();$/;"	v
+category	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $category = \\duyuu\\dao\\BookRecommendMenu::instance();$/;"	v
 categoryList	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $categoryList = $category->where('type = 1')->fetchList();$/;"	v
 fields	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public $fields = array($/;"	v
 getIndexRecommend	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public function getIndexRecommend($limit = 4)$/;"	f
 instance	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    protected static $instance;$/;"	v
 instance	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public static function instance($key = 0)$/;"	f
+key	api/stem/application/library/duyuu/dao/BookRecommend.php	/^                foreach ($tmplist as $key => $value) {$/;"	v
+key	api/stem/application/library/duyuu/dao/BookRecommend.php	/^            foreach ($list as $key => $value) {$/;"	v
 key	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        foreach ($categoryList as $key => $value) {$/;"	v
+list	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $list =  $recommend->field("b.bid,b.title,i.path as cover,b.cid,c.name")->joinQuery("books as b","b.bid=$table.bid")->joinQuery('book_category as c','c.cid=b.cid')->joinQuery('book_image as p','b.bid=p.bid')->joinQuery('images as i','i.pid=p.pid')->where("p.type = 2 AND $table.cid='2'")->limit(4)->fetchList();$/;"	v
 list	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $list = array();$/;"	v
 list	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        \/\/ $list = $recommend->field("b.bid,b.title,c.name,b.cover,$table.sort")->joinQuery("book_category as c","c.cid=$table.cid")->joinQuery("books as b","b.bid=$table.bid")->where("c.type = 1")->limit(4)->fetchList();$/;"	v
 primaryKey	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public $primaryKey = "rid";$/;"	v
 recommend	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $recommend = self::instance();$/;"	v
 table	api/stem/application/library/duyuu/dao/BookRecommend.php	/^        $table = $this->table;$/;"	v
 table	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public $table = 'book_recommend';$/;"	v
+tmplist	api/stem/application/library/duyuu/dao/BookRecommend.php	/^                $tmplist = $recommend->field("b.bid,b.title,i.path as cover,b.cid,c.name")->joinQuery("books as b","b.bid=$table.bid")->joinQuery('book_category as c','c.cid=b.cid')->joinQuery('book_image as p','b.bid=p.bid')->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND $table.cid='" . $value['cid'] . "'")->limit(4)->fetchList();$/;"	v
+topRecommendIndex	api/stem/application/library/duyuu/dao/BookRecommend.php	/^    public function topRecommendIndex()$/;"	f
+BookRecommendMenu	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^class BookRecommendMenu extends \\local\\db\\ORM $/;"	c
+fields	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^    public $fields = array($/;"	v
+instance	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^    protected static $instance;$/;"	v
+instance	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^    public static function instance($key = 0)$/;"	f
+primaryKey	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^    public $primaryKey = "cid";$/;"	v
+table	api/stem/application/library/duyuu/dao/BookRecommendMenu.php	/^    public $table = 'book_recommend_menu';$/;"	v
 Books	api/stem/application/library/duyuu/dao/Books.php	/^class Books extends \\local\\db\\ORM $/;"	c
+books	api/stem/application/library/duyuu/dao/Books.php	/^        $books = self::instance();$/;"	v
+count	api/stem/application/library/duyuu/dao/Books.php	/^        $count = $books->field("count(*) as count")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND cid='$cid'")->fetchList();$/;"	v
+count	api/stem/application/library/duyuu/dao/Books.php	/^        $count = $count ? $count[0]['count'] : 0;$/;"	v
 fields	api/stem/application/library/duyuu/dao/Books.php	/^    public $fields = array($/;"	v
+getBookInfo	api/stem/application/library/duyuu/dao/Books.php	/^    public function getBookInfo($bid)$/;"	f
+getSubCategory	api/stem/application/library/duyuu/dao/Books.php	/^    public function getSubCategory($cid,$limit = 10,$page = 1)$/;"	f
 instance	api/stem/application/library/duyuu/dao/Books.php	/^    protected static $instance;$/;"	v
 instance	api/stem/application/library/duyuu/dao/Books.php	/^    public static function instance($key = 0)$/;"	f
+key	api/stem/application/library/duyuu/dao/Books.php	/^            foreach ($list as $key => $value) {$/;"	v
+key	api/stem/application/library/duyuu/dao/Books.php	/^            foreach ($list["list"] as $key => $value) {$/;"	v
+list	api/stem/application/library/duyuu/dao/Books.php	/^        $list =  $books->field("books.bid,books.cid,i.path as cover,books.title,books.author")->joinQuery('book_category as c',"c.cid=$table.cid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->limit(10)->fetchList();$/;"	v
+list	api/stem/application/library/duyuu/dao/Books.php	/^        $list = $books->field("$table.bid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.press,f.apple_price as price,$table.summary")->joinQuery("book_info as f","$table.bid=f.bid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND $table.bid='$bid'")->order("$table.published")->limit(1)->fetchList();$/;"	v
+offset	api/stem/application/library/duyuu/dao/Books.php	/^        $offset = $limit * ($page - 1);$/;"	v
+offset	api/stem/application/library/duyuu/dao/Books.php	/^        $offset = 0;$/;"	v
+page	api/stem/application/library/duyuu/dao/Books.php	/^        $page = $page < 1 ? 1 : $page;$/;"	v
+page	api/stem/application/library/duyuu/dao/Books.php	/^        $page = $page > $pages ? $pages : $page;$/;"	v
+pages	api/stem/application/library/duyuu/dao/Books.php	/^        $pages = $count\/$limit;$/;"	v
+pages	api/stem/application/library/duyuu/dao/Books.php	/^        $pages = $pages < 1 ? 1 : $pages;$/;"	v
+pages	api/stem/application/library/duyuu/dao/Books.php	/^        $pages = is_float($pages) ? intval($pages)+1 : $pages;$/;"	v
 primaryKey	api/stem/application/library/duyuu/dao/Books.php	/^    public $primaryKey = "bid";$/;"	v
+table	api/stem/application/library/duyuu/dao/Books.php	/^        $table = $books->table;$/;"	v
+table	api/stem/application/library/duyuu/dao/Books.php	/^        $table = $this->table;$/;"	v
 table	api/stem/application/library/duyuu/dao/Books.php	/^    public $table = 'books';$/;"	v
+topList	api/stem/application/library/duyuu/dao/Books.php	/^    public function topList()$/;"	f
+Images	api/stem/application/library/duyuu/dao/Images.php	/^class Images extends \\local\\db\\ORM $/;"	c
+fields	api/stem/application/library/duyuu/dao/Images.php	/^    public $fields = array($/;"	v
+getThumb	api/stem/application/library/duyuu/dao/Images.php	/^    public static function getThumb()$/;"	f
+image	api/stem/application/library/duyuu/dao/Images.php	/^        $image = self::instance();$/;"	v
+instance	api/stem/application/library/duyuu/dao/Images.php	/^    protected static $instance;$/;"	v
+instance	api/stem/application/library/duyuu/dao/Images.php	/^    public static function instance($key = false)$/;"	f
+primaryKey	api/stem/application/library/duyuu/dao/Images.php	/^    public $primaryKey = "pid";$/;"	v
+save	api/stem/application/library/duyuu/dao/Images.php	/^    public function save()$/;"	f
+table	api/stem/application/library/duyuu/dao/Images.php	/^    public $table = 'images';$/;"	v
 Members	api/stem/application/library/duyuu/dao/Members.php	/^class Members extends \\local\\db\\ORM $/;"	c
 __get	api/stem/application/library/duyuu/dao/Members.php	/^    public function __get($fieldName)$/;"	f
 fields	api/stem/application/library/duyuu/dao/Members.php	/^    public $fields = array($/;"	v
@@ -141,6 +211,24 @@ instance	api/stem/application/library/duyuu/dao/OAuthClient.php	/^    protected 
 instance	api/stem/application/library/duyuu/dao/OAuthClient.php	/^    public static function instance($key = false)$/;"	f
 primaryKey	api/stem/application/library/duyuu/dao/OAuthClient.php	/^    public $primaryKey = "client_id";$/;"	v
 table	api/stem/application/library/duyuu/dao/OAuthClient.php	/^    public $table = 'oauth_client';$/;"	v
+ImageControl	api/stem/application/library/duyuu/image/ImageControl.php	/^class ImageControl extends \\local\\image\\Images $/;"	c
+__construct	api/stem/application/library/duyuu/image/ImageControl.php	/^    public function __construct()$/;"	f
+_file	api/stem/application/library/duyuu/image/ImageControl.php	/^        \/\/ file_exists($file) and $this->_file = $file;$/;"	v
+class	api/stem/application/library/duyuu/image/ImageControl.php	/^    public function save($FILE, $class = 1, $thumb = false)$/;"	v
+common	api/stem/application/library/duyuu/image/ImageControl.php	/^        $common =  \\Yaf\\Registry::get('common');$/;"	v
+fileExt	api/stem/application/library/duyuu/image/ImageControl.php	/^        $fileExt = $this->getImageType($FILE['name']);$/;"	v
+filePath	api/stem/application/library/duyuu/image/ImageControl.php	/^        $filePath = $user->id."_".$common->random(4)."$fileType";$/;"	v
+getFilePath	api/stem/application/library/duyuu/image/ImageControl.php	/^    public function getFilePath($fileType,$mkdir = false)$/;"	f
+getRelativeImage	api/stem/application/library/duyuu/image/ImageControl.php	/^    public static function getRelativeImage($path)$/;"	f
+image	api/stem/application/library/duyuu/image/ImageControl.php	/^        $image = new \\duyuu\\dao\\Images();$/;"	v
+imageParam	api/stem/application/library/duyuu/image/ImageControl.php	/^        $imageParam = array($/;"	v
+imagePath	api/stem/application/library/duyuu/image/ImageControl.php	/^        $imagePath = \\Yaf\\Application::app()->getConfig()->toArray();$/;"	v
+newFilePath	api/stem/application/library/duyuu/image/ImageControl.php	/^            $newFilePath = $imagePath['path']['image'].$pathOne;$/;"	v
+pathOne	api/stem/application/library/duyuu/image/ImageControl.php	/^        $pathOne = gmdate("Ym");$/;"	v
+pathTwo	api/stem/application/library/duyuu/image/ImageControl.php	/^        $pathTwo = gmdate('j');$/;"	v
+save	api/stem/application/library/duyuu/image/ImageControl.php	/^    public function save($FILE, $class = 1, $thumb = false)$/;"	f
+upload	api/stem/application/library/duyuu/image/ImageControl.php	/^    public function upload($tmpName)$/;"	f
+user	api/stem/application/library/duyuu/image/ImageControl.php	/^        $user = \\duyuu\\dao\\Members::getCurrentUser();$/;"	v
 OAuth2Storage	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^class OAuth2Storage implements IOAuth2GrantCode, IOAuth2RefreshTokens $/;"	c
 __construct	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^    public function __construct() {$/;"	f
 __destruct	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^    function __destruct() {$/;"	f
@@ -172,21 +260,21 @@ initRegister	api/stem/application/library/duyuu/rest/RegisterRest.php	/^    publ
 Restful	api/stem/application/library/duyuu/rest/Restful.php	/^class Restful extends \\local\\rest\\REST$/;"	c
 __construct	api/stem/application/library/duyuu/rest/Restful.php	/^    public function __construct()$/;"	f
 action	api/stem/application/library/duyuu/rest/Restful.php	/^    static function regRestURL($restName, $restUrl, $controller, $action = ''){ $/;"	v
+assign	api/stem/application/library/duyuu/rest/Restful.php	/^    public function assign($key, $data)$/;"	f
 getRouteName	api/stem/application/library/duyuu/rest/Restful.php	/^    static function getRouteName($restName)$/;"	f
+instance	api/stem/application/library/duyuu/rest/Restful.php	/^    public static $instance;$/;"	v
+instance	api/stem/application/library/duyuu/rest/Restful.php	/^    public static function instance()$/;"	f
 regRestURL	api/stem/application/library/duyuu/rest/Restful.php	/^    static function regRestURL($restName, $restUrl, $controller, $action = ''){ $/;"	f
+responseData	api/stem/application/library/duyuu/rest/Restful.php	/^    public $responseData = array();$/;"	v
 restOptions	api/stem/application/library/duyuu/rest/Restful.php	/^     * $restOptions = array ($/;"	v
-restURL	api/stem/application/library/duyuu/rest/Restful.php	/^    static  $restURL = array();$/;"	v
+restURL	api/stem/application/library/duyuu/rest/Restful.php	/^    public static  $restURL = array();$/;"	v
 routeType	api/stem/application/library/duyuu/rest/Restful.php	/^    private static  $routeType = 'rewrite';$/;"	v
-setData	api/stem/application/library/duyuu/rest/Restful.php	/^    public function setData()$/;"	f
 OAUTH2Plugin	api/stem/application/plugins/OAUTH2.php	/^class OAUTH2Plugin extends Plugin_Abstract$/;"	c
 authorize	api/stem/application/plugins/OAUTH2.php	/^    public function authorize()$/;"	f
 routerShutdown	api/stem/application/plugins/OAUTH2.php	/^    public function routerShutdown(Request_Abstract $request, Response_Abstract $response) $/;"	f
-_valid	api/stem/cache/templates_c/76f8216fdde324037cbf84e69b135185e6dd3ae8.file.reg.tpl.php	/^$_valid = $_smarty_tpl->decodeProperties(array ($/;"	v
-_valid	api/stem/cache/templates_c/8071b958d9288e886a02c1e1d21ed7e60505e07b.file.index.tpl.php	/^$_valid = $_smarty_tpl->decodeProperties(array ($/;"	v
-_valid	api/stem/cache/templates_c/928871e96f365de4525052278312f4b16e9cdc1a.file.addclient.tpl.php	/^$_valid = $_smarty_tpl->decodeProperties(array ($/;"	v
-_valid	api/stem/cache/templates_c/e28b5c653c66b007fa89bf80f5d96b3bd7b11c48.file.login.tpl.php	/^$_valid = $_smarty_tpl->decodeProperties(array ($/;"	v
 AJAX_REQUEST	api/stem/main/index.php	/^define('AJAX_REQUEST', strtolower(getenv('HTTP_X_REQUESTED_WITH')) === 'xmlhttprequest');$/;"	d
 APPLICATION_PATH	api/stem/main/index.php	/^define("APPLICATION_PATH", realpath((phpversion() >= "5.3"? __DIR__: dirname(__FILE__)).'\/..\/'));$/;"	d
+BASE_PATH	api/stem/main/index.php	/^define("BASE_PATH", realpath((phpversion() >= "5.3"? __DIR__: dirname(__FILE__)).'\/..\/..\/'));$/;"	d
 DOMAIN	api/stem/main/index.php	/^define('DOMAIN', (strtolower(getenv('HTTPS')) == 'on' ? 'https' : 'http') . ':\/\/'$/;"	d
 DS	api/stem/main/index.php	/^define('DS', '\/');$/;"	d
 DUYU_TYPE	api/stem/main/index.php	/^define('DUYU_TYPE', ".php");$/;"	d
@@ -226,9 +314,9 @@ setInstance	common/stem/local/db/Database.php	/^    static function setInstance(
 version	common/stem/local/db/Database.php	/^    function version(){}$/;"	f
 MySQL	common/stem/local/db/MySQL.php	/^class MySQL extends Database $/;"	c
 __construct	common/stem/local/db/MySQL.php	/^    public function __construct()$/;"	f
-begin	common/stem/local/db/MySQL.php	/^    function begin(){}$/;"	f
+begin	common/stem/local/db/MySQL.php	/^    function begin(){$/;"	f
 close	common/stem/local/db/MySQL.php	/^    function close() {}$/;"	f
-commit	common/stem/local/db/MySQL.php	/^    function commit(){}$/;"	f
+commit	common/stem/local/db/MySQL.php	/^    function commit(){$/;"	f
 config	common/stem/local/db/MySQL.php	/^    protected static $config;$/;"	v
 db	common/stem/local/db/MySQL.php	/^    protected static $db;$/;"	v
 dbConfigName	common/stem/local/db/MySQL.php	/^                if (isset($value['name']) and $dbConfigName == $value['name']) {$/;"	v
@@ -254,7 +342,7 @@ printDebug	common/stem/local/db/MySQL.php	/^    static function printDebug($mess
 query	common/stem/local/db/MySQL.php	/^    function query() {$/;"	f
 resule	common/stem/local/db/MySQL.php	/^            $resule = self::$db->prepare($tmpSql);$/;"	v
 resule	common/stem/local/db/MySQL.php	/^            $resule = self::$db->query($tmpSql);$/;"	v
-rollback	common/stem/local/db/MySQL.php	/^    function rollback(){}$/;"	f
+rollback	common/stem/local/db/MySQL.php	/^    function rollback(){$/;"	f
 selectTable	common/stem/local/db/MySQL.php	/^    function selectTable($tableName) {$/;"	f
 setCharset	common/stem/local/db/MySQL.php	/^    function setCharset($charset = "UTF8")$/;"	f
 setInstance	common/stem/local/db/MySQL.php	/^    static function setInstance($dbConfigName,$dbParams,$dbHasDaufalt = false)$/;"	f
@@ -264,7 +352,7 @@ tmpNums	common/stem/local/db/MySQL.php	/^        $tmpNums = func_num_args();$/;"
 tmpParams	common/stem/local/db/MySQL.php	/^        $tmpParams = func_get_args();$/;"	v
 tmpSql	common/stem/local/db/MySQL.php	/^        $tmpSql = array_shift($tmpParams);$/;"	v
 version	common/stem/local/db/MySQL.php	/^    function version() {}$/;"	f
-ORM	common/stem/local/db/ORM.php	/^class ORM{$/;"	c
+ORM	common/stem/local/db/ORM.php	/^class ORM extends MySQL{$/;"	c
 __call	common/stem/local/db/ORM.php	/^    function __call($dbMethod, $dbFields) {$/;"	f
 __construct	common/stem/local/db/ORM.php	/^    public function __construct($dbPrimaryKey = false ,$dbConfigName = "default" ) {$/;"	f
 _filter	common/stem/local/db/ORM.php	/^    private function _filter(&$dbData){$/;"	f
@@ -286,6 +374,7 @@ instance	common/stem/local/db/ORM.php	/^    protected static $instance;$/;"	v
 instance	common/stem/local/db/ORM.php	/^    public static function instance() {$/;"	f
 isFilter	common/stem/local/db/ORM.php	/^        \/\/     $isFilter = array();$/;"	v
 joinQuery	common/stem/local/db/ORM.php	/^    function joinQuery($dbTable,$dbSqlarr,$dbPrefix = "LEFT") {$/;"	f
+joinTables	common/stem/local/db/ORM.php	/^        $this->joinTables = array();$/;"	v
 joinTables	common/stem/local/db/ORM.php	/^    public $joinTables = array();$/;"	v
 key	common/stem/local/db/ORM.php	/^                foreach ($dbData as $key => $value) {$/;"	v
 key	common/stem/local/db/ORM.php	/^                foreach ($this->fields as $key => $value) $/;"	v
@@ -326,11 +415,35 @@ tmpSql	common/stem/local/db/ORM.php	/^        $tmpSql = 'SELECT '.$tmpOption['fi
 tmpValue	common/stem/local/db/ORM.php	/^            $tmpValue = implode(",",$dbData);$/;"	v
 update	common/stem/local/db/ORM.php	/^    function update($dbData) {$/;"	f
 value	common/stem/local/db/ORM.php	/^                    $value = str_replace($key_2, $var2, $value);$/;"	v
+Download	common/stem/local/download/Download.php	/^class Download $/;"	c
+download	common/stem/local/download/Download.php	/^    public static function download($filePath, $params = false)$/;"	f
+key	common/stem/local/download/Download.php	/^            foreach ($params as $key => $value) {$/;"	v
+params	common/stem/local/download/Download.php	/^    public static function download($filePath, $params = false)$/;"	v
+setHeader	common/stem/local/download/Download.php	/^    public static function setHeader($content, $param)$/;"	f
 Exception	common/stem/local/exception/Exception.php	/^class Exception extends \\Exception $/;"	c
 MysqlConnectException	common/stem/local/exception/Exception.php	/^    public function MysqlConnectException($message) {$/;"	f
 __construct	common/stem/local/exception/Exception.php	/^     public function __construct($message, $code = 0, Exception $previous = null) {$/;"	f
 __toString	common/stem/local/exception/Exception.php	/^    public function __toString()$/;"	f
 code	common/stem/local/exception/Exception.php	/^     public function __construct($message, $code = 0, Exception $previous = null) {$/;"	v
+Files	common/stem/local/files/Files.php	/^class Files extends \\Filesystem$/;"	c
+Images	common/stem/local/image/Images.php	/^abstract class Images {$/;"	c
+_file	common/stem/local/image/Images.php	/^    public $_file;$/;"	v
+_height	common/stem/local/image/Images.php	/^        $this->_height = $size;$/;"	v
+_height	common/stem/local/image/Images.php	/^    public $_height;$/;"	v
+_width	common/stem/local/image/Images.php	/^        $this->_width = $size;$/;"	v
+_width	common/stem/local/image/Images.php	/^    public $_width;$/;"	v
+extensions	common/stem/local/image/Images.php	/^        $extensions = array($/;"	v
+getFilePath	common/stem/local/image/Images.php	/^    \/\/ public function getFilePath()$/;"	f
+getImageType	common/stem/local/image/Images.php	/^    public function getImageType()$/;"	f
+getSize	common/stem/local/image/Images.php	/^    public function getSize()$/;"	f
+getX	common/stem/local/image/Images.php	/^    public function getX()$/;"	f
+getY	common/stem/local/image/Images.php	/^    public function getY()$/;"	f
+hasImageType	common/stem/local/image/Images.php	/^    public function hasImageType($type)$/;"	f
+setHeight	common/stem/local/image/Images.php	/^    public function setHeight($size)$/;"	f
+setWidth	common/stem/local/image/Images.php	/^    public function setWidth($size)$/;"	f
+thumb	common/stem/local/image/Images.php	/^    public function thumb()$/;"	f
+waterMake	common/stem/local/image/Images.php	/^    public function waterMake()$/;"	f
+writeFile	common/stem/local/image/Images.php	/^    public function writeFile()$/;"	f
 IOAuth2GrantClient	common/stem/local/oauth2/IOAuth2GrantClient.php	/^interface IOAuth2GrantClient extends IOAuth2Storage {$/;"	i
 checkClientCredentialsGrant	common/stem/local/oauth2/IOAuth2GrantClient.php	/^	public function checkClientCredentialsGrant($client_id, $client_secret);$/;"	f
 IOAuth2GrantCode	common/stem/local/oauth2/IOAuth2GrantCode.php	/^interface IOAuth2GrantCode extends IOAuth2Storage {$/;"	i
@@ -585,15 +698,16 @@ _request	common/stem/local/rest/REST.php	/^                $this->_request = $th
 _request	common/stem/local/rest/REST.php	/^    public $_request = array();$/;"	v
 data	common/stem/local/rest/REST.php	/^                $data = trim(stripcslashes($data));$/;"	v
 data	common/stem/local/rest/REST.php	/^            $data = strip_tags($data);$/;"	v
+data	common/stem/local/rest/REST.php	/^        $data = $data ? $data : $this->responseData;$/;"	v
 decode	common/stem/local/rest/REST.php	/^    public function decode($data)$/;"	f
-display	common/stem/local/rest/REST.php	/^    public function display($data)$/;"	f
+encode	common/stem/local/rest/REST.php	/^    public function encode($data)$/;"	f
 errorForJson	common/stem/local/rest/REST.php	/^    public function errorForJson()$/;"	f
 getReferer	common/stem/local/rest/REST.php	/^    public function getReferer()$/;"	f
 getRequest	common/stem/local/rest/REST.php	/^    private function getRequest()$/;"	f
 getRequestMethod	common/stem/local/rest/REST.php	/^    public function getRequestMethod()$/;"	f
-getStatusMsg	common/stem/local/rest/REST.php	/^    private function getStatusMsg()$/;"	f
+getStatusMsg	common/stem/local/rest/REST.php	/^    protected function getStatusMsg()$/;"	f
 key	common/stem/local/rest/REST.php	/^            foreach ($data as $key => $value) {$/;"	v
-response	common/stem/local/rest/REST.php	/^    public function response($data,$status)$/;"	f
+response	common/stem/local/rest/REST.php	/^    public function response($data = false,$status = 200)$/;"	f
 setHeaders	common/stem/local/rest/REST.php	/^    private function setHeaders()$/;"	f
 status	common/stem/local/rest/REST.php	/^        $status = array($/;"	v
 SmartyAdapter	common/stem/local/template/SmartyAdapter.php	/^class SmartyAdapter implements \\Yaf\\View_Interface$/;"	c
