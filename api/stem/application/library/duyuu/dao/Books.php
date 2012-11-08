@@ -94,21 +94,36 @@ class Books extends \local\db\ORM
      * [getSubCategory description]
      * @return [type] [description]
      */
-    public function getSubCategory($cid)
+    public function getSubCategory($cid,$limit = 10,$page = 1)
     {
         $books = self::instance();
         $table = $this->table;
 
-        $list = $books->field("$table.bid,$table.title,$table.author,i.path as cover")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND cid='$cid'")->limit(10)->fetchList();
+        $count = $books->field("count(*) as count")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND cid='$cid'")->fetchList();
 
-        if (is_array($list)) {
-            foreach ($list as $key => $value) {
+        $count = $count ? $count[0]['count'] : 0;
+        $offset = 0;
+
+        $pages = $count/$limit;
+        $pages = $pages < 1 ? 1 : $pages;
+        $pages = is_float($pages) ? intval($pages)+1 : $pages;
+
+        $page = $page < 1 ? 1 : $page;
+        $page = $page > $pages ? $pages : $page;
+
+        $offset = $limit * ($page - 1);
+
+        $list['count'] = $count;
+        $list['page'] = $page;
+        $list['pages'] = $pages;
+        $list["list"] = $books->field("$table.bid,$table.title,$table.author,i.path as cover")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND cid='$cid'")->limit("$offset,$limit")->fetchList();
+
+        if (is_array($list["list"])) {
+            foreach ($list["list"] as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                    $list["list"][$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
                 }
             }
-
-            $books->joinTables = array();
             return $list;
         }
 

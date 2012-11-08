@@ -132,7 +132,7 @@ class MySQL extends Database
         $tmpNums = func_num_args();
         $tmpSql = array_shift($tmpParams);
         $hasArray = false;
-
+        
         // Query Database
         if ($tmpParams) {
             // Prepare in mysql > 5.0

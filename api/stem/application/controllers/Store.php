@@ -66,7 +66,7 @@ class StoreController extends \Yaf\Controller_Abstract
         $rest->response();
     }
 
-    public function subCategoryAction($cid)
+    public function subCategoryAction($cid,$limit = 10,$page = 1)
     {
         $rest = Restful::instance();
         $book = Books::instance();
@@ -74,9 +74,12 @@ class StoreController extends \Yaf\Controller_Abstract
         $code = 200;
         $message = "ok";
 
+        $list = $book->getSubCategory(intval($cid),$limit,$page);
+
         $rest->assign('code',$code);
         $rest->assign('message',$message);
-        $rest->assign('categoryList',$book->getSubCategory(intval($cid)));
+        $rest->assign('pages',$list['pages']);
+        $rest->assign('subList',$list['list']);
 
         $rest->response();
     }

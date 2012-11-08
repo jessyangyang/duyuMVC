@@ -383,6 +383,7 @@ class ORM extends MySQL{
         empty($tmpOption['order']) || $tmpSql.= ' ORDER BY '.$tmpOption['order'];
         empty($tmpOption['limit']) || $tmpSql.= ' LIMIT '.$tmpOption['limit'];
 
+        $this->joinTables = array();
         return self::$db->query($tmpSql);
     }
 

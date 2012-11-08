@@ -55,7 +55,7 @@ class RegisterRest extends Restful{
         // store The Book of category
         self::regRestURL('storeCategory','/api/store/category','store','category');
         // store Sub category
-        self::regRestURL('storeSubCategory','/api/store/category/:cid','store','subCategory');
+        self::regRestURL('storeSubCategory','/api/store/category/:cid/:limit/:page','store','subCategory');
         // store Book Infomation
         self::regRestURL('storeBookInfo','/api/store/book/:bid','store','bookInfo');
         // store Book Chapter
