@@ -55,6 +55,7 @@ OAuthAuthCode	api/stem/application/library/duyuu/dao/OAuthAuthCode.php	/^class O
 OAuthClient	api/stem/application/library/duyuu/dao/OAuthClient.php	/^class OAuthClient extends \\local\\db\\ORM $/;"	c
 ORM	common/stem/local/db/ORM.php	/^class ORM extends MySQL{$/;"	c
 PATH	api/stem/main/index.php	/^define('PATH', parse_url(getenv('REQUEST_URI'), PHP_URL_PATH));$/;"	d
+PermissionControllerPlugin	api/stem/application/plugins/PermissionController.php	/^class PermissionControllerPlugin extends Plugin_Abstract $/;"	c
 PrintTrace	common/third/smarty/sysplugins/smarty_internal_configfileparser.php	/^    static function PrintTrace()$/;"	f
 PrintTrace	common/third/smarty/sysplugins/smarty_internal_templateparser.php	/^    static function PrintTrace()$/;"	f
 REST	common/stem/local/rest/REST.php	/^class REST$/;"	c
@@ -521,6 +522,7 @@ _incompatible_resources	common/third/smarty/sysplugins/smarty_resource.php	/^   
 _index	common/third/smarty/sysplugins/smarty_internal_compile_private_special_variable.php	/^        $_index = preg_split("\/\\]\\[\/",substr($parameter, 1, strlen($parameter)-2));$/;"	v
 _indexed_attr	common/third/smarty/sysplugins/smarty_internal_compilebase.php	/^        $_indexed_attr = array();$/;"	v
 _initConfig	api/stem/application/Bootstrap.php	/^    public function _initConfig(Dispatcher $dispatcher)$/;"	f
+_initPlugins	api/stem/application/Bootstrap.php	/^    public function _initPlugins(Dispatcher $dispatcher)$/;"	f
 _initRoute	api/stem/application/Bootstrap.php	/^    public function _initRoute(Dispatcher $dispatcher) {$/;"	f
 _initSmarty	api/stem/application/Bootstrap.php	/^    public function _initSmarty(Dispatcher $dispatcher)$/;"	f
 _isCached	common/third/smarty/sysplugins/smarty_internal_templatebase.php	/^                $_isCached = $_template->isCached() && !$_template->has_nocache_code;$/;"	v
@@ -1309,7 +1311,9 @@ checkClientCredentials	api/stem/application/library/duyuu/oauth/OAuth2Storage.ph
 checkClientCredentials	common/stem/local/oauth2/IOAuth2Storage.php	/^	public function checkClientCredentials($client_id, $client_secret = NULL);$/;"	f
 checkClientCredentialsGrant	common/stem/local/oauth2/IOAuth2GrantClient.php	/^	public function checkClientCredentialsGrant($client_id, $client_secret);$/;"	f
 checkGrantExtension	common/stem/local/oauth2/IOAuth2GrantExtension.php	/^	public function checkGrantExtension($uri, array $inputData, array $authHeaders);$/;"	f
+checkHeader	api/stem/application/plugins/OAUTH2.php	/^    private function checkHeader()$/;"	f
 checkPassword	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^    protected function checkPassword($try, $client_secret, $client_id) {$/;"	f
+checkPermission	api/stem/application/plugins/PermissionController.php	/^    public function checkPermission(Request_Abstract $request, Response_Abstract $response)$/;"	f
 checkRestrictedGrantType	api/stem/application/library/duyuu/oauth/OAuth2Storage.php	/^    public function checkRestrictedGrantType()$/;"	f
 checkRestrictedGrantType	common/stem/local/oauth2/IOAuth2Storage.php	/^	public function checkRestrictedGrantType($client_id, $grant_type);$/;"	f
 checkScope	common/stem/local/oauth2/OAuth2.php	/^	private function checkScope($required_scope, $available_scope) {$/;"	f
@@ -1483,6 +1487,7 @@ conf	common/stem/local/oauth2/OAuth2.php	/^	protected $conf = array();$/;"	v
 conf	common/stem/local/oauth2/OAuth2Client.php	/^	protected $conf = array();$/;"	v
 conf_file	common/third/smarty/sysplugins/smarty_internal_compile_config_load.php	/^        $conf_file = $_attr['file'];$/;"	v
 config	api/stem/application/Bootstrap.php	/^        $config = Yaf\\Application::app()->getConfig()->get("mysql")->toArray();$/;"	v
+config	api/stem/application/plugins/PermissionController.php	/^        $config = Application::app()->getConfig('api');$/;"	v
 config	common/stem/local/db/MySQL.php	/^    protected static $config;$/;"	v
 config	common/stem/local/oauth2/OAuth2.php	/^	public function __construct(IOAuth2Storage $storage, $config = array()) {$/;"	v
 config	common/third/smarty/sysplugins/smarty_internal_config_file_compiler.php	/^        $this->config = $config;$/;"	v
@@ -2641,7 +2646,7 @@ parts	common/third/smarty/plugins/shared.mb_str_replace.php	/^            $parts
 parts	common/third/smarty/sysplugins/smarty_resource.php	/^        $parts = explode(':', $resource_name, 2);$/;"	v
 pass	common/third/smarty/plugins/function.fetch.php	/^                            $pass = $param_value;$/;"	v
 pass	common/third/smarty/plugins/function.fetch.php	/^                $pass = $uri_parts['pass'];$/;"	v
-path	api/stem/application/controllers/Download.php	/^        $path = "";$/;"	v
+path	api/stem/application/controllers/Download.php	/^        $path = "http:\/\/image.book.duyu.cc\/book\/chenglun.epub";$/;"	v
 path	common/third/smarty/sysplugins/smarty_internal_compile_private_print_expression.php	/^        $path = $compiler->smarty->loadPlugin($plugin_name, false);$/;"	v
 pathOne	api/stem/application/library/duyuu/image/ImageControl.php	/^        $pathOne = gmdate("Ym");$/;"	v
 pathTwo	api/stem/application/library/duyuu/image/ImageControl.php	/^        $pathTwo = gmdate('j');$/;"	v
@@ -2938,6 +2943,8 @@ rollback	common/stem/local/db/MySQL.php	/^    function rollback(){$/;"	f
 routeType	api/stem/application/library/duyuu/rest/Restful.php	/^    private static  $routeType = 'rewrite';$/;"	v
 router	api/stem/application/Bootstrap.php	/^        $router = $dispatcher->getRouter();$/;"	v
 routerShutdown	api/stem/application/plugins/OAUTH2.php	/^    public function routerShutdown(Request_Abstract $request, Response_Abstract $response) $/;"	f
+routerShutdown	api/stem/application/plugins/PermissionController.php	/^    public function routerShutdown(Request_Abstract $request, Response_Abstract $response) $/;"	f
+routerStartup	api/stem/application/plugins/OAUTH2.php	/^    public function routerStartup(Request_Abstract $request, Response_Abstract $response)$/;"	f
 row	api/stem/application/controllers/Test.php	/^            $row = $user->where($wherearr)->fetchRow();$/;"	v
 rows	common/third/smarty/plugins/function.html_table.php	/^        $rows = ceil($loop_count \/ $cols_count);$/;"	v
 rows	common/third/smarty/plugins/function.html_table.php	/^    $rows = 3;$/;"	v
@@ -3035,6 +3042,7 @@ separator	common/third/smarty/plugins/function.html_checkboxes.php	/^    $separa
 separator	common/third/smarty/plugins/function.html_radios.php	/^    $separator = '';$/;"	v
 session	api/stem/application/controllers/Test.php	/^                $session = Yaf\\Session::getInstance();$/;"	v
 session	api/stem/application/library/duyuu/dao/Members.php	/^            $session = \\Yaf\\Session::getInstance();$/;"	v
+session	api/stem/application/plugins/PermissionController.php	/^        $session = Session::getInstance();$/;"	v
 session	common/stem/local/oauth2/OAuth2Client.php	/^					$session = $this->validateSessionObject($session);$/;"	v
 session	common/stem/local/oauth2/OAuth2Client.php	/^					$session = array();$/;"	v
 session	common/stem/local/oauth2/OAuth2Client.php	/^				$session = $this->getSessionObject($access_token);$/;"	v
@@ -3061,7 +3069,7 @@ setCookieFromSession	common/stem/local/oauth2/OAuth2Client.php	/^	protected func
 setDebugTemplate	common/third/smarty/Smarty.class.php	/^    public function setDebugTemplate($tpl_name)$/;"	f
 setDefaultModifiers	common/third/smarty/Smarty.class.php	/^    public function setDefaultModifiers($modifiers)$/;"	f
 setDefaultOptions	common/stem/local/oauth2/OAuth2.php	/^	protected function setDefaultOptions() {$/;"	f
-setHeader	common/stem/local/download/Download.php	/^    public static function setHeader($content, $param)$/;"	f
+setHeader	common/stem/local/download/Download.php	/^    public static function setHeader($param)$/;"	f
 setHeaders	common/stem/local/rest/REST.php	/^    private function setHeaders()$/;"	f
 setHeight	common/stem/local/image/Images.php	/^    public function setHeight($size)$/;"	f
 setInstance	common/stem/local/db/Database.php	/^    static function setInstance($dbConfigName,$dbParams,$dbHasDaufalt = false){}$/;"	f

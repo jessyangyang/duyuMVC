@@ -35,6 +35,12 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
         $smarty = new SmartyAdapter(null, Yaf\Application::app()->getConfig()->smarty);
         $dispatcher->setView($smarty);
     }
+
+    public function _initPlugins(Dispatcher $dispatcher)
+    {
+        $dispatcher->registerPlugin(new PermissionControllerPlugin());
+        $dispatcher->registerPlugin(new OAUTH2Plugin());
+    }
 }
 
 ?>

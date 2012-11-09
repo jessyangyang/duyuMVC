@@ -5,6 +5,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 Bootstrap	api/stem/application/Bootstrap.php	/^class Bootstrap extends \\Yaf\\Bootstrap_Abstract $/;"	c
 _initConfig	api/stem/application/Bootstrap.php	/^    public function _initConfig(Dispatcher $dispatcher)$/;"	f
+_initPlugins	api/stem/application/Bootstrap.php	/^    public function _initPlugins(Dispatcher $dispatcher)$/;"	f
 _initRoute	api/stem/application/Bootstrap.php	/^    public function _initRoute(Dispatcher $dispatcher) {$/;"	f
 _initSmarty	api/stem/application/Bootstrap.php	/^    public function _initSmarty(Dispatcher $dispatcher)$/;"	f
 config	api/stem/application/Bootstrap.php	/^        $config = Yaf\\Application::app()->getConfig()->get("mysql")->toArray();$/;"	v
@@ -16,7 +17,7 @@ indexAction	api/stem/application/controllers/Api.php	/^    public function index
 DownloadController	api/stem/application/controllers/Download.php	/^class DownloadController extends \\Yaf\\Controller_Abstract $/;"	c
 bookAction	api/stem/application/controllers/Download.php	/^    public function bookAction($bid = 1) $/;"	f
 head	api/stem/application/controllers/Download.php	/^        $head = array($/;"	v
-path	api/stem/application/controllers/Download.php	/^        $path = "";$/;"	v
+path	api/stem/application/controllers/Download.php	/^        $path = "http:\/\/image.book.duyu.cc\/book\/chenglun.epub";$/;"	v
 IndexController	api/stem/application/controllers/Index.php	/^class IndexController extends \\Yaf\\Controller_Abstract $/;"	c
 indexAction	api/stem/application/controllers/Index.php	/^    public function indexAction() $/;"	f
 OAUTH2Controller	api/stem/application/controllers/OAUTH2.php	/^class OAUTH2Controller extends \\Yaf\\Controller_Abstract $/;"	c
@@ -271,7 +272,14 @@ restURL	api/stem/application/library/duyuu/rest/Restful.php	/^    public static 
 routeType	api/stem/application/library/duyuu/rest/Restful.php	/^    private static  $routeType = 'rewrite';$/;"	v
 OAUTH2Plugin	api/stem/application/plugins/OAUTH2.php	/^class OAUTH2Plugin extends Plugin_Abstract$/;"	c
 authorize	api/stem/application/plugins/OAUTH2.php	/^    public function authorize()$/;"	f
+checkHeader	api/stem/application/plugins/OAUTH2.php	/^    private function checkHeader()$/;"	f
 routerShutdown	api/stem/application/plugins/OAUTH2.php	/^    public function routerShutdown(Request_Abstract $request, Response_Abstract $response) $/;"	f
+routerStartup	api/stem/application/plugins/OAUTH2.php	/^    public function routerStartup(Request_Abstract $request, Response_Abstract $response)$/;"	f
+PermissionControllerPlugin	api/stem/application/plugins/PermissionController.php	/^class PermissionControllerPlugin extends Plugin_Abstract $/;"	c
+checkPermission	api/stem/application/plugins/PermissionController.php	/^    public function checkPermission(Request_Abstract $request, Response_Abstract $response)$/;"	f
+config	api/stem/application/plugins/PermissionController.php	/^        $config = Application::app()->getConfig('api');$/;"	v
+routerShutdown	api/stem/application/plugins/PermissionController.php	/^    public function routerShutdown(Request_Abstract $request, Response_Abstract $response) $/;"	f
+session	api/stem/application/plugins/PermissionController.php	/^        $session = Session::getInstance();$/;"	v
 AJAX_REQUEST	api/stem/main/index.php	/^define('AJAX_REQUEST', strtolower(getenv('HTTP_X_REQUESTED_WITH')) === 'xmlhttprequest');$/;"	d
 APPLICATION_PATH	api/stem/main/index.php	/^define("APPLICATION_PATH", realpath((phpversion() >= "5.3"? __DIR__: dirname(__FILE__)).'\/..\/'));$/;"	d
 BASE_PATH	api/stem/main/index.php	/^define("BASE_PATH", realpath((phpversion() >= "5.3"? __DIR__: dirname(__FILE__)).'\/..\/..\/'));$/;"	d
@@ -419,7 +427,7 @@ Download	common/stem/local/download/Download.php	/^class Download $/;"	c
 download	common/stem/local/download/Download.php	/^    public static function download($filePath, $params = false)$/;"	f
 key	common/stem/local/download/Download.php	/^            foreach ($params as $key => $value) {$/;"	v
 params	common/stem/local/download/Download.php	/^    public static function download($filePath, $params = false)$/;"	v
-setHeader	common/stem/local/download/Download.php	/^    public static function setHeader($content, $param)$/;"	f
+setHeader	common/stem/local/download/Download.php	/^    public static function setHeader($param)$/;"	f
 Exception	common/stem/local/exception/Exception.php	/^class Exception extends \\Exception $/;"	c
 MysqlConnectException	common/stem/local/exception/Exception.php	/^    public function MysqlConnectException($message) {$/;"	f
 __construct	common/stem/local/exception/Exception.php	/^     public function __construct($message, $code = 0, Exception $previous = null) {$/;"	f
