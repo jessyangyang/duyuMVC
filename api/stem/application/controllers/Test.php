@@ -40,8 +40,8 @@ class testController extends \Yaf\Controller_Abstract
             }
             else {
                 $arr = array(
-                    'email' => $data->getPost('email'),
-                    'username' => $data->getPost('username'),
+                    'email' => addslashes($data->getPost('email')),
+                    'username' => addslashes($data->getPost('username')),
                     'password' => md5(trim($data->getPost('password'))),
                     'published' => time(),
                     'role_id' => 3
@@ -130,8 +130,9 @@ class testController extends \Yaf\Controller_Abstract
             
             $file  = $data->getFiles();
             $image = new \duyuu\image\ImageControl();
+            $class = $data->getPost('type') ? $data->getPost('type') : 1;
 
-            $image->save($file['file']);
+            $image->save($file['file'],$class);
         }
 
         $display->assign('title', 'upload');

@@ -66,7 +66,7 @@ class Restful extends \local\rest\REST
 
     /**
     */
-    public function setData($key, $data)
+    public function assign($key, $data)
     {
         $this->responseData[$key] = $data;
     }

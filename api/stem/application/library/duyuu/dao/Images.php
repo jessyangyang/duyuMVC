@@ -81,5 +81,15 @@ class Images extends \local\db\ORM
 
     }
 
+    /**
+     * [getThumb description]
+     * @return [type] [description]
+     */
+    public static function getThumb()
+    {
+        $image = self::instance();
+        
+    }
+
 
 }

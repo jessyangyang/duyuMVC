@@ -12,7 +12,7 @@ namespace local\db;
 
 use local\db\MySQL;
 
-class ORM{
+class ORM extends MySQL{
 
     // Query params
     public $options = array();
@@ -383,6 +383,7 @@ class ORM{
         empty($tmpOption['order']) || $tmpSql.= ' ORDER BY '.$tmpOption['order'];
         empty($tmpOption['limit']) || $tmpSql.= ' LIMIT '.$tmpOption['limit'];
 
+        $this->joinTables = array();
         return self::$db->query($tmpSql);
     }
 

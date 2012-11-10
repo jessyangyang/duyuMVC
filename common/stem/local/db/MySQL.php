@@ -132,7 +132,7 @@ class MySQL extends Database
         $tmpNums = func_num_args();
         $tmpSql = array_shift($tmpParams);
         $hasArray = false;
-
+        
         // Query Database
         if ($tmpParams) {
             // Prepare in mysql > 5.0
@@ -227,17 +227,24 @@ class MySQL extends Database
     /**
      * Begin transaction
      */
-    function begin(){}
+    function begin(){
+        self::$db->autocommit(false);
+    }
 
     /**
      * Commit transaction
      */
-    function commit(){}
+    function commit(){
+        self::$db->commit();
+        self::$db->autocommit(true);
+    }
 
     /**
      * Rollback transaction 
      */
-    function rollback(){}
+    function rollback(){
+        self::$db->rollback();
+    }
 
 
     /**Debug output
