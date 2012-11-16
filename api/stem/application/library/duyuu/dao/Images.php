@@ -91,5 +91,23 @@ class Images extends \local\db\ORM
         
     }
 
+    /**
+     * [storeFiles description]
+     * @param  [type] $FILE  [description]
+     * @param  [type] $class [description]
+     * @return [type]        [description]
+     */
+    public static function storeFiles($FILE,$class)
+    {
+        $image = self::instance();
+
+        if ($FILE) {
+            $class = $class ? $class : 1;
+            $imageCon = new \duyuu\image\ImageControl();
+            return $imageCon->save($FILE,$class);
+        }
+        return false;
+    }
+
 
 }

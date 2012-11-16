@@ -29,7 +29,7 @@ class RegisterRest extends Restful{
         // userLogin
         self::regRestURL('userLogin','/api/user/login/:email/:password','user','login');
         // userRegister
-        self::regRestURL('userRegister','/api/user/register/:email/:name/:password','user','register');
+        self::regRestURL('userRegister','/api/user/register','user','register');
         // userLogout
         self::regRestURL('userLogout','/api/user/logout','user','logout');
         // userProfile

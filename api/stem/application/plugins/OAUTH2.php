@@ -30,11 +30,11 @@ class OAUTH2Plugin extends Plugin_Abstract
         $controller = $request->getControllerName();
         $action = $request->getActionName();
 
-        $restList = Restful::restURL();
-        if (!isset($_SERVER['HTTP_ACCESS_TOKEN']) and !isset($_SERVER['HTTP_DEVICE_ID'])) {
-            header("Location: /api/error");
-            exit();
-        }
+        $restList = Restful::$restURL;
+        // if (!isset($_SERVER['HTTP_ACCESS_TOKEN']) and !isset($_SERVER['HTTP_DEVICE_ID'])) {
+        //     header("Location: /api/error");
+        //     exit();
+        // }
     }
 
     public function authorize()

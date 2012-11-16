@@ -12,6 +12,8 @@
             <input type="text" name="username"/><br/>
             <label for="password">password</label>
             <input type="password" name="password"/><br/>
+            <label for="avatar">avatar</label>
+            <input type="file" name="avatar"/></br>
             <input type="submit" value="commit"/>
             <input type="hidden" name="state" value="reg"/>
         </form>

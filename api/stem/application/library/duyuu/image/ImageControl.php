@@ -68,6 +68,7 @@ class ImageControl extends \local\image\Images
             );
 
         $image->insert($imageParam);
+        return $image->insertId() ? $image->insertId() : 0;
 
     }
 

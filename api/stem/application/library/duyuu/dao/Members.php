@@ -35,6 +35,10 @@ class Members extends \local\db\ORM
             'type' => 'int',
             'default' => 0,
             'comment' => 'published'),
+        'avatar_id' => array(
+            'type' => 'int',
+            'default' => 0,
+            'comment' => 'avatar_id'),
         'role_id' => array(
             'type' => 'int',
             'default' => 0,
