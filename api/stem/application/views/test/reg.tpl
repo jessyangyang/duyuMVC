@@ -5,7 +5,7 @@
         <title>{$title}</title>
     </head>
     <body>
-        <form action="/api/test/reg" method="POST">
+        <form action="/api/test/reg" method="POST" enctype="multipart/form-data">
             <label for="email">email</label>
             <input type="text" name="email"/><br/>
             <label for="username">username</label>

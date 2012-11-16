@@ -9,6 +9,7 @@
  */
 
 use \duyuu\dao\Members;
+use \duyuu\dao\Images;
 
 class testController extends \Yaf\Controller_Abstract 
 {
@@ -39,11 +40,21 @@ class testController extends \Yaf\Controller_Abstract
 
             }
             else {
+                $image = Images::instance();
+
+                $file  = $data->getFiles();
+
+                echo "<pre>";
+                print_r($file);
+
+                $avatarId = $image->storeFiles($file['avatar'],2) ? $image->storeFiles($file['avatar'],2) : 0;
+
                 $arr = array(
                     'email' => addslashes($data->getPost('email')),
                     'username' => addslashes($data->getPost('username')),
                     'password' => md5(trim($data->getPost('password'))),
                     'published' => time(),
+                    'avatar_id' => $avatarId,
                     'role_id' => 3
                     );
                 if($user->insert($arr)) $message = "sussceful!!";

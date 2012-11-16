@@ -21,7 +21,7 @@ class UserController extends \Yaf\Controller_Abstract
         $data = $this->getRequest();
         $user = Members::getCurrentUser();
         $session = Session::getInstance();
-        
+
         $code = 201;
         $message = "invild!";
 
@@ -77,7 +77,11 @@ class UserController extends \Yaf\Controller_Abstract
 
             }
             else {
-                $avatarId = $image->storeFiles($file['avatar'],2) ? $image->storeFiles($file['avatar'],2) : 0;
+
+                $avatarId = $image->storeFiles($file['avatar'],2);
+                $avatarId = $avatarId ? $avatarId : 0;
+
+                echo $avatarId;
 
                if ($avatarId) {
                     $arr = array(
