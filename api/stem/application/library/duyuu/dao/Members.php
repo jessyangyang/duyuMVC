@@ -63,8 +63,8 @@ class Members extends \local\db\ORM
     {
         if (!isset(self::$instance)) {
             $session = \Yaf\Session::getInstance();
-            if ($session->has('current_id')) {
-                $member = self::getByID($session->current_id);
+            if ($session->has('authToken')) {
+                $member = self::getByID($session->authToken);
                 self::$instance =  $member;
             }
         }

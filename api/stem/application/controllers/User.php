@@ -15,8 +15,43 @@ use \Yaf\Session;
 
 class UserController extends \Yaf\Controller_Abstract 
 {
-    public function loginAction($email,$password)
+    public function loginAction()
     {
+        $rest = Restful::instance();
+        $data = $this->getRequest();
+        $user = Members::getCurrentUser();
+        $session = Session::getInstance();
+        
+        $code = 201;
+        $message = "invild!";
+
+        if (isset($user->id))
+        {
+            $code = 302;
+            $message = "already login.";
+        }
+        elseif ($data->isPost()) 
+        {
+            $user = Members::instance();
+
+            $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";
+            $row = $user->where($wherearr)->fetchRow();
+
+            if ($row) {
+                $session->set('authToken',md5($row['id']));
+
+                $code = 200;
+                $message = "ok";
+                header("Auth-Token:".$session->get('authToken'));
+            }
+        }
+
+
+        $rest->assign('code',$code);
+        $rest->assign('message',$message);
+        $rest->assign('authToken',$session->get('authToken') ? $session->get('authToken') : "");
+
+        $rest->response();
     }
 
     public function registerAction()
