@@ -19,11 +19,9 @@ class ImageControl extends \local\image\Images
         // file_exists($file) and $this->_file = $file;
     }
 
-    public function save($FILE, $class = 1, $thumb = false)
+    public function save($FILE, $uid, $class = 1, $path = "image", $thumb = false)
     {
-        $user = \duyuu\dao\Members::getCurrentUser();
-
-        if (!$user)  return false;
+        if (!$uid)  return false;
 
         $FILE['size'] = $FILE['size'] ? $FILE['size'] : "";
 
@@ -39,10 +37,10 @@ class ImageControl extends \local\image\Images
         }
 
         // Get file path
-        if (!$this->_file = $this->getFilePath($FILE['name'],true)) {
+        if (!$this->_file = $this->getFilePath($FILE['name'],$uid,true, $path)) {
             # code...
         }
-
+        
         // Save to server 
         if ($this->upload($FILE['tmp_name'])) {
             # code...
@@ -56,7 +54,7 @@ class ImageControl extends \local\image\Images
         $image = new \duyuu\dao\Images();
 
         $imageParam = array(
-            'uid' => $user->id,
+            'uid' => $uid,
             'class' => $class,
             'title' => $FILE['name'],
             'filename' => $FILE['name'],
@@ -79,47 +77,48 @@ class ImageControl extends \local\image\Images
      * @param  string  $type     [$type = {'head','image','book'}
      * @return [type]            [description]
      */
-    public function getFilePath($fileType,$mkdir = false)
+    public function getFilePath($file, $id, $mkdir = false, $path = "image")
     {
         $imagePath = \Yaf\Application::app()->getConfig()->toArray();
         $pathOne = gmdate("Ym");
         $pathTwo = gmdate('j');
 
         $common =  \Yaf\Registry::get('common');
-        $user = \duyuu\dao\Members::getCurrentUser();
 
-        if (!$user) return false;
-        $filePath = $user->id."_".$common->random(4)."$fileType";
+        if (!$id) return false;
+        $fileName = $id ."_".$common->random(4).urldecode($file);
         
         if ($mkdir) {
-            $newFilePath = $imagePath['path']['image'].$pathOne;
+            $newFilePath = BASE_PATH . '/files' . $imagePath['path'][$path].$pathOne;
+
             if (!is_dir($newFilePath)) {
                 if (!mkdir($newFilePath,0755)) {
-                    return $filePath;
+                    return $fileName;
                 }
             }
 
             $newFilePath .= "/".$pathTwo;
             if (!is_dir($newFilePath)) {
                 if (!mkdir($newFilePath)) {
-                    return $pathOne . "/" . $filePath;
+                    return $pathOne . "/" . $fileName;
                 }
             }
 
         }
-        return $imagePath['path']['image'].$pathOne."/".$pathTwo."/".$filePath;
+
+        return $imagePath['path'][$path].$pathOne."/".$pathTwo."/".$fileName;
     }
 
     public function upload($tmpName)
     {
         if ($this->_file) {
-            if (copy($tmpName,$this->_file)) {
+            if (copy($tmpName,BASE_PATH . '/files' . $this->_file)) {
                 unlink($tmpName);
             }
-            elseif (function_exists('move_uploaded_file') and move_uploaded_file($tmpName, $this->_file)) {
+            elseif (function_exists('move_uploaded_file') and move_uploaded_file($tmpName, BASE_PATH . '/files' . $this->_file)) {
                 # code...
             }
-            elseif (rename($tmpName, $this->_file)) {
+            elseif (rename($tmpName, BASE_PATH . '/files' . $this->_file)) {
                 # code...
             }
             else {

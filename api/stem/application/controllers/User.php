@@ -9,6 +9,7 @@
 */
 
 use \duyuu\dao\Members;
+use \duyuu\dao\MemberInfo;
 use \duyuu\dao\Images;
 use \duyuu\rest\Restful;
 use \Yaf\Session;
@@ -38,6 +39,7 @@ class UserController extends \Yaf\Controller_Abstract
             $row = $user->where($wherearr)->fetchRow();
 
             if ($row) {
+                $session->set('current_id',md5($row['id']));
                 $session->set('authToken',md5($row['id']));
 
                 $code = 200;
@@ -68,36 +70,48 @@ class UserController extends \Yaf\Controller_Abstract
         $session = Session::getInstance();
 
         if ($data->isPost()) {
-            $file  = $data->getFiles();
+            $file = $data->getFiles();
 
-            if($user->where("email='".$data->getPost('email')."'")->fetchRow()) 
+            if($user->isRegistered($data->getPost('email'))) 
             {
                 $code = 204;
                 $message = "already register!!";
 
             }
-            else {
-                $avatarId = $image->storeFiles($file['avatar'],2) ? $image->storeFiles($file['avatar'],2) : 0;
+            else 
+            {
 
-               if ($avatarId) {
-                    $arr = array(
+                $arr = array(
                         'email' => addslashes($data->getPost('email')),
                         'username' => addslashes($data->getPost('username')),
                         'password' => md5(trim($data->getPost('password'))),
                         'published' => time(),
-                        'avatar_id' => $avatarId,
-                        'role_id' => 3
-                        );
-                    if($user->insert($arr)) {
-                        $image->commit();
+                        'role_id' => 4
+                    );
+                
+                if ($userId = $user->insert($arr)) {
+
+                    $file  = $data->getFiles();
+                    $avatarId = $image->storeFiles($file['avatar'],$userId , 2,'head');
+
+                    $avatarId = $avatarId ? $avatarId : 0;
+
+                    $memberInfo = MemberInfo::instance();
+
+                    $infoArr = array(
+                        'id' => $userId,
+                        'avatar_id' => $avatarId);
+
+                    if ($memberInfo->insert($infoArr);) {
                         $message = "sussceful!!";
-                        $session->set('authToken',md5($avatarId));
+                        $session->set('current_id',$userId);
+                        $session->set('authToken',md5($userId));
+
                         header("Auth-Token:".$session->get('authToken'));
                     }
+
                 }
             }
-
-
         }
 
         $rest->assign('code',$code);

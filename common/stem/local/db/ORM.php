@@ -273,7 +273,13 @@ class ORM extends MySQL{
 
             $sql = "INSERT INTO $this->table($tmpField) VALUES($tmpValue)";
             self::$db->query($sql);
-            return self::$db->insertID();
+
+            if (!self::$db->error() and self::$db->insertId() > 0) {
+               return self::$db->insertId();
+            }
+            elseif (!self::$db->error()) {
+                return true;
+            }
         }
         return 0;
     }

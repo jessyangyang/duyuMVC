@@ -49,10 +49,24 @@ class Members extends \local\db\ORM
 
     protected static $instance;
 
+    /**
+     * Instance Members
+     * @param  boolean $id | the primaryKey
+     * @return Object with self
+     */
+    public static function instance($id = false)
+    {
+        return self::$instance ? self::$instance : new Members($id);
+    }
+
+    /**
+     * [getByID description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public static function getByID($id)
     {
-        $member = new Members($id);
-        return $member;
+        return self::instance($id);
     }
 
     /**
@@ -63,16 +77,34 @@ class Members extends \local\db\ORM
     {
         if (!isset(self::$instance)) {
             $session = \Yaf\Session::getInstance();
-            if ($session->has('authToken')) {
-                $member = self::getByID($session->authToken);
+            if ($session->has('current_id')) {
+                $member = self::getByID($session->current_id);
                 self::$instance =  $member;
             }
         }
         return self::$instance;
     }
 
+    /**
+     * Check register with the user.
+     * @param  [type]  $email [description]
+     * @return boolean | int  return primary_key ,or return false
+     */
+    public function isRegistered($email)
+    {
+        $email = $this->escapeString($email);
+        if ($data = $this->field('id')->where("email='" . $email ."'")->group("published")->fetchRow()) return $data;
+        return false;
+    }
+
+
     public function __get($fieldName)
     {
         return $this->$fieldName;
+    }
+
+    public function __set($fieldName, $value)
+    {
+        $this->$fieldName = $value;
     }
 }

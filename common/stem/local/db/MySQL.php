@@ -190,13 +190,17 @@ class MySQL extends Database
     * Mysql Exception Error
     * @return exception object
     */
-    function error() {}
+    function error() {
+        return self::$db->error;
+    }
 
     /**
     * Mysql Exception Errno
     * @return 
     */
-    function errno() {}
+    function errno() {
+        return self::$db->errno;
+    }
 
     /**
     * Close Mysql Connect
