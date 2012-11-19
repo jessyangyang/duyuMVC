@@ -122,7 +122,23 @@ class UserController extends \Yaf\Controller_Abstract
 
     public function logoutAction()
     {
+        $rest = Restful::instance();
+        $session = Session::getInstance();
 
+        $code = 201;
+        $message = "No Data";
+
+        if ($session->isset("current_id")) {
+            $session->__unset('current_id');
+            $session->__unset('authToken');
+
+            $code = 200;
+            $message = "ok";
+        }
+
+        $rest->assign('code',$code);
+        $rest->assign('message',$message);
+        $rest->response();
     }
 
     public function profileAction()
