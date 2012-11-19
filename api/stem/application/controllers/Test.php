@@ -9,7 +9,10 @@
  */
 
 use \duyuu\dao\Members;
+use \duyuu\dao\MemberInfo;
 use \duyuu\dao\Images;
+use \duyuu\rest\Restful;
+use \Yaf\Session;
 
 class testController extends \Yaf\Controller_Abstract 
 {
@@ -30,34 +33,63 @@ class testController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
         $user = new \duyuu\dao\Members();
+        $session = Session::getInstance();
+
+        $user = Members::instance();
+        $image = Images::instance();
+
+        $code = 201;
+        $message = "No Data";
+        $session = Session::getInstance();
 
         $data = $this->getRequest();
         $message = "invild!";
         if ($data->isPost() and $data->getPost('state') == 'reg') {
-            if($user->where("email='".$data->getPost('email')."'")->fetchRow()) 
+            if($user->isRegistered($data->getPost('email'))) 
             {
                 $message = "already register!!";
 
             }
             else {
-                $image = Images::instance();
-
-                $file  = $data->getFiles();
-
-                echo "<pre>";
-                print_r($file);
-
-                $avatarId = $image->storeFiles($file['avatar'],2) ? $image->storeFiles($file['avatar'],2) : 0;
-
+                
                 $arr = array(
-                    'email' => addslashes($data->getPost('email')),
-                    'username' => addslashes($data->getPost('username')),
-                    'password' => md5(trim($data->getPost('password'))),
-                    'published' => time(),
-                    'avatar_id' => $avatarId,
-                    'role_id' => 3
+                        'email' => addslashes($data->getPost('email')),
+                        'username' => addslashes($data->getPost('username')),
+                        'password' => md5(trim($data->getPost('password'))),
+                        'published' => time(),
+                        'role_id' => 4
                     );
-                if($user->insert($arr)) $message = "sussceful!!";
+                
+                if ($userId = $user->insert($arr)) {
+
+                    $file  = $data->getFiles();
+
+                    
+                    $avatarId = $image->storeFiles($file['avatar'],$userId , 2,'head');
+
+                    $avatarId = $avatarId ? $avatarId : 0;
+
+                    
+
+                    $memberInfo = MemberInfo::instance();
+                    
+
+                    $infoArr = array(
+                        'id' => $userId,
+                        'avatar_id' => $avatarId);
+
+                    $infoId = $memberInfo->insert($infoArr);
+
+                    if ($infoId) {
+                        $message = "sussceful!!";
+                        $session->set('current_id',$userId);
+                        $session->set('authToken',md5($userId));
+
+                        header("Auth-Token:".$session->get('authToken'));
+                    }
+                    
+
+                }
             }
         }
 
