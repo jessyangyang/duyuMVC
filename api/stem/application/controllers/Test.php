@@ -137,20 +137,28 @@ class testController extends \Yaf\Controller_Abstract
         $data = $this->getRequest();
         if ($data->isPost() and $data->getPost('state') == 'login') {
             $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";
-            $user = new Members();
+            $user = Members::instance();
             $row = $user->where($wherearr)->fetchRow();
+
             if ($row) {
                 $session = Yaf\Session::getInstance();
                 $session->set('current_id',$row['id']);
-                header("Location:/api/test/addClient");
+                // header("Location:/api/test/addClient");
+                $session->set('authToken',md5($row['id']));
+                header("Auth-Token:".$session->get('authToken'));
             }
         }
 
-        $user = \duyuu\dao\Members::getCurrentUser();
-        if ($user) {
+        $userInfo = Members::getCurrentUser();
+
+        if ($userInfo) {
             $display->assign('user',array(
-                'id' => $user->id,
-                'email' => $user->email));
+                'id' => $userInfo->id,
+                'email' => $userInfo->email));
+        }
+        else
+        {
+            $display->assign('user',"");
         }
         
         $display->assign('title','login');

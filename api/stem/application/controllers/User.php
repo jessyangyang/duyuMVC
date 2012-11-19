@@ -39,7 +39,7 @@ class UserController extends \Yaf\Controller_Abstract
             $row = $user->where($wherearr)->fetchRow();
 
             if ($row) {
-                $session->set('current_id',md5($row['id']));
+                $session->set('current_id',$row['id']);
                 $session->set('authToken',md5($row['id']));
 
                 $code = 200;
@@ -143,7 +143,9 @@ class UserController extends \Yaf\Controller_Abstract
 
     public function profileAction()
     {
+        $rest = Restful::instance();
 
+        $rest->response();
     }
 }
 ?>

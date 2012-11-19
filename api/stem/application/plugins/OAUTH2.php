@@ -12,6 +12,7 @@ use \Yaf\Request_Abstract;
 use \Yaf\Response_Abstract;
 use \Yaf\Plugin_Abstract;
 use \duyuu\rest\Restful;
+use \Yaf\Session;
 
 class OAUTH2Plugin extends Plugin_Abstract
 {
@@ -35,6 +36,22 @@ class OAUTH2Plugin extends Plugin_Abstract
         if (!isset($_SERVER['HTTP_ACCESS_TOKEN']) and !isset($_SERVER['HTTP_DEVICE_ID'])) {
             // header("Location: /api/error");
             // exit();
+        }
+
+        if (isset($_SERVER['HTTP_AUTH_TOKEN'])) {
+
+            echo "asdfa";
+            $authToken = $_SERVER['HTTP_AUTH_TOKEN'];
+
+            $session = Session::getInstance();
+
+            if ($session->__isset("authToken") and $session->get('authToken') != trim($authToken)) {
+                return;
+            }
+            else
+            {
+                header("Auth-Token:".$session->get('authToken'));
+            }
         }
     }
 
