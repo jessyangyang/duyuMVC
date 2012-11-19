@@ -40,7 +40,6 @@ class OAUTH2Plugin extends Plugin_Abstract
 
         if (isset($_SERVER['HTTP_AUTH_TOKEN'])) {
 
-            echo "asdfa";
             $authToken = $_SERVER['HTTP_AUTH_TOKEN'];
 
             $session = Session::getInstance();
