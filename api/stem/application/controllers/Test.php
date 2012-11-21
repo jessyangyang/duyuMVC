@@ -82,7 +82,7 @@ class testController extends \Yaf\Controller_Abstract
 
                     if ($infoId) {
                         $code = 200;
-                        $message = "sussceful!!";
+                        $message = "注册成功!!";
                         $session->set('current_id',$userId);
                         $session->set('authToken',md5($userId));
 
