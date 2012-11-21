@@ -81,6 +81,7 @@ class testController extends \Yaf\Controller_Abstract
                     $infoId = $memberInfo->insert($infoArr);
 
                     if ($infoId) {
+                        $code = 200;
                         $message = "sussceful!!";
                         $session->set('current_id',$userId);
                         $session->set('authToken',md5($userId));
