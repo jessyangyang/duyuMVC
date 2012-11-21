@@ -101,7 +101,7 @@ class UserController extends \Yaf\Controller_Abstract
                         'id' => $userId,
                         'avatar_id' => $avatarId);
 
-                    if ($memberInfo->insert($infoArr);) {
+                    if ($memberInfo->insert($infoArr)) {
                         $message = "sussceful!!";
                         $session->set('current_id',$userId);
                         $session->set('authToken',md5($userId));
