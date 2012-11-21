@@ -11,6 +11,7 @@
 use \duyuu\dao\Members;
 use \duyuu\dao\MemberInfo;
 use \duyuu\dao\Images;
+use \duyuu\dao\OAuthAccessTokens;
 use \duyuu\rest\Restful;
 use \Yaf\Session;
 
@@ -63,13 +64,11 @@ class testController extends \Yaf\Controller_Abstract
                 if ($userId = $user->insert($arr)) {
 
                     $file  = $data->getFiles();
-
                     
                     $avatarId = $image->storeFiles($file['avatar'],$userId , 2,'head');
 
                     $avatarId = $avatarId ? $avatarId : 0;
 
-                    
 
                     $memberInfo = MemberInfo::instance();
                     
@@ -142,10 +141,24 @@ class testController extends \Yaf\Controller_Abstract
             $row = $user->where($wherearr)->fetchRow();
 
             if ($row) {
-                $session = Yaf\Session::getInstance();
-                $session->set('current_id',$row['id']);
-                // header("Location:/api/test/addClient");
-                $session->set('authToken',md5($row['id']));
+                $auth = OAuthAccessTokens::instance();
+                $session = Session::getInstance();
+                if ($state = $auth->hasArrow(md5($row['id']))) {
+                    $session->set('current_id',$state['user_id']);
+                    $session->set('authToken',$state['oauth_token']);
+                }
+                else
+                {
+                    $authArr = array(
+                            'oauth_token' => md5($row['id']),
+                            'client_id' => $row['id'],
+                            'user_id' => $row['id'],
+                            'expires' => strtotime("next Monday"));
+                    $auth->insert($authArr);
+                    $session->set('current_id',$row['id']);
+                    $session->set('authToken',md5($row['id']));
+                }
+
                 header("Auth-Token:".$session->get('authToken'));
             }
         }

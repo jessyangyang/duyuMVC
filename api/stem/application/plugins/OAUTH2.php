@@ -12,6 +12,7 @@ use \Yaf\Request_Abstract;
 use \Yaf\Response_Abstract;
 use \Yaf\Plugin_Abstract;
 use \duyuu\rest\Restful;
+use \duyuu\dao\OAuthAccessTokens;
 use \Yaf\Session;
 
 class OAUTH2Plugin extends Plugin_Abstract
@@ -43,13 +44,11 @@ class OAUTH2Plugin extends Plugin_Abstract
             $authToken = $_SERVER['HTTP_AUTH_TOKEN'];
 
             $session = Session::getInstance();
-
-            if ($session->__isset("authToken") and $session->get('authToken') != trim($authToken)) {
-                return;
-            }
-            else
-            {
-                header("Auth-Token:".$session->get('authToken'));
+            $auth = OAuthAccessTokens::instance();
+            if ($state = $auth->hasArrow($authToken)) {
+                    $session->set('current_id',$state['user_id']);
+                    $session->set('authToken',$state['oauth_token']);
+                    header("Auth-Token:".$state['oauth_token']);
             }
         }
     }

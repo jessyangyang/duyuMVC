@@ -11,6 +11,7 @@
 use \duyuu\dao\Members;
 use \duyuu\dao\MemberInfo;
 use \duyuu\dao\Images;
+use \duyuu\dao\OAuthAccessTokens;
 use \duyuu\rest\Restful;
 use \Yaf\Session;
 
@@ -28,7 +29,7 @@ class UserController extends \Yaf\Controller_Abstract
 
         if (isset($user->id))
         {
-            $code = 302;
+            $code = 200;
             $message = "already login.";
         }
         elseif ($data->isPost()) 
@@ -39,8 +40,23 @@ class UserController extends \Yaf\Controller_Abstract
             $row = $user->where($wherearr)->fetchRow();
 
             if ($row) {
-                $session->set('current_id',$row['id']);
-                $session->set('authToken',md5($row['id']));
+                $auth = OAuthAccessTokens::instance();
+
+                if ($state = $auth->hasArrow(md5($row['id']))) {
+                    $session->set('current_id',$state['user_id']);
+                    $session->set('authToken',$state['oauth_token']);
+                }
+                else
+                {
+                    $authArr = array(
+                            'oauth_token' => md5($row['id']),
+                            'client_id' => $row['id'],
+                            'user_id' => $row['id'],
+                            'expires' => strtotime("next Monday"));
+                    $auth->insert($authArr);
+                    $session->set('current_id',$row['id']);
+                    $session->set('authToken',md5($row['id']));
+                }
 
                 $code = 200;
                 $message = "ok";
@@ -103,6 +119,15 @@ class UserController extends \Yaf\Controller_Abstract
 
                     if ($memberInfo->insert($infoArr)) {
                         $message = "sussceful!!";
+
+                        $auth = OAuthAccessTokens::instance();
+                        
+                        $authArr = array(
+                            'oauth_token' => md5($userId),
+                            'client_id' => $userId,
+                            'user_id' => $userId,
+                            'expires' => strtotime("next Monday"));
+                        $auth->insert($authArr);
                         $session->set('current_id',$userId);
                         $session->set('authToken',md5($userId));
 
