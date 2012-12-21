@@ -20,7 +20,7 @@ class DownloadController extends \Yaf\Controller_Abstract
             "Content-disposition:attachment;filename='". time() .".epub'",
             'Content-Transfer-Encoding: binary');
 
-        $path = BASE_PATH."/files/book/chenglun.epub";
+        $path = BASE_PATH."/files/book/guidang.epub";
 
         print_r($path);
 
