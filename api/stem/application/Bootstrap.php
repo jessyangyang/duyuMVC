@@ -11,6 +11,7 @@
 use \Yaf\Dispatcher;
 use \local\db\MySQL;
 use \duyuu\rest\RegisterRest;
+use \duyuu\Exception;
 use \local\template\SmartyAdapter;
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract 
@@ -28,7 +29,11 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
         $router->addConfig(new Yaf\Config\Simple($rest));
     }
 
-
+    public function _initException(Dispatcher $dispatcher)
+    {
+        // $exception = new Exception();
+        // $dispatcher->setErrorHandler($exception->exceptionMessage());
+    }
 
     public function _initSmarty(Dispatcher $dispatcher)
     {
