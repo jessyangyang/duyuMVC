@@ -73,7 +73,7 @@ class Books extends \local\db\ORM
         $books = self::instance();
         $table = $this->table;
 
-        $list =  $books->field("books.bid,books.cid,i.path as cover,books.title,books.author,bi.apple_price as price")->joinQuery('book_category as c',"c.cid=$table.cid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->joinQuery('book_info as bi','bi.bid=books.bid')->limit(10)->fetchList();
+        $list =  $books->field("books.bid,books.cid,i.path as cover,books.title,books.author,bi.apple_price as price")->joinQuery('book_category as c',"c.cid=$table.cid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->joinQuery('book_info as bi','bi.bid=books.bid')->where("p.type = 1")->limit(10)->fetchList();
         
         if (is_array($list)) {
             foreach ($list as $key => $value) {
