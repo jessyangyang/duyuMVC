@@ -202,6 +202,31 @@ class testController extends \Yaf\Controller_Abstract
 
         $display->assign('title', 'upload');
     }
+
+    public function addCommentAction()
+    {
+        $display = $this->getView();
+
+        $data = $this->getRequest();
+
+        $userInfo = Members::getCurrentUser();
+
+        if ($userInfo) {
+            $display->assign('user',array(
+                'id' => $userInfo->id,
+                'email' => $userInfo->email));
+        }
+        else
+        {
+            $display->assign('user',"");
+        }
+
+        if ($data->isPost() and $data->getPost('state') == 'comment') {
+            
+        }
+
+        $display->assign('title','comments');
+    }
 }
 
 ?>

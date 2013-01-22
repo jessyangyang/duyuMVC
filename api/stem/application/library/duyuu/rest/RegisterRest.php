@@ -22,6 +22,7 @@ class RegisterRest extends Restful{
         self::regRestURL('testAdd','/api/test/addClient','test','addClient');
         self::regRestURL('testAuth','/api/test/auth','test','auth');
         self::regRestURL('testAuth','/api/test/upload','test','upload');
+        self::regRestURL('testAuth','/api/test/addComment','test','addComment');
 
         /**User
         ************************/
@@ -63,6 +64,15 @@ class RegisterRest extends Restful{
 
         // store Download Book
         self::regRestURL('storeDownLoadBook','/api/store/download/book/:bid','Download','book');
+
+        /** Comments
+        *************************/
+
+        // book Comments List
+        self::regRestURL('storeBookCommentList','/api/comments/bid/:bid/:limit/:page','Comments','bookCommentList');
+
+        // book Comments list for user
+        self::regRestURL('storeBookCommentListForUser','/api/comments/uid/:uid/:limit/:page','Comments','bookCommentListForUser');
 
         /** Payment
         *************************/
