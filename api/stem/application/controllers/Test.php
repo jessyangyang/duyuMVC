@@ -11,6 +11,7 @@
 use \duyuu\dao\Members;
 use \duyuu\dao\MemberInfo;
 use \duyuu\dao\Images;
+use \duyuu\dao\Comments;
 use \duyuu\dao\OAuthAccessTokens;
 use \duyuu\rest\Restful;
 use \Yaf\Session;
@@ -209,7 +210,10 @@ class testController extends \Yaf\Controller_Abstract
 
         $data = $this->getRequest();
 
+        $comment = Comments::instance();
         $userInfo = Members::getCurrentUser();
+
+        $message = "false";
 
         if ($userInfo) {
             $display->assign('user',array(
@@ -222,9 +226,9 @@ class testController extends \Yaf\Controller_Abstract
         }
 
         if ($data->isPost() and $data->getPost('state') == 'comment') {
-            
+            if($comment->addComment($data)) $message = "true";
         }
-
+        $display->assign('message',$message);
         $display->assign('title','comments');
     }
 }

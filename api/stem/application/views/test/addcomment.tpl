@@ -20,6 +20,6 @@
             <input type="submit" value="commit"/>
             <input type="hidden" name="state" value="comment"/>
         </form>
-        <h3></h3>
+        <h3>{$message}</h3>
     </body>
 </html>

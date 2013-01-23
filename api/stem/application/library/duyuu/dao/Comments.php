@@ -68,6 +68,14 @@ class Comments extends \local\db\ORM
         return self::$instance ? self::$instance : new Comments($key);
     }
 
+    /**
+     * Return the comment list
+     *
+     * @param Integer $key , post id
+     * @param Integer $limit , 
+     * @param Integer $page
+     * @return Array 
+     */
     public function getCommentList($key,$limit = 10,$page = 1)
     {
         $comment = self::instance();
@@ -99,6 +107,41 @@ class Comments extends \local\db\ORM
         {
             return "";
         }
+    }
+
+    /**
+     * Add Comment
+     *
+     * @param Array 
+     * @return Boolean , if insert complete,return true
+     */
+    public function addComment($request)
+    {
+        $comment = self::instance();
+        $user = Members::getCurrentUser();
+
+        if ($request and $user) {
+            $data = array(
+                'post_id' => $request->getPost('post_id'),
+                'type' => $request->getPost('type'),
+                'uid' => $user->id,
+                'title' => $request->getPost('title'),
+                'content' => $request->getPost('content'),
+                'ip' => $request->getPost('ip'),
+                'published' => START_TIME,
+                'parent' => getPost('parent'));
+
+        }
+        if ($comment->insert($data)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function deleteComment()
+    {
+
     }
 
     public function getCommentListForUser()

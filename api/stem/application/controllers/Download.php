@@ -22,7 +22,7 @@ class DownloadController extends \Yaf\Controller_Abstract
 
         $path = BASE_PATH."/files/book/guidang.epub";
 
-        print_r($path);
+        // print_r($path);
 
         Download::download($path,$head);
     }

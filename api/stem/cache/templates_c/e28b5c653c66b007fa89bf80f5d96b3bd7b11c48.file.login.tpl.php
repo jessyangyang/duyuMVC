@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.12, created on 2013-01-22 21:47:55
+<?php /* Smarty version Smarty-3.1.12, created on 2013-01-23 11:36:37
          compiled from "/home/wwwroot/duyuMVC/api/stem/application/views/test/login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:170849326550a9a3dc2089e6-64393355%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e28b5c653c66b007fa89bf80f5d96b3bd7b11c48' => 
     array (
       0 => '/home/wwwroot/duyuMVC/api/stem/application/views/test/login.tpl',
-      1 => 1358861209,
+      1 => 1358907390,
       2 => 'file',
     ),
   ),
