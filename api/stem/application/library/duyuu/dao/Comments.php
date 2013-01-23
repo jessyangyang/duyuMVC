@@ -121,15 +121,16 @@ class Comments extends \local\db\ORM
         $user = Members::getCurrentUser();
 
         if ($request and $user) {
+            $common =  \Yaf\Registry::get('common');
             $data = array(
                 'post_id' => $request->getPost('post_id'),
                 'type' => $request->getPost('type'),
                 'uid' => $user->id,
                 'title' => $request->getPost('title'),
                 'content' => $request->getPost('content'),
-                'ip' => $request->getPost('ip'),
+                'ip' => $common->ip(),
                 'published' => START_TIME,
-                'parent' => getPost('parent'));
+                'parent' => $request->getPost('parent'));
 
         }
         if ($comment->insert($data)) {
