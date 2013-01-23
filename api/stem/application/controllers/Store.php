@@ -36,7 +36,7 @@ class StoreController extends \Yaf\Controller_Abstract
         $rest->response();
     }
 
-    public function topAction()
+    public function topAction($sortID = 1)
     {
         $rest = Restful::instance();
         $book = Books::instance();
@@ -44,9 +44,23 @@ class StoreController extends \Yaf\Controller_Abstract
         $code = 200;
         $message = "ok";
 
+        switch ($sortID) {
+            case '1':
+                # code...
+                break;
+            case '2':
+                break;
+
+            case '3':
+                break;
+            default:
+                # code...
+                break;
+        }
+
         $rest->assign('code',$code);
         $rest->assign('message',$message);
-        $rest->assign('topList',$book->topList());
+        $rest->assign('TopList',$book->topList());
 
         $rest->response();
     }

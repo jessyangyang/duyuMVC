@@ -50,7 +50,7 @@ class RegisterRest extends Restful{
         // store recommond books
         self::regRestURL('storeIndexRecommend','/api/store/recommend','store','recommend');
         // store top list
-        self::regRestURL('storeTopList','/api/store/top','store','top');
+        self::regRestURL('storeTopList','/api/store/top/:sortID','store','top');
 
         // store The Book of category
         self::regRestURL('storeCategory','/api/store/category','store','category');

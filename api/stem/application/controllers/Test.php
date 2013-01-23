@@ -11,6 +11,7 @@
 use \duyuu\dao\Members;
 use \duyuu\dao\MemberInfo;
 use \duyuu\dao\Images;
+use \duyuu\dao\OAuthAccessTokens;
 use \duyuu\rest\Restful;
 use \Yaf\Session;
 
@@ -63,13 +64,11 @@ class testController extends \Yaf\Controller_Abstract
                 if ($userId = $user->insert($arr)) {
 
                     $file  = $data->getFiles();
-
                     
                     $avatarId = $image->storeFiles($file['avatar'],$userId , 2,'head');
 
                     $avatarId = $avatarId ? $avatarId : 0;
 
-                    
 
                     $memberInfo = MemberInfo::instance();
                     
@@ -81,7 +80,8 @@ class testController extends \Yaf\Controller_Abstract
                     $infoId = $memberInfo->insert($infoArr);
 
                     if ($infoId) {
-                        $message = "sussceful!!";
+                        $code = 200;
+                        $message = "注册成功!!";
                         $session->set('current_id',$userId);
                         $session->set('authToken',md5($userId));
 
@@ -137,20 +137,42 @@ class testController extends \Yaf\Controller_Abstract
         $data = $this->getRequest();
         if ($data->isPost() and $data->getPost('state') == 'login') {
             $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";
-            $user = new Members();
+            $user = Members::instance();
             $row = $user->where($wherearr)->fetchRow();
+
             if ($row) {
-                $session = Yaf\Session::getInstance();
-                $session->set('current_id',$row['id']);
-                header("Location:/api/test/addClient");
+                $auth = OAuthAccessTokens::instance();
+                $session = Session::getInstance();
+                if ($state = $auth->hasArrow(md5($row['id']))) {
+                    $session->set('current_id',$state['user_id']);
+                    $session->set('authToken',$state['oauth_token']);
+                }
+                else
+                {
+                    $authArr = array(
+                            'oauth_token' => md5($row['id']),
+                            'client_id' => $row['id'],
+                            'user_id' => $row['id'],
+                            'expires' => strtotime("next Monday"));
+                    $auth->insert($authArr);
+                    $session->set('current_id',$row['id']);
+                    $session->set('authToken',md5($row['id']));
+                }
+
+                header("Auth-Token:".$session->get('authToken'));
             }
         }
 
-        $user = \duyuu\dao\Members::getCurrentUser();
-        if ($user) {
+        $userInfo = Members::getCurrentUser();
+
+        if ($userInfo) {
             $display->assign('user',array(
-                'id' => $user->id,
-                'email' => $user->email));
+                'id' => $userInfo->id,
+                'email' => $userInfo->email));
+        }
+        else
+        {
+            $display->assign('user',"");
         }
         
         $display->assign('title','login');
