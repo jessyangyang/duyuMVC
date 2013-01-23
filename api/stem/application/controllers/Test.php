@@ -231,6 +231,7 @@ class testController extends \Yaf\Controller_Abstract
         $display->assign('message',$message);
         $display->assign('title','comments');
     }
+
 }
 
 ?>

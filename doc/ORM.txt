@@ -1,0 +1,192 @@
+ORM 使用
+
+
+1、首先定义model层的结构通过实例化调用
+
+例：在models 新建一个 AdminUserModel.php ,
+
+ 新建 AdminUserModel 类继承 ORM
+
+----------------------
+
+class AdminUserModel extends ORM{
+    public $table = 'admin_user';
+    public $fields = array(
+            'id' => array(
+                'type' => "int", 
+                'comment' => 'ID'),
+            'login_name' => array(
+                'type' => "varchar(45)", 
+                'comment' => 'name'),
+            'password' => array(
+                'type' => 'varchar(64)',
+                'comment' => "password"),
+            'email' => array(
+                'type' => "varchar(45)",
+                'comment' => 'email'),
+            'created_time' => array(
+                'type' => "int(10)",
+                'comment' => 'created_time'),
+            'active' => array(
+                'type' => "tinyint(4)",
+                'comment' => 'active'),
+            'role_id' => array(
+                'type' => "int(10)",
+                'comment' => 'role_id')
+    );
+    public $primaryKey = 'id';
+}
+
+
+
+
+
+然后在controllers/Index.php 控制器里实例化
+
+----------
+
+查询支持方法 :
+
+支持的条件方法：'table','field','group','where','order','having', 'lock' ,'limit','offset','page'
+
+支持的计算方法：'sum','min','max','count','avg'
+
+说明：     * 条件方法 只用于生成SQL的条件语句，不做任何操作。例如limit(0,2)等同于 SQL语句"limit 0,2"
+
+----------
+
+操作方法： joinQuery , save ,insert , update, delete
+
+----------
+
+结果返回方法：fetchRow , fetchOne ,fetchList , fetchHash
+
+/**
+**************************************************/
+
+
+实例化一个model对象
+
+$user = new AdminUserModel();
+
+// SQL查询 
+
+说明: SQL查询支持prepare，
+    $user ->query('select * from admin_user where id = ? ', 1);
+    $user ->query('select * from admin_user where id = ? and login_name = ?',1,jess);
+
+也可以普通查询
+    $user ->query('select * from admin_user where id = 25');
+
+如果有结果：返回array, 也可以返回mysql_resule对象
+
+// 获取结果，返回列表
+
+    ORM支持 查询支持方法 :
+
+    支持的方法：'table','field','group','where','order','having', 'lock' ,'limit','offset','page'；
+
+    支持的计算方法：'sum','min','max','count','avg'
+
+    使用方法类似于 liunx的管道，
+
+    // 获取文章的前50条信息
+    $user->limit(50)->fetchList();
+    
+    // id大于256的信息
+    $user->where(); 
+
+    // 只需要返回作者名和时间，而且id大于5，返回20到40条的数据，排序已ID的倒叙
+    $user ->where("id>0")->field('login_name,email')->limit('20,40')->order('id desc')->fetchList();
+
+    也可以这么写
+    $setarr = array('where'=>"login_name='jess'",  'field'=>'login_name,email', 'limit'=>'0,2', 'order'=>'id desc');
+    $user ->fetchList($setarr);
+
+    // 使用计算方法
+
+    // 通过主键名 直接返回数据
+    $user ->fetchList('13,14,15');
+
+    
+
+
+// 插入数据
+    $userArray = array(
+    'login_name'=> '莫言你妹',
+    'email' => 'jess@163.com',
+    ...
+    );
+    $user ->insert($userArray);
+
+   
+
+// 更新数据
+
+    $user ->update(array('id' => 1, 'login_name' => 'jess'));
+
+   也可以
+
+    $user ->where('id=1')->update(array('login_name' => 'jess'));
+    
+    还可以
+    
+    $user->login_name = 'moon';
+    $user->save();
+
+
+// 删除数据
+
+    $user ->where('id=25')->delete();
+    
+    //通过主键名直接删除
+    $user ->delete(1,2,3);
+
+    //通过条件
+    $user ->delete('published=1385658451');
+
+
+// 多表查询
+    $user ->joinQuery('admin_menu m','m.id = admin_user.id')->fetchList()
+
+
+// 查找 find 功能
+    
+    //通过 “find”+ 字段名 可以直接获取这一行的数据
+    $user ->findlogin_name('jess');
+    也可以
+    $user ->where("login_name='jess'")->fetchRow();
+
+// 查询单条
+    
+    //通过主键名
+    $user ->fetchRow(15);
+
+// 查询某字段，返回字符串
+
+    $user ->fetchOne('count(*)');
+
+// 查询哈西列表
+    $user ->fetchHash('id,login_name'); 
+
+    结果： array(1=>james, 2=>jess)
+
+    $user ->fetchHash('id,login_name,published'); 
+
+    结果： array(1=>array(
+        id=>1,login_name=>jess,published=>1350122354), 
+        2=>array(id=>2,login_name=>james,published=>135785421)
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------

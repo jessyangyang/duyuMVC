@@ -139,12 +139,33 @@ class Comments extends \local\db\ORM
         return false;
     }
 
-    public function deleteComment()
+    /**
+     * Delete Comment 
+     *
+     * @param String or Integer ,primary key
+     * @return Boolean , if deleted,return true.
+     */
+    public function deleteComment($key)
     {
+        $comment = self::instance();
+        $user = Members::getCurrentUser();
 
+        if ($request and $user) {
+            if($comment->where("id= '$key'")->delete()) return true;
+        }
+
+        return false;
     }
 
-    public function getCommentListForUser()
+    /**
+     * Get Comment list For UserID
+     *
+     * @param Integer ,$uid,the userid.
+     * @param Integer ,$limit,limit.
+     * @param Integer ,$page ,the number of page.
+     * @return Array , the commit list 
+     */
+    public function getCommentListForUser($uid,$limit = 10,$page = 1)
     {
         
     }
