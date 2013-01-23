@@ -60,7 +60,7 @@ class StoreController extends \Yaf\Controller_Abstract
 
         $rest->assign('code',$code);
         $rest->assign('message',$message);
-        $rest->assign('TopList',$book->topList());
+        $rest->assign('topList',$book->topList());
 
         $rest->response();
     }
