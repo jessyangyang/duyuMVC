@@ -68,6 +68,10 @@ class RegisterRest extends Restful{
         /** Comments
         *************************/
 
+        // add comment
+        self::regRestURL('storeAddComment','/api/comments/add','Comments','addComment');
+        // delete comment
+        self::regRestURL('storeDeleteComment','/api/comments/delete/:bid','Comments','deleteComment');
         // book Comments List
         self::regRestURL('storeBookCommentList','/api/comments/bid/:bid/:limit/:page','Comments','bookCommentList');
 
