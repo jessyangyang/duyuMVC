@@ -98,7 +98,7 @@ class Comments extends \local\db\ORM
         $list['count']  = $count;
         $list['page']   = $page;
         $list['pages']  = $pages;
-        $list["list"]   = $comment->field('id,post_id,uid,u.username,u.email,content,published')->joinQuery('members as u',"$table.uid = u.id")->where("post_id = '$key' AND type = 1")->limit("$offset,$limit")->fetchList();
+        $list["list"]   = $comment->field('comments.id,post_id as bid,uid,u.username,u.email,content,comments.published,comments.parent')->joinQuery('members as u',"$table.uid = u.id")->where("post_id = '$key' AND type = 1")->limit("$offset,$limit")->fetchList();
 
         if (is_array($list["list"])) {
             return $list;
@@ -123,13 +123,13 @@ class Comments extends \local\db\ORM
         if ($request and $user) {
             $common =  \Yaf\Registry::get('common');
             $data = array(
-                'post_id' => $request->getPost('post_id'),
+                'post_id' => $request->getPost('bid'),
                 'type' => $request->getPost('type'),
                 'uid' => $user->id,
                 'title' => $request->getPost('title'),
                 'content' => $request->getPost('content'),
                 'ip' => $common->ip(),
-                'published' => START_TIME,
+                'published' => $request->getPost('published'),
                 'parent' => $request->getPost('parent'));
 
         }
@@ -151,7 +151,7 @@ class Comments extends \local\db\ORM
         $comment = self::instance();
         $user = Members::getCurrentUser();
 
-        if ($request and $user) {
+        if ($user) {
             if($comment->where("id= '$key'")->delete()) return true;
         }
 
@@ -168,6 +168,34 @@ class Comments extends \local\db\ORM
      */
     public function getCommentListForUser($uid,$limit = 10,$page = 1)
     {
-        
+        $comment = self::instance();
+        $table = $this->table;
+
+        $count = $comment->field("count(*) as count")->where("type = 1 AND post_id='$key'")->fetchList();
+
+        $count = $count ? $count[0]['count'] : 0;
+        $offset = 0;
+
+        $pages = $count/$limit;
+        $pages = $pages < 1 ? 1 : $pages;
+        $pages = is_float($pages) ? intval($pages)+1 : $pages;
+
+        $page = $page < 1 ? 1 : $page;
+        $page = $page > $pages ? $pages : $page;
+
+        $offset = $limit * ($page - 1);
+
+        $list['count']  = $count;
+        $list['page']   = $page;
+        $list['pages']  = $pages;
+        $list["list"]   = $comment->field('comments.id,post_id as bid,uid,u.username,u.email,content,comments.published,comments.parent')->joinQuery('members as u',"$table.uid = u.id")->where("u.id = '$uid' AND type = 1")->limit("$offset,$limit")->fetchList();
+
+        if (is_array($list["list"])) {
+            return $list;
+        }
+        else
+        {
+            return "";
+        }
     }
 }

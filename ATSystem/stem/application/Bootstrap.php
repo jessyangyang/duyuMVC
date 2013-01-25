@@ -10,24 +10,21 @@
 
 use \Yaf\Dispatcher;
 use \local\db\MySQL;
-use \duyuu\rest\RegisterRest;
-use \duyuu\Exception;
 use \local\template\SmartyAdapter;
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract 
 {
     public function _initConfig(Dispatcher $dispatcher)
     {
-        Yaf\Registry::set("common", new \duyuu\common());
+        Yaf\Registry::set("common", new \duyuAT\common());
         $config = Yaf\Application::app()->getConfig()->get("mysql")->toArray();
-        MySQL::setInstance('default', $config, true);
     }
 
-    public function _initRoute(Dispatcher $dispatcher) {
-        $router = $dispatcher->getRouter();
-        $rest = RegisterRest::initRegister();
-        $router->addConfig(new Yaf\Config\Simple($rest));
-    }
+    // public function _initRoute(Dispatcher $dispatcher) {
+    //     $router = $dispatcher->getRouter();
+    //     $rest = RegisterRest::initRegister();
+    //     $router->addConfig(new Yaf\Config\Simple($rest));
+    // }
 
     public function _initException(Dispatcher $dispatcher)
     {
@@ -44,7 +41,7 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
     public function _initPlugins(Dispatcher $dispatcher)
     {
         $dispatcher->registerPlugin(new PermissionControllerPlugin());
-        $dispatcher->registerPlugin(new OAUTH2Plugin());
+        // $dispatcher->registerPlugin(new OAUTH2Plugin());
     }
 }
 
