@@ -40,6 +40,7 @@ class CommentsController extends \Yaf\Controller_Abstract
         else
         {
             $message = "fault.";
+            $code = 201;
         }
 
         $rest->assign('code',$code);
@@ -65,6 +66,7 @@ class CommentsController extends \Yaf\Controller_Abstract
         else
         {
             $message = "fault.";
+            $code = 201;
         }
 
         $rest->assign('code',$code);
