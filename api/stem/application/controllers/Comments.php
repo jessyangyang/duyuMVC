@@ -107,7 +107,27 @@ class CommentsController extends \Yaf\Controller_Abstract
      */
     public function bookCommentListForUserAction($uid, $limit = 10, $page = 1)
     {
+        $rest = Restful::instance();
+        $comments = Comments::instance();
 
+        $code = 200;
+        $message = "ok";
+
+        $list = $comments->getCommentListForUser($uid,$limit,$page);
+
+        $rest->assign('code',$code);
+        $rest->assign('message',$message);
+        if ($list) {
+            $rest->assign('pages',$list['pages']);
+            $rest->assign('commentList',$list['list']);
+        }
+        else
+        {
+            $rest->assign('pages',0);
+            $rest->assign('commentList',"");
+        }
+
+        $rest->response();
     }
 }
 
