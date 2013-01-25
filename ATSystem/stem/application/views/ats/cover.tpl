@@ -32,7 +32,7 @@
 			</div>
 			<div class="right-button">
 				<a href="" class="btn fl">录入下一篇</a>
-				<a href="" class="btn btn-danger fl">下一步-封面设计</a>
+				<a href="" class="btn btn-danger fl">下一步-撰写导言</a>
 			</div>
 			<div class="header-nav">
 				<h1>投稿系统</h1>
@@ -73,6 +73,7 @@
 		            	</div>
 					</div>
 					<div class="control-group">
+						<label class="edit-label" for=""><span>2</span></label>
 						<div class="controls-span">
 							<h4>封面模板</h4>
 							<p>你可以给自己的作品在下列封面中选择自己喜欢的封面，也可以上传图片为自己的作品添加封面。</p>

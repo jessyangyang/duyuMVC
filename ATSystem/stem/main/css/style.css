@@ -103,10 +103,22 @@ body{background-color: #F7F4F1;}
 	padding: 2px;
 }
 .edit-content .edit-textarea {
-	width:780px;
+	width:745px;
+	min-height: 360px;
+	border: 0px;
+	border-top:1px solid #ffffff;
+	background-color:  #F8F6F3;
+	margin-left:20px;
+	margin-bottom: 10px;
+	box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075) inset;
+	text-indent:2em;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 32px;
 }
 .edit-title {
 	padding: 2px;
+	border-bottom: 1px solid #e2ddd9;
 }
 .edit-cover h4 {
 	font-size: 20px;

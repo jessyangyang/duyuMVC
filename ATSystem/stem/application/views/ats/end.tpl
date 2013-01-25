@@ -31,8 +31,7 @@
 				<a href="">设置</a>
 			</div>
 			<div class="right-button">
-				<a href="" class="btn fl">录入下一篇</a>
-				<a href="" class="btn btn-danger fl">下一步-封面设计</a>
+				<a href="" class="btn btn-danger fl">完成并提交全本</a>
 			</div>
 			<div class="header-nav">
 				<h1>投稿系统</h1>
