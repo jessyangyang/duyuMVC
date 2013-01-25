@@ -11,8 +11,8 @@
             <input type="text" name="uid" value="{$user.id}"/><br/>
             <label for="email">email :</label>
             <input type="text" name="email" value="{$user.email}"/><br/>
-            <label for="post_id">bookid :</label>
-            <input type="text" name="post_id"/><br/>
+            <label for="bid">bookid :</label>
+            <input type="text" name="bid"/><br/>
             <label for="type">type :</label>
             <input type="text" name="type" value="1"/><br/>
             <label for="content">content : </label>
