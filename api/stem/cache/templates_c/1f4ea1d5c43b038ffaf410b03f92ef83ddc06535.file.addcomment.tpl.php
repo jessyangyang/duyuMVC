@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.12, created on 2013-01-23 11:37:30
+<?php /* Smarty version Smarty-3.1.12, created on 2013-01-23 23:09:53
          compiled from "/home/wwwroot/duyuMVC/api/stem/application/views/test/addcomment.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:55046713150fe97a8a3c711-84572920%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1f4ea1d5c43b038ffaf410b03f92ef83ddc06535' => 
     array (
       0 => '/home/wwwroot/duyuMVC/api/stem/application/views/test/addcomment.tpl',
-      1 => 1358912169,
+      1 => 1358953784,
       2 => 'file',
     ),
   ),
@@ -41,8 +41,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <label for="email">email :</label>
             <input type="text" name="email" value="<?php echo $_smarty_tpl->tpl_vars['user']->value['email'];?>
 "/><br/>
-            <label for="bid">bookid :</label>
-            <input type="text" name="bid"/><br/>
+            <label for="post_id">bookid :</label>
+            <input type="text" name="post_id"/><br/>
+            <label for="type">type :</label>
+            <input type="text" name="type" value="1"/><br/>
             <label for="content">content : </label>
             <input type="text" name="content"/><br/>
             <label for="parent">parent :</label>
