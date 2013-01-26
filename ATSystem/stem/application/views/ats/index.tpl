@@ -6,7 +6,7 @@
                 <a href="">帮助</a>
                 <a href="">设置</a>
             </div>
-            <a href="" class="btn btn-danger right-button">下一步：撰写导言</a>
+            <a href="javascript:void(0)" class="btn btn-danger right-button">下一步：撰写导言</a>
             <div class="header-nav">
                 <h1>投稿系统</h1>
                 <div class="p-bar">
@@ -27,7 +27,7 @@
         <div class="container">
             <div class="edit-box">
                 <div id="edit-box" class="edit-info">
-                <form action="/ats/title" method="POST" class="form-horizontal" >
+                <form action="/ats/index" method="POST" class="form-horizontal" >
                     <fieldset>
                     <div class="control-group">
                     <label class="control-label" for="">请先登录</label>

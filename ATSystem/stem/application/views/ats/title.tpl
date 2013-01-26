@@ -6,7 +6,7 @@
 				<a href="">帮助</a>
 				<a href="">设置</a>
 			</div>
-			<a href="" class="btn btn-danger right-button">下一步：撰写导言</a>
+			<a href="javascript:void(0)" class="btn btn-danger right-button">下一步：撰写导言</a>
 			<div class="header-nav">
 				<h1>投稿系统</h1>
 				<div class="p-bar">
@@ -28,7 +28,7 @@
 			<div class="edit-box">
 				<h2>录入的信息包括全本作品的名称、作者、体裁以及作品标签。</h2>
 				<div id="edit-box" class="edit-info">
-					<form class="form-horizontal" action="" methods="">
+					<form class="form-horizontal" action="/ats/title" method="POST">
 					<fieldset>
 					<div class="control-group">
 					<label class="control-label" for="">作品名称：</label>
@@ -65,6 +65,7 @@
 	            	<label class="control-label" for="">作品标签：</label>
 	            	<div class="controls">
 					<input type="text" class="span5" name="tag" placeholder="多个标签用逗号隔开，如建筑，哥特式风格，罗马"/>
+					<input type="hidden" value="title" name="state"/>
 					</div>
 					</div>
 					</div>

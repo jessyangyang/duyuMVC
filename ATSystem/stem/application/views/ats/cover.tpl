@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8"/>
-		<title></title>
-		<meta name="viewport" content="width=device-width,initial-scale=1.0/">
-		<meta name="description" content=""/>
-		<meta name="author" content=""/>
-
-		<!-- Base Styles -->
-		<link href="css/bootstrap.min.css" rel="stylesheet"/>
-		<link href="css/bootstrap-responsive.min.css" rel="stylesheet"/>
-		<link href="css/style.css" rel="stylesheet"/>
-
-		<!-- FOR IE6 ~ 8 support of HTML% elements -->
-		<!--[if lt IE 9]>
-			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-
-		<!-- Favicon and Touch icons -->
-		<link rel="shortcut icon" href=""/>
-		<link rel="apple-touch-icon-precomposed" sizes="114x114" href=""/>
-		<link rel="apple-touch-icon-precomposed" sizes="72x72" href=""/>
-		<link rel="apple-touch-icon-precomposed" href=""/>
-	</head>
+{include file = "ats/header.tpl"}
 	<body>
 		<header>
 			<div class="right-tools">
@@ -103,15 +79,4 @@
 				</div>
 			</div>
 		</div>
-		<footer>
-			
-		</footer>
-		<!-- Javascript
-		=============================================== -->
-
-		<!-- Placed at the end of the document so the pages load faster -->
-
-		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-
-	</body>
-</html>
+{include file = "ats/footer.tpl"}
