@@ -151,17 +151,6 @@ class UserController extends \Yaf\Controller_Abstract
         $session = Session::getInstance();
 
         $code = 201;
-<<<<<<< HEAD
-        $message = "No Unset";
-
-        if ($session->__isset('current_id')) 
-        {
-            $session->__unset("current_id");
-            $session->__unset("authToken");
-
-            $code = 200;
-            $message = "Already Logout";
-=======
         $message = "No Data";
 
         if ($session->isset("current_id")) {
@@ -170,7 +159,6 @@ class UserController extends \Yaf\Controller_Abstract
 
             $code = 200;
             $message = "ok";
->>>>>>> 45e1a486227ab976d26f522f35c6bf7a07db05f9
         }
 
         $rest->assign('code',$code);
