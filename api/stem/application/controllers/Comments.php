@@ -96,7 +96,7 @@ class CommentsController extends \Yaf\Controller_Abstract
         else
         {
             $rest->assign('pages',0);
-            $rest->assign('commentList',"");
+            $rest->assign('commentList',array());
         }
 
         $rest->response();

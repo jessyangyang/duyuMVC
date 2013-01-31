@@ -103,10 +103,6 @@ class Comments extends \local\db\ORM
         if (is_array($list["list"])) {
             return $list;
         }
-        else
-        {
-            return "";
-        }
     }
 
     /**
