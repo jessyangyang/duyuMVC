@@ -34,7 +34,7 @@ class CommentsController extends \Yaf\Controller_Abstract
         $code = 200;
         $message = "ok";
 
-        if($comment->addComment($data)) {
+        if($data->isPost() and $comment->addComment($data)) {
             $message = "inserted complete.";
         }
         else
