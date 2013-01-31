@@ -79,7 +79,7 @@ class UserController extends \Yaf\Controller_Abstract
         $user = Members::instance();
         $image = Images::instance();
 
-        $code = 201;
+        $code = 200;
         $message = "No Data";
 
         $data = $this->getRequest();
