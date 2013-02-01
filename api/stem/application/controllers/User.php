@@ -31,7 +31,7 @@ class UserController extends \Yaf\Controller_Abstract
 
         if ($userState)
         {
-            $code = 200;
+            $code = 203;
             $message = "already login.";
             $authToken = isset($userState['authtoken']) ? $userState['authtoken'] : "";
         }
