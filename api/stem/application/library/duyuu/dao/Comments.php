@@ -10,6 +10,8 @@
 
 namespace duyuu\dao;
 
+use \duyuu\dao\MemberStateTemp;
+
 class Comments extends \local\db\ORM 
 {
     public $table = 'comments';
@@ -114,14 +116,15 @@ class Comments extends \local\db\ORM
     public function addComment($request)
     {
         $comment = self::instance();
-        $user = Members::getCurrentUser();
+        // $user = Members::getCurrentUser();
+        $userState = MemberStateTemp::getCurrentUserForAuth();
 
-        if ($request and $user) {
+        if ($request and $userState) {
             $common =  \Yaf\Registry::get('common');
             $data = array(
                 'post_id' => $request->getPost('bid'),
                 'type' => $request->getPost('type'),
-                'uid' => $user->id,
+                'uid' => $userState['uid'],
                 'title' => $request->getPost('title'),
                 'content' => $request->getPost('content'),
                 'ip' => $common->ip(),
