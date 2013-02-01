@@ -89,6 +89,19 @@ class Images extends \local\db\ORM
     {
         $image = self::instance();
         
+    }  
+
+    /**
+     * [Get image for user]
+     * @param Integer , $uid
+     * @return String , the address of image for user_id.
+     */
+    public function getImageForUser($uid)
+    {
+        $image = self::instance();
+
+        $row = $image->field("path")->where("uid = '$uid' AND class = 2")->fetchRow();
+        return isset($row['path']) ? $row['path'] : false;
     }
 
     /**

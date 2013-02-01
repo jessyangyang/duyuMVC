@@ -25,6 +25,7 @@ class UserController extends \Yaf\Controller_Abstract
         $user = Members::getCurrentUser();
         $userState = MemberStateTemp::getCurrentUserForAuth();
         $session = Session::getInstance();
+        $userInfo = array();
 
         $code = 201;
         $message = "invild!";
@@ -40,13 +41,12 @@ class UserController extends \Yaf\Controller_Abstract
             $user = Members::instance();
             $userState = MemberStateTemp::instance();
 
-            $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";
-            $row = $user->where($wherearr)->fetchRow();
+            $userInfo = $user->login($data);
 
-            if ($row) {
+            if ($userInfo) {
                 $auth = OAuthAccessTokens::instance();
 
-                $authToken = md5($row['id'].$row['email']);
+                $authToken = md5($userInfo['id'].$userInfo['email']);
 
                 if ($state = $auth->hasArrow($authToken)) {
                     $session->set('current_id',$state['user_id']);
@@ -56,26 +56,27 @@ class UserController extends \Yaf\Controller_Abstract
                 {
 
                     $authArr = array(
-                            'oauth_token' => md5($row['id']),
-                            'client_id' => $row['id'],
-                            'user_id' => $row['id'],
+                            'oauth_token' => md5($userInfo['id']),
+                            'client_id' => $userInfo['id'],
+                            'user_id' => $userInfo['id'],
                             'expires' => strtotime("next Monday"));
                     $auth->insert($authArr);
-                    $session->set('current_id',$row['id']);
+                    $session->set('current_id',$userInfo['id']);
                     $session->set('authToken',$authToken);
                 }
 
-                $userState->addAuthToken($row['id'],$authToken);
+                $userState->addAuthToken($userInfo['id'],$authToken);
 
                 $code = 200;
                 $message = "ok";
-                header("Auth-Token:".$session->get('authToken'));
             }
         }
 
+        header("Auth-Token:".$authToken);
 
         $rest->assign('code',$code);
         $rest->assign('message',$message);
+        $rest->assign('userInfo',$userInfo);
         $rest->assign('authToken',$authToken ? $authToken : "");
 
         $rest->response();
@@ -149,7 +150,7 @@ class UserController extends \Yaf\Controller_Abstract
                         $session->set('current_id',$userId);
                         $session->set('authToken',$authToken);
 
-                        header("Auth-Token:".$session->get('authToken'));
+                        header("Auth-Token:".$authToken);
                     }
 
                 }
@@ -158,7 +159,7 @@ class UserController extends \Yaf\Controller_Abstract
 
         $rest->assign('code',$code);
         $rest->assign('message',$message);
-        $rest->assign('authToken',$session->get('authToken') ? $session->get('authToken') : "");
+        $rest->assign('authToken',$authToken ? $authToken : "");
 
         $rest->response();
     }
