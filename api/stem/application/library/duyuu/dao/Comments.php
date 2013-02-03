@@ -100,11 +100,11 @@ class Comments extends \local\db\ORM
         $list['count']  = $count;
         $list['page']   = $page;
         $list['pages']  = $pages;
-        $list["list"]   = $comment->field("$table.id,post_id as bid,$table.uid,u.username,u.email,$table.content,$table.published,$table.parent,i.path as cover")->joinQuery('members as u',"$table.uid = u.id")->joinQuery('images as i',"i.uid = $table.uid")->where("$table.post_id = '$key' AND $table.type = 1 AND i.class = 2")->limit("$offset,$limit")->fetchList();
+        $list["list"]   = $comment->field("$table.id,post_id as bid,$table.uid,u.username,u.email,$table.content,$table.published,$table.parent,i.path as avatar")->joinQuery('members as u',"$table.uid = u.id")->joinQuery('images as i',"i.uid = $table.uid")->where("$table.post_id = '$key' AND $table.type = 1 AND i.class = 2")->limit("$offset,$limit")->fetchList();
 
         if ($list['list']) {
             foreach ($list["list"] as $key => $value) {
-                $list['list'][$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                $list['list'][$key]['avatar'] = \duyuu\image\ImageControl::getRelativeImage($value['avatar']);
             }
         }
 

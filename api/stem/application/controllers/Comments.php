@@ -91,35 +91,26 @@ class CommentsController extends \Yaf\Controller_Abstract
     {
         $rest = Restful::instance();
         $comments = Comments::instance();
-        $userState = MemberStateTemp::getCurrentUserForAuth();
 
         $code = 200;
         $message = "ok";
 
-        if ($userState) {
-            $code = "402";
-            $message = "No Login.";
+        $list = $comments->getCommentList($bid,$limit,$page);
+
+        $rest->assign('code',$code);
+        $rest->assign('message',$message);
+        if ($list) {
+            $rest->assign('pages',$list['pages']);
+            $rest->assign('commentList',$list['list']);
         }
         else
         {
-
-            $list = $comments->getCommentList($bid,$limit,$page);
-
-            $rest->assign('code',$code);
-            $rest->assign('message',$message);
-            if ($list) {
-                $rest->assign('pages',$list['pages']);
-                $rest->assign('commentList',$list['list']);
-            }
-            else
-            {
-                $code = 201;
-                $message = "No Data";
-                $rest->assign('pages',0);
-                $rest->assign('commentList',array());
-            }
+            $code = 201;
+            $message = "No Data";
+            $rest->assign('pages',0);
+            $rest->assign('commentList',array());
         }
-
+        
         $rest->response();
     }
 
