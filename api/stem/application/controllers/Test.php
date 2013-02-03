@@ -176,7 +176,6 @@ class testController extends \Yaf\Controller_Abstract
         {
             $display->assign('user',"");
         }
-        header("Auth-Token:".md5($userInfo->id));
 
         
         $display->assign('title','login');

@@ -86,7 +86,9 @@ class Members extends \local\db\ORM
     }
 
     /**
-     * 
+     * The Login of API
+     * @param Object of Http, $request
+     * @return Array, return the Member Array
      */
     public function login($request)
     {
