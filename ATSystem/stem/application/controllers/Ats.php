@@ -23,7 +23,11 @@ class AtsController extends \Yaf\Controller_Abstract
 
         $userInfo = Members::getCurrentUser();
 
-        if ($userInfo) header('Location: /ats/title');
+        if ($userInfo->id) 
+        {
+            header('Location: /ats/title');
+            exit();
+        }
 
         $user = Members::instance();
         $data = $this->getRequest();
@@ -44,13 +48,15 @@ class AtsController extends \Yaf\Controller_Abstract
         $userInfo = Members::getCurrentUser();
         $data = $this->getRequest();
 
-        if ($userInfo) {
+        if ($userInfo->id) {
             $book = Books::instance();
             $bid = $book->getEditingCurrent();
             
-
+            // print_r("expression");
+            // exit();
             if ($data->isPost() and $data->getPost('state') == "title") 
             {
+
                 if ($bid){
                     $book ->where("bid=$bid")->update(array(
                         'title' => $data->getPost('title'),
@@ -72,7 +78,7 @@ class AtsController extends \Yaf\Controller_Abstract
                 }
 
                 header('Location: /ats/edit');
-                exit;
+                exit();
             }
 
             if ($bid) {
@@ -89,11 +95,11 @@ class AtsController extends \Yaf\Controller_Abstract
                 'email' => $userInfo->email));
 
         }
-        else
-        {
-            header('Location: /ats');
-            exit;
-        }
+        // else
+        // {
+        //     header('Location: /ats');
+        //     exit();
+        // }
 
         $display->assign("title", "基本信息");
     }
@@ -101,10 +107,16 @@ class AtsController extends \Yaf\Controller_Abstract
     public function editAction()
     {
         $display = $this->getView();
-        if ($userInfo) 
+        $userInfo = Members::getCurrentUser();
+
+        if (!$userInfo->id) 
         {
             header('Location: /ats');
             exit;
+        }
+        else
+        {
+            header('Location: /ats/cover');
         }
         $display->assign("title", "基本信息");
     }
@@ -112,10 +124,15 @@ class AtsController extends \Yaf\Controller_Abstract
     public function coverAction()
     {
         $display = $this->getView();
-        if ($userInfo) 
+        $userInfo = Members::getCurrentUser();
+        if (!$userInfo->id) 
         {
             header('Location: /ats');
             exit;
+        }
+        else
+        {
+            header('Location: /ats/end');
         }
         $display->assign("title", "基本信息");
     }
@@ -123,7 +140,8 @@ class AtsController extends \Yaf\Controller_Abstract
     public function endAction()
     {
         $display = $this->getView();
-        if ($userInfo) 
+        $userInfo = Members::getCurrentUser();
+        if (!$userInfo->id) 
         {
             header('Location: /ats');
             exit;
