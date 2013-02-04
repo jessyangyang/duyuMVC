@@ -126,6 +126,7 @@ class Members extends \local\db\ORM
                         'user_id' => $row['id'],
                         'expires' => strtotime("next Monday"));
                 $auth->insert($authArr);
+                
                 $session->set('current_id',$row['id']);
                 $session->set('authToken',md5($row['id']));
 

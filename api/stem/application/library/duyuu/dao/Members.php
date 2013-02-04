@@ -18,7 +18,7 @@ class Members extends \local\db\ORM
         'id' => array(
             'type' => 'int',
             'default' => 0,
-            'comment' => 'bookID'),
+            'comment' => 'uid'),
         'email' => array(
             'type' => 'varchar',
             'default' => 0,
@@ -83,6 +83,29 @@ class Members extends \local\db\ORM
             }
         }
         return self::$instance;
+    }
+
+    /**
+     * The Login of API
+     * @param Object of Http, $request
+     * @return Array, return the Member Array
+     */
+    public function login($request)
+    {
+        if ($request->isPost()) {
+            $user = Members::instance();
+            $wherearr = "email='" .$request->getPost('email') . "' AND password='" . md5($request->getPost('password')) . "'";
+            $row = $user->field("id,email,username,role_id")->where($wherearr)->fetchRow();
+            if ($row) {
+                $image = \duyuu\dao\Images::instance();
+
+                $cover = $image->getImageForUser($row['id']);
+                $row['cover'] = \duyuu\image\ImageControl::getRelativeImage($cover);
+            }
+            return $row;
+        }
+
+        return false;
     }
 
     /**

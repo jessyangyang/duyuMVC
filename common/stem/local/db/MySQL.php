@@ -24,6 +24,9 @@ class MySQL extends Database
     // Config Instance
     protected static $config;
 
+    // SQL 
+    private static $SQL;
+
 
     /**
     * Constructor
@@ -130,7 +133,7 @@ class MySQL extends Database
     function query() {
         $tmpParams = func_get_args();
         $tmpNums = func_num_args();
-        $tmpSql = array_shift($tmpParams);
+        $tmpSql = self::$SQL = array_shift($tmpParams);
         $hasArray = false;
         
         // Query Database
@@ -270,6 +273,11 @@ class MySQL extends Database
         //      <b>Errno.</b>: $dberrno<br>
         //      </div>";
         // exit();
+    }
+
+    public function printSQL()
+    {
+        return self::$SQL;
     }
 
 

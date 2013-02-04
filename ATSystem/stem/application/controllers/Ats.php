@@ -23,18 +23,19 @@ class AtsController extends \Yaf\Controller_Abstract
 
         $userInfo = Members::getCurrentUser();
 
-        print_r($userInfo);
-
-        if ($userInfo) {
+        if (isset($userInfo->id) AND $userInfo->id) 
+        {
             header('Location: /ats/title');
+            exit();
         }
+
         $user = Members::instance();
         $data = $this->getRequest();
-        if ($data->isPost() and $data->getPost('email')) {
+        if ($data->isPost() and $data->getPost('state') == 'index') {
             if ($user->login($data->getPost('email') , $data->getPost('password')))
             {
                 header('Location: /ats/title');
-                exit;
+                exit();
             }
         }
         
@@ -48,40 +49,36 @@ class AtsController extends \Yaf\Controller_Abstract
         $userInfo = Members::getCurrentUser();
         $data = $this->getRequest();
 
-        if (!$userInfo->id) 
-        {
-            header('Location: /ats');
-            exit;
-        }
-
-        $book = Books::instance();
-        $bid = $book->getEditingCurrent();
-
-        
-        if ($data->isPost() and $data->getPost('state') == "title") 
-        {
-            print_r($data);
-            if ($bid){
-                $book ->where("bid=$bid")->update(array(
-                    'title' => $data->getPost('title'),
-                    'author' => $data->getPost('author'),
-                    'modified' => START_TIME));
-            }
-            else
+        if ($userInfo->id) {
+            $book = Books::instance();
+            $bid = $book->getEditingCurrent();
+            
+            if ($data->isPost() and $data->getPost('state') == "title") 
             {
-                $arr = array(
-                    'cid' => 0,
-                    'title' => $data->getPost('title'),
-                    'author' => $data->getPost('author'),
-                    'published' => START_TIME,
-                    'modified' => START_TIME);
-                if ($bookid = $book->insert($arr)) {
-                    $session = Session::getInstance();
-                    $session->set('bid',$bookid);
+
+                if ($bid){
+                    $book ->where("bid=$bid")->update(array(
+                        'title' => $data->getPost('title'),
+                        'author' => $data->getPost('author'),
+                        'modified' => START_TIME));
                 }
+                else
+                {
+                    $arr = array(
+                        'cid' => 0,
+                        'title' => $data->getPost('title'),
+                        'author' => $data->getPost('author'),
+                        'published' => START_TIME,
+                        'modified' => START_TIME);
+                    if ($bookid = $book->insert($arr)) {
+                        $session = Session::getInstance();
+                        $session->set('bid',$bookid);
+                    }
+                }
+
+                header('Location: /ats/edit');
+                exit();
             }
-            // header('Location: /ats/edit');
-            // exit;
         }
 
         $display->assign('info',"");
@@ -91,20 +88,27 @@ class AtsController extends \Yaf\Controller_Abstract
             $display->assign('info',$info);
         }
 
+
         $display->assign('user',array(
                 'id' => $userInfo->id,
                 'email' => $userInfo->email));
         $display->assign("title", "基本信息");
+        
     }
 
     public function editAction()
     {
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
+
         if (!$userInfo->id) 
         {
             header('Location: /ats');
-            exit;
+            exit();
+        }
+        else
+        {
+            header('Location: /ats/cover');
         }
         $display->assign("title", "基本信息");
     }
@@ -116,7 +120,11 @@ class AtsController extends \Yaf\Controller_Abstract
         if (!$userInfo->id) 
         {
             header('Location: /ats');
-            exit;
+            exit();
+        }
+        else
+        {
+            header('Location: /ats/end');
         }
         $display->assign("title", "基本信息");
     }
@@ -128,7 +136,7 @@ class AtsController extends \Yaf\Controller_Abstract
         if (!$userInfo->id) 
         {
             header('Location: /ats');
-            exit;
+            exit();
         }
         $display->assign("title", "基本信息");
     }

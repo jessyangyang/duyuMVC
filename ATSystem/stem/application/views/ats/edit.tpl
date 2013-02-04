@@ -7,8 +7,8 @@
 				<a href="">设置</a>
 			</div>
 			<div class="right-button">
-				<a href="" class="btn fl">录入下一篇</a>
-				<a href="" class="btn btn-danger fl">下一步-封面设计</a>
+				<a href="javascript:void(0)" class="btn fl">录入下一篇</a>
+				<a href="javascript:void(0)" class="btn btn-danger fl">下一步-封面设计</a>
 			</div>
 			<div class="header-nav">
 				<h1>投稿系统</h1>
@@ -31,7 +31,7 @@
 			<div id="edit-box" class="edit-box">
 				<h2>按章节依次录入文章，可在设置内添加副标题、摘要和文章标签，也可以为当前文章设置新的作者。</h2>
 				<div class="edit-content">
-				<form class="form-horizontal" action="" methods="">
+				<form class="form-horizontal" action="/ats/edit" method="POST">
 					<input type="text" name="title" class="span5 edit-title" placeholder="新建章节 (不分章节的作品可不填)"/>
 					<textarea id="textarea1" name="editor1" class="ckeditor">输入您的内容!
 					</textarea>

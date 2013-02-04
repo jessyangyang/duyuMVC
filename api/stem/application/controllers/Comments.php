@@ -10,6 +10,7 @@
 
 use \duyuu\dao\Comments;
 use \duyuu\dao\Members;
+use \duyuu\dao\MemberStateTemp;
 use \duyuu\rest\Restful;
 
 class CommentsController extends \Yaf\Controller_Abstract 
@@ -28,19 +29,28 @@ class CommentsController extends \Yaf\Controller_Abstract
     {
         $rest = Restful::instance();
         $comment = Comments::instance();
-
-        $data = $this->getRequest();
+        $userState = MemberStateTemp::getCurrentUserForAuth();
 
         $code = 200;
         $message = "ok";
 
-        if($comment->addComment($data)) {
-            $message = "inserted complete.";
+        if ($userState) {
+            $code = "402";
+            $message = "No Login.";
         }
         else
         {
-            $message = "fault.";
-            $code = 201;
+
+            $data = $this->getRequest();
+
+            if($data->isPost() and $comment->addComment($data)) {
+                $message = "inserted complete.";
+            }
+            else
+            {
+                $message = "fault.";
+                $code = 201;
+            }
         }
 
         $rest->assign('code',$code);
@@ -95,10 +105,12 @@ class CommentsController extends \Yaf\Controller_Abstract
         }
         else
         {
+            $code = 201;
+            $message = "No Data";
             $rest->assign('pages',0);
-            $rest->assign('commentList',"");
+            $rest->assign('commentList',array());
         }
-
+        
         $rest->response();
     }
 

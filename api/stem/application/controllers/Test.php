@@ -87,6 +87,7 @@ class testController extends \Yaf\Controller_Abstract
                         $session->set('authToken',md5($userId));
 
                         header("Auth-Token:".$session->get('authToken'));
+
                     }
                     
 
@@ -175,6 +176,7 @@ class testController extends \Yaf\Controller_Abstract
         {
             $display->assign('user',"");
         }
+
         
         $display->assign('title','login');
     }

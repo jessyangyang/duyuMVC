@@ -10,6 +10,7 @@
 
 use \duyuu\dao\Members;
 use \duyuu\dao\MemberInfo;
+use \duyuu\dao\MemberStateTemp;
 use \duyuu\dao\Images;
 use \duyuu\dao\OAuthAccessTokens;
 use \duyuu\rest\Restful;
@@ -22,52 +23,61 @@ class UserController extends \Yaf\Controller_Abstract
         $rest = Restful::instance();
         $data = $this->getRequest();
         $user = Members::getCurrentUser();
+        $userState = MemberStateTemp::getCurrentUserForAuth();
         $session = Session::getInstance();
+        $userInfo = array();
 
         $code = 201;
         $message = "invild!";
 
-        if (isset($user->id))
+        if ($userState)
         {
-            $code = 200;
+            $code = 203;
             $message = "already login.";
+            $authToken = isset($userState['authtoken']) ? $userState['authtoken'] : "";
         }
         elseif ($data->isPost()) 
         {
             $user = Members::instance();
+            $userState = MemberStateTemp::instance();
 
-            $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";
-            $row = $user->where($wherearr)->fetchRow();
+            $userInfo = $user->login($data);
 
-            if ($row) {
+            if ($userInfo) {
                 $auth = OAuthAccessTokens::instance();
 
-                if ($state = $auth->hasArrow(md5($row['id']))) {
+                $authToken = md5($userInfo['id'].$userInfo['email']);
+
+                if ($state = $auth->hasArrow($authToken)) {
                     $session->set('current_id',$state['user_id']);
                     $session->set('authToken',$state['oauth_token']);
                 }
                 else
                 {
+
                     $authArr = array(
-                            'oauth_token' => md5($row['id']),
-                            'client_id' => $row['id'],
-                            'user_id' => $row['id'],
+                            'oauth_token' => md5($userInfo['id']),
+                            'client_id' => $userInfo['id'],
+                            'user_id' => $userInfo['id'],
                             'expires' => strtotime("next Monday"));
                     $auth->insert($authArr);
-                    $session->set('current_id',$row['id']);
-                    $session->set('authToken',md5($row['id']));
+                    $session->set('current_id',$userInfo['id']);
+                    $session->set('authToken',$authToken);
                 }
+
+                $userState->addAuthToken($userInfo['id'],$authToken);
 
                 $code = 200;
                 $message = "ok";
-                header("Auth-Token:".$session->get('authToken'));
             }
         }
 
+        header("Auth-Token:".$authToken);
 
         $rest->assign('code',$code);
         $rest->assign('message',$message);
-        $rest->assign('authToken',$session->get('authToken') ? $session->get('authToken') : "");
+        $rest->assign('userInfo',$userInfo);
+        $rest->assign('authToken',$authToken ? $authToken : "");
 
         $rest->response();
     }
@@ -79,7 +89,7 @@ class UserController extends \Yaf\Controller_Abstract
         $user = Members::instance();
         $image = Images::instance();
 
-        $code = 201;
+        $code = 200;
         $message = "No Data";
 
         $data = $this->getRequest();
@@ -96,8 +106,10 @@ class UserController extends \Yaf\Controller_Abstract
             }
             else 
             {
+                $email = addslashes($data->getPost('email'));
+
                 $arr = array(
-                        'email' => addslashes($data->getPost('email')),
+                        'email' => $email,
                         'username' => addslashes($data->getPost('username')),
                         'password' => md5(trim($data->getPost('password'))),
                         'published' => time(),
@@ -112,6 +124,7 @@ class UserController extends \Yaf\Controller_Abstract
                     $avatarId = $avatarId ? $avatarId : 0;
 
                     $memberInfo = MemberInfo::instance();
+                    $memberState = MemberStateTemp::instance();
 
                     $infoArr = array(
                         'id' => $userId,
@@ -122,16 +135,22 @@ class UserController extends \Yaf\Controller_Abstract
 
                         $auth = OAuthAccessTokens::instance();
                         
+                        $authToken = md5($userId.$email);
                         $authArr = array(
-                            'oauth_token' => md5($userId),
+                            'oauth_token' => $authToken,
                             'client_id' => $userId,
                             'user_id' => $userId,
                             'expires' => strtotime("next Monday"));
                         $auth->insert($authArr);
-                        $session->set('current_id',$userId);
-                        $session->set('authToken',md5($userId));
 
-                        header("Auth-Token:".$session->get('authToken'));
+                        //temp
+                        $memberState->addAuthToken($userId,$authToken);
+
+
+                        $session->set('current_id',$userId);
+                        $session->set('authToken',$authToken);
+
+                        header("Auth-Token:".$authToken);
                     }
 
                 }
@@ -140,7 +159,7 @@ class UserController extends \Yaf\Controller_Abstract
 
         $rest->assign('code',$code);
         $rest->assign('message',$message);
-        $rest->assign('authToken',$session->get('authToken') ? $session->get('authToken') : "");
+        $rest->assign('authToken',$authToken ? $authToken : "");
 
         $rest->response();
     }
@@ -151,17 +170,6 @@ class UserController extends \Yaf\Controller_Abstract
         $session = Session::getInstance();
 
         $code = 201;
-<<<<<<< HEAD
-        $message = "No Unset";
-
-        if ($session->__isset('current_id')) 
-        {
-            $session->__unset("current_id");
-            $session->__unset("authToken");
-
-            $code = 200;
-            $message = "Already Logout";
-=======
         $message = "No Data";
 
         if ($session->isset("current_id")) {
@@ -170,7 +178,6 @@ class UserController extends \Yaf\Controller_Abstract
 
             $code = 200;
             $message = "ok";
->>>>>>> 45e1a486227ab976d26f522f35c6bf7a07db05f9
         }
 
         $rest->assign('code',$code);
