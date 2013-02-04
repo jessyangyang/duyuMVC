@@ -23,7 +23,7 @@
 
         <!-- FOR IE6 ~ 8 support of HTML% elements -->
         <!--[if lt IE 9]>
-            <script type="text/javascript" src="/js/html5.js"></script>
+            <script type="text/javascript" src="js/html5.js"></script>
         <![endif]-->
 
         <!-- Favicon and Touch icons -->
