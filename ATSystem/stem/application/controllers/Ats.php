@@ -17,21 +17,35 @@ use \Yaf\Session;
 class AtsController extends \Yaf\Controller_Abstract 
 {
 
-    public function indexAction() 
+    public function indexAction($action = false) 
     {
         $display = $this->getView();
 
+        $data = $this->getRequest();
+
         $userInfo = Members::getCurrentUser();
+        $user = Members::instance();
+        $session = Session::getInstance();
+
+
+        switch ($action) {
+            case 'logout':
+                if ($user->logout()) {
+
+                }
+                break;
+            default:
+                # code...
+                break;
+        }
 
         if (isset($userInfo->id) AND $userInfo->id) 
         {
-            header('Location: /ats/title');
-            exit();
+            // header('Location: /ats/title');
+            // exit();
         }
-
-        $user = Members::instance();
-        $data = $this->getRequest();
-        if ($data->isPost() and $data->getPost('state') == 'index') {
+        elseif ($data->isPost() AND $data->getPost('state') == 'index') 
+        {
             if ($user->login($data->getPost('email') , $data->getPost('password')))
             {
                 header('Location: /ats/title');

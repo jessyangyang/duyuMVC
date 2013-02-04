@@ -113,7 +113,7 @@ class Members extends \local\db\ORM
         if ($row) {
             $auth = \duyuAT\dao\OAuthAccessTokens::instance();
             $session = \Yaf\Session::getInstance();
-            if ($state = $auth->hasArrow(md5($row['id']))) {
+            if ($state = $auth->hasArrow(md5($row['id'].$email))) {
                 $session->set('current_id',$state['user_id']);
                 $session->set('authToken',$state['oauth_token']);
                 return $state;
@@ -121,19 +121,35 @@ class Members extends \local\db\ORM
             else
             {
                 $authArr = array(
-                        'oauth_token' => md5($row['id']),
+                        'oauth_token' => md5($row['id'].$email),
                         'client_id' => $row['id'],
                         'user_id' => $row['id'],
                         'expires' => strtotime("next Monday"));
                 $auth->insert($authArr);
                 
                 $session->set('current_id',$row['id']);
-                $session->set('authToken',md5($row['id']));
+                $session->set('authToken',md5($row['id'].$email));
 
                 return true;
             }
 
             header("Auth-Token:".$session->get('authToken'));
+        }
+        return false;
+    }
+
+    /**
+     * Logout
+     *
+     * @return Boolean , if unset session ,return true.
+     */
+    public function logout()
+    {
+        $session = \Yaf\Session::getInstance();
+        if ($session->has("current_id")) {
+            $session->__unset('current_id');
+            $session->__unset('authToken');
+            return true;
         }
         return false;
     }
