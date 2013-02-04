@@ -45,5 +45,5 @@
 				<div class="edit-chapter-top">已录入章节 （1/4）</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
 {include file = "ats/footer.tpl"}

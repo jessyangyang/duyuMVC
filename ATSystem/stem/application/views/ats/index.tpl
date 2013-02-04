@@ -41,7 +41,7 @@
                     <label class="checkbox">
                     <input type="checkbox"> 记住我
                     </label>
-                    <input type="hidden" value="title" name="state"/>
+                    <input type="hidden" value="index" name="state"/>
                     <button type="submit" class="btn btn-commit">登录</button>
                     </div>
                     </div>
