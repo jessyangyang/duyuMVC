@@ -90,7 +90,7 @@ class UserController extends \Yaf\Controller_Abstract
         $image = Images::instance();
 
         $code = 200;
-        $message = "No Data";
+        $message = "No Data.";
 
         $data = $this->getRequest();
         $session = Session::getInstance();
