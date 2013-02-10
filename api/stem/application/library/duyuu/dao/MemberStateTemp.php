@@ -26,7 +26,11 @@ class MemberStateTemp extends \local\db\ORM
         'authtoken' => array(
             'type' => 'varchar',
             'default' => 0,
-            'comment' => 'authtoken')
+            'comment' => 'authtoken'),
+        'published' => array(
+            'type' => 'int',
+            'default' => 0,
+            'comment' => 'published')
         );
 
     public $primaryKey = "id";
