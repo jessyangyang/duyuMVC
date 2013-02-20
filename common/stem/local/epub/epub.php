@@ -19,6 +19,10 @@
 
 namespace local\EPub;
 
+use \local\EPubChapterSplitter;
+use \local\UUID;
+use \local\Zip;
+
 class EPub {
     const VERSION = 2.09;
     const REQ_ZIP_VERSION = 1.37;
@@ -65,6 +69,10 @@ class EPub {
     private $ncx_navmap = "";
     private $opf = "";
     private $ncx = "";
+    private $opf_filename = "";
+    private $opf_path = "";
+    private $ncx_path = "";
+    private $ncx_filename = "";
     private $isFinalized = FALSE;
     private $isCoverImageSet = FALSE;
 
@@ -90,13 +98,13 @@ class EPub {
      *
      * @return void
      */
-    function __construct() {
-        include_once "Zip.php";
+    function __construct($option = false) {
+        // include_once "Zip.php";
  
         if (!defined("Zip::VERSION") || Zip::VERSION < self::REQ_ZIP_VERSION) {
             die("<p>EPub requires Zip.php at version " . self::REQ_ZIP_VERSION . " or higher.<br />You can obtain the latest version from <a href=\"http://www.phpclasses.org/browse/package/6110.html\">http://www.phpclasses.org/browse/package/6110.html</a>.</p>");
         }
-        include_once "EPubChapterSplitter.php";
+        // include_once "EPubChapterSplitter.php";
 
         $this->docRoot = $_SERVER["DOCUMENT_ROOT"] . "/";
 
@@ -106,11 +114,18 @@ class EPub {
         $this->zip->setExtraField(TRUE);
         $this->zip->addDirectory("META-INF");
 
-        $this->content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<container version=\"1.0\" xmlns=\"urn:oasis:names:tc:opendocument:xmlns:container\">\n\t<rootfiles>\n\t\t<rootfile full-path=\"book.opf\" media-type=\"application/oebps-package+xml\" />\n\t</rootfiles>\n</container>\n";
+        $this->opf_path = isset($option['opf_path']) ? $option['opf_path'] : "";
+        $this->opf_filename = isset($option['opf_filename']) ? $option['opf_filename'] : "content.opf";
+        $this->ncx_path = isset($option['ncx_path']) ? $option['ncx_path'] : "";
+        $this->ncx_filename = isset($option['ncx_filename']) ? $option['ncx_filename'] : "toc.ncx";
+
+        $this->content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<container version=\"1.0\" xmlns=\"urn:oasis:names:tc:opendocument:xmlns:container\">\n\t<rootfiles>\n\t\t<rootfile full-path=\""
+            . $this->opf_path . $this->opf_filename . "\" media-type=\"application/oebps-package+xml\" />\n\t</rootfiles>\n</container>\n";
 
         $this->zip->addFile($this->content, "META-INF/container.xml");
         $this->content = NULL;
-        $this->opf_manifest = "\t\t<item id=\"ncx\" href=\"book.ncx\" media-type=\"application/x-dtbncx+xml\" />\n";
+        $this->opf_manifest = "\t\t<item id=\"ncx\" href=\""
+            . $this->ncx_path . $this->ncx_filename . "\" media-type=\"application/x-dtbncx+xml\" />\n";
         $this->chapterCount = 0;
 
         $this->isCurlInstalled = extension_loaded('curl') && function_exists('curl_version');
@@ -1339,7 +1354,7 @@ class EPub {
      * @return string $url     The formatted uuid
      */
     function createUUID($version = 4, $url = NULL) {
-        include_once "lib.uuid.php";
+        // include_once "lib.uuid.php";
         return UUID::mint($version, $url, UUID::nsURL);
     }
 

@@ -31,7 +31,8 @@ class AtsController extends \Yaf\Controller_Abstract
         switch ($action) {
             case 'logout':
                 if ($user->logout()) {
-
+                    header('Location: /ats/title');
+                    exit();
                 }
                 break;
             default:
@@ -39,10 +40,10 @@ class AtsController extends \Yaf\Controller_Abstract
                 break;
         }
 
-        if (isset($userInfo->id) AND $userInfo->id) 
+        if (isset($userInfo->id) AND $userInfo->id AND $data->getPost('state') != 'index') 
         {
-            // header('Location: /ats/title');
-            // exit();
+            header('Location: /ats/title');
+            exit();
         }
         elseif ($data->isPost() AND $data->getPost('state') == 'index') 
         {
