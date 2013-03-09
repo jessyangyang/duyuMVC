@@ -43,7 +43,7 @@ class StoreBookController extends \Yaf\Controller_Abstract
 
         $rest->assign('code',$code);
         $rest->assign('message',$message);
-        $rest->assign('bookInfo',$list);
+        $rest->assign('bookMenu',$list);
 
         $rest->response();
     }
