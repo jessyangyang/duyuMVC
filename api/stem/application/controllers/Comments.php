@@ -34,7 +34,7 @@ class CommentsController extends \Yaf\Controller_Abstract
         $code = 200;
         $message = "ok";
 
-        if ($userState) {
+        if (!$userState) {
             $code = "402";
             $message = "No Login.";
         }
@@ -42,7 +42,6 @@ class CommentsController extends \Yaf\Controller_Abstract
         {
 
             $data = $this->getRequest();
-
             if($data->isPost() and $comment->addComment($data)) {
                 $message = "inserted complete.";
             }
@@ -97,9 +96,9 @@ class CommentsController extends \Yaf\Controller_Abstract
 
         $list = $comments->getCommentList($bid,$limit,$page);
 
-        $rest->assign('code',$code);
-        $rest->assign('message',$message);
         if ($list) {
+            $rest->assign('code',$code);
+            $rest->assign('message',$message);
             $rest->assign('pages',$list['pages']);
             $rest->assign('commentList',$list['list']);
         }
