@@ -25,7 +25,7 @@ class UserController extends \Yaf\Controller_Abstract
         $user = Members::getCurrentUser();
         $userState = MemberStateTemp::getCurrentUserForAuth();
         $session = Session::getInstance();
-        $userInfo = array();
+        $userInfo = $authToken = array();
 
         $code = 201;
         $message = "invild!";
