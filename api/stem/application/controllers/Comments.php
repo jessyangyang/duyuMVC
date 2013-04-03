@@ -35,7 +35,7 @@ class CommentsController extends \Yaf\Controller_Abstract
         $message = "ok";
 
         if (!$userState) {
-            $code = "402";
+            $code = 402;
             $message = "No Login.";
         }
         else
