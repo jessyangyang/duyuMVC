@@ -64,11 +64,13 @@ class MemberStateTemp extends \local\db\ORM
     public static function getCurrentUserForAuth()
     {
         $memberState  = self::instance();
+
         if (isset($_SERVER['HTTP_AUTH_TOKEN']) and $_SERVER['HTTP_AUTH_TOKEN']) {
             $wherearr = "authtoken='" .$_SERVER['HTTP_AUTH_TOKEN']. "'";
             if($row = $memberState->field("uid,authtoken")->where($wherearr)->fetchRow()) return $row;
         }
-        return false;
+        else return false;
+        
     }
 
     public function addAuthToken($uid,$authtoken)
@@ -80,7 +82,7 @@ class MemberStateTemp extends \local\db\ORM
             }
             else
             {
-                if($memberState->insert(array('uid' => $uid,'authtoken' => $authtoken))) return true;
+                if($memberState->insert(array('uid' => $uid,'authtoken' => $authtoken,'published' => START_TIME))) return true;
             }
         }
         return false;

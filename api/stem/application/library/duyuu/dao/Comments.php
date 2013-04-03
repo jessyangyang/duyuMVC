@@ -124,9 +124,10 @@ class Comments extends \local\db\ORM
         $comment = self::instance();
         // $user = Members::getCurrentUser();
         $userState = MemberStateTemp::getCurrentUserForAuth();
-
+        
         if ($request and $userState) {
             $common =  \Yaf\Registry::get('common');
+
             $data = array(
                 'post_id' => $request->getPost('bid'),
                 'type' => $request->getPost('type'),
@@ -137,11 +138,10 @@ class Comments extends \local\db\ORM
                 'published' => $request->getPost('published'),
                 'parent' => $request->getPost('parent'));
 
-        }
-        if ($comment->insert($data)) {
-            return true;
-        }
+            if ($comment->insert($data)) return true;
 
+        }
+        
         return false;
     }
 
