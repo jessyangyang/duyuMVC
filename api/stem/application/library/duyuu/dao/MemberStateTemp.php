@@ -82,7 +82,7 @@ class MemberStateTemp extends \local\db\ORM
             }
             else
             {
-                if($memberState->insert(array('uid' => $uid,'authtoken' => $authtoken,'published' => START_TIME))) return true;
+                if($memberState->insert(array('uid' => $uid,'authtoken' => $authtoken,'published' => UPDATE_TIME))) return true;
             }
         }
         return false;

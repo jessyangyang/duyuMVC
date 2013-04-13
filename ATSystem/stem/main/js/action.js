@@ -35,7 +35,7 @@
         });
         return false; 
     });
-    $(".right-button").live('click',function(){
+    $(".right-button,.btn-commit").live('click',function(){
         $(".form-horizontal").ajaxSubmit({
             target: '#fix'
         });

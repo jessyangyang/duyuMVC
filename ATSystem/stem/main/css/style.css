@@ -204,6 +204,59 @@ body{background-color: #F7F4F1;}
 	padding-top:0px; 
 }
 
+/* editor*/
+
+.btn-toolbar
+{
+	margin-left: 20px;
+}
+
+#editor {
+	max-height: 350px;
+	height: 350px;
+	background-color: #F8F6F3;
+	border-collapse: separate; 
+	border: none; 
+	padding: 20px; 
+	box-sizing: content-box; 
+	box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+	-webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+	-moz-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+	border-top-right-radius: 3px; border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px; border-top-left-radius: 3px;
+	overflow: none;
+	outline: none;
+	font-size: 16px;
+	text-indent:32px;
+}
+#voiceBtn {
+  width: 20px;
+  color: transparent;
+  background-color: transparent;
+  transform: scale(2.0, 2.0);
+  -webkit-transform: scale(2.0, 2.0);
+  -moz-transform: scale(2.0, 2.0);
+  border: transparent;
+  cursor: pointer;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+div[data-role="editor-toolbar"] {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.dropdown-menu a {
+  cursor: pointer;
+}
+
+.dropdown-menu li {
+	text-align: left;
+}
+
 /* Fix */
 ul.inline > li, ol.inline > li {
 	padding: 0 23px 0 23px;
