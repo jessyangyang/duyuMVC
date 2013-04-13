@@ -43,6 +43,10 @@ class Books extends \local\db\ORM
             'type' => 'int',
             'default' => 0,
             'comment' => 'publishing time'),
+        'modified' => array(
+            'type' => 'int',
+            'default' => 0,
+            'comment' => 'modified time'),
         'isbn' => array(
             'type' => 'varchar',
             'default' => 0,
