@@ -14,6 +14,9 @@ define("APPLICATION_PATH", realpath((phpversion() >= "5.3"? __DIR__: dirname(__F
 // System Start Time
 define("START_TIME", microtime(true));
 
+// Start Time
+define("UPDATE_TIME", time());
+
 // System Start Memory
 define("START_MEMORY_USAGE", memory_get_usage());
 
