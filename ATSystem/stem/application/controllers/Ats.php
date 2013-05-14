@@ -63,10 +63,15 @@ class AtsController extends \Yaf\Controller_Abstract
 
         $userInfo = Members::getCurrentUser();
         $data = $this->getRequest();
+        $bid = "";
 
-        if ($userInfo->id) {
+        if (isset($userInfo->id) and $userInfo->id) {
             $book = Books::instance();
             $bid = $book->getEditingCurrent();
+
+            $display->assign('user',array(
+                'id' => $userInfo->id,
+                'email' => $userInfo->email));
             
             if ($data->isPost() and $data->getPost('state') == "title") 
             {
@@ -95,18 +100,22 @@ class AtsController extends \Yaf\Controller_Abstract
                 exit();
             }
         }
+        else
+        {
+            header('Location: /ats/index');
+            exit();
+        }
 
         $display->assign('info',"");
 
         if ($bid) {
             $info = $book->getBookInfo($bid);
+
             $display->assign('info',$info);
         }
 
 
-        $display->assign('user',array(
-                'id' => $userInfo->id,
-                'email' => $userInfo->email));
+        
         $display->assign("title", "基本信息");
         
     }
