@@ -29,13 +29,13 @@
     //         data:$(this).attr('name') + '=' +$(this).val()
     //     });
     // });
-    $(".form-horizontal").live('submit',function(){
+    $(".form-horizontal").on('submit',function(){
         $(this).ajaxSubmit({
             target: '#fix'
         });
         return false; 
     });
-    $(".right-button,.btn-commit").live('click',function(){
+    $(".right-button,.btn-commit").on('click',function(){
         $(".form-horizontal").ajaxSubmit({
             target: '#fix'
         });
