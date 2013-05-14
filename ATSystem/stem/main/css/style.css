@@ -43,7 +43,9 @@ body{background-color: #F7F4F1;}
 }
 .edit-box h2 {
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: 16px;
+	color:#333333;
+	font-weight: 500;
 	margin: 0px;
 	padding: 4px;
 	padding-left: 20px;
@@ -101,6 +103,9 @@ body{background-color: #F7F4F1;}
 	box-shadow:0 0 0 rgba(0, 0, 0, 0.075) inset;
 	margin:12px 18px 12px 18px;
 	padding: 2px;
+	font-size: 18px;
+	line-height: 24px;
+	height: 24px;
 }
 .edit-content .edit-textarea {
 	width:745px;

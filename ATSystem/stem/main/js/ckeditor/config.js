@@ -13,11 +13,11 @@ CKEDITOR.editorConfig = function( config ) {
 	// 					'forms,iframe,image,newpage,removeformat,' +
 	// 					'smiley,specialchar,stylescombo,templates';
 
-
+	config.extraPlugins = 'abbr';
 
 	config.toolbar = [
     	{ name: 'basicstyles', items: [ 'Bold', 'Italic','Underline','Strike','-','Subscript','Superscript'] },
-    	{ name: '', items: ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote']},
+    	{ name: '', items: ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','Abbr']},
     	{ name: '', items: ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']},
     	'/',
 		{ name: 'styles' , items: [ 'Font','Format']},
@@ -26,12 +26,13 @@ CKEDITOR.editorConfig = function( config ) {
     	{ name: '', items: ['Source','SelectAll','RemoveFormat','-','Undo', 'Redo']}
 	];
 
-	config.contentsCss = '/contents.css';
+	config.contentsCss = '/js/ckeditor/contents.css' + '?code=' + Math.random();
 	config.height = 400;
 	config.filebrowserBrowseUrl = '/kcfinder/browse.php?type=files';
-   config.filebrowserImageBrowseUrl = '/kcfinder/browse.php?type=images';
-   config.filebrowserFlashBrowseUrl = '/kcfinder/browse.php?type=flash';
-   config.filebrowserUploadUrl = '/kcfinder/upload.php?type=files';
-   config.filebrowserImageUploadUrl = '/kcfinder/upload.php?type=images';
-   config.filebrowserFlashUploadUrl = '/kcfinder/upload.php?type=flash';
+    config.filebrowserImageBrowseUrl = '/kcfinder/browse.php?type=images';
+    config.filebrowserFlashBrowseUrl = '/kcfinder/browse.php?type=flash';
+    config.filebrowserUploadUrl = '/kcfinder/upload.php?type=files';
+    config.filebrowserImageUploadUrl = '/kcfinder/upload.php?type=images';
+    config.filebrowserFlashUploadUrl = '/kcfinder/upload.php?type=flash';
+
 };

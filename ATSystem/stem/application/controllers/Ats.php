@@ -123,6 +123,7 @@ class AtsController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
+        $data = $this->getRequest();
 
         if (!$userInfo->id) 
         {
@@ -131,7 +132,11 @@ class AtsController extends \Yaf\Controller_Abstract
         }
         else
         {
-            // header('Location: /ats/cover');
+            if ($data->isPost() and $data->getPost('state') == "edit") 
+            {
+                header('Location: /ats/cover');
+                exit();
+            }
         }
         $display->assign("title", "基本信息");
     }
@@ -140,6 +145,8 @@ class AtsController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
+        $data = $this->getRequest();
+
         if (!$userInfo->id) 
         {
             header('Location: /ats');
@@ -147,7 +154,12 @@ class AtsController extends \Yaf\Controller_Abstract
         }
         else
         {
-            // header('Location: /ats/end');
+            if ($data->isPost() and $data->getPost('state') == "cover") 
+            {
+                header('Location: /ats/end');
+                exit();
+            }
+            
         }
         $display->assign("title", "基本信息");
     }
@@ -156,6 +168,7 @@ class AtsController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
+        $data = $this->getRequest();
         if (!$userInfo->id) 
         {
             header('Location: /ats');

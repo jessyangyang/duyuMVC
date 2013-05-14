@@ -7,7 +7,7 @@
 				<a href="">设置</a>
 			</div>
 			<div class="right-button">
-				<a href="javascript:void(0)" class="btn btn-danger fl">完成并提交全本</a>
+				<a href="javascript:void(0)" class="btn btn-danger fl btn-next">完成并提交全本</a>
 			</div>
 			<div class="header-nav">
 				<h1>投稿系统</h1>
@@ -34,7 +34,7 @@
 					<input type="text" name="title" class="span5 edit-title" placeholder="新建章节 (不分章节的作品可不填)"/>
 					<textarea id="textarea1" name="editor1" class="edit-textarea">
 					</textarea>
-					<input type="hidden" value="complete" name="state"/>
+					<input type="hidden" value="end" name="state"/>
 				</form>
 				
 				</div>
