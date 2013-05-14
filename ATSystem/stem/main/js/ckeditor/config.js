@@ -1,49 +1,37 @@
 /**
- * @license Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.html or http://ckeditor.com/license
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	// Define changes to default configuration here.
-	// For the complete reference:
-	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
-
-	// default language
+	// Define changes to default configuration here. For example:
+	// config.language = 'fr';
+	// config.uiColor = '#AADC6E';
 	config.language = 'zh-cn';
-
-	// Default color
 	config.uiColor = '#F8F6F3';
-	// Box width
-	//config.width = 400;
-	// Box height
-    config.height = 290;
+	// config.removePlugins = 'colorbutton,find,flash,font,' +
+	// 					'forms,iframe,image,newpage,removeformat,' +
+	// 					'smiley,specialchar,stylescombo,templates';
 
-    config.toolbarCanCollapse = false;
-    config.resize_enabled = false;
-	config.docType = "<!DOCTYPE html>";
-	config.font_defaultLabel = "Helvetica";
-	config.fontSize_defaultLabel = '14px';
-    // The toolbar style
-    config.toolbar = "Basic";
- 
-	// The toolbar groups arrangement, optimized for two toolbar rows.
-	config.toolbarGroups = [
-		//{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-		//{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-		//{ name: 'links' },
-		//{ name: 'insert' },
-		//{ name: 'forms' },
-		//{ name: 'tools' },
-		//{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
-		//{ name: 'others' },
-		//'/',
-		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align' ] },
-		//{ name: 'styles' },
-		//{ name: 'colors' }
+
+
+	config.toolbar = [
+    	{ name: 'basicstyles', items: [ 'Bold', 'Italic','Underline','Strike','-','Subscript','Superscript'] },
+    	{ name: '', items: ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote']},
+    	{ name: '', items: ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']},
+    	'/',
+		{ name: 'styles' , items: [ 'Font','Format']},
+		{ name: 'tools', items: ['Image','Table','HorizontalRule','SpecialChar',]},
+    	{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'] },
+    	{ name: '', items: ['Source','SelectAll','RemoveFormat','-','Undo', 'Redo']}
 	];
 
-	// Remove some buttons, provided by the standard plugins, which we don't
-	// need to have in the Standard(s) toolbar.
-	config.removeButtons = 'Underline,Subscript,Superscript';
+	config.contentsCss = '/contents.css';
+	config.height = 400;
+	config.filebrowserBrowseUrl = '/kcfinder/browse.php?type=files';
+   config.filebrowserImageBrowseUrl = '/kcfinder/browse.php?type=images';
+   config.filebrowserFlashBrowseUrl = '/kcfinder/browse.php?type=flash';
+   config.filebrowserUploadUrl = '/kcfinder/upload.php?type=files';
+   config.filebrowserImageUploadUrl = '/kcfinder/upload.php?type=images';
+   config.filebrowserFlashUploadUrl = '/kcfinder/upload.php?type=flash';
 };
