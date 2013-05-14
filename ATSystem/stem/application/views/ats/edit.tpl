@@ -8,7 +8,7 @@
 			</div>
 			<div class="right-button">
 				<a href="javascript:void(0)" class="btn fl">录入下一篇</a>
-				<a href="javascript:void(0)" class="btn btn-danger fl">下一步-封面设计</a>
+				<a href="javascript:void(0)" class="btn btn-danger fl btn-next">下一步-封面设计</a>
 			</div>
 			<div class="header-nav">
 				<h1>投稿系统</h1>
@@ -43,6 +43,7 @@
 					<script>
                         CKEDITOR.replace( 'textarea1' );
                     </script>
+                    <input type="hidden" value="edit" name="state"/>
 				</form>
 				</div>
 			</div>

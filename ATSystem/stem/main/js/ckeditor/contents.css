@@ -4,12 +4,12 @@ body {
     color: #333333;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
-    font-weight: 18px;
     margin: 20px;
 }
 .cke_editable {
     font-size: 14px;
-    line-height: 1.8em;
+    line-height: 1.6em;
+    letter-spacing:0.15em;
 }
 blockquote {
     border-color: #CCCCCC;

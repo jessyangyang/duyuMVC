@@ -7,8 +7,8 @@
 				<a href="">设置</a>
 			</div>
 			<div class="right-button">
-				<a href="" class="btn fl">录入下一篇</a>
-				<a href="" class="btn btn-danger fl">下一步-撰写导言</a>
+				<a href="" class="btn fl btn-previous">录入下一篇</a>
+				<a href="" class="btn btn-danger fl btn-next">下一步-撰写导言</a>previous
 			</div>
 			<div class="header-nav">
 				<h1>投稿系统</h1>
@@ -75,6 +75,7 @@
 						
 					</div>
 					</fieldset>
+					<input type="hidden" value="cover" name="state"/>
 				</form>
 				</div>
 			</div>

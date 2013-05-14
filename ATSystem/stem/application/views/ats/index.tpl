@@ -6,7 +6,7 @@
                 <a href="">帮助</a>
                 <a href="">设置</a>
             </div>
-            <a href="javascript:void(0)" class="btn btn-danger right-button">下一步：撰写导言</a>
+            <a href="javascript:void(0)" class="btn btn-danger right-button btn-next">下一步：撰写导言</a>
             <div class="header-nav">
                 <h1>投稿系统</h1>
                 <div class="p-bar">
