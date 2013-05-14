@@ -31,7 +31,7 @@ class AtsController extends \Yaf\Controller_Abstract
         switch ($action) {
             case 'logout':
                 if ($user->logout()) {
-                    header('Location: /ats/title');
+                    header('Location: /ats/index');
                     exit();
                 }
                 break;
@@ -70,12 +70,11 @@ class AtsController extends \Yaf\Controller_Abstract
             
             if ($data->isPost() and $data->getPost('state') == "title") 
             {
-
                 if ($bid){
                     $book ->where("bid=$bid")->update(array(
                         'title' => $data->getPost('title'),
                         'author' => $data->getPost('author'),
-                        'modified' => START_TIME));
+                        'modified' => UPDATE_TIME));
                 }
                 else
                 {
@@ -83,8 +82,8 @@ class AtsController extends \Yaf\Controller_Abstract
                         'cid' => 0,
                         'title' => $data->getPost('title'),
                         'author' => $data->getPost('author'),
-                        'published' => START_TIME,
-                        'modified' => START_TIME);
+                        'published' => UPDATE_TIME,
+                        'modified' => UPDATE_TIME);
                     if ($bookid = $book->insert($arr)) {
                         $session = Session::getInstance();
                         $session->set('bid',$bookid);
@@ -123,7 +122,7 @@ class AtsController extends \Yaf\Controller_Abstract
         }
         else
         {
-            header('Location: /ats/cover');
+            // header('Location: /ats/cover');
         }
         $display->assign("title", "基本信息");
     }
@@ -139,7 +138,7 @@ class AtsController extends \Yaf\Controller_Abstract
         }
         else
         {
-            header('Location: /ats/end');
+            // header('Location: /ats/end');
         }
         $display->assign("title", "基本信息");
     }

@@ -35,8 +35,8 @@ class TestController extends \Yaf\Controller_Abstract
         include_once("EPub.php");
 
         $option = array(
-            'opf_path' = 'OEBPS/',
-            'ncx_path' = 'OEBPS/');
+            'opf_path' => 'OEBPS/',
+            'ncx_path' => 'OEBPS/');
         $book = new EPub();
 
         $book->setTitle("Test book");
