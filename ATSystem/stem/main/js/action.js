@@ -29,15 +29,15 @@
     //         data:$(this).attr('name') + '=' +$(this).val()
     //     });
     // });
-    $(".form-horizontal").on('submit',function(){
-        $(this).ajaxSubmit({
-            target: '#fix'
+    $("body").on('submit','.form-horizontal',function(){
+        $(".form-horizontal").ajaxSubmit({
+            target: 'body'
         });
         return false; 
     });
-    $(".right-button,.btn-commit").on('click',function(){
+    $("body").on('click',".right-button,.btn-commit",function(){
         $(".form-horizontal").ajaxSubmit({
-            target: '#fix'
+            target: 'body'
         });
         return false; 
     });
