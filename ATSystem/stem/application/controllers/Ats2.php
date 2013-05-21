@@ -27,14 +27,20 @@ class AtsController extends \Yaf\Controller_Abstract
         $user = Members::instance();
         $session = Session::getInstance();
 
+        $book = Books::instance();
+
+        $templePath = $display->getScriptPath();
+
         $isLogin = false;
 
         // logout from the get field.
         switch ($action) {
             case 'logout':
                 if ($user->logout()) {
-                    header('Location: /ats/index');
-                    exit();
+                    // header('Location: /ats/index');
+                    // exit();
+                    $display->render($this->getScripPath()."/index.tpl");
+                    return true;
                 }
                 break;
             default:
@@ -45,8 +51,10 @@ class AtsController extends \Yaf\Controller_Abstract
         if (isset($userInfo->id) AND $userInfo->id AND $data->getPost('state') != 'index') 
         {
             $isLogin = true;
-            header('Location: /ats/title');
-            exit();
+            $display->assign('list',$book->getCurrentUserWriterBooks());
+            // header('Location: /ats/title');
+            // exit();
+            $display->display("title.tpl");
         }
         elseif ($data->isPost() AND $data->getPost('state') == 'index') 
         {
