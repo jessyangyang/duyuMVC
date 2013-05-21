@@ -12,7 +12,7 @@
 				<div class="p-bar">
 					<div class='red-point'></div>
 					<div class="progress">
-						<div class="bar" style="width: 0%"></div>
+						<div class="bar" style="width: {$progress}%"></div>
 					</div>
 				</div>
 				<ul class="inline">

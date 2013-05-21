@@ -27,7 +27,9 @@ class AtsController extends \Yaf\Controller_Abstract
         $user = Members::instance();
         $session = Session::getInstance();
 
+        $isLogin = false;
 
+        // logout from the get field.
         switch ($action) {
             case 'logout':
                 if ($user->logout()) {
@@ -42,6 +44,7 @@ class AtsController extends \Yaf\Controller_Abstract
 
         if (isset($userInfo->id) AND $userInfo->id AND $data->getPost('state') != 'index') 
         {
+            $isLogin = true;
             header('Location: /ats/title');
             exit();
         }
@@ -55,6 +58,8 @@ class AtsController extends \Yaf\Controller_Abstract
         }
         
         $display->assign("title", "Login");
+        $display->assign("progress",0);
+        $display->assign("islogin",$isLogin);
     }
 
     public function titleAction()
@@ -116,6 +121,7 @@ class AtsController extends \Yaf\Controller_Abstract
 
         
         $display->assign("title", "基本信息");
+        $display->assign("progress",0);
         
     }
 

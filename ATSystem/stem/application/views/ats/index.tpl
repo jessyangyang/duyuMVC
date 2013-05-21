@@ -12,7 +12,8 @@
                 <div class="p-bar">
                     <div class='red-point'></div>
                     <div class="progress">
-                        <div class="bar" style="width: 0%"></div>
+                        <div class="bar" style="width: 0
+                        {$progress}%"></div>
                     </div>
                 </div>
                 <ul class="inline">
@@ -29,6 +30,7 @@
                 <div id="edit-box" class="edit-info">
                 <form action="/ats/index" method="POST" class="form-horizontal" >
                     <fieldset>
+                    {if $islogin eq false}
                     <div class="control-group">
                     <label class="control-label" for="">请先登录</label>
                     <div class="controls">
@@ -45,6 +47,11 @@
                     <button type="submit" class="btn btn-commit">登录</button>
                     </div>
                     </div>
+                    {else}
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href=""></a></li>
+                    </ul>
+                    {/if}
                     </fieldset>
                 </form>
                 </div>
