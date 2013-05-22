@@ -14,7 +14,8 @@ use \duyuAT\dao\Images;
 use \duyuAT\dao\Books;
 use \Yaf\Session;
 
-class IndexController extends \Yaf\Controller_Abstract 
+
+class WriterController extends \Yaf\Controller_Abstract 
 {
 
     public function indexAction($action = false) 
@@ -39,7 +40,7 @@ class IndexController extends \Yaf\Controller_Abstract
                 if ($user->logout()) {
                     // header('Location: /ats/index');
                     // exit();
-                    $display->render($this->getScripPath()."/index.tpl");
+                    $display->render("index.tpl");
                     return true;
                 }
                 break;

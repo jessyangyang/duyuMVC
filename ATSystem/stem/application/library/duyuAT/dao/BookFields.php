@@ -8,7 +8,9 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace duyuAT\dao;
+namespace \duyuAT\dao;
+
+use duyuAT\dao\Members;
 
 class BookFields extends \local\db\ORM 
 {
@@ -19,6 +21,10 @@ class BookFields extends \local\db\ORM
             'type' => 'int',
             'default' => 0,
             'comment' => 'bid'),
+        'uid' => array(
+            'type' => 'int',
+            'default' => 0,
+            'comment' => 'uid'),
         'status' => array(
             'type' => 'int',
             'default' => 0,
@@ -26,4 +32,31 @@ class BookFields extends \local\db\ORM
     );
 
     public $primaryKey = "bid";
+
+    // Instance Self
+    protected static $instance;
+
+
+    public static function instance($key = 0)
+    {
+        return self::$instance ? self::$instance : new BookFields($key);
+    }
+
+
+    /**
+     * [updateBookStatus description]
+     * @param  [type] $bid   [description]
+     * @param  [type] $state [description]
+     * @return [Boolean]        [description]
+     */
+    public function updateBookStatus($bid,$state)
+    {
+        $bookfields = self::instance();
+        $table = $bookfields->table;
+        $userStatus = Members::getCurrentUser();
+
+        if ($bookfields->where("uid='".$userStatus->id."' AND bid='$bid'")->update(array("status"=> $state))) return true;
+
+        return false
+    }
 }

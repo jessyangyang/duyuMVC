@@ -10,6 +10,9 @@
 
 namespace duyuAT\dao;
 
+use duyuAT\dao\Members;
+use duyuAT\dao\BookFields;
+
 class Books extends \local\db\ORM 
 {
     public $table = 'books';
@@ -74,7 +77,8 @@ class Books extends \local\db\ORM
      */
     public function getEditingCurrent()
     {
-        if (\duyuAT\dao\Members::getCurrentUser()) return false;
+        $user = \duyuAT\dao\Members::getCurrentUser();
+        if (!$user->id) return false;
         $session = \Yaf\Session::getInstance();
         if ($session->has('bid')) {
             return $session->bid;
@@ -148,6 +152,53 @@ class Books extends \local\db\ORM
         return "";
     }
 
+    /**
+     * [getCurrentUserWriterBooks]
+     *
+     * @return Array or false , return array of the current writer book online
+     */
+    public function getCurrentUserWriterBooks()
+    {
+        $books = self::instance();
+        $table = $books->table;
+        $userStatus = \duyuAT\dao\Members::getCurrentUser();
+
+        if ($userStatus->id) return false;
+
+        $list = $books->field("$table.bid,$table.title,$table.category,$table.cover,$table.author,$table.press,$table.published,$table.isbn,$table.summary,bf.uid,bf.status")->joinQuery('book_fields as bf',"$table.bid=bf.bid")->where("bf.uid='".$userStatus->id."'")->order("$table.published")->fetchList();
+
+        if (is_array($list)) {
+            foreach ($list as $key => $value) {
+                if (isset($value['cover']) and $value['cover']) {
+                    $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                }
+            }
+            return $list;
+        }
+
+        return false;
+    }
+
+    /**
+     * [updateBookStatus description]
+     * @param  [type] $bid   [description]
+     * @param  [type] $state [description]
+     * @return [type]        [description]
+     */
+    public function updateBookStatus($bid,$state)
+    {
+        $books = self::instance();
+        $table = $books->table;
+        $userStatus = \duyuAT\dao\Members::getCurrentUser();
+
+
+    }
+
+    /**
+     * [getBookInfo description]
+     * @param  [String] $bid [description]
+     * @return [Array]      [return list of the bookInfo]
+     */
     public function getBookInfo($bid)
     {
         $books = self::instance();
