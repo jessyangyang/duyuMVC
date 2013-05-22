@@ -35,10 +35,10 @@ class SmartyAdapterRouter implements \Yaf\View_Interface
 
         if ($views == null) $this->_views = "views";
         else $this->_views = $views;
-        
-        if (empty($arrRequest->module)) {
-            $this->_script_path = APPLICATION_PATH.'/application/' . $this->_views;
-            $this->setScriptPath(APPLICATION_PATH.'/application/') . $this->_views;
+
+        if (empty($arrRequest->module) or 'index' == strtolower($arrRequest->module)) {
+            $this->_script_path = APPLICATION_PATH.'/application/' . $this->_views . '/' . strtolower($arrRequest->controller);
+            $this->setScriptPath(APPLICATION_PATH.'/application/' . $this->_views . '/' . strtolower($arrRequest->controller));
         } 
         else 
         {
@@ -62,7 +62,7 @@ class SmartyAdapterRouter implements \Yaf\View_Interface
          $view_path = $this->_script_path.'/'.$view_name;
          $cache_id     = empty($tpl_vars['cache_id']) ? '' : $tpl_vars['cache_id'];
          $compile_id = empty($tpl_vars['compile_id']) ? '' : $tpl_vars['compile_id'];
-         return $this->_smarty->display($view_path, $cache_id, $compile_id);
+         echo $this->_smarty->fetch($view_path, $cache_id, $compile_id);
      }
      
      //模版赋值
@@ -82,5 +82,84 @@ class SmartyAdapterRouter implements \Yaf\View_Interface
      {
          return $this->_script_path;
      }
-     
+
+     /**
+     * Return the template engine object
+     *
+     * @return Smarty
+     */
+    public function getEngine() {
+        return $this->_smarty;
+    }
+    
+    /**
+     * Alias for setScriptPath
+     *
+     * @param string $path
+     * @param string $prefix Unused
+     * @return void
+     */
+    public function setBasePath($path, $prefix = 'Zend_View')
+    {
+        return $this->setScriptPath($path);
+    }
+ 
+    /**
+     * Alias for setScriptPath
+     *
+     * @param string $path
+     * @param string $prefix Unused
+     * @return void
+     */
+    public function addBasePath($path, $prefix = 'Zend_View')
+    {
+        return $this->setScriptPath($path);
+    }
+ 
+    /**
+     * Assign a variable to the template
+     *
+     * @param string $key The variable name.
+     * @param mixed $val The variable value.
+     * @return void
+     */
+    public function __set($key, $val)
+    {
+        $this->_smarty->assign($key, $val);
+    }
+ 
+    /**
+     * Allows testing with empty() and isset() to work
+     *
+     * @param string $key
+     * @return boolean
+     */
+    public function __isset($key)
+    {
+        return (null !== $this->_smarty->get_template_vars($key));
+    }
+ 
+    /**
+     * Allows unset() on object properties to work
+     *
+     * @param string $key
+     * @return void
+     */
+    public function __unset($key)
+    {
+        $this->_smarty->clear_assign($key);
+    }
+
+    /**
+     * Clear all assigned variables
+     *
+     * Clears all variables assigned to Zend_View either via
+     * {@link assign()} or property overloading
+     * ({@link __get()}/{@link __set()}).
+     *
+     * @return void
+     */
+    public function clearVars() {
+        $this->_smarty->clear_all_assign();
+    }
 }

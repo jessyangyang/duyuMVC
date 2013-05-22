@@ -1,4 +1,4 @@
-{include file = "ats/header.tpl"}
+{include file = "header.tpl"}
 	<body>
 		<header>
 			<div class="right-tools">
@@ -31,7 +31,7 @@
 			<div class="edit-box">
 				<h2>给已上传的作品添加封面。</h2>
 				<div id="edit-box" class="edit-cover">
-				<form class="form-horizontal" action="/ats/cover" method="POST">
+				<form class="form-horizontal" action="/writer/cover" method="POST">
 					<fieldset>
 					<div class="control-group-left">
 					<div class="control-group">
@@ -80,4 +80,4 @@
 				</div>
 			</div>
 		</div>
-{include file = "ats/footer.tpl"}
+{include file = "footer.tpl"}

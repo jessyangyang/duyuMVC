@@ -26,10 +26,10 @@ class Books extends \local\db\ORM
             'type' => 'varchar',
             'default' => 0,
             'comment' => 'title'),
-        'category' => array(
-            'type' => 'varchar',
+        'cid' => array(
+            'type' => 'int',
             'default' => 0,
-            'comment' => 'category'),
+            'comment' => 'cid'),
         'cover' => array(
             'type' => 'varchar',
             'default' => 0,
@@ -100,7 +100,7 @@ class Books extends \local\db\ORM
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = \duyuAT\image\ImageControl::getRelativeImage($value['cover']);
                 }
             }
 
@@ -143,7 +143,7 @@ class Books extends \local\db\ORM
         if (is_array($list["list"])) {
             foreach ($list["list"] as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list["list"][$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                    $list["list"][$key]['cover'] = \duyuAT\image\ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list;
@@ -162,15 +162,18 @@ class Books extends \local\db\ORM
         $books = self::instance();
         $table = $books->table;
         $userStatus = \duyuAT\dao\Members::getCurrentUser();
+        if (!$userStatus->id) return false;
 
-        if ($userStatus->id) return false;
 
-        $list = $books->field("$table.bid,$table.title,$table.category,$table.cover,$table.author,$table.press,$table.published,$table.isbn,$table.summary,bf.uid,bf.status")->joinQuery('book_fields as bf',"$table.bid=bf.bid")->where("bf.uid='".$userStatus->id."'")->order("$table.published")->fetchList();
+
+        $list = $books->field("$table.bid,$table.title,$table.cover,$table.author,$table.press,$table.published,$table.isbn,$table.summary,bf.uid,bf.status,bc.name")->joinQuery('book_fields as bf',"$table.bid=bf.bid")->joinQuery('book_category as bc',"bc.cid=books.cid")->where("bf.uid='".$userStatus->id."'")->order("$table.published")->fetchList();
+
+        // print_r($list);
 
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = \duyuAT\image\ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list;
@@ -209,7 +212,7 @@ class Books extends \local\db\ORM
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = \duyuAT\image\ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list[0];

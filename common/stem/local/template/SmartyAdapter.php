@@ -27,7 +27,8 @@ class SmartyAdapter implements \Yaf\View_Interface
      * @param array $extraParams
      * @return void
      */
-    public function __construct($tmplPath = null, $extraParams = array()) {
+    public function __construct($tmplPath = null, $extraParams = array()) 
+    {
         $this->_smarty = new \Smarty();
  
         if (null !== $tmplPath) {

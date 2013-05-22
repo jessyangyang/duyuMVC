@@ -1,36 +1,12 @@
-{include file = "header.tpl"}
-    <body>
-        <header>
-            <div class="right-tools">
-                <a href="">主页</a>
-                <a href="">帮助</a>
-                <a href="">设置</a>
-            </div>
-            <a href="javascript:void(0)" class="btn btn-danger right-button btn-next">下一步：撰写导言</a>
-            <div class="header-nav">
-                <h1>投稿系统</h1>
-                <div class="p-bar">
-                    <div class='red-point'></div>
-                    <div class="progress">
-                        <div class="bar" style="width: 0
-                        {$progress}%"></div>
-                    </div>
-                </div>
-                <ul class="inline">
-                    <li>基本信息</li>
-                    <li>文章录入</li>
-                    <li>封面设计</li>
-                    <li>撰写导言</li>
-                </ul>
-            </div>
-        </header>
+{include file = "writer/header.tpl"}
+{include file = "writer/progress.tpl"}
         
         <div class="container">
             <div class="edit-box">
                 <div id="edit-box" class="edit-info">
-                <form action="/ats/index" method="POST" class="form-horizontal" >
+                <form action="/writer/index" method="POST" class="form-horizontal" >
                     <fieldset>
-                    {if $islogin eq false}
+                    {if $islogin eq 0}
                     <div class="control-group">
                     <label class="control-label" for="">请先登录</label>
                     <div class="controls">
@@ -48,15 +24,33 @@
                     </div>
                     </div>
                     {else}
-                    <ul class="nav nav-tabs">
-                        {foreach $list as $item}
-                        <li class="active"><a href="">{$item}</a></li>
-                        {/foreach}
-                    </ul>
+                    <table class="table">
+                        <thead>
+                            <th>#</th>
+                            <th>书名</th>
+                            <th>作者</th>
+                            <th>分类</th>
+                            <th>创建时间</th>
+                            <th>发布状态</th>
+                        </thead>
+                        <tbody>
+                            {foreach $list as $key => $item}
+                            <tr>
+                                <td>{$key+1}</td>
+                                <td><a href="">{$item.title}</a></td>
+                                <td>{$item.author}</td>
+                                <td>{$item.name}</td>
+                                <td>{$item.published|date_format:"%H:%M %D"}</td>
+                                <td><a href="">{if $item.status eq 0}未发布{else}已发布{/if}</a></td>
+                            </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                    <input type="hidden" value="title" name="state"/>
                     {/if}
                     </fieldset>
                 </form>
                 </div>
             </div>
         </div>
-{include file = "footer.tpl"}
+{include file = "writer/footer.tpl"}
