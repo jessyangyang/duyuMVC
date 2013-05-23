@@ -26,27 +26,19 @@ class RegisterRest extends \local\rest\Restful{
         self::regRestURL('testAuth','/api/test/upload','test','upload');
         self::regRestURL('testAuth','/api/test/addComment','test','addComment');
 
-        /**User
+        /**Writer System
         ************************/
 
-        // userLogin
-        self::regRestURL('userLogin','/api/user/login','user','login');
-        // userRegister
-        self::regRestURL('userRegister','/api/user/register','user','register');
-        // userLogout
-        self::regRestURL('userLogout','/api/user/logout','user','logout');
-        // userProfile
-        self::regRestURL('userProfile','/api/user/profile','user','profile');
-        
-        // user Buylist
-        self::regRestURL('userBuyList','/api/user/buyList/:offset/:limit','userShelf','buyList');
-        // user Anthor BuyList
-        self::regRestURL('userOtherBuyList','/api/user/otherList/:type','userShelf','otherList');
-        // user Delete book
-        self::regRestURL('userDeleteBook','/api/user/book/delete/:bid','userShelf','delete');
-
-        // Payment For Apple
-        self::regRestURL('paymentForApple','/api/payment/apple/feedback','store','paymentForApple');
+        // writer login
+        self::regRestURL('writerLogin','/writer/index','writer','index');
+        // writer title
+        self::regRestURL('writerTitle','/writer/title/:bid','writer','title');
+        // writer edit 
+        self::regRestURL('writerEdit','/writer/edit','writer','edit');
+        // writer cover 
+        self::regRestURL('writerCover','/writer/cover','writer','cover');
+        // writer end
+        self::regRestURL('writerEnd','/writer/end','writer','end');
         
         
         return self::$restURL;

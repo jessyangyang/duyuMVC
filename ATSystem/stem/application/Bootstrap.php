@@ -13,6 +13,7 @@ use \Yaf\Loader;
 use \local\db\MySQL;
 use \duyuAT\common;
 use \local\template\SmartyAdapter;
+use \duyuAT\rest\RegisterRest;
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract 
 {
@@ -33,11 +34,11 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
         MySQL::setInstance('default', $config, true);
     }
 
-    // public function _initRoute(Dispatcher $dispatcher) {
-    //     $router = $dispatcher->getRouter();
-    //     $rest = RegisterRest::initRegister();
-    //     $router->addConfig(new Yaf\Config\Simple($rest));
-    // }
+    public function _initRoute(Dispatcher $dispatcher) {
+        $router = $dispatcher->getRouter();
+        $rest = RegisterRest::initRegister();
+        $router->addConfig(new Yaf\Config\Simple($rest));
+    }
 
     public function _initSmarty(Dispatcher $dispatcher)
     {

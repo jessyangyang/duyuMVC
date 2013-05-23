@@ -84,8 +84,6 @@ class WriterController extends \Yaf\Controller_Abstract
         $data = $this->getRequest();
         $button = false;
 
-        echo $bid;
-
         if (isset($userInfo->id) and $userInfo->id) {
 
             $book = Books::instance();
