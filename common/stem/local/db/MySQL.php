@@ -145,9 +145,18 @@ class MySQL extends Database
         else {
             $resule = self::$db->query($tmpSql);
         }
-        if (isset($resule->num_rows) and $resule->num_rows > 0) {
-            return $resule->fetch_all(MYSQLI_ASSOC);
+
+        if (self::$db->error) {
+            self::printDebug("SQL Error:",$tmpSql);
+            return false;
         }
+        if (isset($resule->num_rows) and $resule->num_rows > 0) {
+
+            return $resule->fetch_all(MYSQLI_ASSOC);
+            
+        }
+
+        return false;
     }
 
 
@@ -263,16 +272,16 @@ class MySQL extends Database
     * @param string | $sql
     */
     static function printDebug($message = '' , $sql = '') {
-        // $dberror = self::$db->error();
-        // $dberrno = self::$db->errno();
-        // echo "<div style=\"position:absolute;font-size:12px;font-family:arial;background:#EBEBEB;padding:0.5em;\">
-        //      <b>MySQL Error</b><br>
-        //      <b>Message</b>: $message<br>
-        //      <b>From SQL</b>: $sql<br>
-        //      <b>Error</b>: $dberror<br>
-        //      <b>Errno.</b>: $dberrno<br>
-        //      </div>";
-        // exit();
+        $dberror = self::$db->error;
+        $dberrno = self::$db->errno;
+        echo "<div style=\"position:absolute;font-size:12px;font-family:arial;background:#EBEBEB;padding:0.5em;\">
+             <b>MySQL Error</b><br>
+             <b>Message</b>: $message<br>
+             <b>From SQL</b>: $sql<br>
+             <b>Error</b>: $dberror<br>
+             <b>Errno.</b>: $dberrno<br>
+             </div>";
+        exit();
     }
 
     public function printSQL()
