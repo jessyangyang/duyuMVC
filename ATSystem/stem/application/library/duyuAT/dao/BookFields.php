@@ -8,9 +8,9 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace \duyuAT\dao;
+namespace duyuAT\dao;
 
-use duyuAT\dao\Members;
+use \duyuAT\dao\Members;
 
 class BookFields extends \local\db\ORM 
 {
@@ -28,7 +28,11 @@ class BookFields extends \local\db\ORM
         'status' => array(
             'type' => 'int',
             'default' => 0,
-            'comment' => 'status')
+            'comment' => 'status'),
+        'modified' => array(
+            'type' => 'int',
+            'default' => 0,
+            'comment' => 'modified time')
     );
 
     public $primaryKey = "bid";
@@ -57,6 +61,6 @@ class BookFields extends \local\db\ORM
 
         if ($bookfields->where("uid='".$userStatus->id."' AND bid='$bid'")->update(array("status"=> $state))) return true;
 
-        return false
+        return false;
     }
 }

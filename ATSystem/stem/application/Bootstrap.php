@@ -12,13 +12,14 @@ use \Yaf\Dispatcher;
 use \Yaf\Loader;
 use \local\db\MySQL;
 use \duyuAT\common;
+use \local\template\SmartyAdapter;
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract 
 {
     public function _initException(Dispatcher $dispatcher)
     {
         // $exception = new Exception();
-        $dispatcher->setErrorHandler(array(get_class($this),'error_handler'));
+        // $dispatcher->setErrorHandler(array(get_class($this),'error_handler'));
     }
 
     public function _initConfig(Dispatcher $dispatcher)
@@ -40,9 +41,9 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
 
     public function _initSmarty(Dispatcher $dispatcher)
     {
-        // $smarty = new SmartyAdapter(null, Yaf\Application::app()->getConfig()->smarty);
-        // $dispatcher->setView($smarty);
-        $dispatcher->registerPlugin(new SmartyControllerPlugin());
+        $smarty = new SmartyAdapter(null, Yaf\Application::app()->getConfig()->smarty);
+        $dispatcher->setView($smarty);
+        // $dispatcher->registerPlugin(new SmartyControllerPlugin());
     }
 
     public function _initPlugins(Dispatcher $dispatcher)
@@ -53,6 +54,14 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
 
     public function _initLoader(Dispatcher $dispatcher)
     {
+    }
+
+    public function _initModules(Dispatcher $dispatcher)
+    {
+        // foreach ($dispatcher->getApplication()->getModules() as $key => $module) {
+        //     if ( 'index' == strtolower($module)) continue;
+        // }
+
     }
 
     /**

@@ -35,7 +35,6 @@ class testController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
         $user = new \duyuu\dao\Members();
-        $session = Session::getInstance();
 
         $user = Members::instance();
         $image = Images::instance();
@@ -226,7 +225,6 @@ class testController extends \Yaf\Controller_Abstract
         {
             $display->assign('user',"");
         }
-
         if ($data->isPost() and $data->getPost('state') == 'comment') {
             if($comment->addComment($data)) $message = "true";
         }

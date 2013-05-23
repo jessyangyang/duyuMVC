@@ -11,7 +11,7 @@
 use \Yaf\Request_Abstract;
 use \Yaf\Response_Abstract;
 use \Yaf\Plugin_Abstract;
-use \duyuu\rest\Restful;
+use \local\rest\Restful;
 use \duyuu\dao\OAuthAccessTokens;
 use \Yaf\Session;
 

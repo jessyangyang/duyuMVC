@@ -37,7 +37,7 @@
                             {foreach $list as $key => $item}
                             <tr>
                                 <td>{$key+1}</td>
-                                <td><a href="">{$item.title}</a></td>
+                                <td><a href="/writer/title/{$item.bid}">{$item.title}</a></td>
                                 <td>{$item.author}</td>
                                 <td>{$item.name}</td>
                                 <td>{$item.published|date_format:"%H:%M %D"}</td>

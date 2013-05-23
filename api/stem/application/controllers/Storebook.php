@@ -9,7 +9,7 @@
 */
 
 use \duyuu\dao\Books;
-use \duyuu\rest\Restful;
+use \local\rest\Restful;
 use \duyuu\dao\BookMenu;
 
 class StoreBookController extends \Yaf\Controller_Abstract 

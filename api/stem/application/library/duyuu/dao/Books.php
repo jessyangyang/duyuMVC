@@ -140,7 +140,7 @@ class Books extends \local\db\ORM
         $books = self::instance();
         $table = $books->table;
 
-        $list = $books->field("$table.bid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.press,f.apple_price as price,$table.summary,c.name,f.wordcount,f.tags,f.copyright,f.proofreader")
+        $list = $books->field("$table.bid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.press,f.apple_price as price,$table.summary,c.name as cname,f.wordcount,f.tags,f.copyright,f.proofreader")
             ->joinQuery("book_info as f","$table.bid=f.bid")
             ->joinQuery('book_image as p',"$table.bid=p.bid")
             ->joinQuery('images as i','i.pid=p.pid')

@@ -46,10 +46,6 @@ class Books extends \local\db\ORM
             'type' => 'int',
             'default' => 0,
             'comment' => 'publishing time'),
-        'modified' => array(
-            'type' => 'int',
-            'default' => 0,
-            'comment' => 'modified time'),
         'isbn' => array(
             'type' => 'varchar',
             'default' => 0,
@@ -85,32 +81,6 @@ class Books extends \local\db\ORM
         }
         return false;
     }
-
-    /**
-     * [topList description]
-     * @return [type] [description]
-     */
-    public function topList()
-    {
-        $books = self::instance();
-        $table = $this->table;
-
-        $list =  $books->field("books.bid,books.cid,i.path as cover,books.title,books.author,bi.apple_price as price")->joinQuery('book_category as c',"c.cid=$table.cid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->joinQuery('book_info as bi','bi.bid=books.bid')->where("p.type = 1")->limit(10)->fetchList();
-        
-        if (is_array($list)) {
-            foreach ($list as $key => $value) {
-                if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuAT\image\ImageControl::getRelativeImage($value['cover']);
-                }
-            }
-
-            $books->joinTables = array();
-            return $list;
-        }
-
-        return "";
-    }
-
 
     /**
      * [getSubCategory description]
@@ -180,6 +150,14 @@ class Books extends \local\db\ORM
         }
 
         return false;
+    }
+
+    /**
+     * [addBook description]
+     */
+    public function addBook($fields = array())
+    {
+
     }
 
     /**

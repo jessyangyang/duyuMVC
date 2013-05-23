@@ -32,14 +32,35 @@ class BookInfo extends \local\db\ORM
             'default' => 0,
             'comment' => 'price'),
         'apple_price' => array(
-            'type' => 'int',
+            'type' => 'varchar',
             'default' => 0,
             'comment' => 'apple_price'),
         'download_path' => array(
-                'type' => 'varchar',
-                'default' => 0,
-                'comment' => 'download_path')
+            'type' => 'varchar',
+            'default' => 0,
+            'comment' => 'download_path'),
+        'tags' => array(
+            'type' => 'varchar',
+            'default' => 0,
+            'comment' => 'tags'),
+        'copyright' => array(
+            'type' => 'varchar',
+            'default' => 0,
+            'comment' => 'copyright'),
+        'proofreader' => array(
+            'type' => 'varchar',
+            'default' => 0,
+            'comment' => 'proofreader')
         );
 
     public $primaryKey = "bid";
+
+    // Instance Self
+    protected static $instance;
+
+
+    public static function instance($key = 0)
+    {
+        return self::$instance ? self::$instance : new BookInfo($key);
+    }
 }
