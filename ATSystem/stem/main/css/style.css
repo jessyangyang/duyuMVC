@@ -69,7 +69,12 @@ body{background-color: #F7F4F1;}
 }
 .edit-content {
 	min-height: 330px;
-	background-color: #f8f6f3;
+	background-color: #faf8f6;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	box-shadow:0px -2px 3px 1px #e2deda;
+	-moz-box-shadow:0px -2px 3px 1px #e2deda;
+	-webkit-box-shadow:0px -2px 3px 1px #e2deda;
 }
 .edit-chapter {
 	margin: 0 auto;
@@ -207,4 +212,15 @@ body{background-color: #F7F4F1;}
 	width: 316px;
 	margin: 0 auto;
 	padding-top:0px; 
+}
+
+/*edit-content*/
+.title-hr {margin:0 auto;padding: 0; width: 95%;overflow: hidden;}
+.edit-setting-title {position:relative;float: right;margin: 15px;color:#333333;}
+.edit-setting-title span{position:relative;top: 3px;margin-right:1px;line-height: 20px;}
+.edit-title-subitem {display: none;}
+.edit-setting-title-img {
+	transform:rotate(0deg);
+	-webkit-transform:rotate(0deg);
+	-moz-transform:rotate(0deg);
 }
