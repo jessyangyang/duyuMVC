@@ -1,4 +1,6 @@
         <footer></footer>
+
+        <link href="/css/fixed.css" rel="stylesheet">
         <!-- Javascript
         =============================================== -->
 

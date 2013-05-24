@@ -131,7 +131,7 @@ class Books extends \local\db\ORM
     {
         $books = self::instance();
         $table = $books->table;
-        $userStatus = \duyuAT\dao\Members::getCurrentUser();
+        $userStatus = Members::getCurrentUser();
         if (!$userStatus->id) return false;
 
 
@@ -161,21 +161,6 @@ class Books extends \local\db\ORM
     }
 
     /**
-     * [updateBookStatus description]
-     * @param  [type] $bid   [description]
-     * @param  [type] $state [description]
-     * @return [type]        [description]
-     */
-    public function updateBookStatus($bid,$state)
-    {
-        $books = self::instance();
-        $table = $books->table;
-        $userStatus = \duyuAT\dao\Members::getCurrentUser();
-
-
-    }
-
-    /**
      * [getBookInfo description]
      * @param  [String] $bid [description]
      * @return [Array]      [return list of the bookInfo]
@@ -184,8 +169,10 @@ class Books extends \local\db\ORM
     {
         $books = self::instance();
         $table = $books->table;
+        $userStatus = Members::getCurrentUser();
 
-        $list = $books->field("$table.bid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.press,f.apple_price as price,$table.summary")->joinQuery("book_info as f","$table.bid=f.bid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->where("p.type = 1 AND $table.bid='$bid'")->order("$table.published")->limit(1)->fetchList();
+        $list = $books->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.press,f.apple_price as price,$table.summary,f.tags")->joinQuery("book_info as f","$table.bid=f.bid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->joinQuery('book_fields as bf',"$table.bid=bf.bid AND bf.uid=$userStatus->id")->where("$table.bid='$bid'")->order("$table.published")->limit(1)->fetchList();
+
 
         if (is_array($list)) {
             foreach ($list as $key => $value) {

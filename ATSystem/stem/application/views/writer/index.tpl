@@ -41,7 +41,7 @@
                                 <td>{$item.author}</td>
                                 <td>{$item.name}</td>
                                 <td>{$item.published|date_format:"%H:%M %D"}</td>
-                                <td><a href="">{if $item.status eq 0}未发布{else}已发布{/if}</a></td>
+                                <td><a href="/writer/index/state/{$item.bid}/{$item.status}">{if $item.status eq 0}未发布{else}已发布{/if}</a></td>
                             </tr>
                             {/foreach}
                         </tbody>

@@ -21,7 +21,7 @@ use \Yaf\Session;
 class WriterController extends \Yaf\Controller_Abstract 
 {
 
-    public function indexAction($action = false) 
+    public function indexAction($action = false,$bid = false,$value = false) 
     {
         $display = $this->getView();
 
@@ -30,6 +30,7 @@ class WriterController extends \Yaf\Controller_Abstract
         $session = Session::getInstance();
         $userInfo = Members::getCurrentUser();
         $user = Members::instance();
+        $bookfield = BookFields::instance();
 
         $book = Books::instance();
 
@@ -46,6 +47,14 @@ class WriterController extends \Yaf\Controller_Abstract
                 if ($user->logout()) {
                     header('Location: /writer/index');
                     exit();
+                }
+                break;
+            case 'state':
+                if($bid)
+                {
+                    if($value == 1) $value = 0;
+                    else if ($value == 0) $value = 1; 
+                    $bookfield->updateBookStatus($bid,$value);
                 }
                 break;
             default:
@@ -75,12 +84,13 @@ class WriterController extends \Yaf\Controller_Abstract
         $display->assign("islogin",$isLogin);
     }
 
-    public function titleAction($bid = false)
+    public function titleAction($bid = false,$state = false)
     {
         $display = $this->getView();
 
         $userInfo = Members::getCurrentUser();
         $category = BookCategory::instance();
+        $session = Session::getInstance();
         $data = $this->getRequest();
         $button = false;
 
@@ -90,10 +100,11 @@ class WriterController extends \Yaf\Controller_Abstract
             $bookinfo = BookInfo::instance();
             $bookfield = BookFields::instance();
 
+            //TODO
             if($bid)
             {
                 $bookData = $book->getBookInfo($bid);
-                print_r($bookData);
+                $session->set('bid',$bid);
                 $display->assign('info',$bookData);
             }
             else
@@ -102,7 +113,9 @@ class WriterController extends \Yaf\Controller_Abstract
                 if($bid)
                 {
                     $bookData = $book->getBookInfo($bid);
+                    $session->set('bid',$bid);
                     $display->assign('info',$bookData);
+
                 }
                 
             }
@@ -145,14 +158,12 @@ class WriterController extends \Yaf\Controller_Abstract
                             'uid' => $userInfo->id,
                             'modified' => UPDATE_TIME
                         ));
-
-                        $session = Session::getInstance();
                         $session->set('bid',$bookid);
                     }
                 }
 
-                // header('Location: /writer/edit');
-                // exit();
+                header('Location: /writer/edit');
+                exit();
             }
             
         }
@@ -182,23 +193,31 @@ class WriterController extends \Yaf\Controller_Abstract
     public function editAction()
     {
         $display = $this->getView();
+
         $userInfo = Members::getCurrentUser();
         $data = $this->getRequest();
+        $button = false;
 
         if (!$userInfo->id) 
         {
-            header('Location: /writer');
+            header('Location: /writer/index');
             exit();
         }
         else
         {
             if ($data->isPost() and $data->getPost('state') == "edit") 
             {
-                header('Location: /writer/cover');
-                exit();
+                // header('Location: /writer/cover');
+                // exit();
             }
         }
-        $display->assign("title", "基本信息");
+
+        $button['left']['name'] = "录入下一篇";
+        $button['right']['name'] = "下一步-封面设计";
+
+        $display->assign("title", "编辑内容");
+        $display->assign('topButton',$button);
+        $display->assign("progress",30);
     }
 
     public function coverAction()

@@ -24,7 +24,7 @@
 					{if isset($category)}
 						{foreach $category as $key=>$item}
 	              		<label class="radio inline">
-	                	<input type="radio" value="{$item.cid}" id="optionRadio{$key}" name="category" {if isset($info.cid) && $info.cid eq $item.cid}checker{/if}/> {$item.name}</label>
+	                	<input type="radio" value="{$item.cid}" id="optionRadio{$key}" name="category" {if isset($info.cid) && $info.cid eq $item.cid}checked{/if}/> {$item.name}</label>
 	                	{/foreach}
 	                {/if}
 	            	</div>
