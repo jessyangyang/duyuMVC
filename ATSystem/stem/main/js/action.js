@@ -27,5 +27,15 @@
         });
     });
 
+    $("body").on('click','.edit-chapter',function(){
+        $(".edit-setting-chapter").slideToggle('fast',function(){
+            if(!$(this).is(':hidden'))
+            {
+                $(".form-horizontal").submit();
+                return false; 
+            }
+        });
+    });
+
     
 });

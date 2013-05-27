@@ -1,1 +1,8 @@
 /************* fixed **/
+.progress .bar {
+    background-color: #bb4637;
+    background-image: -moz-linear-gradient(center top , #a01e1e, #c25e54);
+}
+.inline li {margin-right:20px;margin-top:5px;}
+.table th {color:#828282;}
+.table th, .table td {line-height: 24px;}
