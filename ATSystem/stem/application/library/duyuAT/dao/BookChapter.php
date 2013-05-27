@@ -26,4 +26,34 @@ class BookChapter extends \local\db\ORM
     );
 
     public $primaryKey = "menu_id";
+
+    // Instance Self
+    protected static $instance;
+
+
+    public static function instance($key = 0)
+    {
+        return self::$instance ? self::$instance : new BookChapter($key);
+    }
+
+    /**
+     * [addContent description]
+     * @param [type] $arr [description]
+     * @return [Boolean or String] ,if updated return true ,inserted return
+     * insert_id ,or return false.
+     */
+    public function addContent($arr)
+    {
+        $chapter = self::instance();
+        if (is_array($arr)) {
+            if ($chapter->where("menu_id='$arr[menu_id]'")->fetchRow()) {
+                return $chapter->where("menu_id='$arr[menu_id]'")->update($arr);
+            }
+            else
+            {
+                return $chapter->insert($arr);
+            }
+        }
+        return false;
+    }
 }
