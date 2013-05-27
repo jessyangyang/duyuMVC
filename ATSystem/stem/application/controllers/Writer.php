@@ -15,6 +15,8 @@ use \duyuAT\dao\Books;
 use \duyuAT\dao\BookCategory;
 use \duyuAT\dao\BookInfo;
 use \duyuAT\dao\BookFields;
+use \duyuAT\dao\BookMenu;
+use \duyuAT\dao\BookChapter;
 use \Yaf\Session;
 
 
@@ -181,7 +183,7 @@ class WriterController extends \Yaf\Controller_Abstract
 
         $button['left']['name'] = "回首页";
         $button['left']['url'] = "/writer/index";
-        $button['right']['name'] = "下一步：编辑内容";
+        $button['right']['name'] = "下一步：文章录入";
 
         $display->assign('category',$category->getCategory());
         $display->assign('topButton',$button);
@@ -190,13 +192,17 @@ class WriterController extends \Yaf\Controller_Abstract
         
     }
 
-    public function editAction()
+    public function editAction($action = false, $menuid = false)
     {
         $display = $this->getView();
 
         $userInfo = Members::getCurrentUser();
         $data = $this->getRequest();
-        $button = false;
+        $button = $menuList = $menuRow = false;
+        $menu = BookMenu::instance();
+        $body = BookChapter::instance();
+        $session = Session::getInstance();
+        $bid = $session->get("bid");
 
         if (!$userInfo->id) 
         {
@@ -205,25 +211,76 @@ class WriterController extends \Yaf\Controller_Abstract
         }
         else
         {
-            if ($data->isPost() and $data->getPost('state') == "edit") 
-            {
-                // header('Location: /writer/cover');
-                // exit();
+
+            switch ($action) {
+                case 'menu':
+                    if ($menuid) {
+                        $menuRow = $menu->getMenuAndContentRow($menuid);
+                        $session->set('current_menu_id',$menuid);
+                    }
+                    break;
+                case 'delete':
+                    if ($menuid) $menu->deleteMenuForMenuID($menuid);
+                    $session->__unset('current_menu_id');
+                    break;
+                case 'next':
+                    header('Location: /writer/cover');
+                    exit();
+                    break;
+                default:
+                    # code...
+                    break;
             }
+
+            if($data->isPost() and $data->getPost('state') == "edit")
+            {
+                $menu_arr = array(
+                    'bid' => $bid,
+                    'title' => $data->getPost('menu-title'),
+                    // 'author' => $data->getPost('menu-author'),
+                    'summary' => $data->getPost('menu-summary'));
+
+                if($menuid || $session->get('current_menu_id')){
+                    $menu_arr['id'] = $menuid ? $menuid : $session->get('current_menu_id');
+                    $menu_arr['sort'] = $data->getPost('sort');
+                    $menu->where("id='$menuid'")->update($menu_arr);
+                }
+                else{
+                    $menu_arr['sort'] = 0;
+                    $menuid = $menu->insert($menu_arr);
+                };
+
+                if ($menuid || $session->get('current_menu_id')){
+                    $content = array(
+                        'menu_id' => $menuid ? $menuid : $session->get('current_menu_id'),
+                        'body' => $data->getPost('textarea-content'));
+                        $body->addContent($content);
+                        $session->__unset('current_menu_id');
+                    }
+                }
+
+            $menuList = $menu->getMenuForBookID($bid);
+
         }
 
         $button['left']['name'] = "录入下一篇";
-        $button['right']['name'] = "下一步-封面设计";
 
-        $display->assign("title", "编辑内容");
+        $button['right']['name'] = "下一步-封面设计";
+        $button['right']['url'] = "/writer/cover";
+
+        $display->assign("menuRow",$menuRow[0]);
+        $display->assign('userinfo',array('userid' => $userInfo->id,'username'=>$userInfo->username));
+        $display->assign('menuList',$menuList);
+        $display->assign("title", "文章录入");
         $display->assign('topButton',$button);
-        $display->assign("progress",30);
+        $display->assign("progress",33);
     }
 
     public function coverAction()
     {
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
+        $button  = false;
         $data = $this->getRequest();
 
         if (!$userInfo->id) 
@@ -240,19 +297,43 @@ class WriterController extends \Yaf\Controller_Abstract
             }
             
         }
-        $display->assign("title", "基本信息");
+
+        $button['left']['name'] = "文章录入";
+        $button['left']['url'] = "/writer/edit";
+
+        $button['right']['name'] = "下一步-撰写导言";
+        $button['right']['url'] = "/writer/end";
+
+        $display->assign('topButton',$button);
+        $display->assign("title", "封面设计");
+        $display->assign("progress",66);
     }
 
     public function endAction()
     {
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
+        $button  = false;
         $data = $this->getRequest();
         if (!$userInfo->id) 
         {
-            header('Location: /writer');
+            header('Location: /writer/index');
             exit();
         }
+        else
+        {
+            if ($data->isPost() and $data->getPost('state') == "cover") 
+            {
+                // header('Location: /writer/end');
+                // exit();
+            }
+        }
+
+        $button['right']['name'] = "完成并提交全本";
+        $button['right']['url'] = "/writer/end";
+
+        $display->assign('topButton',$button);
+        $display->assign("progress",99);
         $display->assign("title", "基本信息");
     }
 
