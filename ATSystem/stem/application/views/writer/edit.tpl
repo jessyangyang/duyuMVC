@@ -1,5 +1,39 @@
 {include file = "writer/header.tpl"}
-{include file = "writer/progress.tpl"}
+<body>    
+    <header>
+            <div class="right-tools">
+                <a href="">主页</a>
+                <a href="">帮助</a>
+                <a href="">设置</a>
+            </div>
+            {if is_array($topButton)}
+                <div class="right-button">
+                	<a href="/writer/title" class="btn fl">上一步：基本信息</a>
+                {if isset($topButton.left)}
+                     <a href="{if !isset($topButton.left.url)}javascript:void(0){else}{$topButton.left.url}{/if}" class="btn fl btn-next">{$topButton.left.name}</a>
+                {/if}
+                {if isset($topButton.right)}
+                    <a href="{if !isset($topButton.right.url)}javascript:void(0){else}{$topButton.right.url}{/if}" class="btn btn-danger">{$topButton.right.name}</a>
+                {/if}
+                </div>
+            {/if}
+            
+            <div class="header-nav">
+                <h1>投稿系统</h1>
+                <div class="p-bar">
+                    <div class='red-point' style="left: {$progress}%"></div>
+                    <div class="progress">
+                        <div class="bar" style="width:{$progress}%"></div>
+                    </div>
+                </div>
+                <ul class="inline">
+                    <li>基本信息</li>
+                    <li>文章录入</li>
+                    <li>封面设计</li>
+                    <li>撰写导言</li>
+                </ul>
+            </div>
+        </header>
 		
 		<div class="container">
 			<div id="edit-box" class="edit-box">
@@ -10,19 +44,46 @@
 						<span>更多设置</span>
 						<img class="edit-setting-title-img"src="http://{$smarty.server.SERVER_NAME}/img/setting-title-arrow.png">
 					</div>
-					<input type="text" name="title" class="span5 edit-title" placeholder="新建章节 (不分章节的作品可不填)"/>
+					<input type="text" name="menu-title" class="span5 edit-title" placeholder="新建章节 (不分章节的作品可不填)" {if isset($menuRow.title)}value="{$menuRow.title}"{/if}/>
 					<hr class='title-hr'/>
 					<div class="edit-title-subitem">
-						<input type="text" name='author' class="span5 edit-title" placeholder="作者" value=""/>
+						<input type="text" name='menu-author' class="span5 edit-title" placeholder="作者" value=""/>
 						<hr class='title-hr'/>
-						<input type="text" name="summary" class="span5 edit-title" placeholder="摘要" value=""/>
+						<input type="text" name="menu-summary" class="span5 edit-title" placeholder="摘要" {if isset($menuRow.summary)}value="{$menuRow.summary}"{/if}/>
 						<hr class='title-hr'/>
 					</div>
+					<div class="edit-setting-chapter">
+						<table class="table">
+							<thead>
+                            	<th>ID</th>
+	                            <th>标题</th>
+	                            <th>排序</th>
+	                            <th>操作</th>
+                        	</thead>
+                        	<tbody>
+                        	{if $menuList}
+                            {foreach $menuList as $key => $item}
+                            <tr>
+                                <td>
+                                	<label class="radio inline">
+	                				<input type="radio" value="{$item.id}" id="optionRadio{$key}" name="menu-id" {if isset($menuRow.id) && $menuRow.id eq $item.id}checked{/if}/> {$key+1}
+	                				</label>
+
+	                			</td>
+                                <td><a href="/writer/edit/menu/{$item.id}">{$item.title}</a></td>
+                                <td><input type="text" name='menu-sort' class="span1 edit-title" placeholder="{$item.sort}" value="{$item.sort}" style="margin:0;padding:0"/></td>
+                                <td><a href="/writer/edit/delete/{$item.id}">删除</a></td>
+                            </tr>
+                            {/foreach}
+                            {/if}
+                        	</tbody>
+                    </table>
+					</div>
                     <script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
-					<textarea id="textarea1" name="textarea1" class="ckeditor">输入您的内容!
+					<textarea id="textarea-content" name="textarea-content" class="ckeditor" placeholder="输入你的内容">{if isset($menuRow.body)}{$menuRow.body}{/if}
 					</textarea>
 					<script>
-                        CKEDITOR.replace( 'textarea1' );
+                        CKEDITOR.replace( 'textarea-content' );
                     </script>
                     <input type="hidden" value="edit" name="state"/>
 				</form>
