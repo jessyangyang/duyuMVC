@@ -308,7 +308,7 @@ class ORM extends MySQL{
                 }
                 $sql = "UPDATE " . $tmpOption['table'] . " SET " . implode(',', $setarr) . " WHERE " . $tmpOption['where'];
                 self::$db->query($sql);
-                return true;
+                return self::$db->affected_rows() ? true : false;
             }
 
             return false;
@@ -336,7 +336,8 @@ class ORM extends MySQL{
 
         if ($tmpOption) {
             $sql = "DELETE FROM " . $tmpOption['table'] . " WHERE " . $tmpOption['where'];
-            return self::$db->query($sql);
+            self::$db->query($sql);
+            return self::$db->affected_rows() ? true : false;
         }
         return false;
 
@@ -377,7 +378,7 @@ class ORM extends MySQL{
      * @param Array | option
      * @return Array 
      */
-    function fetchList($option = array()) {
+    function fetchList($option = array(),$debug = false) {
         if(!is_array($option)){
             $option = array('where' => $this->primaryKey.(strpos($option, ',')? ' IN('.$option.')': '='.$option));
         }
@@ -388,6 +389,8 @@ class ORM extends MySQL{
         empty($tmpOption['group']) || $tmpSql.= ' GROUP BY '.$tmpOption['group'];
         empty($tmpOption['order']) || $tmpSql.= ' ORDER BY '.$tmpOption['order'];
         empty($tmpOption['limit']) || $tmpSql.= ' LIMIT '.$tmpOption['limit'];
+
+        if($debug) echo $tmpSql;
 
         // echo $tmpSql;
         $this->joinTables = array();

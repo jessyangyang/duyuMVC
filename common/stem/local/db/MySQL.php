@@ -171,6 +171,11 @@ class MySQL extends Database
         return self::$db->insert_id;
     }
 
+    function affected_rows()
+    {
+        return self::$db->affected_rows;
+    }
+
     function setCharset($charset = "UTF8")
     {
         return self::$db->set_charset($charset);
