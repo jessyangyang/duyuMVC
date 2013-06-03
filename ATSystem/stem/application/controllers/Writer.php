@@ -119,6 +119,11 @@ class WriterController extends \Yaf\Controller_Abstract
                     $display->assign('info',$bookData);
 
                 }
+                else
+                {
+                    header('Location: /writer/index');
+                    exit();
+                }
                 
             }
 
@@ -204,7 +209,7 @@ class WriterController extends \Yaf\Controller_Abstract
         $session = Session::getInstance();
         $bid = $session->get("bid");
 
-        if (!$userInfo->id) 
+        if (!$userInfo->id or !$bid) 
         {
             header('Location: /writer/index');
             exit();
@@ -283,8 +288,9 @@ class WriterController extends \Yaf\Controller_Abstract
         $userInfo = Members::getCurrentUser();
         $button  = false;
         $data = $this->getRequest();
+        $bid = $session->get("bid");
 
-        if (!$userInfo->id) 
+        if (!$userInfo->id or !$bid) 
         {
             header('Location: /writer');
             exit();
@@ -316,7 +322,9 @@ class WriterController extends \Yaf\Controller_Abstract
         $userInfo = Members::getCurrentUser();
         $button  = false;
         $data = $this->getRequest();
-        if (!$userInfo->id) 
+        $bid = $session->get("bid");
+
+        if (!$userInfo->id or !$bid) 
         {
             header('Location: /writer/index');
             exit();
