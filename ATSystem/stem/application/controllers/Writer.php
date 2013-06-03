@@ -242,7 +242,7 @@ class WriterController extends \Yaf\Controller_Abstract
 
                 if($menuid || $session->get('current_menu_id')){
                     $menu_arr['id'] = $menuid ? $menuid : $session->get('current_menu_id');
-                    $menu_arr['sort'] = $data->getPost('sort');
+                    $menu_arr['sort'] = $data->getPost('sort') ? 0 : $data->getPost('sort');
                     $menu->where("id='$menuid'")->update($menu_arr);
                 }
                 else{

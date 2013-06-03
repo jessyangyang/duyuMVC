@@ -30,7 +30,7 @@ class RegisterRest extends \local\rest\Restful{
         ************************/
 
         // writer login
-        self::regRestURL('writerLogin','/writer/index/:action/:bid/:value','writer','index');
+        self::regRestURL('writerLogin','/writer/index/:action/:value/:bid','writer','index');
         // writer title
         self::regRestURL('writerTitle','/writer/title/:bid','writer','title');
         // writer edit 
