@@ -8,7 +8,7 @@
  * @license     http://wiki.duyu.com/duyuMvc
  */
 
-use \duyuu\rest\Restful;
+use \local\rest\Restful;
 use \duyuu\oauth\OAUTHTest.php;
 use \Yaf\Session;
 

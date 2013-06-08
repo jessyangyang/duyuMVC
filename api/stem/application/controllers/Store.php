@@ -11,7 +11,7 @@
 use \duyuu\dao\Books;
 use \duyuu\dao\BookRecommend;
 use \duyuu\dao\BookCategory;
-use \duyuu\rest\Restful;
+use \local\rest\Restful;
 
 class StoreController extends \Yaf\Controller_Abstract 
 {

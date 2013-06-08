@@ -11,7 +11,7 @@
 use \duyuu\dao\Comments;
 use \duyuu\dao\Members;
 use \duyuu\dao\MemberStateTemp;
-use \duyuu\rest\Restful;
+use \local\rest\Restful;
 
 class CommentsController extends \Yaf\Controller_Abstract 
 {

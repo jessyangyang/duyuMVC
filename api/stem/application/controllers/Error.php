@@ -8,7 +8,7 @@
  * @license     http://wiki.duyu.com/duyuMvc
  */
 
-use \duyuu\rest\Restful;
+use \local\rest\Restful;
 
 class ErrorController extends \Yaf\Controller_Abstract {
      /** 

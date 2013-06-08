@@ -13,7 +13,7 @@ use \duyuu\dao\MemberInfo;
 use \duyuu\dao\Images;
 use \duyuu\dao\Comments;
 use \duyuu\dao\OAuthAccessTokens;
-use \duyuu\rest\Restful;
+use \local\rest\Restful;
 use \Yaf\Session;
 
 class testController extends \Yaf\Controller_Abstract 

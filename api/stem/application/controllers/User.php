@@ -13,7 +13,7 @@ use \duyuu\dao\MemberInfo;
 use \duyuu\dao\MemberStateTemp;
 use \duyuu\dao\Images;
 use \duyuu\dao\OAuthAccessTokens;
-use \duyuu\rest\Restful;
+use \local\rest\Restful;
 use \Yaf\Session;
 
 class UserController extends \Yaf\Controller_Abstract 
@@ -94,6 +94,8 @@ class UserController extends \Yaf\Controller_Abstract
 
         $data = $this->getRequest();
         $session = Session::getInstance();
+
+        $authToken = "";
 
         if ($data->isPost()) {
             $file = $data->getFiles();
