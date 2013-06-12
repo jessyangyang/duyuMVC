@@ -31,37 +31,29 @@
                             <th>作者</th>
                             <th>分类</th>
                             <th>创建时间</th>
-                            <th>发布状态</th>
+                            <th>状态</th>
+                            <th>操作</th>
                         </thead>
                         <tbody>
                             {foreach $list as $key => $item}
                             <tr>
                                 <td>{$key+1}</td>
-                                <td><a href="/writer/title/{$item.bid}">{$item.title}</a></td>
+                                <td class="edit-item-title"><a href="/writer/title/{$item.bid}">{$item.title}</a></td>
                                 <td>{$item.author}</td>
                                 <td>{$item.name}</td>
                                 <td>{$item.published|date_format:"%H:%M %D"}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button data-toggle="dropdown" class="btn dropdown-toggle">{if $item.status eq 1}未发布{else}已发布{/if} <span class="caret"></span></button>
+                                        <button data-toggle="dropdown" class="btn dropdown-toggle">{if $item.status eq 0}不可用{else if $item.status eq 1}等待审核{else if $item.status eq 2}审核中{else if $item.status eq 3}未发布{else if $item.status eq 4}已发布{/if} <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
+                                            <li><a href="/writer/index/review/{$item.bid}">等待审核</a></li>
+                                            <li><a href="/writer/index/inreview/{$item.bid}">审核中</a></li>
                                             <li><a href="/writer/index/unpublished/{$item.bid}">未发布</a></li>
                                             <li><a href="/writer/index/published/{$item.bid}">已发布</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="javascript:void(0)" id="edit-delete-button">删除</a></li>
-                                                <div class="modal" id="edit-delete-modal">
-                                                    <div class="modal-header">
-                                                    <a class="close" data-dismiss="modal">×</a>
-                                                    <h3>删除图书"{$item.title}"吗</h3>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                    <a href="javascript:void(0)" class="btn">取消</a>
-                                                    <a href="/writer/title/delete/{$item.bid}" class="btn btn-primary">确定</a>
-                                                    </div>
-                                                </div>
-                                            </ul>
+                                        </ul>
                                     </div>
                                 </td>
+                                <td><a href="javascript:void(0)"  class="edit-delete-button" data-toggle="modal">删除</a></td>
                             </tr>
                             {/foreach}
                         </tbody>
@@ -70,6 +62,19 @@
                     {/if}
                     </fieldset>
                 </form>
+                <div class="modal" id="edit-delete-modal" >
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3>删除</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p><i class="icon-info-sign"></i>  确定删除"</p>
+                    </div>
+                    <div class="modal-footer">
+                            <a href="#" data-dismiss="modal" class="btn">取消</a>
+                            <a href="/writer/index/delete/{$item.bid}" class="btn btn-primary">确定</a>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 <body>    
     <header>
             <div class="right-tools">
-                <a href="">主页</a>
+                <a href="/writer/index">主页</a>
                 <a href="">帮助</a>
                 <a href="">设置</a>
             </div>
