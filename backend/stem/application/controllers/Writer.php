@@ -51,13 +51,25 @@ class WriterController extends \Yaf\Controller_Abstract
                     exit();
                 }
                 break;
-            case 'unpublished':
+            case 'review':
                 if($bid)  $bookfield->updateBookStatus($bid,1);
                 break;
+            case 'inreview':
+                if($bid)  $bookfield->updateBookStatus($bid,2);
+                break;
+            case 'unpublished':
+                if($bid)  $bookfield->updateBookStatus($bid,3);
+                break;
             case 'published':
-                if ($bid) $bookfield->updateBookStatus($bid,3)
+                if ($bid) $bookfield->updateBookStatus($bid,4);
+                break;
+
             case 'delete':
-                if ($bid) $bookfield->de
+                if ($bid) $bookfield->updateBookStatus($bid,0);
+                break;
+            case 'new':
+                header('Location: /writer/title');
+                exit();
                 break;
             default:
                 break;
@@ -69,7 +81,7 @@ class WriterController extends \Yaf\Controller_Abstract
             $isLogin = true;
             $display->assign('list',$book->getCurrentUserWriterBooks());
             $button['right']['name'] = "创建 : 一本新书";
-            // $button['right']['url'] = "/writer/title";
+            $button['right']['url'] = "/writer/index/new/0";
         }
         else $display->assign("title", "登录");
         
@@ -102,7 +114,7 @@ class WriterController extends \Yaf\Controller_Abstract
             $bookinfo = BookInfo::instance();
             $bookfield = BookFields::instance();
 
-            //TODO
+            //TODO edit
             if($bid)
             {
                 $bookData = $book->getBookInfo($bid);
@@ -111,6 +123,7 @@ class WriterController extends \Yaf\Controller_Abstract
             }
             else
             {
+                // Update 
                 $bid = $book->getEditingCurrent();
                 if($bid)
                 {
@@ -121,8 +134,8 @@ class WriterController extends \Yaf\Controller_Abstract
                 }
                 else
                 {
-                    header('Location: /writer/index');
-                    exit();
+                    // header('Location: /writer/index');
+                    // exit();
                 }
                 
             }
