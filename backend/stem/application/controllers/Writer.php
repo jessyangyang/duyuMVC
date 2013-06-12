@@ -23,7 +23,7 @@ use \Yaf\Session;
 class WriterController extends \Yaf\Controller_Abstract 
 {
 
-    public function indexAction($action = false,$bid = false,$value = false) 
+    public function indexAction($action = false,$bid = false) 
     {
         $display = $this->getView();
 
@@ -51,13 +51,14 @@ class WriterController extends \Yaf\Controller_Abstract
                     exit();
                 }
                 break;
-            case 'state':
-                if($bid)
-                {
-                    if($value == 1) $value = 0;
-                    else if ($value == 0) $value = 1; 
-                    $bookfield->updateBookStatus($bid,$value);
-                }
+            case 'unpublished':
+                if($bid)  $bookfield->updateBookStatus($bid,1);
+                break;
+            case 'published':
+                if ($bid) $bookfield->updateBookStatus($bid,2);
+                break;
+            case 'delete':
+
                 break;
             default:
                 break;
@@ -286,6 +287,7 @@ class WriterController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
+        $session = Session::getInstance();
         $button  = false;
         $data = $this->getRequest();
         $bid = $session->get("bid");
@@ -322,6 +324,7 @@ class WriterController extends \Yaf\Controller_Abstract
         $userInfo = Members::getCurrentUser();
         $button  = false;
         $data = $this->getRequest();
+        $session = Session::getInstance();
         $bid = $session->get("bid");
 
         if (!$userInfo->id or !$bid) 

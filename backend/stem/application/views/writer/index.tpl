@@ -41,7 +41,27 @@
                                 <td>{$item.author}</td>
                                 <td>{$item.name}</td>
                                 <td>{$item.published|date_format:"%H:%M %D"}</td>
-                                <td><a href="/writer/index/state/{$item.bid}/{$item.status}">{if $item.status eq 0}未发布{else}已发布{/if}</a></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button data-toggle="dropdown" class="btn dropdown-toggle">{if $item.status eq 1}未发布{else}已发布{/if} <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/writer/index/state/{$item.bid}/1">未发布</a></li>
+                                            <li><a href="/writer/index/state/{$item.bid}/3">已发布</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="javascript:void(0)" id="edit-delete-button">删除</a></li>
+                                                <div class="modal" id="edit-delete-modal">
+                                                    <div class="modal-header">
+                                                    <a class="close" data-dismiss="modal">×</a>
+                                                    <h3>删除图书"{$item.title}"吗</h3>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <a href="javascript:void(0)" class="btn">取消</a>
+                                                    <a href="/writer/title/delete/{$item.bid}" class="btn btn-primary">确定</a>
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                    </div>
+                                </td>
                             </tr>
                             {/foreach}
                         </tbody>
@@ -53,4 +73,5 @@
                 </div>
             </div>
         </div>
+<script type="text/javascript" src="/js/bootstrap/bootstrap.modal.js"></script>
 {include file = "writer/footer.tpl"}

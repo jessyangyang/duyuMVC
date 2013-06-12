@@ -29,9 +29,22 @@
 						<div class="controls">
 							<h4>封面模板</h4>
 							<p>你可以给自己的作品在下列封面中选择自己喜欢的封面，也可以上传图片为自己<br/>的作品添加封面。</p>
+							<div class="modal hide fade" id="UploadCoverModel" style="display: none;">
+					            <div class="modal-header">
+					              <a data-dismiss="modal" class="close">×</a>
+					              <h3>对话框标题</h3>
+					            </div>
+					            <div class="modal-body">
+					              <h4>对话框文字</h4>
+					            </div>
+					            <div class="modal-footer">
+					              <a data-dismiss="modal" class="btn" href="#">关闭</a>
+					              <a class="btn btn-primary" href="#">保存更改</a>
+					            </div>
+					        </div>
 							<div class="btn-group">
 							 	<button class="btn">选择模板</button>
-								<button class="btn">上传图片</button>
+								<button id="UploadCover" class="btn">上传图片</button>
 							</div>
 						</div>
 						<div class="controls">

@@ -37,5 +37,14 @@
         });
     });
 
+    $("#edit-delete-button").on('click','',function(){
+        $("#edit-delete-modal").model(
+            backdrop:true,
+            keyboard:true,
+            show:true
+        );
+        return false;
+    });
+
     
 });
