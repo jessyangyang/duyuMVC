@@ -8,7 +8,7 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace duyuAT\dao;
+namespace backend\dao;
 
 class BookCategory extends \local\db\ORM 
 {
@@ -62,7 +62,7 @@ class BookCategory extends \local\db\ORM
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuAT\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
                 }
             }
             

@@ -8,10 +8,10 @@
  * @license     http://wiki.duyu.com/duyuMvc
  */
 
-use \duyuAT\dao\Members;
-use \duyuAT\dao\MemberInfo;
-use \duyuAT\dao\Images;
-use \duyuAT\dao\Books;
+use \backend\dao\Members;
+use \backend\dao\MemberInfo;
+use \backend\dao\Images;
+use \backend\dao\Books;
 use \Yaf\Session;
 
 class AtsController extends \Yaf\Controller_Abstract 

@@ -8,15 +8,15 @@
  * @license     http://wiki.duyu.com/duyuMvc
  */
 
-use \duyuAT\dao\Members;
-use \duyuAT\dao\MemberInfo;
-use \duyuAT\dao\Images;
-use \duyuAT\dao\Books;
-use \duyuAT\dao\BookCategory;
-use \duyuAT\dao\BookInfo;
-use \duyuAT\dao\BookFields;
-use \duyuAT\dao\BookMenu;
-use \duyuAT\dao\BookChapter;
+use \backend\dao\Members;
+use \backend\dao\MemberInfo;
+use \backend\dao\Images;
+use \backend\dao\Books;
+use \backend\dao\BookCategory;
+use \backend\dao\BookInfo;
+use \backend\dao\BookFields;
+use \backend\dao\BookMenu;
+use \backend\dao\BookChapter;
 use \Yaf\Session;
 
 
@@ -55,10 +55,9 @@ class WriterController extends \Yaf\Controller_Abstract
                 if($bid)  $bookfield->updateBookStatus($bid,1);
                 break;
             case 'published':
-                if ($bid) $bookfield->updateBookStatus($bid,2);
-                break;
+                if ($bid) $bookfield->updateBookStatus($bid,3)
             case 'delete':
-
+                if ($bid) $bookfield->de
                 break;
             default:
                 break;

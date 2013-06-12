@@ -8,9 +8,9 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace duyuAT\dao;
+namespace backend\dao;
 
-use \duyuAT\dao\BookChapter;
+use \backend\dao\BookChapter;
 
 class BookMenu extends \local\db\ORM 
 {

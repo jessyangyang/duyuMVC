@@ -9,7 +9,7 @@
  * 
  */
 
-namespace duyuAT\rest;
+namespace backend\rest;
 
 
 

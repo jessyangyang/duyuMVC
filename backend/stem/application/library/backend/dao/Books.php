@@ -8,10 +8,10 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace duyuAT\dao;
+namespace backend\dao;
 
-use duyuAT\dao\Members;
-use duyuAT\dao\BookFields;
+use backend\dao\Members;
+use backend\dao\BookFields;
 
 class Books extends \local\db\ORM 
 {
@@ -73,7 +73,7 @@ class Books extends \local\db\ORM
      */
     public function getEditingCurrent()
     {
-        $user = \duyuAT\dao\Members::getCurrentUser();
+        $user = \backend\dao\Members::getCurrentUser();
         if (!$user->id) return false;
         $session = \Yaf\Session::getInstance();
         if ($session->has('bid')) {
@@ -113,7 +113,7 @@ class Books extends \local\db\ORM
         if (is_array($list["list"])) {
             foreach ($list["list"] as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list["list"][$key]['cover'] = \duyuAT\image\ImageControl::getRelativeImage($value['cover']);
+                    $list["list"][$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list;
@@ -143,7 +143,7 @@ class Books extends \local\db\ORM
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuAT\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list;
@@ -177,7 +177,7 @@ class Books extends \local\db\ORM
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuAT\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list[0];

@@ -11,9 +11,9 @@
 use \Yaf\Dispatcher;
 use \Yaf\Loader;
 use \local\db\MySQL;
-use \duyuAT\common;
+use \backend\common;
 use \local\template\SmartyAdapter;
-use \duyuAT\rest\RegisterRest;
+use \backend\rest\RegisterRest;
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract 
 {

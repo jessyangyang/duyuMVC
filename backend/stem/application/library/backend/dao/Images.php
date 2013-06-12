@@ -8,7 +8,7 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace duyuAT\dao;
+namespace backend\dao;
 
 class Images extends \local\db\ORM 
 {

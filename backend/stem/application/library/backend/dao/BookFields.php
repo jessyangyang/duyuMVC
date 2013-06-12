@@ -8,9 +8,9 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace duyuAT\dao;
+namespace backend\dao;
 
-use \duyuAT\dao\Members;
+use \backend\dao\Members;
 
 class BookFields extends \local\db\ORM 
 {

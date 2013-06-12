@@ -8,7 +8,7 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace duyuAT\dao;
+namespace backend\dao;
 
 class Members extends \local\db\ORM 
 {
@@ -111,7 +111,7 @@ class Members extends \local\db\ORM
         $row = $user->where($wherearr)->fetchRow();
 
         if ($row) {
-            $auth = \duyuAT\dao\OAuthAccessTokens::instance();
+            $auth = \backend\dao\OAuthAccessTokens::instance();
             $session = \Yaf\Session::getInstance();
             if ($state = $auth->hasArrow(md5($row['id'].$email))) {
                 $session->set('current_id',$state['user_id']);

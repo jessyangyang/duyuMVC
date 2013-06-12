@@ -9,7 +9,7 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace duyuAT\image;
+namespace backend\image;
 
 class ImageControl extends \local\image\Images 
 {
@@ -51,7 +51,7 @@ class ImageControl extends \local\image\Images
             # code...
         }
 
-        $image = new \duyuAT\dao\Images();
+        $image = new \backend\dao\Images();
 
         $imageParam = array(
             'uid' => $uid,

@@ -45,8 +45,8 @@
                                     <div class="btn-group">
                                         <button data-toggle="dropdown" class="btn dropdown-toggle">{if $item.status eq 1}未发布{else}已发布{/if} <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
-                                            <li><a href="/writer/index/state/{$item.bid}/1">未发布</a></li>
-                                            <li><a href="/writer/index/state/{$item.bid}/3">已发布</a></li>
+                                            <li><a href="/writer/index/unpublished/{$item.bid}">未发布</a></li>
+                                            <li><a href="/writer/index/published/{$item.bid}">已发布</a></li>
                                             <li class="divider"></li>
                                             <li><a href="javascript:void(0)" id="edit-delete-button">删除</a></li>
                                                 <div class="modal" id="edit-delete-modal">
