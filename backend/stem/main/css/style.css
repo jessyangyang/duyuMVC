@@ -227,3 +227,5 @@ body{background-color: #F7F4F1;}
 	-moz-transform:rotate(0deg);
 }
 .edit-setting-chapter {display: none;}
+
+#edit-delete-modal {display: none;}

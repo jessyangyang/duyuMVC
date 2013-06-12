@@ -9,6 +9,7 @@
         $(".form-horizontal").submit();
         return false; 
     });
+
     $("body").on('click','.edit-setting-title',function(){
         $(".edit-title-subitem").slideToggle('fast',function(){
             $(".edit-setting-title-img").css("transform",function(index,value)
@@ -37,12 +38,16 @@
         });
     });
 
-    $("#edit-delete-button").on('click','',function(){
-        $("#edit-delete-modal").model(
+    $(".edit-delete-button").on('click',function(){
+        var button = $(this);
+        $('#edit-delete-modal .modal-body p').append(function(){
+            return button.parents('tr').find('.edit-item-title a').html() + '"?';
+        });
+        $('#edit-delete-modal').modal({
             backdrop:true,
             keyboard:true,
             show:true
-        );
+        });
         return false;
     });
 
