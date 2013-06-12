@@ -185,4 +185,19 @@ class Books extends \local\db\ORM
 
         return "";
     }
+
+    /**
+     *  delete books
+     */
+    public function deleteBooks($bid)
+    {
+        $books = self::instance();
+        $table = $books->table;
+
+        $userStatus = Members::getCurrentUser();
+
+        if (!$userStatus->id || !$bid) return false;
+
+        return $books->where("bid = '$bid'")->delete();
+    }
 }
