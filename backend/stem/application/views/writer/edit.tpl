@@ -66,13 +66,13 @@
                             <tr>
                                 <td>
                                 	<label class="radio inline">
-	                				<input type="radio" value="{$item.id}" id="optionRadio{$key}" name="menu-id" {if isset($menuRow.id) && $menuRow.id eq $item.id}checked{/if}/> {$key+1}
+	                				<input type="radio" value="{$item.id}" id="optionRadio{$key}" name="menu-id" {if isset($menuRow.id) && $menuRow.id eq $item.id}checked{/if} class="edit-item-id" title="{$item.id}"/> {$key+1}
 	                				</label>
 
 	                			</td>
-                                <td><a href="/writer/edit/menu/{$item.id}">{$item.title}</a></td>
+                                <td class="edit-item-title"><a href="/writer/edit/menu/{$item.id}" >{$item.title}</a></td>
                                 <td><input type="text" name='menu-sort' class="span1 edit-title" placeholder="{$item.sort}" value="{$item.sort}" style="margin:0;padding:0"/></td>
-                                <td><a href="/writer/edit/delete/{$item.id}">删除</a></td>
+                                <td><a href="javascript:void(0)" class="edit-delete-button">删除</a></td>
                             </tr>
                             {/foreach}
                             {/if}
@@ -90,8 +90,22 @@
 				</div>
 			</div>
 			<div class="edit-chapter">
-				<div class="edit-chapter-top">已录入章节 （1/4）</div>
+				<div class="edit-chapter-top">已录入章节 （{if isset($menuRow.id)}{$menuRow.menuid}{$menuRow.id}{else}0{/if}/{count($menuList)}）</div>
 			</div>
+            <div class="modal" id="edit-delete-modal" >
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3>删除</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p><i class="icon-info-sign"></i>  确定删除"</p>
+                    </div>
+                    <div class="modal-footer">
+                            <a href="#" data-dismiss="modal" class="btn">取消</a>
+                            <a href="#" title="/writer/edit/delete/" class="btn btn-primary">确定</a>
+                    </div>
+                </div>
+                </div>
 		</div>
 <!-- 		<link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet"> -->
 		<!--<script type="text/javascript" src="/js/editor.js"></script>

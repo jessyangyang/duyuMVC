@@ -37,7 +37,7 @@
                         <tbody>
                             {foreach $list as $key => $item}
                             <tr>
-                                <td>{$key+1}</td>
+                                <td class="edit-item-id" title="{$item.bid}">{$key+1}</td>
                                 <td class="edit-item-title"><a href="/writer/title/{$item.bid}">{$item.title}</a></td>
                                 <td>{$item.author}</td>
                                 <td>{$item.name}</td>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="modal-footer">
                             <a href="#" data-dismiss="modal" class="btn">取消</a>
-                            <a href="/writer/index/delete/{$item.bid}" class="btn btn-primary">确定</a>
+                            <a href="#" title="/writer/index/delete/" class="btn btn-primary">确定</a>
                     </div>
                 </div>
                 </div>
