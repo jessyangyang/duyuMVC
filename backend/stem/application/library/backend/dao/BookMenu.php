@@ -92,10 +92,8 @@ class BookMenu extends \local\db\ORM
         $menu = self::instance();
         $chapter = BookChapter::instance();
 
-        if($chapter->where("menu_id='$menu_id'")->delete())
-        {
-            return $menu->where("id='$menu_id'")->delete();
-        }
-        return false;
+        $chapter->where("menu_id='$menu_id'")->delete();
+        return $menu->where("id='$menu_id'")->delete();
+        
     }
 }
