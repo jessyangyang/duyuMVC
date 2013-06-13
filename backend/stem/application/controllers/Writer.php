@@ -94,11 +94,11 @@ class WriterController extends \Yaf\Controller_Abstract
         }
         
         $display->assign('topButton',$button);
-        $display->assign("progress",0);
+        $display->assign("progress",3);
         $display->assign("islogin",$isLogin);
     }
 
-    public function titleAction($bid = false,$state = false)
+    public function titleAction($bid = false)
     {
         $display = $this->getView();
 
@@ -195,7 +195,6 @@ class WriterController extends \Yaf\Controller_Abstract
 
         if ($bid) {
             $info = $book->getBookInfo($bid);
-
             $display->assign('info',$info);
         }
 
@@ -206,7 +205,7 @@ class WriterController extends \Yaf\Controller_Abstract
         $display->assign('category',$category->getCategory());
         $display->assign('topButton',$button);
         $display->assign("title", "基本信息");
-        $display->assign("progress",0);
+        $display->assign("progress",3);
         
     }
 
