@@ -43,6 +43,9 @@
         $('#edit-delete-modal .modal-body p').append(function(){
             return button.parents('tr').find('.edit-item-title a').html() + '"?';
         });
+        $('#edit-delete-modal .modal-footer .btn-primary').attr('href',function(){
+            return $(this).attr('title') + button.parents('tr').find('.edit-item-id').attr('title');
+        });
         $('#edit-delete-modal').modal({
             backdrop:true,
             keyboard:true,
