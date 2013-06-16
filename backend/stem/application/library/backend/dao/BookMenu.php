@@ -29,6 +29,10 @@ class BookMenu extends \local\db\ORM
             'type' => 'int',
             'default' => 0,
             'comment' => 'sort'),
+        'type' => array(
+            'type' => 'int',
+            'default' => 1,
+            'comment' => 'type'),
         'title' => array(
             'type' => 'title',
             'default' => 0,
@@ -60,7 +64,7 @@ class BookMenu extends \local\db\ORM
         $menu = self::instance();
         $table = $this->table;
 
-        $list = $menu->field("$table.id,$table.bid,$table.sort,$table.title,$table.summary")->where("bid=$bid")->order("sort")->fetchList();
+        $list = $menu->field("$table.id,$table.bid,$table.type,$table.sort,$table.title,$table.summary")->where("bid=$bid")->order("sort")->fetchList();
 
         $menu->joinTables = array();
         return $list;
@@ -76,7 +80,24 @@ class BookMenu extends \local\db\ORM
         $menu = self::instance();
         $table = $this->table;
 
-        $list = $menu->field("$table.id,$table.bid,$table.sort,$table.title,$table.summary,bc.body")->joinQuery('book_chapter as bc',"$table.id=bc.menu_id")->where("$table.id='$menu_id'")->limit(1)->fetchList();
+        $list = $menu->field("$table.id,$table.bid,$table.type,$table.sort,$table.title,$table.summary,bc.body")->joinQuery('book_chapter as bc',"$table.id=bc.menu_id")->where("$table.id='$menu_id'")->limit(1)->fetchList();
+
+        $menu->joinTables = array();
+        return $list;
+    }
+
+    /**
+     * Get Content List For bid
+     *
+     * @param string $bid
+     * @return array
+     */
+    public function getMenuAndContentList($bid)
+    {
+        $menu = self::instance();
+        $table = $this->table;
+
+        $list = $menu->field("$table.id,$table.bid,$table.type,$table.sort,$table.title,$table.summary,bc.body")->joinQuery('book_chapter as bc',"$table.id=bc.menu_id")->where("$table.bid='$bid'")->order("$table.sort")->fetchList();
 
         $menu->joinTables = array();
         return $list;

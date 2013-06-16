@@ -63,4 +63,5 @@ class BookInfo extends \local\db\ORM
     {
         return self::$instance ? self::$instance : new BookInfo($key);
     }
+
 }
