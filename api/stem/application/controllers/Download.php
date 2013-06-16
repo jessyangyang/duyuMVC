@@ -13,7 +13,7 @@ use \local\download\Download;
 class DownloadController extends \Yaf\Controller_Abstract 
 {
 
-    public function bookAction($bid = 1,$fileName = false) 
+    public function bookAction($bid = 1) 
     {
         $head = array(
             'Content-type: application/epub+zip',
