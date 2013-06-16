@@ -89,7 +89,7 @@ class ImageControl extends \local\image\Images
         $fileName = $id ."_".$common->random(4).urldecode($file);
         
         if ($mkdir) {
-            $newFilePath = BASE_PATH . '/files' . $imagePath['path'][$path].$pathOne;
+            $newFilePath = FILES_PATH . '/files' . $imagePath['path'][$path].$pathOne;
 
             if (!is_dir($newFilePath)) {
                 if (!mkdir($newFilePath,0755)) {
@@ -105,20 +105,20 @@ class ImageControl extends \local\image\Images
             }
 
         }
-
+        print_r($imagePath['path'][$path].$pathOne."/".$pathTwo."/".$fileName);
         return $imagePath['path'][$path].$pathOne."/".$pathTwo."/".$fileName;
     }
 
     public function upload($tmpName)
     {
         if ($this->_file) {
-            if (copy($tmpName,BASE_PATH . '/files' . $this->_file)) {
+            if (copy($tmpName,FILES_PATH . '/files' . $this->_file)) {
                 unlink($tmpName);
             }
-            elseif (function_exists('move_uploaded_file') and move_uploaded_file($tmpName, BASE_PATH . '/files' . $this->_file)) {
+            elseif (function_exists('move_uploaded_file') and move_uploaded_file($tmpName, FILES_PATH . '/files' . $this->_file)) {
                 # code...
             }
-            elseif (rename($tmpName, BASE_PATH . '/files' . $this->_file)) {
+            elseif (rename($tmpName, FILES_PATH . '/files' . $this->_file)) {
                 # code...
             }
             else {
