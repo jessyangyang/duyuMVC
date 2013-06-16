@@ -17,6 +17,7 @@ use \backend\dao\BookInfo;
 use \backend\dao\BookFields;
 use \backend\dao\BookMenu;
 use \backend\dao\BookChapter;
+use \backend\book\BookControllers;
 use \Yaf\Session;
 
 
@@ -332,7 +333,7 @@ class WriterController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
-        $button  = false;
+        $button = $book = false;
         $data = $this->getRequest();
         $session = Session::getInstance();
         $bid = $session->get("bid");
@@ -344,10 +345,14 @@ class WriterController extends \Yaf\Controller_Abstract
         }
         else
         {
-            if ($data->isPost() and $data->getPost('state') == "cover") 
+            if ($data->isPost() and $data->getPost('state') == "end") 
             {
-                // header('Location: /writer/end');
-                // exit();
+                $book = new BookControllers();
+
+                $book->saveBook($bid);
+
+                header('Location: /writer/index');
+                exit();
             }
         }
 
