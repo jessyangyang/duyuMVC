@@ -13,9 +13,9 @@ namespace backend\book;
 use \backend\dao\Members;
 use \backend\dao\BookMenu;
 use \backend\dao\Books;
-use \backend\dao\BookInfo;
 
 
+use \local\models\BookInfo;
 use \local\file\Files;
 use \local\epub\EPub;
 use \local\zip\Zip;
@@ -33,6 +33,7 @@ class BookControllers
     private $book;
     private $member;
     private $menu;
+    private $bookinfo;
 
     private $chapterTitle = '';
     private $header = '';
@@ -71,6 +72,7 @@ class BookControllers
         $this->member = Members::instance();
         $this->book = Books::instance();
         $this->menu = BookMenu::instance();
+        $this->bookinfo = BookInfo::instance();
 
     }
 
@@ -86,6 +88,7 @@ class BookControllers
         $this->member = NULL;
         $this->book = NULL;
         $this->menu = NULL;
+        $this->bookinfo = NULL;
         $this->title = "";
         $this->author = "";
         $this->publisherName = "";
@@ -197,12 +200,31 @@ class BookControllers
 
         $this->epub->finalize();
         $this->epub->saveBook($books['bid'] . '-' . md5($books['title']), FILES_PATH . BookControllers::PATH_FOLDER);
-        $zipData = $this->epub->sendBook(md5($books['title']));
+
+        $this->bookinfo->where("bid=$bid")->update(array(
+            'download_path' => $books['bid'] . '-' . md5($books['title']) . ".epub"));
+        // $zipData = $this->epub->sendBook(md5($books['title']));
 
         exit();
 
 
     }
+
+    /**
+     * Save book
+     *
+     * @param string $fileName
+     * @param string $filePath
+     *
+     * @return boolean 
+     */
+    public function sendBook($fileName,$filePath)
+    {
+        $zipData =  $this->epub->sendBook($fileName,$filePath);
+        return $zipData;
+    }
+
+
 
     public function setTitle($title)
     {
