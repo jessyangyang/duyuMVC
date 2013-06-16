@@ -148,16 +148,15 @@ class WriterController extends \Yaf\Controller_Abstract
             {
 
                 if ($bid){
-                    if($book ->where("bid=$bid")->update(array(
+                    $book ->where("bid=$bid")->update(array(
                         'title' => $data->getPost('title'),
                         'author' => $data->getPost('author'),
-                        'cid' => $data->getPost('category'))))
-                    {
-                        $bookinfo->where("bid='$bid'")->update(array(
+                        'cid' => $data->getPost('category')));
+                    
+                    $bookinfo->where("bid='$bid'")->update(array(
                             'tags' => $data->getPost('tags'))
-                        );
-                        $bookfield->where("bid='$bid'")->update(array('bid' => $bid,'uid' => $userInfo->id,'modified' => UPDATE_TIME));
-                    }
+                    );
+                    $bookfield->where("bid='$bid'")->update(array('bid' => $bid,'uid' => $userInfo->id,'modified' => UPDATE_TIME));
                 }
                 else
                 {
@@ -318,7 +317,7 @@ class WriterController extends \Yaf\Controller_Abstract
             
         }
 
-        $button['left']['name'] = "文章录入";
+        $button['left']['name'] = "上一步：文章录入";
         $button['left']['url'] = "/writer/edit";
 
         $button['right']['name'] = "下一步-撰写导言";
@@ -352,6 +351,8 @@ class WriterController extends \Yaf\Controller_Abstract
             }
         }
 
+        $button['left']['name'] = "上一步：封面设计";
+        $button['left']['url'] = "/writer/cover";
         $button['right']['name'] = "完成并提交全本";
         $button['right']['url'] = "/writer/end";
 
@@ -359,7 +360,6 @@ class WriterController extends \Yaf\Controller_Abstract
         $display->assign("progress",99);
         $display->assign("title", "基本信息");
     }
-
 }
 
 ?>
