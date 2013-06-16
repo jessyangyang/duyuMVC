@@ -13,14 +13,14 @@ use \local\download\Download;
 class DownloadController extends \Yaf\Controller_Abstract 
 {
 
-    public function bookAction($bid = 1) 
+    public function bookAction($bid = 1,$fileName = false) 
     {
         $head = array(
             'Content-type: application/epub+zip',
             "Content-disposition:attachment;filename='". time() .".epub'",
             'Content-Transfer-Encoding: binary');
 
-        $path = BASE_PATH."/files/book/guidang.epub";
+        $path = FILES_PATH."/files/book/guidang.epub";
 
         // print_r($path);
 
