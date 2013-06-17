@@ -5,12 +5,12 @@
     //     });
     //     return false; 
     // });
-    $("body").on('click',".btn-next,.btn-commit",function(){
+    $(".btn-next,.btn-commit").on('click',function(){
         $(".form-horizontal").submit();
         return false; 
     });
 
-    $("body").on('click','.edit-setting-title',function(){
+    $(".edit-setting-title").on('click',function(){
         $(".edit-title-subitem").slideToggle('fast',function(){
             $(".edit-setting-title-img").css("transform",function(index,value)
             {
@@ -28,7 +28,7 @@
         });
     });
 
-    $("body").on('click','.edit-chapter',function(){
+    $(".edit-chapter").on('click',function(){
         $(".edit-setting-chapter").slideToggle('fast',function(){
             // if(!$(this).is(':hidden'))
             // {
@@ -52,6 +52,10 @@
             show:true
         });
         return false;
+    });
+
+    $(".edit-action-button").on('click',function(){
+        $('.form-horizontal').attr('action',$(this).attr('data'));
     });
 
     
