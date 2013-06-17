@@ -11,14 +11,144 @@
 
 namespace backend\image;
 
+use \backend\dao\Images;
+use \local\models\BookImage;
+
 class ImageControl extends \local\image\Images 
 {
-    public function __construct()
+
+    private $images;
+    private $bookimage;
+    private $fileName;
+
+    public $insertId;
+
+    /**
+     * Class construct
+     * @return void
+     */
+    function __construct()
     {
 
         // file_exists($file) and $this->_file = $file;
+        $this->images = images::instance();
+        $this->bookimage = BookImage::instance();
     }
 
+    /**
+     * Get BookImage Row
+     *
+     * @param Array , $option
+     * @return Array
+     */
+    public function getBookImageRow($option = array())
+    {
+        if (!is_array($option) or !$option) return false;
+
+        $sql = '';
+        foreach ($option as $key => $value) {
+            if(end($option) == $value) $sql .= "$key='" . $value . "'";
+            else $sql .= "$key='" . $value . "' AND ";
+        }
+
+        return $this->bookimage->where($sql)->fetchRow();
+    }
+
+    /**
+     * Add BookImage Table
+     *
+     * @param Int ,$insertId , if $insertId = 0, then $insertId = lastest mysql insertid
+     * @param Int ,$bid
+     * @param Int ,$type
+     *
+     * @return Boolean or Int
+     */
+    public function addBookImage($insertId,$bid,$type = 1,$name = false)
+    {
+        if (!$insertId or !$bid) return 0;
+
+        $fields = array(
+            'bid'  => $bid,
+            'pid'  => $insertId,
+            'type' => $type
+        );
+
+        $name and $fields['name'] = $name;
+        $this->bookimage->insert($fields);
+
+        return $this->bookimage->insertId() ? $this->bookimage->insertId() : 0;
+    }
+
+    /**
+     * Update BookImage Table
+     *
+     * @param Int ,pramary key
+     * @param Array , $fields
+     * @return Boolean
+     */
+    public function updateBookImage($id,$fields = array())
+    {
+        if(!is_array($fields) or isset($fields['id'])) return false;
+
+        return $this->bookimage->where("id='$id'")->update($fields);
+    }
+
+    /**
+     * Delete BookImage Row For pid
+     *
+     * @param Int ,$pid
+     * @return Boolean
+     */
+    public function deleteBookImageForPid($pid)
+    {
+        if(!$pid) return false;
+        return $this->bookimage->where("pid='$pid'")->delete();
+    }
+
+    /**
+     * Get Images Row
+     *
+     * @param Array , $option
+     * @return Array
+     */
+    public function getImagesRow($option = array())
+    {
+        if (!is_array($option) or !$option) return false;
+
+        $sql = '';
+        foreach ($option as $key => $value) {
+            if(end($option) == $value) $sql .= " $key='" . $value . "' ";
+            else $sql .= " $key='" . $value . "' AND ";
+        }
+
+        return $this->images->where($sql)->fetchRow();
+    }
+
+    public function addImages()
+    {
+
+    }
+
+    /**
+     * Delete Images Row For pid
+     *
+     * @param Int ,$pid
+     * @return Boolean
+     */
+    public function deleteImagesForPid($pid)
+    {
+        if(!$pid) return false;
+        $item = $this->getImagesRow(array('pid'=> $pid));
+        $is_delete = $this->images->where("pid='$pid'")->delete();
+        if($is_delete) $this->unlink($item['path']);
+        return $is_delete;
+    }
+
+    /**
+     * Save image to folder and Update Images table.
+     *
+     * @param 
+     */
     public function save($FILE, $uid, $class = 1, $path = "image", $thumb = false)
     {
         if (!$uid)  return false;
@@ -51,23 +181,35 @@ class ImageControl extends \local\image\Images
             # code...
         }
 
-        $image = new \backend\dao\Images();
-
         $imageParam = array(
             'uid' => $uid,
             'class' => $class,
-            'title' => $FILE['name'],
-            'filename' => $FILE['name'],
+            'title' => basename($FILE['name']),
+            'filename' => $this->fileName,
             'type' => $FILE['type'],
             'size' => $FILE['size'],
-            'path' => $image->escapeString($this->_file),
+            'path' => $this->images->escapeString($this->_file),
             'thumb' => 0,
             'published' => time()
             );
 
-        $image->insert($imageParam);
-        return $image->insertId() ? $image->insertId() : 0;
+        $this->images->insert($imageParam);
+        $this->insertId = $this->images->insertId();
+        return $this->insertId ? $this->insertId : 0;
 
+    }
+
+    /**
+     *  Remove Image Files
+     *
+     *  @param String ,$path
+     *  @return Boolean
+     */
+    public function unlink($path)
+    {
+        $filepath = FILES_PATH . '/files' . $path;
+        if(is_dir($filepath)) return unlink($filepath);
+        return false;
     }
 
     /**
@@ -86,29 +228,36 @@ class ImageControl extends \local\image\Images
         $common =  \Yaf\Registry::get('common');
 
         if (!$id) return false;
-        $fileName = $id ."_".$common->random(4).urldecode($file);
+        $fileInfo = pathinfo($file);
+        $this->fileName = $id ."_".$common->random(4) . "_" . time() .'.'.$fileInfo['extension'];
         
         if ($mkdir) {
             $newFilePath = FILES_PATH . '/files' . $imagePath['path'][$path].$pathOne;
 
             if (!is_dir($newFilePath)) {
                 if (!mkdir($newFilePath,0755)) {
-                    return $fileName;
+                    return $this->fileName;
                 }
             }
 
             $newFilePath .= "/".$pathTwo;
             if (!is_dir($newFilePath)) {
                 if (!mkdir($newFilePath)) {
-                    return $pathOne . "/" . $fileName;
+                    return $pathOne . "/" . $this->fileName;
                 }
             }
 
         }
 
-        return $imagePath['path'][$path].$pathOne."/".$pathTwo."/".$fileName;
+        return $imagePath['path'][$path].$pathOne."/".$pathTwo."/".$this->fileName;
     }
 
+    /**
+     * Move file
+     *
+     * @param String $tmpName
+     * @return Boolean 
+     */
     public function upload($tmpName)
     {
         if ($this->_file) {
@@ -128,6 +277,12 @@ class ImageControl extends \local\image\Images
         }
     }
 
+    /**
+     * Get store path
+     *
+     * @param String , $path
+     * @return String , the store path.
+     */
     public static function getRelativeImage($path)
     {
         $imagePath = \Yaf\Application::app()->getConfig()->toArray();

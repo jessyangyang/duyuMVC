@@ -205,9 +205,6 @@ class BookControllers
             'download_path' => $books['bid'] . '-' . md5($books['title']) . ".epub"));
         // $zipData = $this->epub->sendBook(md5($books['title']));
 
-        exit();
-
-
     }
 
     /**

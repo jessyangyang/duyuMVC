@@ -4,7 +4,7 @@
 			<div class="edit-box">
 				<h2>给已上传的作品添加封面。</h2>
 				<div id="edit-box" class="edit-cover">
-				<form class="form-horizontal" action="/writer/cover" method="POST">
+				<form class="form-horizontal" action="/writer/cover" method="POST" enctype="multipart/form-data">
 					<fieldset>
 					<div class="control-group-left">
 					<div class="control-group">
@@ -42,9 +42,9 @@
 					              <a class="btn btn-primary" href="#">保存更改</a>
 					            </div>
 					        </div>
-							<div class="btn-group">
-							 	<button class="btn">选择模板</button>
-								<button id="UploadCover" class="btn">上传图片</button>
+							<div class="inline">
+							 	<input type="file" name="thumb" data="/writer/cover/thumb" class="edit-action-button"/>上传商店封面
+								<input type="file" name="cover" data="/writer/cover/cover" class="edit-action-button"/>上传图书封面
 							</div>
 						</div>
 						<div class="controls">
