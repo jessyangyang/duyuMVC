@@ -18,6 +18,8 @@ use \backend\dao\BookFields;
 use \backend\dao\BookMenu;
 use \backend\dao\BookChapter;
 use \backend\book\BookControllers;
+
+use \backend\image\ImageControl;
 use \Yaf\Session;
 
 
@@ -294,7 +296,7 @@ class WriterController extends \Yaf\Controller_Abstract
         $display->assign("progress",33);
     }
 
-    public function coverAction()
+    public function coverAction($type = false)
     {
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
@@ -302,6 +304,7 @@ class WriterController extends \Yaf\Controller_Abstract
         $button  = false;
         $data = $this->getRequest();
         $bid = $session->get("bid");
+        $code = 0;
 
         if (!$userInfo->id or !$bid) 
         {
@@ -312,8 +315,46 @@ class WriterController extends \Yaf\Controller_Abstract
         {
             if ($data->isPost() and $data->getPost('state') == "cover") 
             {
-                header('Location: /writer/end');
-                exit();
+                $image = new ImageControl();
+                $file = $data->getFiles();
+                $path = '';
+                switch ($type) {
+                    case 'cover':
+                        $code = 3;
+                        $path = "book";
+                        break;
+                    case 'thumb':
+                        $code = 1;
+                        $path = "image";
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+
+                if($file and $type and $code > 0)
+                {
+                    $item = $image->getBookImageRow(array(
+                            'bid'=>$bid,
+                            'type'=> $code));
+
+                    if($item)
+                    {
+                        if($image->deleteImagesForPid($item['pid']))
+                        {
+                            $avatarId = $image->save($file["$type"],$userInfo->id,$code,$path);
+                            $image->updateBookImage($item['id'],array('pid' => $avatarId));
+                        }
+                    }
+                    else
+                    {
+                        $avatarId = $image->save($file["$type"],$userInfo->id , $code,$path);
+                        $image->addBookImage($avatarId,$bid,$code);
+                    }
+                }
+
+                // header('Location: /writer/end');
+                // exit();
             }
             
         }
@@ -322,7 +363,7 @@ class WriterController extends \Yaf\Controller_Abstract
         $button['left']['url'] = "/writer/edit";
 
         $button['right']['name'] = "下一步-撰写导言";
-        $button['right']['url'] = "/writer/end";
+        // $button['right']['url'] = "/writer/end";
 
         $display->assign('topButton',$button);
         $display->assign("title", "封面设计");
