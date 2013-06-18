@@ -316,7 +316,7 @@ class WriterController extends \Yaf\Controller_Abstract
         {
             $image = new ImageControl();
 
-            $bookImage = $image->getImagesForBookid($bid);
+            $bookImage = $image->getImagesForBookid($bid,1);
 
             if($bookImage) $coverPath = ImageControl::getRelativeImage($bookImage[0]['path']);
 
