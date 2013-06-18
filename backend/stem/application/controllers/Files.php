@@ -47,6 +47,8 @@ class FilesController extends \Yaf\Controller_Abstract
 
         $image = new ImageControl();
 
+        echo "type:".$type;
+
         $echoResult = function($fn,$fileurl,$message)
         {
             $str='<script type="text/javascript">window.parent.CKEDITOR.tools.callFunction('.$fn.', \''.$fileurl.'\', \''.$message.'\');</script>';
