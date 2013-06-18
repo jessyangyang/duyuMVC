@@ -29,10 +29,10 @@ CKEDITOR.editorConfig = function( config ) {
 	config.contentsCss = '/js/ckeditor/contents.css' + '?code=' + Math.random();
 	config.height = 400;
 	config.filebrowserBrowseUrl = '/kcfinder/browse.php?type=files';
-    config.filebrowserImageBrowseUrl = '/kcfinder/browse.php?type=images';
+    config.filebrowserImageBrowseUrl = '/files/upload/images';
     config.filebrowserFlashBrowseUrl = '/kcfinder/browse.php?type=flash';
     config.filebrowserUploadUrl = '/kcfinder/upload.php?type=files';
-    config.filebrowserImageUploadUrl = '/kcfinder/upload.php?type=images';
+    config.filebrowserImageUploadUrl = '/files/upload/images';
     config.filebrowserFlashUploadUrl = '/kcfinder/upload.php?type=flash';
 
 };
