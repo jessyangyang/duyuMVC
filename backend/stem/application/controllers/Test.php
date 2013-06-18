@@ -263,7 +263,8 @@ class TestController extends \Yaf\Controller_Abstract
     {
         $book = new BookControllers();
 
-        $book->saveBook(3);
+        $book->saveBook(7);
+        exit();
 
     }
 
@@ -528,6 +529,15 @@ class TestController extends \Yaf\Controller_Abstract
 
         // After this point your script should call exit. If anything is written to the output,
         // it'll be appended to the end of the book, causing the epub file to become corrupt.
+    }
+
+    public function test4Action()
+    {
+        $type = "images?CKEditor=textarea-content&CKEditorFuncNum=1&langCode=zh-cn";
+        $type = mb_substr($type,0,stripos($type,'?'), 'utf-8');
+        echo $type;
+
+        exit();
     }
 
 
