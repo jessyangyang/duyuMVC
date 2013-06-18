@@ -6,7 +6,7 @@
 				<div id="edit-box" class="edit-cover">
 				<form class="form-horizontal" action="/writer/cover" method="POST" enctype="multipart/form-data">
 					<fieldset>
-					<div class="control-group-left">
+					<div class="span7">
 					<div class="control-group">
 						<label class="edit-label" for=""><span>1</span></label>
 						<div class="controls">
@@ -59,14 +59,15 @@
 							<a class="edit-cover-list edit-cover-end"></a>
 						</div>
 					</div>
-					
-					<div class="control-group-right">
-						
+					</div>
+					<div class="span4">
+					<div class="edit-cover-show">
+						<img src="{$cover}"/>
+					</div>
 					</div>
 					</fieldset>
 					<input type="hidden" value="cover" name="state"/>
 				</form>
-				</div>
 			</div>
 		</div>
 {include file = "writer/footer.tpl"}
