@@ -46,7 +46,9 @@ class RegisterRest extends \local\rest\Restful{
          */
         
         // Upload Image
-        self::regRestURL('filesUpload','files/upload/:type','files','upload');
+        self::regRestURL('filesUpload','/files/upload/:type','files','upload');
+        self::regRestURL('filesLoad','/files/load/:type','files','load');
+        self::regRestURL('filesSend','/files/send/:fileName','files','send');
         
         
         return self::$restURL;

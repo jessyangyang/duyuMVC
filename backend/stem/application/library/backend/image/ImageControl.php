@@ -176,7 +176,7 @@ class ImageControl extends \local\image\Images
         $sql = "$table.bid='$bid'";
         $type and $sql.= " AND $table.type='$type'";
         
-        return $this->bookimage->field("$table.pid,i.uid,i.title,i.filename,i.type,i.path,i.published")->joinQuery("images as i","$table.pid=i.pid")->where($sql)->limit(1)->fetchList();
+        return $this->bookimage->field("$table.pid,i.uid,i.title,i.filename,i.type,i.path,i.published")->joinQuery("images as i","$table.pid=i.pid")->where($sql)->fetchList();
     }
 
     /**

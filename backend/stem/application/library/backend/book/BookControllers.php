@@ -13,6 +13,7 @@ namespace backend\book;
 use \backend\dao\Members;
 use \backend\dao\BookMenu;
 use \backend\dao\Books;
+use \backend\image\ImageControl;
 
 
 use \local\models\BookInfo;
@@ -34,6 +35,7 @@ class BookControllers
     private $member;
     private $menu;
     private $bookinfo;
+    private $images;
 
     private $chapterTitle = '';
     private $header = '';
@@ -73,6 +75,7 @@ class BookControllers
         $this->book = Books::instance();
         $this->menu = BookMenu::instance();
         $this->bookinfo = BookInfo::instance();
+        $this->images = new ImageControl();
 
     }
 
@@ -160,7 +163,7 @@ class BookControllers
      * @param string $html_name , allow include folderPath and fileName , "content/chapter1.html"
      * @param string or array $content,if book have subChapter,allow $content set array. $content
      */
-    public function addChapter($chapterTitle,$htmlName,$content,$autoSplit = FALSE, $externalReferences = EPub::EXTERNAL_REF_IGNORE, $baseDir = "")
+    public function addChapter($chapterTitle,$htmlName,$content,$autoSplit = FALSE, $externalReferences = EPub::EXTERNAL_REF_REPLACE_IMAGES, $baseDir = "")
     {
         $this->epub->addChapter($chapterTitle, $htmlName, $content,$autoSplit,$externalReferences,$baseDir);
     }
@@ -174,6 +177,7 @@ class BookControllers
 
         $books = $this->book->getBookInfo($bid);
         $menus = $this->menu->getMenuAndContentList($bid);
+        // $images = $this->images->getImagesForBookid($bid,4);
 
         if (!$books or !$menus) return false;
         $this->addMetaData($books['title'],'urn:uuid:'.$books['isbn'] ? $books['isbn'] : md5($books['bid']),'zh-CN',$books['summary'],$books['author'],'蠹鱼有书',$books['pubtime'],'http://www.duyu.cc');
@@ -195,9 +199,17 @@ class BookControllers
             }
             $this->chapterTitle = $value['title'];
             $header = $this->header;
-            $this->addChapter($title,'content/'.$title,$header . $value['body'] . $this->footer,false,EPub::EXTERNAL_REF_IGNORE,'/OEBPS/content');
+            $this->addChapter($title,'content/'.$title,$header . $value['body'] . $this->footer,false,EPub::EXTERNAL_REF_ADD,'/OEBPS/content');
         }
 
+        // if($images)
+        // {
+            // $paths = array();
+            // foreach ($images as $key => $value) {
+            //     $paths[]= ImageControl::getRelativeImage($value['path']);
+            // }
+            // $this->epub->addImages($paths);
+        // }
         $this->epub->finalize();
         $this->epub->saveBook($books['bid'] . '-' . md5($books['title']), FILES_PATH . BookControllers::PATH_FOLDER);
 
