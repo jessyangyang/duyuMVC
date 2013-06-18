@@ -47,7 +47,7 @@ class FilesController extends \Yaf\Controller_Abstract
 
         $image = new ImageControl();
 
-        echo "type:".$type;
+        if(stripos($type,'?')) $type = mb_substr($type,0,stripos($type,'?'), 'utf-8');
 
         $echoResult = function($fn,$fileurl,$message)
         {
