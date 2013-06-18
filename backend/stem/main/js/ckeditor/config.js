@@ -29,7 +29,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.contentsCss = '/js/ckeditor/contents.css' + '?code=' + Math.random();
 	config.height = 400;
 	config.filebrowserBrowseUrl = '/kcfinder/browse.php?type=files';
-    config.filebrowserImageBrowseUrl = '/files/upload/images';
+    config.filebrowserImageBrowseUrl = '/files/load/images';
     config.filebrowserFlashBrowseUrl = '/kcfinder/browse.php?type=flash';
     config.filebrowserUploadUrl = '/kcfinder/upload.php?type=files';
     config.filebrowserImageUploadUrl = '/files/upload/images';
