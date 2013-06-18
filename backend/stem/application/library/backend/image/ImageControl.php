@@ -168,12 +168,15 @@ class ImageControl extends \local\image\Images
      * @param String ,
      * @return Array
      */
-    public function getImagesForBookid($bid)
+    public function getImagesForBookid($bid,$type = false)
     {
-        if(!$bid) return false;
-
+        if(!$bid) return false; 
         $table = $this->bookimage->table;
-        return $this->bookimage->field("$table.pid,i.uid,i.title,i.filename,i.type,i.path,i.published")->joinQuery("images as i","$table.pid=i.pid")->where("$table.bid='$bid'")->limit(1)->fetchList();
+
+        $sql = "$table.bid='$bid'";
+        $type and $sql.= " AND $table.type='$type'";
+        
+        return $this->bookimage->field("$table.pid,i.uid,i.title,i.filename,i.type,i.path,i.published")->joinQuery("images as i","$table.pid=i.pid")->where($sql)->limit(1)->fetchList();
     }
 
     /**
@@ -181,7 +184,7 @@ class ImageControl extends \local\image\Images
      *
      * @param 
      */
-    public function save($FILE, $uid, $class = 1, $path = "image", $thumb = false)
+    public function save($FILE, $uid, $class = 1, $path = "image", $thumb = false, $fixed = false)
     {
         if (!$uid)  return false;
 
@@ -199,7 +202,7 @@ class ImageControl extends \local\image\Images
         }
 
         // Get file path
-        if (!$this->_file = $this->getFilePath($FILE['name'],$uid,true, $path)) {
+        if (!$this->_file = $this->getFilePath($FILE['name'],$uid,true, $path, $fixed)) {
             # code...
         }
         
@@ -249,9 +252,10 @@ class ImageControl extends \local\image\Images
      * @param  [type]  $fileType [description]
      * @param  boolean $mkdir    [description]
      * @param  string  $type     [$type = {'head','image','book'}
+     * @param  String  $fixed    the path is fixed dir.
      * @return [type]            [description]
      */
-    public function getFilePath($file, $id, $mkdir = false, $path = "image")
+    public function getFilePath($file, $id, $mkdir = false, $path = "image" ,$fixed = false)
     {
         $pathOne = gmdate("Ym");
         $pathTwo = gmdate('j');
@@ -263,24 +267,36 @@ class ImageControl extends \local\image\Images
         $this->fileName = $id ."_".$common->random(4) . "_" . time() .'.'.$fileInfo['extension'];
         
         if ($mkdir) {
-            $newFilePath = FILES_PATH . '/files' . $this->path[$path].$pathOne;
-
-            if (!is_dir($newFilePath)) {
-                if (!mkdir($newFilePath,0755)) {
-                    return $this->fileName;
+            if($fixed)
+            {
+                $newFilePath = FILES_PATH . '/files' . $this->path[$path] . $fixed;
+                if (!is_dir($newFilePath)) {
+                    if (!mkdir($newFilePath,0755)) {
+                        return $this->fileName;
+                    }
                 }
             }
+            else
+            {
+                $newFilePath = FILES_PATH . '/files' . $this->path[$path].$pathOne;
+                if (!is_dir($newFilePath)) {
+                    if (!mkdir($newFilePath,0755)) {
+                        return $this->fileName;
+                    }
+                }
 
-            $newFilePath .= "/".$pathTwo;
-            if (!is_dir($newFilePath)) {
-                if (!mkdir($newFilePath)) {
-                    return $pathOne . "/" . $this->fileName;
+                $newFilePath .= "/".$pathTwo;
+                if (!is_dir($newFilePath)) {
+                    if (!mkdir($newFilePath)) {
+                        return $pathOne . "/" . $this->fileName;
+                    }
                 }
             }
 
         }
 
-        return $this->path[$path].$pathOne."/".$pathTwo."/".$this->fileName;
+        if($fixed) return $this->path[$path].$fixed . '/' . $this->fileName;
+        else return $this->path[$path].$pathOne."/".$pathTwo."/".$this->fileName;
     }
 
     /**

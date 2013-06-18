@@ -36,18 +36,16 @@ class FilesController extends \Yaf\Controller_Abstract
         $bookfield = BookFields::instance();
         $bid = $session->get("bid");
 
+        $fileSaveType = $filePathType = 0;
+
         $code = 200;
         $message = "ok";
+
+        $ckeditor = $_GET;
 
         $book = Books::instance();
 
         $image = new ImageControl();
-
-        if (!$userInfo->id or !$bid)
-        {
-            $code = 402;
-            $message = "No Login";
-        }
 
         $echoResult = function($fn,$fileurl,$message)
         {
@@ -55,16 +53,24 @@ class FilesController extends \Yaf\Controller_Abstract
             exit($str);
         };
 
+        if (!$userInfo->id or !$bid)
+        {
+            $code = 402;
+            $message = "No Login";
+        }
+
+        if(!isset($ckeditor['CKEditorFuncNum'])) $echoResult(1,"","错误的文件调用请求");
+
         $file = $data->getFiles();
 
+
         switch ($type) {
-            case 'cover':
-                $avatarId = $image->storeFiles($file['cover'],$userInfo->id , 3,'image');
-                $image->addBookImage($avatarId,$bid,3);
+            case 'images':
+                $fileSaveType = 4;
+                $filePathType = "book";
                 break;
             case 'thumb':
-                $avatarId = $image->storeFiles($file['thumb'],$userInfo->id , 1,'image');
-                $image->addBookImage($avatarId,$bid,1);
+                
                 break;
             case 'flash':
                 break;
@@ -73,6 +79,18 @@ class FilesController extends \Yaf\Controller_Abstract
             default:
                 # code...
                 break;
+        }
+
+        if ($fileSaveType > 0)
+        {
+            $avatarId = $image->save($file['upload'],$userInfo->id , $fileSaveType,$filePathType, false, $bid);
+            $image->addBookImage($avatarId,$bid,$fileSaveType);
+            // $item = $image->getImagesForBookid($bid,$fileSaveType);
+            $echoResult($ckeditor['CKEditorFuncNum'],ImageControl::getRelativeImage($image->_file),"上传成功");
+        }
+        else
+        {
+            $echoResult($ckeditor['CKEditorFuncNum'],"","文件上传失败，请检查上传目录设置和目录读写权限");
         }
 
         $rest->assign('code',$code);
