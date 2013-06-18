@@ -10,7 +10,7 @@
  */
 namespace local\files;
 
-class Files extends \Filesystem
+class Files
 {
     /**
      * Make New DIR
@@ -36,5 +36,53 @@ class Files extends \Filesystem
             }
         }
         return $is_dir;
+    }
+
+    /**
+     *  Get Dir
+     *  @param String ,$path
+     *  @return Array
+     */
+    static public function getDir($path) {
+        $dirArray[]=NULL;
+        if (false != ($handle = opendir ( $path ))) {
+            $i=0;
+            while ( false !== ($file = readdir ( $handle )) ) {
+                //去掉"“.”、“..”以及带“.xxx”后缀的文件
+                if ($file != "." and  $file != ".." and !strpos($file,".")) {
+                    $dirArray[$i]=$file;
+                    $i++;
+                }
+            }
+            //关闭句柄
+            closedir ( $handle );
+        }
+        return $dirArray;
+    }
+
+    /**
+     * Get File in Dir
+     *
+     * @param String ,$path
+     * @return Array
+     */
+    static public function getFile($path,$url = "") {
+        $fileArray[]=NULL;
+        if (false != ($handle = opendir ( $path ))) {
+            $i=0;
+            while ( false !== ($file = readdir ( $handle )) ) {
+                //去掉"“.”、“..”以及带“.xxx”后缀的文件
+                if ($file != "." and  $file != ".." and strpos($file,".")) {
+                    $fileArray[$i]=$url . $file;
+                    if($i==100){
+                        break;
+                    }
+                    $i++;
+                }
+            }
+            //关闭句柄
+            closedir ( $handle );
+        }
+        return $fileArray;
     }
 }
