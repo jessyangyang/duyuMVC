@@ -301,10 +301,11 @@ class WriterController extends \Yaf\Controller_Abstract
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
         $session = Session::getInstance();
-        $button  = false;
+        $button  = $coverPath =false;
         $data = $this->getRequest();
         $bid = $session->get("bid");
         $code = 0;
+
 
         if (!$userInfo->id or !$bid) 
         {
@@ -313,9 +314,14 @@ class WriterController extends \Yaf\Controller_Abstract
         }
         else
         {
+            $image = new ImageControl();
+
+            $bookImage = $image->getImagesForBookid($bid);
+
+            if($bookImage) $coverPath = ImageControl::getRelativeImage($bookImage[0]['path']);
+
             if ($data->isPost() and $data->getPost('state') == "cover") 
             {
-                $image = new ImageControl();
                 $file = $data->getFiles();
                 $path = '';
                 switch ($type) {
@@ -353,8 +359,8 @@ class WriterController extends \Yaf\Controller_Abstract
                     }
                 }
 
-                // header('Location: /writer/end');
-                // exit();
+                header('Location: /writer/end');
+                exit();
             }
             
         }
@@ -365,6 +371,7 @@ class WriterController extends \Yaf\Controller_Abstract
         $button['right']['name'] = "下一步-撰写导言";
         // $button['right']['url'] = "/writer/end";
 
+        $display->assign("cover",$coverPath);
         $display->assign('topButton',$button);
         $display->assign("title", "封面设计");
         $display->assign("progress",66);

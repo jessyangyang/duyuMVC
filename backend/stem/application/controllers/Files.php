@@ -49,6 +49,12 @@ class FilesController extends \Yaf\Controller_Abstract
             $message = "No Login";
         }
 
+        $echoResult = function($fn,$fileurl,$message)
+        {
+            $str='<script type="text/javascript">window.parent.CKEDITOR.tools.callFunction('.$fn.', \''.$fileurl.'\', \''.$message.'\');</script>';
+            exit($str);
+        };
+
         $file = $data->getFiles();
 
         switch ($type) {

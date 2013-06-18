@@ -23,6 +23,7 @@ abstract class Images {
     // The Image Height
     public $_height;
 
+
     public function thumb()
     {
 

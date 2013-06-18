@@ -17,11 +17,24 @@ use \local\models\BookImage;
 class ImageControl extends \local\image\Images 
 {
 
+    // Images Instance
     private $images;
+    // BookImage Instance
     private $bookimage;
+    // File Name
     private $fileName;
 
+    // lastest insertId for database server
     public $insertId;
+
+    // Files Size : KB
+    protected $allowFileSize = 2000;
+
+    // Files Directory
+    protected $path = array();
+
+    // Server Files
+    protected $siteUrl;
 
     /**
      * Class construct
@@ -33,6 +46,11 @@ class ImageControl extends \local\image\Images
         // file_exists($file) and $this->_file = $file;
         $this->images = images::instance();
         $this->bookimage = BookImage::instance();
+
+        $sitePath = \Yaf\Application::app()->getConfig()->toArray();
+
+        $this->siteUrl = $sitePath['server']['imagesBook'];
+        $this->path = $sitePath['path'];
     }
 
     /**
@@ -145,6 +163,20 @@ class ImageControl extends \local\image\Images
     }
 
     /**
+     * Get Image for BookID
+     *
+     * @param String ,
+     * @return Array
+     */
+    public function getImagesForBookid($bid)
+    {
+        if(!$bid) return false;
+
+        $table = $this->bookimage->table;
+        return $this->bookimage->field("$table.pid,i.uid,i.title,i.filename,i.type,i.path,i.published")->joinQuery("images as i","$table.pid=i.pid")->where("$table.bid='$bid'")->limit(1)->fetchList();
+    }
+
+    /**
      * Save image to folder and Update Images table.
      *
      * @param 
@@ -221,7 +253,6 @@ class ImageControl extends \local\image\Images
      */
     public function getFilePath($file, $id, $mkdir = false, $path = "image")
     {
-        $imagePath = \Yaf\Application::app()->getConfig()->toArray();
         $pathOne = gmdate("Ym");
         $pathTwo = gmdate('j');
 
@@ -232,7 +263,7 @@ class ImageControl extends \local\image\Images
         $this->fileName = $id ."_".$common->random(4) . "_" . time() .'.'.$fileInfo['extension'];
         
         if ($mkdir) {
-            $newFilePath = FILES_PATH . '/files' . $imagePath['path'][$path].$pathOne;
+            $newFilePath = FILES_PATH . '/files' . $this->path[$path].$pathOne;
 
             if (!is_dir($newFilePath)) {
                 if (!mkdir($newFilePath,0755)) {
@@ -249,7 +280,7 @@ class ImageControl extends \local\image\Images
 
         }
 
-        return $imagePath['path'][$path].$pathOne."/".$pathTwo."/".$this->fileName;
+        return $this->path[$path].$pathOne."/".$pathTwo."/".$this->fileName;
     }
 
     /**
