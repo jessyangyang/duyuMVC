@@ -227,6 +227,7 @@ body{background-color: #F7F4F1;}
 
 /*edit-content*/
 .title-hr , .edit-setting-chapter {margin:0 auto;padding: 0; width: 95%;overflow: hidden;}
+.edit-setting-chapter input[type="text"]{margin:0;font-size:14px;line-height: 18px;}
 .edit-setting-title {position:relative;float: right;margin: 15px;color:#333333;}
 .edit-setting-title span{position:relative;top: 3px;margin-right:1px;line-height: 20px;}
 .edit-title-subitem {display: none;}
