@@ -93,7 +93,7 @@
 				</div>
 			</div>
 			<div class="edit-chapter">
-				<div class="edit-chapter-top">已录入章节 （{if isset($menuRow.id)}{$menuRow.menuid}{$menuRow.id}{else}0{/if}/{count($menuList)}）</div>
+				<div class="edit-chapter-top">已录入章节 （{if isset($menuRow.id)}{$menuRow.sort}{else}0{/if}/{count($menuList)}）</div>
 			</div>
             <div class="modal" id="edit-delete-modal" >
                     <div class="modal-header">
