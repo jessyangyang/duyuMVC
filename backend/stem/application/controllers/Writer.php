@@ -242,6 +242,25 @@ class WriterController extends \Yaf\Controller_Abstract
                     if ($menuid) $menu->deleteMenuForMenuID($menuid);
                     $session->__unset('current_menu_id');
                     break;
+                case 'sort':
+                    if ($data->isPost()) {
+                        $titles = $data->getPost('menuTitle');
+                        $sorts = $data->getPost('menuSort');
+                        $mids = $data->getPost('menuMid');
+
+                        $sql = "UPDATE $menu->table SET title = CASE id ";
+                        $tmp = ' END, sort = CASE id ';
+                        $ids = implode(',', array_values($mids));
+                        foreach ($mids as $key => $value) 
+                        {
+                            $sql .= " WHEN $value THEN '$titles[$key]' ";
+                            $tmp .= " WHEN $value THEN '$sorts[$key]' ";
+                        }
+                        $sql .= $tmp . "END WHERE id IN ($ids) AND bid='$bid'";
+                        $menu->query($sql);
+                        exit();
+                    }
+                    break;
                 case 'next':
                     header('Location: /writer/cover');
                     exit();

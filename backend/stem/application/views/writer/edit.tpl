@@ -53,7 +53,7 @@
 						<hr class='title-hr'/>
 					</div>
 					<div class="edit-setting-chapter">
-						<table class="table">
+						<table id="edit-setting-table" class="table">
 							<thead>
                             	<th>ID</th>
 	                            <th>标题</th>
@@ -68,11 +68,14 @@
                                 	<label class="radio inline">
 	                				<input type="radio" value="{$item.id}" id="optionRadio{$key}" name="menu-id" {if isset($menuRow.id) && $menuRow.id eq $item.id}checked{/if} class="edit-item-id" title="{$item.id}"/> {$key+1}
 	                				</label>
-
+                                    <input type="hidden" name="menuMid[]" value="{$item.id}"/>
 	                			</td>
-                                <td class="edit-item-title"><a href="/writer/edit/menu/{$item.id}" >{$item.title}</a></td>
-                                <td><input type="text" name='menu-sort' class="span1 edit-title" placeholder="{$item.sort}" value="{$item.sort}" style="margin:0;padding:0"/></td>
-                                <td><a href="javascript:void(0)" class="edit-delete-button">删除</a></td>
+                                <td class="edit-item-title"><input type="text" value="{$item.title}" name="menuTitle[]" class="span4" placeholder="请输入文字..."/></td>
+                                <td><input type="text" name='menuSort[]' class="span1 edit-title" placeholder="{$item.sort}" value="{if $item.sort eq 0}{$key+1}{else}{$item.sort}{/if}" style="margin:0;padding:0"/></td>
+                                <td>
+                                    <a href="/writer/edit/menu/{$item.id}" class='btn' >进入</a>
+                                    <a href="javascript:void(0)" class="btn edit-delete-button">删除</a>
+                                </td>
                             </tr>
                             {/foreach}
                             {/if}
@@ -104,9 +107,10 @@
                             <a href="#" data-dismiss="modal" class="btn">取消</a>
                             <a href="#" title="/writer/edit/delete/" class="btn btn-primary">确定</a>
                     </div>
-                </div>
-                </div>
+            </div>
+            </div>
 		</div>
+        <script type="text/javascript" src="/js/jquery.tablednd.js"></script>
 <!-- 		<link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet"> -->
 		<!--<script type="text/javascript" src="/js/editor.js"></script>
 		<script type="text/javascript" src="/js/editor_ready.js"></script>
