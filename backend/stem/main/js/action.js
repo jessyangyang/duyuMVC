@@ -30,11 +30,12 @@
 
     $(".edit-chapter").on('click',function(){
         $(".edit-setting-chapter").slideToggle('fast',function(){
-            // if(!$(this).is(':hidden'))
-            // {
-            //     $(".form-horizontal").submit();
-            //     return false; 
-            // }
+            if($(this).is(':hidden'))
+            {
+                $('.form-horizontal').attr('action','/writer/edit/sort/0');
+                $(".form-horizontal").ajaxSubmit();
+                return false; 
+            }
         });
     });
 
@@ -56,6 +57,18 @@
 
     $(".edit-action-button").on('click',function(){
         $('.form-horizontal').attr('action',$(this).attr('data'));
+    });
+
+
+    $("#edit-setting-table").tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var debugStr = "Row dropped was "+row.id+". New order: ";
+            for (var i=0; i<rows.length; i++) {
+                debugStr += rows[i].id+" ";
+            }
+            $("#edit-setting-table").append(debugStr);
+        }
     });
 
     
