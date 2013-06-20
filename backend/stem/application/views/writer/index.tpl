@@ -4,7 +4,7 @@
         <div class="container">
             <div class="edit-box">
                 <div id="edit-box" class="edit-info">
-                <form action="/writer/index" method="POST" title="/writer/index" class="form-horizontal" >
+                <form action="/writer/index" method="POST" class="form-horizontal" >
                     <fieldset>
                     {if $islogin eq 0}
                     <div class="control-group">

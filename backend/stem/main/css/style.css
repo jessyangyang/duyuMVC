@@ -155,7 +155,7 @@ body{background-color: #F7F4F1;}
 }
 .edit-cover .edit-label span {margin-top: 6px;display: inline-block;}
 .edit-cover .edit-cover-info{
-	width: 450px;
+	width: 400px;
 	height: 154px;
 }
 .edit-cover .control-group-left {
@@ -181,7 +181,6 @@ body{background-color: #F7F4F1;}
 .edit-cover .edit-cover-show
 {
 	margin: 15px;
-	text-align: center;
 }
 .right-tools {
 	position: absolute;

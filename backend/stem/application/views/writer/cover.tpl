@@ -4,7 +4,7 @@
 			<div class="edit-box">
 				<h2>给已上传的作品添加封面。</h2>
 				<div id="edit-box" class="edit-cover">
-				<form class="form-horizontal" action="/writer/cover" title="/writer/cover" method="POST" enctype="multipart/form-data">
+				<form class="form-horizontal" action="/writer/cover" method="POST" enctype="multipart/form-data">
 					<fieldset>
 					<div class="span6">
 					<div class="control-group">
@@ -60,7 +60,7 @@
 						</div>
 					</div>
 					</div>
-					<div class="span4">
+					<div class="span3">
 					<div class="edit-cover-show">
 						<img src="{$cover}"/>
 					</div>
