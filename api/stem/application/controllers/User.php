@@ -115,7 +115,7 @@ class UserController extends \Yaf\Controller_Abstract
                         'username' => addslashes($data->getPost('username')),
                         'password' => md5(trim($data->getPost('password'))),
                         'published' => time(),
-                        'role_id' => 4
+                        'role_id' => 500
                     );
                 
                 if ($userId = $user->insert($arr)) {
