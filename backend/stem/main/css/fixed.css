@@ -1,7 +1,11 @@
 /************* fixed **/
-.progress .bar {
+div .progress .bar {
     background-color: #bb4637;
-    background-image: -moz-linear-gradient(center top , #a01e1e, #c25e54);
+    background-image: -moz-linear-gradient(top,#a01e1e,#c25e54);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#a01e1e),to(#c25e54));
+    background-image: -webkit-linear-gradient(top,#a01e1e,#c25e54);
+    background-image: -o-linear-gradient(top,#a01e1e,#c25e54);
+    background-image: linear-gradient(to bottom,#a01e1e,#c25e54);
 }
 .inline li {margin-right:20px;margin-top:5px;}
 .table th {color:#828282;}

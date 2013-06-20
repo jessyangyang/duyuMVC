@@ -7,6 +7,8 @@
 /* Base Style*/
 body{background-color: #F7F4F1;}
 
+a {color: #c25e54};
+
 .font-18 {font-size: 18px}
 .fl {float: left}
 .rl {float: right;}
