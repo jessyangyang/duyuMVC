@@ -3,8 +3,7 @@
             <div class="right-tools">
                 <ul class="inline">
                 {if $member}
-                    <li><a href="">{$member->username}</a></li>
-                    <li>{$member->email}</li>
+                    <li><a href="" title="{$member->email}">{$member->username}</a></li>
                     <li> | </li>
                     <li><a href="">帮助</a></li>
                     <li><a href="">设置</a></li>
