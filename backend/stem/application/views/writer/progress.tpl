@@ -1,18 +1,24 @@
 <body>    
     <header>
             <div class="right-tools">
-                <a href="/writer/index">主页</a>
-                <a href="">帮助</a>
-                <a href="">设置</a>
+                <ul class="inline">
+                {if $member}
+                    <li><a href="">{$member->username}</a></li>
+                    <li>{$member->email}</li>
+                    <li> | </li>
+                    <li><a href="">帮助</a></li>
+                    <li><a href="">设置</a></li>
+                    <li><a href="/writer/index/logout/0">退出</a></li>
+                {else}
+                    <li><a href="/writer/index">主页</a></li>
+                {/if}
+                </ul>
             </div>
             {if is_array($topButton)}
-                <div class="right-button">
-                {if isset($topButton.left)}
-                     <a href="{if !isset($topButton.left.url)}javascript:void(0){else}{$topButton.left.url}{/if}" class="btn fl btn-previous">{$topButton.left.name}</a>
-                {/if}
-                {if isset($topButton.right)}
-                    <a href="{if !isset($topButton.right.url)}javascript:void(0){else}{$topButton.right.url}{/if}" class="btn btn-danger btn-next">{$topButton.right.name}</a>
-                {/if}
+                <div class="right-button inline">
+                {foreach $topButton as $key => $item}
+                <a href="{if !isset($item.url)}javascript:void(0){else}{$item.url}{/if}" class="btn {if isset($item.type)}{$item.type}{/if} {if isset($item.action)}{$item.action}{/if}">{$item.name}</a>
+                {/foreach}
                 </div>
             {/if}
             
@@ -25,10 +31,10 @@
                     </div>
                 </div>
                 <ul class="inline">
-                    <li>基本信息</li>
-                    <li>文章录入</li>
-                    <li>封面设计</li>
-                    <li>撰写导言</li>
+                    <li><a href="/writer/index">基本信息</a></li>
+                    <li><a href="/writer/edit">文章录入</a></li>
+                    <li><a href="/writer/cover">封面设计</a></li>
+                    <li><a href="/writer/end">撰写导言</a></li>
                 </ul>
             </div>
         </header>

@@ -4,7 +4,7 @@
 			<div class="edit-box">
 				<h2>录入的信息包括全本作品的名称、作者、体裁以及作品标签。</h2>
 				<div id="edit-box" class="edit-info">
-					<form class="form-horizontal" action="/writer/title" method="POST">
+					<form class="form-horizontal" action="/writer/title" title="/writer/title"  method="POST">
 					<fieldset>
 					<div class="control-group">
 					<label class="control-label" for="">作品名称：</label>

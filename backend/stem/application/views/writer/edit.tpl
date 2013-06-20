@@ -1,45 +1,11 @@
 {include file = "writer/header.tpl"}
-<body>    
-    <header>
-            <div class="right-tools">
-                <a href="/writer/index">主页</a>
-                <a href="">帮助</a>
-                <a href="">设置</a>
-            </div>
-            {if is_array($topButton)}
-                <div class="right-button">
-                	<a href="/writer/title" class="btn fl">上一步：基本信息</a>
-                {if isset($topButton.left)}
-                     <a href="{if !isset($topButton.left.url)}javascript:void(0){else}{$topButton.left.url}{/if}" class="btn fl btn-next">{$topButton.left.name}</a>
-                {/if}
-                {if isset($topButton.right)}
-                    <a href="{if !isset($topButton.right.url)}javascript:void(0){else}{$topButton.right.url}{/if}" class="btn btn-danger">{$topButton.right.name}</a>
-                {/if}
-                </div>
-            {/if}
-            
-            <div class="header-nav">
-                <h1>投稿系统</h1>
-                <div class="p-bar">
-                    <div class='red-point' style="left: {$progress}%"></div>
-                    <div class="progress">
-                        <div class="bar" style="width:{$progress}%"></div>
-                    </div>
-                </div>
-                <ul class="inline">
-                    <li>基本信息</li>
-                    <li>文章录入</li>
-                    <li>封面设计</li>
-                    <li>撰写导言</li>
-                </ul>
-            </div>
-        </header>
+{include file = "writer/progress.tpl"}
 		
 		<div class="container">
 			<div id="edit-box" class="edit-box">
 				<h2>按章节依次录入文章，可在设置内添加副标题、摘要和文章标签，也可以为当前文章设置新的作者。</h2>
 				<div class="edit-content">
-				<form class="form-horizontal" action="/writer/edit" method="POST">
+				<form class="form-horizontal" action="/writer/edit" title="/writer/edit"  method="POST">
 					<div class="edit-setting-title">
 						<span>更多设置</span>
 						<img class="edit-setting-title-img"src="http://{$smarty.server.SERVER_NAME}/img/setting-title-arrow.png">

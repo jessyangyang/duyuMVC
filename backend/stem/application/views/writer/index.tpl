@@ -4,7 +4,7 @@
         <div class="container">
             <div class="edit-box">
                 <div id="edit-box" class="edit-info">
-                <form action="/writer/index" method="POST" class="form-horizontal" >
+                <form action="/writer/index" method="POST" title="/writer/index" class="form-horizontal" >
                     <fieldset>
                     {if $islogin eq 0}
                     <div class="control-group">
@@ -53,7 +53,7 @@
                                         </ul>
                                     </div>
                                 </td>
-                                <td><a href="javascript:void(0)"  class="edit-delete-button" data-toggle="modal">删除</a></td>
+                                <td><a href="javascript:void(0)"  class="btn edit-delete-button" data-toggle="modal">删除</a></td>
                             </tr>
                             {/foreach}
                         </tbody>

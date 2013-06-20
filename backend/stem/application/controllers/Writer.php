@@ -85,6 +85,8 @@ class WriterController extends \Yaf\Controller_Abstract
             $display->assign('list',$book->getCurrentUserWriterBooks());
             $button['right']['name'] = "创建 : 一本新书";
             $button['right']['url'] = "/writer/index/new/0";
+            $button['right']['type'] = "btn-danger";
+            $button['right']['action'] = "btn-next";
         }
         else $display->assign("title", "登录");
         
@@ -96,6 +98,7 @@ class WriterController extends \Yaf\Controller_Abstract
             exit();
         }
         
+        $display->assign('member',$userInfo);
         $display->assign('topButton',$button);
         $display->assign("progress",3);
         $display->assign("islogin",$isLogin);
@@ -203,7 +206,10 @@ class WriterController extends \Yaf\Controller_Abstract
         $button['left']['name'] = "回首页";
         $button['left']['url'] = "/writer/index";
         $button['right']['name'] = "下一步：文章录入";
+        $button['right']['type'] = "btn-danger";
+        $button['right']['action'] = "btn-next";
 
+        $display->assign('member',$userInfo);
         $display->assign('category',$category->getCategory());
         $display->assign('topButton',$button);
         $display->assign("title", "基本信息");
@@ -302,13 +308,17 @@ class WriterController extends \Yaf\Controller_Abstract
 
         }
 
-        $button['left']['name'] = "录入下一篇";
-
+        $button['left']['name'] = "上一步：基本信息";
+        $button['left']['url'] = "/writer/title";
+        $button['center']['name'] = "录入下一篇";
+        $button['center']['action'] = "btn-next";
         $button['right']['name'] = "下一步-封面设计";
         $button['right']['url'] = "/writer/cover";
+        $button['right']['type'] = "btn-danger";
 
         $display->assign("menuRow",$menuRow[0]);
         $display->assign('userinfo',array('userid' => $userInfo->id,'username'=>$userInfo->username));
+        $display->assign('member',$userInfo);
         $display->assign('menuList',$menuList);
         $display->assign("title", "文章录入");
         $display->assign('topButton',$button);
@@ -389,7 +399,10 @@ class WriterController extends \Yaf\Controller_Abstract
 
         $button['right']['name'] = "下一步-撰写导言";
         // $button['right']['url'] = "/writer/end";
+        $button['right']['type'] = "btn-danger";
+        $button['right']['action'] = "btn-next";
 
+        $display->assign('member',$userInfo);
         $display->assign("cover",$coverPath);
         $display->assign('topButton',$button);
         $display->assign("title", "封面设计");
@@ -427,7 +440,10 @@ class WriterController extends \Yaf\Controller_Abstract
         $button['left']['url'] = "/writer/cover";
         $button['right']['name'] = "完成并提交全本";
         $button['right']['url'] = "/writer/end";
+        $button['right']['type'] = "btn-danger";
+        $button['right']['action'] = "btn-next";
 
+        $display->assign('member',$userInfo);
         $display->assign('topButton',$button);
         $display->assign("progress",99);
         $display->assign("title", "基本信息");
