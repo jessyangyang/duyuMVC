@@ -413,10 +413,11 @@ class WriterController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
         $userInfo = Members::getCurrentUser();
-        $button = $book = false;
+        $button = $book = $summary = false;
         $data = $this->getRequest();
         $session = Session::getInstance();
         $bid = $session->get("bid");
+
 
         if (!$userInfo->id or !$bid) 
         {
@@ -425,9 +426,15 @@ class WriterController extends \Yaf\Controller_Abstract
         }
         else
         {
+            $book = new BookControllers();
+
+            $summary = $book->getBooksRow(array('bid'=>$bid));
+
+
             if ($data->isPost() and $data->getPost('state') == "end") 
             {
-                $book = new BookControllers();
+
+                $book->updateBooks($bid,array('summary'=>$userInfo->escapeString($data->getPost('summary'))));
 
                 $book->saveBook($bid);
 
@@ -443,6 +450,7 @@ class WriterController extends \Yaf\Controller_Abstract
         $button['right']['type'] = "btn-danger";
         $button['right']['action'] = "btn-next";
 
+        $display->assign('summary',$summary['summary']);
         $display->assign('member',$userInfo);
         $display->assign('topButton',$button);
         $display->assign("progress",99);
