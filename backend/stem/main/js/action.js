@@ -6,6 +6,7 @@
     //     return false; 
     // });
     $(".btn-next,.btn-commit").on('click',function(){
+        $(".form-horizontal").attr('action',function(){ return $(this).attr('title');});
         $(".form-horizontal").submit();
         return false; 
     });

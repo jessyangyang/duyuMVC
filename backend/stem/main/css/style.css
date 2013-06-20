@@ -180,7 +180,7 @@ body{background-color: #F7F4F1;}
 }
 .edit-cover .edit-cover-show
 {
-	margin: 20px;
+	margin: 15px;
 	text-align: center;
 }
 .right-tools {
@@ -189,11 +189,14 @@ body{background-color: #F7F4F1;}
 	right: 18px;
 	top: 10px;
 }
+.right-tools ul.inline > li{
+	padding: 0px;
+}
 .right-button {
 	position: absolute;
 	text-align: right;
 	right: 35px;
-	top: 35px;
+	top: 40px;
 }
 .right-button a {margin-right:8px; }
 .red-point {
