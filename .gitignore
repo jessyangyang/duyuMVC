@@ -1,0 +1,5 @@
+./backend/stem/cache/**/*.tpl.php
+./api/stem/cache/**/*.tpl.php
+./files/**/*
+.tag
+*.log
