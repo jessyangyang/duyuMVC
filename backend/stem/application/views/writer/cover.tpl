@@ -62,7 +62,7 @@
 					</div>
 					<div class="span3">
 					<div class="edit-cover-show">
-						<img src="{$cover}"/>
+						{if $cover}<img src="{$cover}"/>{/if}
 					</div>
 					</div>
 					</fieldset>

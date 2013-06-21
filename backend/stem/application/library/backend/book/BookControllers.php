@@ -250,9 +250,12 @@ class BookControllers
         if (!is_array($option) or !$option) return false;
 
         $sql = '';
+        $i = 1;
+        $count = count($option);
         foreach ($option as $key => $value) {
-            if(end($option) == $value) $sql .= "$key='" . $value . "'";
+            if($i == $count) $sql .= "$key='" . $value . "'";
             else $sql .= "$key='" . $value . "' AND ";
+            $i ++;
         }
 
         return $this->book->where($sql)->fetchRow();
