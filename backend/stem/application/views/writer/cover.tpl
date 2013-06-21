@@ -6,7 +6,7 @@
 				<div id="edit-box" class="edit-cover">
 				<form class="form-horizontal" action="/writer/cover" method="POST" enctype="multipart/form-data">
 					<fieldset>
-					<div class="span6">
+					<div class="span5">
 					<div class="control-group">
 						<label class="edit-label" for=""><span>1</span></label>
 						<div class="controls">
@@ -28,7 +28,7 @@
 						<label class="edit-label" for=""><span>2</span></label>
 						<div class="controls">
 							<h4>封面模板</h4>
-							<p>你可以给自己的作品在下列封面中选择自己喜欢的封面，也可以上传图片为自己<br/>的作品添加封面。</p>
+							<p>你可以给自己的作品在下列封面中选择自己喜欢的封面，也可以上传图片为自己的作品添加封面。</p>
 							<div class="modal hide fade" id="UploadCoverModel" style="display: none;">
 					            <div class="modal-header">
 					              <a data-dismiss="modal" class="close">×</a>
