@@ -70,6 +70,7 @@ CKEDITOR.dialog.add( 'abbrDialog', function( editor ) {
 			// Set element attribute and text, by getting the defined field values.
 			abbr.setAttribute( 'title', dialog.getValueOf( 'tab-basic', 'title' ) );
 			abbr.setText( dialog.getValueOf( 'tab-basic', 'abbr' ) );
+			abbr.setAttribute('style',"border-bottom: 3px dotted #A01E1E;");
 
 			// Now get yet another field value, from the advanced tab.
 			var id = dialog.getValueOf( 'tab-adv', 'id' );

@@ -13,7 +13,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// 					'forms,iframe,image,newpage,removeformat,' +
 	// 					'smiley,specialchar,stylescombo,templates';
 
-	config.extraPlugins = 'abbr';
+	config.extraPlugins = 'abbr,wordcount';
 
 	config.toolbar = [
     	{ name: 'basicstyles', items: [ 'Bold', 'Italic','Underline','Strike','-','Subscript','Superscript'] },
@@ -25,6 +25,18 @@ CKEDITOR.editorConfig = function( config ) {
     	{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'] },
     	{ name: '', items: ['Source','SelectAll','RemoveFormat','-','Undo', 'Redo']}
 	];
+
+    config.wordcount = {
+
+        // Whether or not you want to show the Word Count
+        showWordCount: true,
+        // Whether or not you want to show the Char Count
+        showCharCount: true,
+        // Option to limit the characters in the Editor
+        charLimit: 'unlimited',
+        // Option to limit the words in the Editor
+        wordLimit: 'unlimited'
+    };
 
 	config.contentsCss = '/js/ckeditor/contents.css' + '?code=' + Math.random();
 	config.height = 400;
