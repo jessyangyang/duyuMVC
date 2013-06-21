@@ -25,7 +25,7 @@ CKEDITOR.editorConfig = function( config ) {
     	{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'] },
     	{ name: '', items: ['Source','SelectAll','RemoveFormat','-','Undo', 'Redo']}
 	];
-
+    config.forcePasteAsPlainText =true;
     config.wordcount = {
 
         // Whether or not you want to show the Word Count
