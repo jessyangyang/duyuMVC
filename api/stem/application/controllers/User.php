@@ -27,7 +27,7 @@ class UserController extends \Yaf\Controller_Abstract
         $session = Session::getInstance();
 
         $code = 201;
-        $message = "invild"
+        $message = "invild";
 
         switch ($action) {
             case 'callback':
