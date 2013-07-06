@@ -105,7 +105,6 @@ class ImageControl extends \local\image\Images
             }
 
         }
-        print_r($imagePath['path'][$path].$pathOne."/".$pathTwo."/".$fileName);
         return $imagePath['path'][$path].$pathOne."/".$pathTwo."/".$fileName;
     }
 
