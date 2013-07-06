@@ -18,6 +18,32 @@ use \Yaf\Session;
 
 class UserController extends \Yaf\Controller_Abstract 
 {
+    public function indexAction($action = false)
+    {
+        $rest = Restful::instance();
+        $data = $this->getRequest();
+        $user = Members::getCurrentUser();
+        $userState = MemberStateTemp::getCurrentUserForAuth();
+        $session = Session::getInstance();
+
+        $code = 201;
+        $message = "invild"
+
+        switch ($action) {
+            case 'callback':
+                # code...
+                break;
+            default:
+                # code...
+                break;
+        }
+
+        $rest->assign('code',$code);
+        $rest->assign('message',$message);
+
+        $rest->response();
+    }
+
     public function loginAction()
     {
         $rest = Restful::instance();

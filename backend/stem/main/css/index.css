@@ -1,0 +1,78 @@
+/*!
+ * M For Duyu
+ *
+ * Copyright 2012 Duyu, Inc
+ */
+
+/* Base Style*/
+body{background-color: #F5F4F2;margin: 0;padding: 0;line-height: 14px}
+
+a:link {color: #6E6868}
+a:visited {color: #B74535}
+a:hover {color: #B74535}
+a:active {color: #B74535}
+
+/* Header */
+
+header{height: 43px;background-color: #B74535;margin: 0 auto;padding: 0;text-align:center;}
+
+header h1 {margin: 0;padding: 0;font-size: 20px;line-height: 45px; color: #F5F4F2}
+
+.header-back {
+  background:transparent url("../img/icon-button.png") no-repeat scroll -4px -3px;
+  text-indent:-9999px;
+  position:absolute;
+  top:13px;
+  left: 13px;
+  height: 19px;
+  width: 19px;
+}
+
+.header-user {
+  background:transparent url("../img/icon-button.png") no-repeat scroll 0px -24px;
+  text-indent:-9999px;
+  position:absolute;
+  top:11px;
+  right: 12px;
+  height: 22px;
+  width: 22px;
+}
+
+/* Nav */
+
+nav ul.inline > li {
+    padding: 0;
+    margin: 0;
+    height: 43px;
+    width: 33%;
+    margin: 0px;
+    margin-right: -3px;
+    margin-left: -1px;
+    background-color: #F6F5F0;
+    border-bottom:1px solid #DCD9D7;
+    border-left:1px solid #FFFFFF;
+    border-right:1px solid #DCD9D7;
+    text-align: center;
+    font-size: 14px;
+    line-height: 46px;
+    color: #6E6868;
+    overflow:hidden;
+}
+nav ul
+{
+   padding: 0;
+   margin: 0 auto; 
+   list-style:none;
+   text-align: center;
+}
+
+/* Aricle */
+
+section {width:100%;padding: 20px;margin: 0;}
+.book-item-article {border-bottom: 1px solid #ABABAB;border-top: 1px solid #FFFFFF;}
+
+section .book-section-left {width: 25%;text-align: center;}
+section .book-section-left img {width: 116px;}
+section .book-section-right {width:70%;float: left;}
+section .book-section-right h3 {font-size: 20px;line-height: 24px;font-weight: 500;}
+section .book-section-right h5 {font-size: 14px;line-height: 18px;font-weight: 500;}

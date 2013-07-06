@@ -13,6 +13,7 @@ use \duyuu\dao\MemberInfo;
 use \duyuu\dao\Images;
 use \duyuu\dao\Comments;
 use \duyuu\dao\OAuthAccessTokens;
+use \duyuu\dao\MemberStateTemp;
 use \local\rest\Restful;
 use \Yaf\Session;
 
@@ -140,6 +141,7 @@ class testController extends \Yaf\Controller_Abstract
             $wherearr = "email='" .$data->getPost('email') . "' AND password='" . md5($data->getPost('password')) . "'";
             $user = Members::instance();
             $row = $user->where($wherearr)->fetchRow();
+            $userState = MemberStateTemp::instance();
 
             if ($row) {
                 $auth = OAuthAccessTokens::instance();

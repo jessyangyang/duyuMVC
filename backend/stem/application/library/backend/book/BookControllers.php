@@ -27,6 +27,12 @@ class BookControllers
     const VERSION = 1.0;
     const PATH_FOLDER = '/files/book';
 
+    const BOOK_NONE_STATE = 0;
+    const BOOK_WATTING_PUBLISH_STATE = 1;
+    const BOOK_PUBLISHING_STATE = 2;
+    const BOOK_UNPUBLISHED_STATE = 3;
+    const BOOK_PUBLISHED_STATE = 4;
+
     private $epub;
     private $splitter;
     private $files;
@@ -258,7 +264,56 @@ class BookControllers
             $i ++;
         }
 
-        return $this->book->where($sql)->fetchRow();
+        $table = $this->book->table;
+
+        $list = $this->book->field("$table.bid,$table.cid,bc.name,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags,f.copyright,f.download_path as path,f.designer,f.proofreader,f.wordcount,f.dateline")->joinQuery("book_info as f","$table.bid=f.bid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->joinQuery('book_fields as bf',"$table.bid=bf.bid")->joinQuery('book_category as bc',"$table.cid=bc.cid")->where($sql)->limit(1)->fetchList();
+
+        if (is_array($list)) {
+            if (isset($list[0]['cover']) and $list[0]['cover']) {
+                    $list[0]['cover'] = \backend\image\ImageControl::getRelativeImage($list[0]['cover']);
+            }
+            return $list[0];
+        }
+
+        return false;
+    }
+
+    /**
+     * Get Books List
+     *
+     * @param Array , $option
+     * @param int , $limit
+     * @param int , $page
+     * @return Array
+     */
+    public function getBooksList($option = array(),$limit = 10,$page = 1)
+    {
+        if (!is_array($option) or !$option) return false;
+
+        $sql = '';
+        $i = 1;
+        $count = count($option);
+        foreach ($option as $key => $value) {
+            if($i == $count) $sql .= "$key='" . $value . "'";
+            else $sql .= "$key='" . $value . "' AND ";
+            $i ++;
+        }
+
+        $offset = $page == 1 ? 0 : ($page - 1)*$limit; 
+        $table = $this->book->table;
+
+        $list = $this->book->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags")->joinQuery("book_info as f","$table.bid=f.bid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->joinQuery('book_fields as bf',"$table.bid=bf.bid")->where($sql)->order("$table.published")->limit($offset,$limit)->fetchList();
+
+        if (is_array($list)) {
+            foreach ($list as $key => $value) {
+                if (isset($value['cover']) and $value['cover']) {
+                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+                }
+            }
+            return $list;
+        }
+
+        return false;
     }
 
     /**

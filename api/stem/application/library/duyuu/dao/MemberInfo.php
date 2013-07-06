@@ -23,6 +23,10 @@ class MemberInfo extends \local\db\ORM
             'type' => 'varchar',
             'default' => 0,
             'comment' => 'avatar_id'),
+        'name' => array(
+            'type' => 'varchar',
+            'default' => 0,
+            'comment' => 'name'),
         'sex' => array(
             'type' => 'int',
             'default' => 0,
@@ -50,7 +54,12 @@ class MemberInfo extends \local\db\ORM
         'address' => array(
             'type' => 'varchar',
             'default' => 0,
-            'comment' => 'address')
+            'comment' => 'address'),
+        'weiboid' => array(
+            'type' => 'varchar',
+            'default' => 0,
+            'comment' => 'weiboid')
+
         );
 
     public $primaryKey = "id";
