@@ -49,7 +49,13 @@ class RegisterRest extends \local\rest\Restful{
         self::regRestURL('filesUpload','/files/upload/:type','files','upload');
         self::regRestURL('filesLoad','/files/load/:type','files','load');
         self::regRestURL('filesSend','/files/send/:fileName','files','send');
-        
+
+        /////////////////////
+        // Mobile WebSite  //
+        /////////////////////
+        self::regRestURL('mIndex','/m/index/:action','m','index');
+        self::regRestURL('mBook','/m/book/:bid','m','book');
+        self::regRestURL('mUser','/m/user/:action','m','user');
         
         return self::$restURL;
     }

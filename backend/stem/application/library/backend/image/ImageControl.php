@@ -54,132 +54,6 @@ class ImageControl extends \local\image\Images
     }
 
     /**
-     * Get BookImage Row
-     *
-     * @param Array , $option
-     * @return Array
-     */
-    public function getBookImageRow($option = array())
-    {
-        if (!is_array($option) or !$option) return false;
-
-        $sql = '';
-        foreach ($option as $key => $value) {
-            if(end($option) == $value) $sql .= "$key='" . $value . "'";
-            else $sql .= "$key='" . $value . "' AND ";
-        }
-
-        return $this->bookimage->where($sql)->fetchRow();
-    }
-
-    /**
-     * Add BookImage Table
-     *
-     * @param Int ,$insertId , if $insertId = 0, then $insertId = lastest mysql insertid
-     * @param Int ,$bid
-     * @param Int ,$type
-     *
-     * @return Boolean or Int
-     */
-    public function addBookImage($insertId,$bid,$type = 1,$name = false)
-    {
-        if (!$insertId or !$bid) return 0;
-
-        $fields = array(
-            'bid'  => $bid,
-            'pid'  => $insertId,
-            'type' => $type
-        );
-
-        $name and $fields['name'] = $name;
-        $this->bookimage->insert($fields);
-
-        return $this->bookimage->insertId() ? $this->bookimage->insertId() : 0;
-    }
-
-    /**
-     * Update BookImage Table
-     *
-     * @param Int ,pramary key
-     * @param Array , $fields
-     * @return Boolean
-     */
-    public function updateBookImage($id,$fields = array())
-    {
-        if(!is_array($fields) or isset($fields['id'])) return false;
-
-        return $this->bookimage->where("id='$id'")->update($fields);
-    }
-
-    /**
-     * Delete BookImage Row For pid
-     *
-     * @param Int ,$pid
-     * @return Boolean
-     */
-    public function deleteBookImageForPid($pid)
-    {
-        if(!$pid) return false;
-        return $this->bookimage->where("pid='$pid'")->delete();
-    }
-
-    /**
-     * Get Images Row
-     *
-     * @param Array , $option
-     * @return Array
-     */
-    public function getImagesRow($option = array())
-    {
-        if (!is_array($option) or !$option) return false;
-
-        $sql = '';
-        foreach ($option as $key => $value) {
-            if(end($option) == $value) $sql .= " $key='" . $value . "' ";
-            else $sql .= " $key='" . $value . "' AND ";
-        }
-
-        return $this->images->where($sql)->fetchRow();
-    }
-
-    public function addImages()
-    {
-
-    }
-
-    /**
-     * Delete Images Row For pid
-     *
-     * @param Int ,$pid
-     * @return Boolean
-     */
-    public function deleteImagesForPid($pid)
-    {
-        if(!$pid) return false;
-        $item = $this->getImagesRow(array('pid'=> $pid));
-        $is_delete = $this->images->where("pid='$pid'")->delete();
-        if($is_delete) $this->unlink($item['path']);
-        return $is_delete;
-    }
-
-    /**
-     * Get Image for BookID
-     *
-     * @param String ,
-     * @return Array
-     */
-    public function getImagesForBookid($bid,$type = false)
-    {
-        if(!$bid) return false; 
-        $table = $this->bookimage->table;
-
-        $sql = "$table.bid='$bid'";
-        $type and $sql.= " AND $table.type='$type'";
-        
-        return $this->bookimage->field("$table.pid,i.uid,i.title,i.filename,i.type,i.path,i.published")->joinQuery("images as i","$table.pid=i.pid")->where($sql)->fetchList();
-    }
-
-    /**
      * Save image to folder and Update Images table.
      *
      * @param 
@@ -244,6 +118,51 @@ class ImageControl extends \local\image\Images
     {
         $filepath = FILES_PATH . '/files' . $path;
         if(is_dir($filepath)) return unlink($filepath);
+        return false;
+    }
+
+    /**
+     * Save Image from url
+     *
+     * @param 
+     */
+    public function saveImageFromUrl($url, $uid, $class = 1, $path = "image", $thumb = false, $fixed = false)
+    {
+        $pathinfo = pathinfo($url); 
+
+        // print_r($pathinfo);
+
+        $fileExt = $this->getImageType($pathinfo['extension']);
+        // Allow Type
+        if (!$this->hasImageType($fileExt)) {
+            # code...
+        }
+
+        // Get file path
+        if (!$this->_file = $this->getFilePath($pathinfo['basename'],$uid,true, $path, $fixed)) {
+            # code...
+        }
+
+        $data = file_get_contents($url);
+        $img_size = file_put_contents(FILES_PATH . '/files' . $this->_file, $data);
+
+        if ($img_size) {
+            $imageParam = array(
+            'uid' => $uid,
+            'class' => $class,
+            'title' => $pathinfo['basename'],
+            'filename' => $this->fileName,
+            'type' => "image/".$pathinfo['extension'],
+            'size' => strlen($data),
+            'path' => $this->images->escapeString($this->_file),
+            'thumb' => 0,
+            'published' => time()
+            );
+
+            $this->images->insert($imageParam);
+            $this->insertId = $this->images->insertId();
+            return $this->insertId ? $this->insertId : 0;
+        }
         return false;
     }
 
@@ -334,5 +253,138 @@ class ImageControl extends \local\image\Images
     {
         $imagePath = \Yaf\Application::app()->getConfig()->toArray();
         return $imagePath['server']['imagesBook'].$path;
+    }
+
+
+        /**
+     * Get BookImage Row
+     *
+     * @param Array , $option
+     * @return Array
+     */
+    public function getBookImageRow($option = array())
+    {
+        if (!is_array($option) or !$option) return false;
+
+        $sql = '';
+        $i = 1;
+        $count = count($option);
+        foreach ($option as $key => $value) {
+            if($i == $count) $sql .= "$key='" . $value . "'";
+            else $sql .= "$key='" . $value . "' AND ";
+            $i ++;
+        }
+
+        return $this->bookimage->where($sql)->fetchRow();
+    }
+
+    /**
+     * Add BookImage Table
+     *
+     * @param Int ,$insertId , if $insertId = 0, then $insertId = lastest mysql insertid
+     * @param Int ,$bid
+     * @param Int ,$type
+     *
+     * @return Boolean or Int
+     */
+    public function addBookImage($insertId,$bid,$type = 1,$name = false)
+    {
+        if (!$insertId or !$bid) return 0;
+
+        $fields = array(
+            'bid'  => $bid,
+            'pid'  => $insertId,
+            'type' => $type
+        );
+
+        $name and $fields['name'] = $name;
+        $this->bookimage->insert($fields);
+
+        return $this->bookimage->insertId() ? $this->bookimage->insertId() : 0;
+    }
+
+    /**
+     * Update BookImage Table
+     *
+     * @param Int ,pramary key
+     * @param Array , $fields
+     * @return Boolean
+     */
+    public function updateBookImage($id,$fields = array())
+    {
+        if(!is_array($fields) or isset($fields['id'])) return false;
+
+        return $this->bookimage->where("id='$id'")->update($fields);
+    }
+
+    /**
+     * Delete BookImage Row For pid
+     *
+     * @param Int ,$pid
+     * @return Boolean
+     */
+    public function deleteBookImageForPid($pid)
+    {
+        if(!$pid) return false;
+        return $this->bookimage->where("pid='$pid'")->delete();
+    }
+
+    /**
+     * Get Images Row
+     *
+     * @param Array , $option
+     * @return Array
+     */
+    public function getImagesRow($option = array())
+    {
+        if (!is_array($option) or !$option) return false;
+
+        $sql = '';
+        $i = 1;
+        $count = count($option);
+        foreach ($option as $key => $value) {
+            if($i == $count) $sql .= " $key='" . $value . "' ";
+            else $sql .= " $key='" . $value . "' AND ";
+            $i ++;
+        }
+
+        return $this->images->where($sql)->fetchRow();
+    }
+
+    public function addImages()
+    {
+
+    }
+
+    /**
+     * Delete Images Row For pid
+     *
+     * @param Int ,$pid
+     * @return Boolean
+     */
+    public function deleteImagesForPid($pid)
+    {
+        if(!$pid) return false;
+        $item = $this->getImagesRow(array('pid'=> $pid));
+        $is_delete = $this->images->where("pid='$pid'")->delete();
+        if($is_delete) $this->unlink($item['path']);
+        return $is_delete;
+    }
+
+    /**
+     * Get Image for BookID
+     *
+     * @param String ,
+     * @return Array
+     */
+    public function getImagesForBookid($bid,$type = false)
+    {
+        if(!$bid) return false; 
+        $table = $this->bookimage->table;
+
+        $sql = "$table.bid='$bid'";
+        $type and $sql.= " AND $table.type='$type'";
+        
+        return $this->bookimage->field("$table.pid,i.uid,i.title,i.filename,i.type,i.path,i.published")->joinQuery("images as i","$table.pid=i.pid")->where($sql)->fetchList();
     }
 }

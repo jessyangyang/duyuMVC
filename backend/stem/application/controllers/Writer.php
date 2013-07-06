@@ -347,7 +347,7 @@ class WriterController extends \Yaf\Controller_Abstract
 
             $bookImage = $image->getImagesForBookid($bid,1);
 
-            if($bookImage) $coverPath = ImageControl::getRelativeImage($bookImage[0]['path']);
+            $coverPath = isset($bookImage[0]['path']) ?  ImageControl::getRelativeImage($bookImage[0]['path']) : false;
 
             if ($data->isPost() and $data->getPost('state') == "cover") 
             {
@@ -428,7 +428,7 @@ class WriterController extends \Yaf\Controller_Abstract
         {
             $book = new BookControllers();
 
-            $summary = $book->getBooksRow(array('bid'=>$bid));
+            $summary = $book->getBooksRow(array('books.bid'=>$bid));
 
 
             if ($data->isPost() and $data->getPost('state') == "end") 
