@@ -188,7 +188,7 @@ class BookControllers
         // $images = $this->images->getImagesForBookid($bid,4);
 
         if (!$books or !$menus) return false;
-        $this->addMetaData($books['title'],'urn:uuid:'.$books['isbn'] ? $books['isbn'] : md5($books['bid']),'zh-CN',$books['summary'],$books['author'],'蠹鱼有书',$books['pubtime'],'http://www.duyu.cc');
+        $this->addMetaData($books['title'],'urn:uuid:'.$books['isbn'] ? $books['isbn'] : md5($books['bid']),'zh-cn',$books['summary'],$books['author'],'蠹鱼有书',$books['pubtime'],'http://www.duyu.cc');
 
         foreach ($menus as $key => $value) {
             switch ($value['type']) {
@@ -207,7 +207,7 @@ class BookControllers
             }
             $this->chapterTitle = $value['title'];
             $header = $this->header;
-            $this->addChapter($title,'content/'.$title,$header . $value['body'] . $this->footer,false,EPub::EXTERNAL_REF_ADD,'/OEBPS/content');
+            $this->addChapter($this->chapterTitle,'content/'.$title,$header . $value['body'] . $this->footer,false,EPub::EXTERNAL_REF_ADD,'/OEBPS/content');
         }
 
         // if($images)
