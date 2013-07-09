@@ -41,7 +41,7 @@
                                 <td class="edit-item-title"><a href="/writer/title/{$item.bid}">{$item.title}</a></td>
                                 <td>{$item.author}</td>
                                 <td>{$item.name}</td>
-                                <td>{$item.published|date_format:"%H:%M %D"}$item.published</td>
+                                <td>{$item.published|date_format:"%H:%M %D"}{$item.published}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button data-toggle="dropdown" class="btn dropdown-toggle">{if $item.status eq 0}不可用{else if $item.status eq 1}等待审核{else if $item.status eq 2}审核中{else if $item.status eq 3}未发布{else if $item.status eq 4}已发布{/if} <span class="caret"></span></button>
