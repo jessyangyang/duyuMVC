@@ -298,7 +298,7 @@ class WriterController extends \Yaf\Controller_Abstract
                 if ($menuid || $session->get('current_menu_id')){
                     $content = array(
                         'menu_id' => $menuid ? $menuid : $session->get('current_menu_id'),
-                        'body' => $data->getPost('textarea-content'));
+                        'body' => $body->escapeString($data->getPost('textarea-content')));
                         $body->addContent($content);
                         $session->__unset('current_menu_id');
                     }
