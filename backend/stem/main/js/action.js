@@ -14,6 +14,8 @@
         return false; 
     });
 
+
+    // edit
     $(".edit-setting-title").on('click',function(){
         $(".edit-title-subitem").slideToggle('fast',function(){
             $(".edit-setting-title-img").css("transform",function(index,value)
@@ -75,5 +77,4 @@
         }
     });
 
-    
 });

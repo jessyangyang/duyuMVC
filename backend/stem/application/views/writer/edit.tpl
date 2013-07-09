@@ -5,7 +5,7 @@
 			<div id="edit-box" class="edit-box">
 				<h2>按章节依次录入文章，可在设置内添加副标题、摘要和文章标签，也可以为当前文章设置新的作者。</h2>
 				<div class="edit-content">
-				<form class="form-horizontal" action="/writer/edit" title="/writer/edit"  method="POST">
+				<form class="form-horizontal" action="/writer/edit" title="/writer/edit/submit/0"  method="POST">
 					<div class="edit-setting-title">
 						<span>更多设置</span>
 						<img class="edit-setting-title-img"src="http://{$smarty.server.SERVER_NAME}/img/setting-title-arrow.png">
@@ -54,6 +54,8 @@
 					<script>
                         CKEDITOR.replace( 'textarea-content' );
                     </script>
+                    <input type="hidden" value="{count($menuList)}" name='sort-count'/>
+                    <input type="hidden" value="{if isset($menuRow.sort)}{$menuRow.sort}{else}0{/if}" name="sort"/>
                     <input type="hidden" value="edit" name="state"/>
 				</form>
 				</div>

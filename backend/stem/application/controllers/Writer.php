@@ -271,41 +271,38 @@ class WriterController extends \Yaf\Controller_Abstract
                     header('Location: /writer/cover');
                     exit();
                     break;
+                case 'submit':
+                    if($data->isPost() and $data->getPost('state') == "edit")
+                    {
+                        $menu_arr = array(
+                            'bid' => $bid,
+                            'title' => $data->getPost('menu-title'),
+                            // 'author' => $data->getPost('menu-author'),
+                            'summary' => $data->getPost('menu-summary'));
+
+                        if($menuid || $session->get('current_menu_id')){
+                            $menu_arr['id'] = $menuid ? $menuid : $session->get('current_menu_id');
+                            $sort = $data->isPost('sort') ? $data->getPost('sort') : 0;
+                            $menu_arr['sort'] = $sort;
+                            $menu->where("id='$menuid'")->update($menu_arr);
+                        }
+                        else{
+                            $menu_arr['sort'] = $data->getPost('sort-count') + 1;
+                            $menuid = $menu->insert($menu_arr);
+                        };
+
+                        $content = array(
+                            'menu_id' => $menuid ? $menuid : $session->get('current_menu_id'),
+                            'body' => $body->escapeString($data->getPost('textarea-content')));
+                        $body->addContent($content);
+                        $session->__unset('current_menu_id');
+                    }
+                    break;
                 default:
                     # code...
                     break;
             }
-
-            if($data->isPost() and $data->getPost('state') == "edit")
-            {
-                $menu_arr = array(
-                    'bid' => $bid,
-                    'title' => $data->getPost('menu-title'),
-                    // 'author' => $data->getPost('menu-author'),
-                    'summary' => $data->getPost('menu-summary'));
-
-                if($menuid || $session->get('current_menu_id')){
-                    $menu_arr['id'] = $menuid ? $menuid : $session->get('current_menu_id');
-                    $sort = $data->getPost('sort');
-                    $menu_arr['sort'] = empty($sort) ? 0 : $data->getPost('sort');
-                    $menu->where("id='$menuid'")->update($menu_arr);
-                }
-                else{
-                    $menu_arr['sort'] = 0;
-                    $menuid = $menu->insert($menu_arr);
-                };
-
-                if ($menuid || $session->get('current_menu_id')){
-                    $content = array(
-                        'menu_id' => $menuid ? $menuid : $session->get('current_menu_id'),
-                        'body' => $body->escapeString($data->getPost('textarea-content')));
-                        $body->addContent($content);
-                        $session->__unset('current_menu_id');
-                    }
-                }
-
             $menuList = $menu->getMenuForBookID($bid);
-
         }
 
         $button['left']['name'] = "上一步：基本信息";
