@@ -17,7 +17,7 @@ use \backend\dao\BookInfo;
 use \backend\dao\BookFields;
 use \backend\dao\BookMenu;
 use \backend\dao\BookChapter;
-use \backend\book\BookControllers;
+use \lib\dao\BookControllers;
 
 use \backend\image\ImageControl;
 use \Yaf\Session;

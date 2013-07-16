@@ -8,7 +8,7 @@
  * @license     http://wiki.duyu.com/duyuMvc
  */
 
-use \backend\book\BookControllers;
+use \lib\dao\BookControllers;
 use \local\epub\EPub;
 use \local\epub\Logger;
 use \local\zip\Zip;
