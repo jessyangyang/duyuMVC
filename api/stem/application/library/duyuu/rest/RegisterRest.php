@@ -35,6 +35,8 @@ class RegisterRest extends \local\rest\Restful{
         self::regRestURL('userLogout','/api/user/logout','user','logout');
         // userProfile
         self::regRestURL('userProfile','/api/user/profile','user','profile');
+        // userPurchased
+        self::regRestURL('userPurchased','/api/user/purchased/:page/:limit','user','purchased');
         
         // user Buylist
         self::regRestURL('userBuyList','/api/user/buyList/:offset/:limit','userShelf','buyList');

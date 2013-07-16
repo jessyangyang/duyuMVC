@@ -94,7 +94,7 @@ class Members extends \local\db\ORM
     {
         if ($request->isPost()) {
             $user = Members::instance();
-            $wherearr = "email='" .$request->getPost('email') . "' AND password='" . md5($request->getPost('password')) . "'";
+            $wherearr = "email='" .$user->escapeString($request->getPost('email')) . "' AND password='" . md5($request->getPost('password')) . "'";
             $row = $user->field("id,email,username,role_id")->where($wherearr)->fetchRow();
             if ($row) {
                 $image = \duyuu\dao\Images::instance();

@@ -9,7 +9,7 @@
  */
 
 use \local\download\Download;
-use \local\models\BookInfo;
+use \lib\models\BookInfo;
 use \local\rest\Restful;
 use \duyuu\dao\MemberStateTemp;
 

@@ -15,6 +15,7 @@ use \duyuu\dao\Images;
 use \duyuu\dao\OAuthAccessTokens;
 use \local\rest\Restful;
 use \Yaf\Session;
+use \lib\dao\ProductsControl;
 
 class UserController extends \Yaf\Controller_Abstract 
 {
@@ -217,6 +218,33 @@ class UserController extends \Yaf\Controller_Abstract
     {
         $rest = Restful::instance();
 
+        $rest->response();
+    }
+
+    public function purchasedAction($page = 1 ,$limit = 20)
+    {
+        $rest = Restful::instance();
+        $session = Session::getInstance();
+        $userState = MemberStateTemp::getCurrentUserForAuth();
+
+        $list = array();
+
+        $code = 200;
+        $message = "ok";
+
+        if (!$userState) {
+            $code = 402;
+            $message = "No Login.";
+        }
+        else
+        {
+            $purchased = new ProductsControl();
+            $list = $purchased->getPurchasedForBooks(array('uid'=>$userState['uid']),$limit,$page);
+        }
+
+        $rest->assign('code',$code);
+        $rest->assign('message',$message);
+        $rest->assign('purchased',$list);
         $rest->response();
     }
 }
