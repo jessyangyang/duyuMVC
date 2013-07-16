@@ -10,8 +10,8 @@
 
 namespace backend\dao;
 
-use \local\models\UserRole;
-use \local\models\UserRolePermission;
+use \lib\models\UserRole;
+use \lib\models\UserRolePermission;
 
 class UserRoles
 {

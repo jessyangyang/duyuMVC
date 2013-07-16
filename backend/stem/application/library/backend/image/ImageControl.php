@@ -12,7 +12,7 @@
 namespace backend\image;
 
 use \backend\dao\Images;
-use \local\models\BookImage;
+use \lib\models\BookImage;
 
 class ImageControl extends \local\image\Images 
 {
