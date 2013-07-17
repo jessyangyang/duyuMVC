@@ -9,7 +9,7 @@
  */
 
 use \local\rest\Restful;
-use \duyuu\oauth\OAUTHTest.php;
+use \duyuu\oauth\OAUTHTest;
 use \Yaf\Session;
 
 class OAUTH2Controller extends \Yaf\Controller_Abstract 
@@ -29,7 +29,7 @@ class OAUTH2Controller extends \Yaf\Controller_Abstract
         $data = $this->getRequest();
 
         $code = 200;
-        $message = "no authorize."
+        $message = "no authorize.";
         if (OAUTHTest::token()) {
             # code...
         }

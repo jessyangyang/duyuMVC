@@ -234,6 +234,14 @@ class testController extends \Yaf\Controller_Abstract
         $display->assign('title','comments');
     }
 
+    public function purchasedAction()
+    {
+        $display = $this->getView();
+
+        $data = $this->getRequest();
+        
+    }
+
 }
 
 ?>

@@ -239,7 +239,7 @@ class UserController extends \Yaf\Controller_Abstract
         else
         {
             $purchased = new ProductsControl();
-            $list = $purchased->getPurchasedForBooks(array('uid'=>$userState['uid']),$limit,$page);
+            $list = $purchased->getPurchasedForBooks(array('product_purchased.uid'=> $userState["uid"]),$limit,$page);
         }
 
         $rest->assign('code',$code);

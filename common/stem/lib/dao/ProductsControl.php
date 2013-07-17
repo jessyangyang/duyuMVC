@@ -53,8 +53,9 @@ class ProductsControl
 
         $sql = '';
         $i = 1;
+        $table = $this->productPurchased->table;
 
-        $option = array_diff_key($option , array('type'=>'1'));
+        $option = array_merge_recursive($option , array('bi.type'=>'1'));
 
         $count = count($option);
         foreach ($option as $key => $value) {
@@ -65,11 +66,25 @@ class ProductsControl
 
 
         $offset = $page == 1 ? 0 : ($page - 1)*$limit; 
-        $table = $this->productPurchased->table;
 
-        $list = $this->productPurchased->field("$table.pid,$table.status,$table.published,$table.uid,b.bid,b.title,b.author")->joinQuery("products as p","$table.pid=p.pid")->joinQuery("books as b","p.oldid=b.bid")->where($sql)->order("$table.published")->limit($offset,$limit)->fetchList();
+        $list = $this->productPurchased->field("$table.pid,$table.status,$table.published,$table.uid,b.bid,b.title,b.author,i.path as cover")
+        	->joinQuery("products as p","$table.pid=p.pid")
+        	->joinQuery("books as b","p.oldid=b.bid")
+        	->joinQuery('book_image as bi',"b.bid=bi.bid")
+        	->joinQuery('images as i','i.pid=bi.pid')
+        	->where($sql)->order("$table.published")
+        	->limit($offset,$limit)->fetchList();
 
-        if ($list) return $list;
+    	if (is_array($list)) {
+            foreach ($list as $key => $value) {
+                if (isset($value['cover']) and $value['cover']) {
+                    $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                }
+            }
+
+            $this->productPurchased->joinTables = array();
+            return $list;
+        }
 
         return false;
     }

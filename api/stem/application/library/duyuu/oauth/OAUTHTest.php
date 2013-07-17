@@ -15,7 +15,8 @@ class OAUTHTest
 {
     public static function token()
     {
-        if (isset($_SERVER['HTTP_ACCESS_TOKEN']) and isset($_SERVER['HTTP_DEVICE_ID']) {
+        if (isset($_SERVER['HTTP_ACCESS_TOKEN']) and isset($_SERVER['HTTP_DEVICE_ID'])) 
+        {
            $accessToken = $_SERVER['HTTP_ACCESS_TOKEN'];
            $devicdID = $_SERVER['HTTP_DEVICE_ID'];
            $session->set('authToken',md5($accessToken.$devicdID));

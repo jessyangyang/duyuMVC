@@ -8,7 +8,7 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-class StoreDownloadController extends \Yaf\Controller_Abstract 
+class PayMentController extends \Yaf\Controller_Abstract 
 {
     public function applePaymentAction()
     {

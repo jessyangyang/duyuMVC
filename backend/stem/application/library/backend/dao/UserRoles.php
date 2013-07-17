@@ -33,12 +33,13 @@ class UserRoles
      */
     public function init()
     {
-        $userRole = UserRole::instance()
+        $userRole = UserRole::instance();
 
-        $permissionRoles = array(
+        $permissionRoles =  array(
             'api' => array(),
             'backend' => array(),
-            'user' =>array());
+            'user' => array()
+        );
     }
 
     public function getRoles($role_id = false)
