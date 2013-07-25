@@ -11,10 +11,10 @@
     <article>
         {foreach $books as $key => $book}
         <section id="book-item-{$key}" class="row book-item-article" data="/m/book/{$book.cover}">
-            <div class="span2 book-section-left">
+            <div class="book-section-left">
                 <a href="/m/book/{$book.bid}"><img src="{$book.cover}"/></a>
             </div>
-            <div class="span3 book-section-right">
+            <div class="book-section-right">
                  <a href="/m/book/{$book.bid}"><h3>{$book.title}</h3></a>
                 <h5>{$book.author}</h5>
                 <span>{$book.price}</span>

@@ -14,7 +14,7 @@ a:active {color: #B74535}
 
 /* Header */
 
-header{height: 43px;background-color: #B74535;margin: 0 auto;padding: 0;text-align:center;}
+header{height: 43px;background-color: #B74535;margin: 0 auto;padding: 0;text-align:center;width:100%;}
 
 header h1 {margin: 0;padding: 0;font-size: 20px;line-height: 45px; color: #F5F4F2}
 
@@ -39,12 +39,38 @@ header h1 {margin: 0;padding: 0;font-size: 20px;line-height: 45px; color: #F5F4F
 }
 
 /* Nav */
+nav {width:100%;padding: 0;margin: 0;}
 
+.fixed-layer {position: fixed;top:0px;}
+
+nav #nav-m-title {
+   padding: 0;
+   margin: 0 auto; 
+   list-style:none;
+   text-align: center;
+}
+
+nav #nav-m-title .nav-m-title-item {
+    width: 72px;
+    padding: 0;
+    margin: 0;
+    height: 43px;
+    margin: 0px;
+    background-color: #F6F5F0;
+    border-bottom:1px solid #DCD9D7;
+    border-left:1px solid #FFFFFF;
+    border-right:1px solid #DCD9D7;
+    text-align: center;
+    font-size: 14px;
+    line-height: 46px;
+    color: #6E6868;
+    overflow:hidden;
+}
 nav ul.inline > li {
     padding: 0;
     margin: 0;
     height: 43px;
-    width: 33%;
+    width: 72px;
     margin: 0px;
     margin-right: -3px;
     margin-left: -1px;
@@ -66,14 +92,15 @@ nav ul
    text-align: center;
 }
 
-/* Aricle */
+/* Article */
 
-section {width:100%;margin: 0;}
+article {width:100%;margin: 0;padding: 0}
+section {width:100%;margin: 0;padding: 0}
 .book-item-article {border-bottom: 1px solid #ABABAB;border-top: 1px solid #FFFFFF;}
 
-section .book-section-left {width: 30%;text-align: center;float: left;margin: 10px 10px 10px 15px;}
+section .book-section-left {width: 26%;text-align: center;float: left;margin: 13px 10px 10px 13px;padding: 0}
 section .book-section-left img {}
-section .book-section-right {width:55%;float: left;margin: 10px 10px 10px 0;}
+section .book-section-right {width:55%;float: left;margin: 10px 10px 10px 0;padding: 0}
 section .book-section-right h3 {font-size: 20px;line-height: 24px;font-weight: 500;}
 section .book-section-right h5 {font-size: 14px;line-height: 18px;font-weight: 500;}
 
