@@ -13,6 +13,7 @@ a:hover {color: #B74535}
 a:active {color: #B74535}
 
 /* Header */
+#header {height: 86px}
 
 header{height: 43px;background-color: #B74535;margin: 0 auto;padding: 0;text-align:center;width:100%;}
 
