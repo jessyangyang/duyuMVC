@@ -1,4 +1,5 @@
 {include file = "m/header.tpl"}
+</div>
 <form action="/m/user/register" method="POST" class="form-vertical" id="user">
     {if $action eq false}
     <div class="control-group">
