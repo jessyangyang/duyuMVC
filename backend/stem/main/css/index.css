@@ -79,6 +79,6 @@ section .book-section-right h5 {font-size: 14px;line-height: 18px;font-weight: 5
 
 /* Footer*/
 
-footer {margin:0 auto;text-align:center}
+footer {margin:0 auto;text-align:center;width: 100%;padding: 0}
 footer .info {padding:20px;}
 #footer {margin:10px;}
