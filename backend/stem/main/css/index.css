@@ -97,7 +97,7 @@ section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;
 #article-cover .article-cover-center span{font-size: 12px;line-height: 16px;color: #666666}
 #article-cover .article-cover-center .article-cover-span{margin-top: 55px;}
 #article-cover .article-cover-right {float: right;}
-#article-cover .article-cover-right .btn{margin-top:95px;margin-right:5px;width: 55px}
+#article-cover .article-cover-right .btn{margin-top:95px;position: relative;}
 
 #article-menu,#article-info,#article-summary {padding: 15px;}
 #article-menu h3,#article-info h3,#article-summary h3 {font-size: 16px;line-height: 22px;color:#333333;margin:0;}
