@@ -78,9 +78,11 @@ section {width:100%;margin: 0;padding: 0}
 
 section .book-section-left {width: 26%;text-align: center;float: left;margin: 13px 10px 10px 13px;padding: 0}
 section .book-section-left img {}
-section .book-section-right {width:55%;float: left;margin: 10px 10px 10px 0;padding: 0}
-section .book-section-right h3 {font-size: 20px;line-height: 24px;font-weight: 500;}
-section .book-section-right h5 {font-size: 14px;line-height: 18px;font-weight: 500;}
+section .book-section-right {width:55%;float: left;margin: 5px 10px 10px 5px;padding: 0}
+section .book-section-right h3 {font-size: 20px;line-height: 22px;font-weight: 500;color:#333333;}
+section .book-section-right h5 {font-size: 12px;line-height: 12px;font-weight: 500;color:#666666;}
+section .book-section-right span {font-size: 12px;line-height: 16px;margin-bottom: 10px;color: #DF624B}
+section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;}
 
 /* Footer*/
 

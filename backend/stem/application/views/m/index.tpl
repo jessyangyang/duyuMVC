@@ -19,7 +19,7 @@
                  <a href="/m/book/{$book.bid}"><h3>{$book.title}</h3></a>
                 <h5>{$book.author}</h5>
                 <span>{$book.price}</span>
-                <p>{$book.summary}</p>
+                <p>{$book.summary|truncate:70:"...":true}</p>
             </div>
         </section>
         {/foreach}
