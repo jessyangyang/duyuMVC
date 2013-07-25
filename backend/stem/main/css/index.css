@@ -13,9 +13,9 @@ a:hover {color: #B74535}
 a:active {color: #B74535}
 
 /* Header */
-#header {height: 86px;width: 100%;}
+#header {width: 100%;}
 
-header{height: 43px;background-color: #B74535;margin: 0 auto;padding: 0;text-align:center;width:100%;}
+header{height: 43px;background-color: #B74535;margin: 0 auto;padding: 0;text-align:center;width:100%;border-bottom:1px solid #913926;z-index: 9999}
 
 header h1 {margin: 0;padding: 0;font-size: 20px;line-height: 45px; color: #F5F4F2}
 
@@ -79,11 +79,34 @@ section {width:100%;margin: 0;padding: 0}
 section .book-section-left {width: 26%;text-align: center;float: left;margin: 13px 10px 10px 13px;padding: 0}
 section .book-section-left img {}
 section .book-section-right {width:55%;float: left;margin: 5px 10px 10px 5px;padding: 0}
-section .book-section-right h3 {font-size: 20px;line-height: 22px;font-weight: 500;color:#333333;}
+section .book-section-right h3 {font-size: 20px;line-height: 20px;font-weight: 500;color:#333333;}
 section .book-section-right h5 {font-size: 12px;line-height: 12px;font-weight: 500;color:#666666;}
 section .book-section-right span {font-size: 12px;line-height: 16px;margin-bottom: 10px;color: #DF624B}
 section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;}
 
+
+/* Book*/
+
+#article-cover {height: 153px;display: block;background-color: #FFFFFF;padding: 15px;}
+#article-cover .article-cover-left {width: 100px;float: left;}
+#article-cover .article-cover-left img {max-width: 90px;}
+#article-cover .article-cover-center {float: left;margin-left: 10px;}
+#article-cover .article-cover-center h2{font-size: 16px;line-height: 18px;color: #333333;margin:0px;}
+#article-cover .article-cover-center h5{font-size: 12px;line-height: 14px;color: #333333}
+#article-cover .article-cover-center h5{font-size: 12px;line-height: 14px;color: #333333}
+#article-cover .article-cover-center span{font-size: 12px;line-height: 16px;color: #666666}
+#article-cover .article-cover-center .article-cover-span{margin-top: 55px;}
+#article-cover .article-cover-right {float: right;}
+#article-cover .article-cover-right .btn{margin-top:95px;margin-right:5px;width: 55px}
+
+#article-menu,#article-info,#article-summary {padding: 15px;}
+#article-menu h3,#article-info h3,#article-summary h3 {font-size: 16px;line-height: 22px;color:#333333;margin:0;}
+#article-menu ul,#article-info ul,#article-summary ul {margin-top: 10px;} 
+#article-menu li,#article-info li,#article-summary li {font-size: 14px;line-height: 22px;color:#17130B;margin:0;padding: 0;}
+
+#article-summary{border-top:1px solid #D0CECE;background-color: #F6F6F6;}
+#article-summary p {margin-top: 10px;line-height: 18px;color:#666666;}
+#article-info {border-bottom:1px solid #D0CECE;}
 /* Footer*/
 
 footer {margin:0 auto;text-align:center;width: 100%;padding: 0}

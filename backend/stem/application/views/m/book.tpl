@@ -2,23 +2,29 @@
 </div>
     <article>
         {if isset($book)}
-        <div class="article-cover">
-            <img src="{$book.cover}"/>
-            <h2>{$book.title}</h2>
-            <h5>{$book.author}</h5>
-            <span>{$book.name}</span>
-            <span>{$book.copyright}</span>
-            <a href="" class='btn'>{$book.price}</a>
+        <div id="article-cover">
+            <div class="article-cover-left">
+                <img src="{$book.cover}"/>
+            </div>
+            <div class="article-cover-center">
+                <h2>{$book.title}</h2>
+                <h5>{$book.author}</h5>
+                <span class="article-cover-span">{$book.name}</span>
+                <span>{$book.copyright}</span>
+             </div>
+             <div class="article-cover-right">
+                <a href="" class='btn'>￥ {$book.price}</a>
+             </div>
         </div>
-        <div class="article-summary">
+        <div id="article-summary">
             <h3>导言</h3>
             <p>{$book.summary}</p>
             <a href=""></a>
         </div>
-        <div class="article-menu">
+        <div id="article-menu">
             <h3>目录</h3>
             {if isset($menus)}
-            <ul>
+            <ul class="unstyled">
                 {foreach $menus as $key => $menu}
                 <li>{$menu.title}</li>
                 {/foreach}
@@ -26,9 +32,9 @@
             {/if}
             <a href=""></a>
         </div>
-        <div class="article-info">
+        <div id="article-info">
             <h3>信息</h3>
-            <ul>
+            <ul class="unstyled">
                 <li>体裁 : {$book.name}</li>
                 <li>版权 : {$book.copyright}</li>
                 <li>标签 : {$book.tags}</li>
