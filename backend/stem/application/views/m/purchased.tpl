@@ -1,4 +1,5 @@
 {include file = "m/header.tpl"}
+</div>
 <ul class="unstyled">
 {if $purchased}
 	{foreach $purchased as $key => $val}

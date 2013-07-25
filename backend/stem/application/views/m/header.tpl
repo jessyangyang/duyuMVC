@@ -36,6 +36,7 @@
         <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     </head>
 <body>
+    <div id="header">
     <header>
         <a href="/m/index"><div class="header-back">上一页</div></a>
         <h1>{$topTitle}</h1>

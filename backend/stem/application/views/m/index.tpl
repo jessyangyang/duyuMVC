@@ -8,6 +8,7 @@
             {/if}
         </ul>
     </nav>
+    </div>
     <article>
         {foreach $books as $key => $book}
         <section id="book-item-{$key}" class="row book-item-article" data="/m/book/{$book.cover}">

@@ -1,5 +1,5 @@
 {include file = "m/header.tpl"}
-<body>
+</div>
     <article>
         {if isset($book)}
         <div class="article-cover">
