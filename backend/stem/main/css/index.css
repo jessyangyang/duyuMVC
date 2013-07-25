@@ -107,6 +107,18 @@ section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;
 #article-summary{border-top:1px solid #D0CECE;background-color: #F6F6F6;}
 #article-summary p {margin-top: 10px;line-height: 18px;color:#666666;}
 #article-info {border-bottom:1px solid #D0CECE;}
+
+
+/* User */
+#user {margin: 0 auto;text-align: center;padding: 20px;}
+#user .input-prepend {margin-top:15px}
+#user input[type="text"] {height: 44px;font-size: 14px;line-height: 18px}
+#user .add-on {height: 22px;width:51px;font-size: 18px;line-height: 24px;color: #999999;text-align: center;padding: 10px;}
+#user .btn-large {width: 261px;margin: 10px;color: #565252}
+#user a {color: #6e6868}
+#user a:link {color: #6e6868}
+
+
 /* Footer*/
 
 footer {margin:0 auto;text-align:center;width: 100%;padding: 0}
