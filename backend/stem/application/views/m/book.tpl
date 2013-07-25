@@ -13,7 +13,7 @@
                 <span>{$book.copyright}</span>
              </div>
              <div class="article-cover-right">
-                <a href="" class='btn'>￥ {$book.price}</a>
+                <a href="" class='btn'>￥{$book.price}</a>
              </div>
         </div>
         <div id="article-summary">
