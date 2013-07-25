@@ -20,6 +20,7 @@ use \backend\dao\BookChapter;
 
 use \lib\dao\BookControllers;
 use \lib\dao\MembersControl;
+use \lib\dao\ProductsControl;
 
 use \backend\image\ImageControl;
 use \Yaf\Session;
@@ -41,24 +42,27 @@ class MController extends \Yaf\Controller_Abstract
         $userInfo = Members::getCurrentUser();
 
         $book = new BookControllers();
-
-        switch ($action) {
-            case 'page':
-                # code...
-                break;
-            
-            default:
-                # code...
-                break;
+        
+        $action = $action == false ? $action = "recommend" : $action;
+        
+        $menus = $book->getRecommendMenuForType($book::MOBILE_TYPE);
+        
+        $cid = false;
+        
+        foreach ($menus as $key => $value)
+        {
+        	if ($value['action'] == $action) $cid = $value['cid'];
         }
 
         $limit = $data->isPost('limit') ? $data->getPost('limit') : 10;
         $page = $data->isPost('page') ? $data->getPost('page') : 1;
 
-        $list = $book->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),$limit,$page);
+        $list = $book->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),$cid,$limit,$page);
 
         $count = is_array($list) ? count($list) : 0;
 
+        $display->assign('user',$userInfo);
+        $display->assign('menus',$menus);
         $display->assign("title", "蠹鱼有书 - 荐书");
         $display->assign('topTitle',"蠹鱼有书");
         $display->assign('books',$list);
@@ -87,6 +91,7 @@ class MController extends \Yaf\Controller_Abstract
 
         $list = $book->getBooksRow(array('books.bid'=>$bid,'p.type'=>1));
 
+        $display->assign('user',$userInfo);
         $display->assign("title", "蠹鱼有书 - ".$list["title"]);
         $display->assign('topTitle',$list['title']);
         $display->assign('book',$list);
@@ -102,13 +107,27 @@ class MController extends \Yaf\Controller_Abstract
         $session = Session::getInstance();
         $userInfo = Members::getCurrentUser();
         $member = new MembersControl();
+        
+        $title = "蠹鱼有书 - 登录";
+        $topTitle = "登录";
+        
+        $purchasedList = array();
+        
+        if (isset($userInfo->id) and $userInfo->id)
+        {
+        	$title = "蠹鱼有书 - " . $userInfo->username;
+        	$topTitle = "购买记录";
+        	$action = $action == false ? "purchased" : $action;
+        	
+//         	goto show;
+        }
 
         $weiboConfig = \Yaf\Application::app()->getConfig()->toArray();
         $weibo = new SaeTOAuthV2( $weiboConfig['weibo']['akey'] , $weiboConfig['weibo']['skey'] );
         $weiboUrl = $weibo->getAuthorizeURL($weiboConfig['weibo']['callback']);
         $keys = $weiboMessage = array();
-
-        $title = "登录";
+        
+        $display->assign('weibo_url',$weiboUrl);
 
         switch ($action) {
             case 'callback':
@@ -134,7 +153,7 @@ class MController extends \Yaf\Controller_Abstract
                     $uid_get = $client->get_uid();
                     $uid = $uid_get['uid'];
                     $weiboMessage = $client->show_user_by_id($uid);
-                $title = "欢迎你， ".$weiboMessage['name'];
+                $topTitle = "欢迎你， ".$weiboMessage['name'];
                 
                 if ($data->isPost()) {
                     if($member->register($data->getPost('email'),$weiboMessage['name'],$data->getPost('password'),$weiboMessage['avatar_large']))
@@ -144,14 +163,32 @@ class MController extends \Yaf\Controller_Abstract
                     }
                 }
                 break;
+            case 'purchased':
+            	$products = new ProductsControl();
+            	$purchasedList = $products->getPurchasedForBooks(array(
+            			'product_purchased.uid'=>$userInfo->id),50,1);
+            	
+            	$display->assign('user',$userInfo);
+            	$display->assign('purchased',$purchasedList);
+            	$display->assign('action',$action);
+            	$display->assign("title", $title);
+            	$display->assign('topTitle',$topTitle);
+            	$display->display("m/purchased.tpl");
+            	break;
+            case 'logout':
+            	$userInfo->logout();
+            	header('Location: /m/index');
+            	exit();
+            	break;
             default:
                 # code...
                 break;
         }
         
+        show:
+        $display->assign('user',$userInfo);
         $display->assign('action',$action);
-        $display->assign('weibo_url',$weiboUrl);
-        $display->assign("title", "蠹鱼有书 - 登录");
-        $display->assign('topTitle',$title);
+        $display->assign("title", $title);
+        $display->assign('topTitle',$topTitle);
     }
 }

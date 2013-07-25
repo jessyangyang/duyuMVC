@@ -76,3 +76,9 @@ section .book-section-left img {width: 116px;}
 section .book-section-right {width:70%;float: left;}
 section .book-section-right h3 {font-size: 20px;line-height: 24px;font-weight: 500;}
 section .book-section-right h5 {font-size: 14px;line-height: 18px;font-weight: 500;}
+
+/* Footer*/
+
+footer {margin:0 auto;text-align:center}
+footer .info {padding:20px;}
+#footer {margin:10px;}

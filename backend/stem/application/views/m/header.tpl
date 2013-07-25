@@ -37,7 +37,7 @@
     </head>
 <body>
     <header>
-        <a href="/user/profile"><div class="header-back">上一页</div></a>
+        <a href="/m/index"><div class="header-back">上一页</div></a>
         <h1>{$topTitle}</h1>
-        <a href="/user/profile"><div class="header-user">账户</div></a>
+        <a href="/m/user"><div class="header-user">账户</div></a>
     </header>
