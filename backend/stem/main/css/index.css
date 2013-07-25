@@ -43,34 +43,11 @@ nav {width:100%;padding: 0;margin: 0;}
 
 .fixed-layer {position: fixed;top:0px;}
 
-nav #nav-m-title {
-   padding: 0;
-   margin: 0 auto; 
-   list-style:none;
-   text-align: center;
-}
-
-nav #nav-m-title .nav-m-title-item {
-    width: 116px;
-    padding: 0;
-    margin: 0;
-    height: 43px;
-    margin: 0px;
-    background-color: #F6F5F0;
-    border-bottom:1px solid #DCD9D7;
-    border-left:1px solid #FFFFFF;
-    border-right:1px solid #DCD9D7;
-    text-align: center;
-    font-size: 14px;
-    line-height: 46px;
-    color: #6E6868;
-    overflow:hidden;
-}
 nav ul.inline > li {
     padding: 0;
     margin: 0;
     height: 43px;
-    width: 72px;
+    width: 116px;
     margin: 0px;
     margin-right: -3px;
     margin-left: -1px;
