@@ -26,7 +26,15 @@ class ProductCategory extends \local\db\ORM
         'summary' => array(
             'type' => 'varchar',
             'default' => 0,
-            'comment' => 'summary')
+            'comment' => 'summary'),
+        'sort' => array(
+            'type' => 'int',
+            'default' => '0',
+            'comment' => 'sort'),
+        'published' => array(
+            'type' => 'int',
+            'default' => '0',
+            'comment' => 'published')
         );
 
     public $primaryKey = "pcid";

@@ -115,5 +115,8 @@ class MembersControl
         return false;
     }
 
-    
+    public function logout()
+    {
+    	
+    }
 }

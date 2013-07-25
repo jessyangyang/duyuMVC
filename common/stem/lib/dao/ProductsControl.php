@@ -16,6 +16,16 @@ use \lib\models\ProductPurchased;
 
 class ProductsControl
 {
+	const PRODUCT_TYPE_RENT = 1;
+	const PRODUCT_TYPE_SUBSCRIPTION = 2;
+	
+	const STATUS_DEPRECATED = -1;
+	const STATUS_NOT_PAIED = 0;
+	const STATUS_PAIED = 1;
+	
+	const PAY_METHOD_ALIPAY = 'alipay';
+	const PAY_METHOD_APPLE = 'apple';
+	
     private $products;
     private $productCategory;
     private $productPurchased;
@@ -28,6 +38,7 @@ class ProductsControl
         $this->productCategory = ProductCategory::instance();
         $this->productPurchased = ProductPurchased::instance();
     }
+ 
 
     /**
     * Class destructor
@@ -39,6 +50,38 @@ class ProductsControl
         $this->products = NULL;
         $this->productCategory = NULL;
         $this->productPurchased = NULL;
+    }
+    
+    //////////////////////
+    // Instance Objects //
+    //////////////////////
+    
+    /**
+     * Get products Object
+     * 
+     * @return Object , return products model object
+     * */
+    public function getProducts()
+    {
+    	return $this->products;
+    }
+    
+    /**
+     * Get ProductPurchased Object
+     * @return Object , return ProductPurchased Model Object
+     * */
+    public function getProductPurchased()
+    {
+    	return $this->productPurchased;
+    }
+    
+    /**
+     * Get ProductCategory Object
+     * @return Object, return ProductCategory Model Object
+     * */
+    public function getProductCategory()
+    {
+    	return $this->productCategory;
     }
 
 
@@ -78,7 +121,7 @@ class ProductsControl
     	if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
                 }
             }
 
@@ -117,11 +160,27 @@ class ProductsControl
         $offset = $page == 1 ? 0 : ($page - 1)*$limit; 
         $table = $this->products->table;
 
-        $list = $this->products->field("$table.pid,$table.type,$table.name,$table.price,$table.oldid,$table.product_id,$table.published,$table.summary,$table.costprice,$table.image_id,pc.name,pc.uid")->joinQuery("product_category as pc","$table.type=pc.pcid")->where($sql)->order("$table.published")->limit($offset,$limit)->fetchList();
+        $list = $this->products->field("$table.pid,$table.pcid,$table.order_num,$table.product_name,$table.total_fee,$table.oldid,$table.product_id,$table.created_time,$table.modified_time,$table.paied_time,$table.summary,$table.costprice,$table.image_id,pc.name")
+            ->joinQuery("product_category as pc","$table.pcid=pc.pcid")
+            ->where($sql)
+            ->order("$table.created_time")
+            ->limit($offset,$limit)->fetchList();
 
         if ($list) return $list;
 
         return false;
+    }
+    
+    /**
+     * Get Products For Row
+     * 
+     * @param Array , $option 
+     * @return Array.
+     * */
+    public function getProductsRow($option = array())
+    {
+    	$row = $this->getProductsList($option, 1 , 1);
+    	return $row ? $row[0] : false;
     }
 
     /**
@@ -156,7 +215,7 @@ class ProductsControl
 
         $table = $this->products->table;
 
-        $list = $this->products->field("$table.pid,$table.type,$table.name,$table.price,$table.oldid,$table.product_id,$table.published,$table.summary,$table.costprice,$table.image_id,pc.name,pc.uid")->joinQuery("product_category as pc","$table.type=pc.pcid")->joinQuery("product_purchased as pp","$table.pid=pp.pid")->where($sql)->order("$table.published")->limit(1)->fetchList();
+        $list = $this->products->field("$table.pid,$table.pcid,$table.product_name,$table.total_fee,$table.oldid,$table.product_id,$table.created_time,$table.summary,$table.costprice,$table.image_id,pc.name,pc.uid")->joinQuery("product_category as pc","$table.pcid=pc.pcid")->joinQuery("product_purchased as pp","$table.pid=pp.pid")->where($sql)->order("$table.created_time")->limit(1)->fetchList();
 
         if($list) return $list[0];
 

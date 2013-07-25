@@ -392,7 +392,7 @@ class ORM extends MySQL{
 
         if($debug) echo $tmpSql;
 
-        // echo $tmpSql;
+//         echo $tmpSql;
         $this->joinTables = array();
         return self::$db->query($tmpSql);
     }

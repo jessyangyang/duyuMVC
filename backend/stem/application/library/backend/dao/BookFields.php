@@ -29,6 +29,10 @@ class BookFields extends \local\db\ORM
             'type' => 'int',
             'default' => 0,
             'comment' => 'status'),
+    	'download_count' => array(
+    		'type' => 'int',
+   			'default' => 0,
+    		'comment' => 'download_count'),
         'modified' => array(
             'type' => 'int',
             'default' => 0,

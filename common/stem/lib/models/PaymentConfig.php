@@ -12,13 +12,13 @@ namespace lib\models;
 
 class PaymentConfig extends \local\db\ORM 
 {
-    public $table = 'config';
+    public $table = 'payment_config';
 
     public $fields = array(
-        'pcid' => array(
+        'configid' => array(
             'type' => 'int',
             'default' => 0,
-            'comment' => 'pcid'),
+            'comment' => 'configid'),
         'alipay_pid' => array(
             'type' => 'varchar',
             'default' => 0,
@@ -61,7 +61,7 @@ class PaymentConfig extends \local\db\ORM
             'comment' => 'apple_sell_veriyurl')
         );
 
-    public $primaryKey = "pcid";
+    public $primaryKey = "configid";
 
     // Instance Self
     protected static $instance;

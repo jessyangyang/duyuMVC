@@ -8,7 +8,7 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace \lib\dao;
+namespace lib\dao;
 
 use \local\pay\alipay\lib\AlipaySubmit;
 use \local\pay\alipay\lib\AlipayNotify;
@@ -19,6 +19,12 @@ class PaymentUtil {
 	
 	private static $ini = null;
 	private static $http_verify_url = 'http://notify.alipay.com/trade/notify_query.do?';
+	
+	
+	function __construct()
+	{
+
+	}
 	
 	public static function getConfig()
 	{
@@ -57,10 +63,12 @@ class PaymentUtil {
 	 */
 	public static function getAlipayConfig($more = false)
 	{
+		self::getConfig();
+		print_r(self::$ini);
 		$config = array(
 			"service" => self::$ini->alipay_service,
 			"payment_type" => self::$ini->alipay_payment_type,
-			"partner" => self::$ini-alipay_pid,
+			"partner" => self::$ini->alipay_pid,
 			"_input_charset" => self::$ini->alipay_input_charset,
 			"seller_email" => self::$ini->alipay_email,
 			"return_url" => self::getBaseUrl() . self::$ini->alipay_return_url,

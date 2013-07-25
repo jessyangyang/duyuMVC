@@ -179,9 +179,11 @@ class SmartyAdapter implements \Yaf\View_Interface
     }
 
     public function display($name, $value = NULL) {
-        echo $this->_smarty->fetch($name);
+    	$path = $this->getScriptPath();
+    	$path = $path[0] . $name ;
+        echo $this->_smarty->fetch($path);
+        exit();
     }
-
 }
 
 ?>

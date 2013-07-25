@@ -8,7 +8,7 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace \local\pay\alipay\lib;
+namespace local\pay\alipay\lib;
 
 class AlipayCore {
 	

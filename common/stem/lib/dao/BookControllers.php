@@ -15,8 +15,10 @@ use \backend\dao\BookMenu;
 use \backend\dao\Books;
 use \backend\image\ImageControl;
 
-
 use \lib\models\BookInfo;
+use \lib\models\BookRecommend;
+use \lib\models\BookRecommendMenu;
+
 use \local\file\Files;
 use \local\epub\EPub;
 use \local\zip\Zip;
@@ -32,6 +34,9 @@ class BookControllers
     const BOOK_PUBLISHING_STATE = 2;
     const BOOK_UNPUBLISHED_STATE = 3;
     const BOOK_PUBLISHED_STATE = 4;
+    
+    // mobile type in book_recommend_menu table.
+    const MOBILE_TYPE = 10;
 
     private $epub;
     private $splitter;
@@ -40,6 +45,8 @@ class BookControllers
 
     private $book;
     private $bookinfo;
+    private $bookRecommend;
+    private $bookRecommendMenu;
 
     private $member;
     private $menu;
@@ -84,6 +91,8 @@ class BookControllers
         $this->menu = BookMenu::instance();
         $this->bookinfo = BookInfo::instance();
         $this->images = new ImageControl();
+        $this->bookRecommend = BookRecommend::instance();
+        $this->bookRecommendMenu = BookRecommendMenu::instance();
 
     }
 
@@ -315,8 +324,64 @@ class BookControllers
 
         return false;
     }
-
+	
+    /**
+     * Get BookRecommand List 
+     * 
+     * @param Array, $option
+     * @param Int, $limit
+     * @param Int, $page
+     * @param Int, $type
+     * @return Array
+     * */
+    public function getBookRecommendList($option = array(),$cid = false,$limit = 10,$page = 1)
+    {
+    	if (!is_array($option) or !$option) return false;
+    	
+    	$option['br.cid'] = $cid;
+    	
+    	$sql = '';
+    	$i = 1;
+    	$count = count($option);
+    	foreach ($option as $key => $value) {
+    		if($i == $count) $sql .= "$key='" . $value . "'";
+    		else $sql .= "$key='" . $value . "' AND ";
+    		$i ++;
+    	}
+    	
+    	$offset = $page == 1 ? 0 : ($page - 1)*$limit;
+    	$table = $this->book->table;
+    	
+    	$list = $this->book->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags")
+	    	->joinQuery("book_info as f","$table.bid=f.bid")
+	    	->joinQuery('book_image as p',"$table.bid=p.bid")
+	    	->joinQuery('images as i','i.pid=p.pid')
+	    	->joinQuery('book_fields as bf',"$table.bid=bf.bid")
+	    	->joinQuery('book_recommend as br',"$table.bid=br.bid")
+	    	->where($sql)->order("br.sort")
+	    	->limit($offset,$limit)->fetchList();
+    	
+    	if (is_array($list)) {
+    		foreach ($list as $key => $value) {
+    			if (isset($value['cover']) and $value['cover']) {
+    				$list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+    			}
+    		}
+    		return $list;
+    	}
+ 		return false;
+    }
     
+    /**
+     * Get RecommandMenu For Type
+     * 
+     * @param Int, $type
+     * @return Array.
+     * */
+    public function getRecommendMenuForType($type)
+    {
+    	return $this->bookRecommendMenu->getRecommendMenuForType($type);
+    }
 
     /**
      * Add Books Table
