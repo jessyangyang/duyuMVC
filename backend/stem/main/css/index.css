@@ -71,8 +71,8 @@ nav ul
 section {width:100%;padding: 20px;margin: 0;}
 .book-item-article {border-bottom: 1px solid #ABABAB;border-top: 1px solid #FFFFFF;}
 
-section .book-section-left {width: 25%;text-align: center;}
-section .book-section-left img {width: 116px;}
+section .book-section-left {width: 25%;text-align: center;float: left;margin: 10px 10px 10px 0;}
+section .book-section-left img {}
 section .book-section-right {width:70%;float: left;}
 section .book-section-right h3 {font-size: 20px;line-height: 24px;font-weight: 500;}
 section .book-section-right h5 {font-size: 14px;line-height: 18px;font-weight: 500;}
