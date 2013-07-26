@@ -176,7 +176,8 @@ class MController extends \Yaf\Controller_Abstract
             	$display->display("m/purchased.tpl");
             	break;
             case 'logout':
-            	$userInfo->logout();
+                $user = Members::instance();
+            	$user->logout();
             	header('Location: /m/index');
             	exit();
             	break;
