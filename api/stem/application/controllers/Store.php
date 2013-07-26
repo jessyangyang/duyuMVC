@@ -50,7 +50,6 @@ class StoreController extends \Yaf\Controller_Abstract
                 break;
             case '2':
                 break;
-
             case '3':
                 break;
             default:

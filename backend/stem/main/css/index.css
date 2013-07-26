@@ -119,6 +119,9 @@ section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;
 #user a:link {color: #6e6868}
 
 
+/* Purchased */
+.m-purchased-info {padding: 10px;background-color: #F6F5F0;font-size: 12px;line-height: 12px}
+
 /* Footer*/
 
 footer {margin:0 auto;text-align:center;width: 100%;padding: 0}

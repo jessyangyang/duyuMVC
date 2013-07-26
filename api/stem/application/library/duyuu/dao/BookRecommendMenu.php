@@ -30,7 +30,11 @@ class BookRecommendMenu extends \local\db\ORM
         'type' => array(
             'type' => 'int',
             'default' => 0,
-            'comment' => 'type')
+            'comment' => 'type'),
+    	'action' => array(
+    		'type' => 'int',
+    		'default' => 0,
+    		'comment' => 'action')
         );
 
     public $primaryKey = "cid";

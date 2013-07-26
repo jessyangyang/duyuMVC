@@ -89,6 +89,16 @@ class RegisterRest extends \local\rest\Restful{
         self::regRestURL('paymentForApple','/api/payment/apple/feedback','store','paymentForApple');
         
         
+        // Payment For Alipay
+        
+        self::regRestURL('paymentForAlipayTo', '/api/payment/alipay/pay/:productID', 'payment', 'alipayTo');
+        self::regRestURL('paymentForAlipayNotify', '/api/payment/alipay/notify', 'payment', 'alipayNotify');
+        self::regRestURL('paymentForAlipayCallback', '/api/payment/alipay/callback', 'payment', 'alipayReturn');
+
+        // WeChaT
+        self::regRestURL('wechatIndex', '/api/wechat/index', 'wechat', 'index');
+        self::regRestURL('wechatToken', '/api/wechat/token', 'wechat', 'token');
+        
         return self::$restURL;
     }
 
