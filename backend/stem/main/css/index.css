@@ -112,7 +112,7 @@ section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;
 /* User */
 #user {margin: 0 auto;text-align: center;padding: 20px;}
 #user .input-prepend {margin-top:15px}
-#user input[type="text"] {height: 44px;font-size: 14px;line-height: 18px}
+#user input[type="text"],#user input[type="password"] {height: 44px;font-size: 14px;line-height: 18px}
 #user .add-on {height: 22px;width:51px;font-size: 18px;line-height: 24px;color: #999999;text-align: center;padding: 10px;}
 #user .btn-large {width: 261px;margin: 10px;color: #565252}
 #user a {color: #6e6868}

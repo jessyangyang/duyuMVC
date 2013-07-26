@@ -106,7 +106,7 @@ class Members extends \local\db\ORM
      */
     public function login($email,$password)
     {
-        $wherearr = "email='" .trim($email) . "' AND password='" . md5($password) . "'";
+        $wherearr = "email='" . $this->escapeString(trim($email)) . "' AND password='" . md5($this->escapeString($password)) . "'";
         $user = self::instance();
         $row = $user->where($wherearr)->fetchRow();
 

@@ -3,7 +3,7 @@
         <ul class="inline">
         	{if $menus}
         	{foreach $menus as $key => $menu}
-            <li><a href="/m/index/{$menu.action}">{$menu.name}</a></li>
+            <li {if $current eq $menu.action}class="current"{/if}><a href="/m/index/{$menu.action}">{$menu.name}</a></li>
             {/foreach}
             {/if}
         </ul>

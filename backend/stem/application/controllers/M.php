@@ -63,6 +63,7 @@ class MController extends \Yaf\Controller_Abstract
 
         $display->assign('user',$userInfo);
         $display->assign('menus',$menus);
+        $display->assign('current',$action);
         $display->assign("title", "蠹鱼有书 - 荐书");
         $display->assign('topTitle',"蠹鱼有书");
         $display->assign('books',$list);
@@ -107,6 +108,7 @@ class MController extends \Yaf\Controller_Abstract
         $session = Session::getInstance();
         $userInfo = Members::getCurrentUser();
         $member = new MembersControl();
+        $user = Members::instance();
         
         $title = "蠹鱼有书 - 登录";
         $topTitle = "登录";
@@ -153,10 +155,24 @@ class MController extends \Yaf\Controller_Abstract
                     $uid_get = $client->get_uid();
                     $uid = $uid_get['uid'];
                     $weiboMessage = $client->show_user_by_id($uid);
-                $topTitle = "欢迎你， ".$weiboMessage['name'];
+                    $topTitle = "欢迎你， ".$weiboMessage['name'];
                 
                 if ($data->isPost()) {
+                    if ($user->isRegistered($data->getPost('email')))
+                    {
+                        header('Location: /m/user/register');
+                        exit();
+                    }
                     if($member->register($data->getPost('email'),$weiboMessage['name'],$data->getPost('password'),$weiboMessage['avatar_large']))
+                    {
+                        header('Location: /m/index');
+                        exit();
+                    }
+                }
+                break;
+            case 'login':
+                if ($data->isPost()) {
+                    if ($user->login($data->getPost('email'),$data->getPost('password')))
                     {
                         header('Location: /m/index');
                         exit();
@@ -176,7 +192,6 @@ class MController extends \Yaf\Controller_Abstract
             	$display->display("m/purchased.tpl");
             	break;
             case 'logout':
-                $user = Members::instance();
             	$user->logout();
             	header('Location: /m/index');
             	exit();
