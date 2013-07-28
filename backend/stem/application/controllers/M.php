@@ -33,6 +33,7 @@ use \local\social\SaeTClientV2;
 
 class MController extends \Yaf\Controller_Abstract 
 {
+
     public function indexAction($action = false)
     {
         $display = $this->getView();
@@ -93,12 +94,24 @@ class MController extends \Yaf\Controller_Abstract
         $menus = $menu->getMenuForBookID($bid);
 
         $book = new BookControllers();
+        $product = new ProductsControl();
+        $purchased = $product->getPurchasedForUserID($userInfo->id);
 
+        $result = array();
+
+
+        if ($purchased)
+        {
+            foreach ($purchased as $key => $value) {
+                $result[] = $value['old_id'];
+            }
+        }
         $list = $book->getBooksRow(array('books.bid'=>$bid,'p.type'=>1));
 
         $display->assign('user',$userInfo);
         $display->assign("title", $list["title"]);
         $display->assign('topTitle',$list['title']);
+        $display->assign('purchased',$result);
         $display->assign('book',$list);
         $display->assign('menus',$menus);
     }
@@ -213,10 +226,42 @@ class MController extends \Yaf\Controller_Abstract
     }
 
 
-    public function paymentAction($productID = false)
+    public function paymentAction($bid = false)
     {
-        $payment = new PaymentForMobile();
-        $html = $payment->payment($productID);
+        $display = $this->getView();
+        $userInfo = Members::getCurrentUser();
+
+        if (isset($userInfo->id) and $userInfo->id)  {
+            $payment = new PaymentForMobile();
+            $html = $payment->payment($bid);
+
+            if ($html) {
+                header("Content-type: text/html; charset=utf-8"); 
+                echo $html;
+                exit();
+            }
+        }
+        else
+        {
+            header('Location: /m/user');
+            exit();
+        }
+
+
+    }
+
+    public function paymentHandleAction($action = false)
+    {
+        $display = $this->getView();
+
+        $data = $this->getRequest();
+
+        $userInfo = Members::getCurrentUser();
+
+        if (isset($userInfo->id) and $userInfo->id)  {
+           $payment = new PaymentForMobile();
+           $payment->ResultHandle($action);
+        }
 
 
         exit();

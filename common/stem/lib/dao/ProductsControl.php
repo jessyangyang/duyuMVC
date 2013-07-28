@@ -208,16 +208,59 @@ class ProductsControl
      * @param String ,$pid
      * @return Array
      */
-    public function getPurchasedForRow($pid,$uid = false)
+    public function getPurchasedForRow($option = array())
     {
-        $pid and $sql .= " pid='$pid' ";
-        $uid and $sql .= " AND uid='$uid'";
 
-        $table = $this->products->table;
-
-        $list = $this->products->field("$table.pid,$table.pcid,$table.product_name,$table.total_fee,$table.oldid,$table.product_id,$table.created_time,$table.summary,$table.costprice,$table.image_id,pc.name,pc.uid")->joinQuery("product_category as pc","$table.pcid=pc.pcid")->joinQuery("product_purchased as pp","$table.pid=pp.pid")->where($sql)->order("$table.created_time")->limit(1)->fetchList();
+        $list = $this->getPurchasedList($option,1,1);
 
         if($list) return $list[0];
+
+        return false;
+    }
+
+
+    public function getPurchasedForUserID($uid = false, $limit = 50,$page = 1,$type = "list")
+    {
+        $option = array();
+        $uid and $option['uid'] = $uid;
+        $option['status'] = "1";
+        $list = $this->getPurchasedList($option,$limit,$page);
+
+        if($list and $type == "row") return $list[0];
+        else return $list;
+
+        return false;
+    }
+
+    /**
+     * [getPurchasedList description]
+     * @param  array   $option [description]
+     * @param  integer $limit  [description]
+     * @param  integer $page   [description]
+     * @return [type]          [description]
+     */
+    public function getPurchasedList($option = array(),$limit = 10,$page = 1)
+    {
+        if (!is_array($option) or !$option) return false;
+
+        $sql = '';
+        $i = 1;
+        $count = count($option);
+        foreach ($option as $key => $value) {
+            if($i == $count) $sql .= "$key='" . $value . "'";
+            else $sql .= "$key='" . $value . "' AND ";
+            $i ++;
+        }
+
+        $offset = $page == 1 ? 0 : ($page - 1)*$limit; 
+        $table = $this->productPurchased->table;
+
+        $list = $this->productPurchased->field("$table.ppid,$table.pid,$table.trade_no,$table.out_trade_no,$table.uid,$table.old_id,$table.status,$table.published")
+            ->where($sql)
+            ->order("$table.published")
+            ->limit($offset,$limit)->fetchList();
+
+        if ($list) return $list;
 
         return false;
     }

@@ -77,7 +77,8 @@ class AlipayCore {
 	 * @param $word 要写入日志里的文本内容 默认值：空值
 	 */
 	public static function logResult($word='') {
-		$fp = fopen("log.txt","a");
+		$path = FILES_PATH."/log/alipay_log.txt";
+		$fp = fopen($path,"a");
 		flock($fp, LOCK_EX) ;
 		fwrite($fp,"执行日期：".strftime("%Y%m%d%H%M%S",time())."\n".$word."\n");
 		flock($fp, LOCK_UN);

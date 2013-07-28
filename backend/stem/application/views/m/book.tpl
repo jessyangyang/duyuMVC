@@ -13,7 +13,7 @@
                 <span>{$book.copyright}</span>
              </div>
              <div class="article-cover-right">
-                <span>￥{$book.price}</span><a href="" class='btn'>购买</a>
+                <span>￥{$book.price}</span>{if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="http://api.duyu.cc/api/store/download/book/{$book.bid}" class='btn'>阅读</a>{else}<a href="/m/payment/{$book.bid}" class='btn'>购买</a>{/if}
              </div>
         </div>
         <div id="article-summary">
