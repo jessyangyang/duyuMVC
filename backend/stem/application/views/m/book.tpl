@@ -9,7 +9,7 @@
             <div class="article-cover-center">
                 <h2>{$book.title}</h2>
                 <h5>{$book.author}</h5>
-                <span class="article-cover-span">{$book.name}</span>
+                <span>{$book.name}</span>
                 <span>{$book.copyright}</span>
              </div>
              <div class="article-cover-right">

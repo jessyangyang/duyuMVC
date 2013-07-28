@@ -111,7 +111,7 @@ section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;
 #article-cover .article-cover-center {float: left;margin-left: 10px;}
 #article-cover .article-cover-center h2{font-size: 16px;line-height: 18px;color: #333333;margin:0px;}
 #article-cover .article-cover-center h5{font-size: 12px;line-height: 14px;color: #333333;margin-bottom: 70px;}
-#article-cover .article-cover-center span{font-size: 12px;line-height: 18px;color: #666666}
+#article-cover .article-cover-center span{font-size: 12px;line-height: 18px;color: #666666;display: block;margin: 0;padding: 0;}
 #article-cover .article-cover-right {float: right;margin: 0;margin-top:105px;}
 #article-cover .article-cover-right span {margin-right: 10px;color: #A5A4A3;line-height: 18px}
 #article-cover .article-cover-right .btn{}
