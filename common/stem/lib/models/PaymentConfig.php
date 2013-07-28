@@ -58,7 +58,7 @@ class PaymentConfig extends \local\db\ORM
         'alipay_body' => array(
             'type' => 'varchar',
             'default' => 0,
-            'comment' => 'alipay_body'))
+            'comment' => 'alipay_body')
         );
 
     public $primaryKey = "configid";
