@@ -7,10 +7,21 @@
 /* Base Style*/
 body{background-color: #F5F4F2;margin: 0;padding: 0;line-height: 14px}
 
+/* Base */
+
 a:link {color: #6E6868}
 a:visited {color: #B74535}
 a:hover {color: #B74535}
 a:active {color: #B74535}
+
+.text-l {text-align: left;}
+.text-c {text-align: center;}
+.text-r {text-align: right;}
+
+.fl {float: left}
+.fr {float: right;}
+
+.block {display: inline-block;}
 
 /* Header */
 #header {width: 100%;}
@@ -21,6 +32,7 @@ header h1 {margin: 0;padding: 0;font-size: 20px;line-height: 45px; color: #F5F4F
 
 .header-back {
   background:transparent url("../img/icon-button.png") no-repeat scroll -4px -3px;
+  background-size: auto;
   text-indent:-9999px;
   position:absolute;
   top:13px;
@@ -31,6 +43,7 @@ header h1 {margin: 0;padding: 0;font-size: 20px;line-height: 45px; color: #F5F4F
 
 .header-user {
   background:transparent url("../img/icon-button.png") no-repeat scroll 0px -24px;
+  background-size: auto;
   text-indent:-9999px;
   position:absolute;
   top:11px;
@@ -121,9 +134,15 @@ section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;
 
 /* Purchased */
 .m-purchased-info {padding: 10px;background-color: #F6F5F0;font-size: 12px;line-height: 12px}
+.m-purchased-ul {min-height: 480px;background-color: #FFFFFF;position: relative;}
+.m-purchased-ul li{width: 100%;height: 47px;border-bottom: 1px solid #DCD9D7;}
+.m-purchased-left {width:50%;height: 47px;}
+.m-purchased-left h4 {font-size: 16px;line-height: 24px;font-weight: normal;margin: 12px;}
+.m-purchased-right {width: 48%;font-size: 12px;line-height: 14px;color: #999999;margin-top: 8px;}
+.m-purchased-right span {margin-top: 12px;}
 
 /* Footer*/
 
-footer {margin:0 auto;text-align:center;width: 100%;padding: 0}
+footer {margin:0 auto;text-align:center;width: 100%;padding: 0;}
 footer .info {padding:20px;}
 #footer {margin:10px;}

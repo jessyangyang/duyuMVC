@@ -110,7 +110,7 @@ class ProductsControl
 
         $offset = $page == 1 ? 0 : ($page - 1)*$limit; 
 
-        $list = $this->productPurchased->field("$table.pid,$table.status,$table.published,$table.uid,b.bid,b.title,b.author,i.path as cover")
+        $list = $this->productPurchased->field("$table.pid,$table.status,$table.published,$table.uid,b.bid,b.title,b.author,i.path as cover,p.total_fee as price")
         	->joinQuery("products as p","$table.pid=p.pid")
         	->joinQuery("books as b","p.oldid=b.bid")
         	->joinQuery('book_image as bi',"b.bid=bi.bid")
