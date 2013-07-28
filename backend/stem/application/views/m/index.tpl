@@ -3,7 +3,7 @@
         <div id="nav-menus">
         	{if $menus}
         	{foreach $menus as $key => $menu}
-            {assign var='i' value = $key + 1}<a href="/m/index/{$menu.action}" {if $current eq $menu.action}class="current"{/if}><div class="nav-menu-item {if $i eq count($menus)}nav-item-right{/if}">{$menu.name}</div></a>{/foreach}
+            {assign var='i' value = $key + 1}<a href="/m/index/{$menu.action}"><div class="nav-menu-item {if $i eq count($menus)}nav-item-right{/if} {if $current eq $menu.action}current{/if}">{$menu.name}</div></a>{/foreach}
             {/if}
         </div>
     </nav>

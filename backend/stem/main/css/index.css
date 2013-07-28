@@ -58,6 +58,7 @@ nav {width:100%;padding: 0;margin: 0;background-color: #F6F5F0;text-align: cente
 
 .fixed-layer {position: fixed;top:0px;}
 #nav-menus {text-align: center;height: 43px;width:100%;margin: 0 auto;font-size:0;*word-spacing:-0.18em;}
+nav a {height: 43px;color: #6E6868}
 nav a .nav-menu-item{
     display: inline-block;
     *word-spacing:normal;
@@ -74,6 +75,7 @@ nav a .nav-menu-item{
     color: #6E6868;
     overflow:hidden;
 }
+nav a .current {background-color: #EEECE2;color: #B54830}
 nav a .nav-item-right
 {
   border-right:none;
