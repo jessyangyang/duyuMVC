@@ -42,6 +42,11 @@ class PaymentForMobile
         
             return $html;
         }
+        else 
+        {
+            header("Location:/m/book/$bid");
+            exit();
+        }
 
         return false;
     }
