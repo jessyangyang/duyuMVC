@@ -17,7 +17,7 @@ require_once("alipay_core.function.php");
 require_once("alipay_rsa.function.php");
 require_once("alipay_md5.function.php");
 
-namespace \local\pay\alipay\lib;
+namespace local\pay\alipay\lib;
 
 class AlipayNotify {
     /**

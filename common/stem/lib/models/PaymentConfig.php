@@ -31,6 +31,14 @@ class PaymentConfig extends \local\db\ORM
             'type' => 'int',
             'default' => 0,
             'comment' => 'alipay_email'),
+        'alipay_service_auth' => array(
+            'type' => 'varchar',
+            'default' => 0,
+            'comment' => 'alipay_service_auth'),
+        'alipay_service_pay' => array(
+            'type' => 'varchar',
+            'default' => 0,
+            'comment' => 'alipay_service_pay'),
         'alipay_sign_type' => array(
             'type' => 'varchar',
             'default' => 0,

@@ -13,7 +13,7 @@
                 <span>{$book.copyright}</span>
              </div>
              <div class="article-cover-right">
-                <a href="" class='btn'>￥{$book.price}</a>
+                <span>￥{$book.price}</span><a href="" class='btn'>购买</a>
              </div>
         </div>
         <div id="article-summary">
@@ -35,13 +35,13 @@
         <div id="article-info">
             <h3>信息</h3>
             <ul class="unstyled">
-                <li>体裁 : {$book.name}</li>
-                <li>版权 : {$book.copyright}</li>
-                <li>标签 : {$book.tags}</li>
-                <li>设计 : {$book.designer}</li>
-                <li>校对 : {$book.proofreader}</li>
-                <li>字数 : {$book.wordcount}</li>
-                <li>上架 : {$book.dateline}</li>
+                <li><span>体裁</span> {$book.name}</li>
+                <li><span>版权</span> {$book.copyright}</li>
+                <li><span>标签</span> {$book.tags}</li>
+                <li><span>设计</span> {$book.designer}</li>
+                <li><span>校对</span> {$book.proofreader}</li>
+                <li><span>字数</span> {$book.wordcount}</li>
+                <li><span>上架</span> {$book.dateline}</li>
             </ul>
             <a href=""></a>
         </div>

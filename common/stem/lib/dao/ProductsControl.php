@@ -26,7 +26,7 @@ class ProductsControl
 	const PAY_METHOD_ALIPAY = 'alipay';
 	const PAY_METHOD_APPLE = 'apple';
 	
-    private $products;
+    public $products;
     private $productCategory;
     private $productPurchased;
 

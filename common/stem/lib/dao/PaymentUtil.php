@@ -16,8 +16,14 @@ use \local\pay\alipay\lib\AlipayCore;
 use \lib\models\PaymentConfig;
 
 class PaymentUtil {
-	
+
+	private static $alipay_format = "XML";
+	private static $alipay_service;
+	private static $alipay_version = "2.0";
+
 	private static $ini = null;
+	private static $ini_auth = null;
+	private static $config = null;
 	private static $http_verify_url = 'http://notify.alipay.com/trade/notify_query.do?';
 	
 	
@@ -26,10 +32,10 @@ class PaymentUtil {
 
 	}
 	
-	public static function getConfig()
+	public static function getConfig($configid = 2)
 	{
-		if (self::$ini == null) self::$ini = PaymentConfig::instance(1);
-		return self::$ini;
+		if (self::$ini_auth == null) self::$ini_auth = PaymentConfig::instance($configid);
+		return self::$ini_auth;
 	}
 	
 	public static function getBaseUrl()
@@ -63,20 +69,18 @@ class PaymentUtil {
 	 */
 	public static function getAlipayConfig($more = false)
 	{
-		self::getConfig();
-		print_r(self::$ini);
 		$config = array(
-			"service" => self::$ini->alipay_service,
-			"payment_type" => self::$ini->alipay_payment_type,
-			"partner" => self::$ini->alipay_pid,
-			"_input_charset" => self::$ini->alipay_input_charset,
-			"seller_email" => self::$ini->alipay_email,
-			"return_url" => self::getBaseUrl() . self::$ini->alipay_return_url,
-			"notify_url" => self::getBaseUrl() . self::$ini->alipay_notify_url,
-			"subject" => self::$ini->alipay_subject,
-			"body" => self::$ini->alipay_body,
-			"exter_invoke_ip" => self::$ini->alipay_exter_invoke_ip,
-			"show_url" => self::getBaseUrl() . self::$ini->alipay_show_url
+			"service" => self::$ini_auth->alipay_service_auth,
+			"payment_type" => self::$ini_auth->alipay_payment_type,
+			"partner" => self::$ini_auth->alipay_pid,
+			"_input_charset" => self::$ini_auth->alipay_input_charset,
+			"seller_email" => self::$ini_auth->alipay_email,
+			"return_url" => self::getBaseUrl() . self::$ini_auth->alipay_return_url,
+			"notify_url" => self::getBaseUrl() . self::$ini_auth->alipay_notify_url,
+			"subject" => self::$ini_auth->alipay_subject,
+			"body" => self::$ini_auth->alipay_body,
+			"exter_invoke_ip" => self::$ini_auth->alipay_exter_invoke_ip,
+			"show_url" => self::getBaseUrl() . self::$ini_auth->alipay_show_url
 		);	
 
 		if ($more && is_array($more)) {
@@ -90,11 +94,11 @@ class PaymentUtil {
 			}
 		}
 
-		$key = trim(self::$ini->alipay_key); 
+		$key = trim(self::$ini_auth->alipay_key); 
 
 		$config = AlipayCore::paraFilter($config);
 		$config = AlipayCore::argSort($config);
-		$signType = strtoupper(trim(self::$ini->alipay_sign_type));
+		$signType = strtoupper(trim(self::$ini_auth->alipay_sign_type));
 		$sign = AlipayCore::buildMysign($config, $key, $signType);
 		
 		$config['sign'] = $sign;
@@ -102,24 +106,110 @@ class PaymentUtil {
 
 		return $config;
 	}
+
+	/**
+	 * [getAlipayConfigForWAP description]
+	 * @param  boolean $more [description]
+	 * @return [type]        [description]
+	 *
+	 * 
+	 * $config = array(
+			"service" => "alipay.wap.auth.authAndExecute",
+			"partner" => "2008***",
+			"sec_id" => "***",
+			"format"	=> "XML",
+			"v"	=> $v,
+			"req_id"	=> $req_id,
+			"req_data"	=> $req_data,
+			"_input_charset"	=> trim(strtolower($alipay_config['input_charset']))
+		 );
+	 */
+	public static function getAlipayConfigForWAP($configid = 2, $more = false )
+	{
+		self::getConfig($configid);
+		self::$config = array(
+			"service" => self::$ini_auth->alipay_service_auth,
+			"partner" => self::$ini_auth->alipay_pid,
+			'sec_id' => self::$ini_auth->alipay_sign_type,
+			'format' => self::$alipay_format,
+			"v" => self::$alipay_version,
+			"req_id" => date('Ymdhis'),
+			"_input_charset" => self::$ini_auth->alipay_input_charset,
+		);
+
+		self::$ini = array(
+			'partner' => self::$ini_auth->alipay_pid,
+			'key' => self::$ini_auth->alipay_key,
+			'sign_type' => self::$ini_auth->alipay_sign_type,
+			'input_charset' => self::$ini_auth->alipay_input_charset,
+			'transport' => self::$ini_auth->alipay_transport,
+			'private_key_path'	=> 'key/rsa_private_key.pem',
+			'ali_public_key_path' => 'key/alipay_public_key.pem',
+			'cacert' => '');	
+
+		if ($more && is_array($more)) {
+			foreach ($more as $key=>$v) {
+				self::$config[$key] = $v;
+			}
+		}
+
+	}
 	
 	
-	public static function getAlipayToUrl($order_no, $total_fee, $more=false)
+	public static function getAlipayToUrl($order_no, $total_fee, $subject = false, $more=false)
 	{
 		if ($more && is_array($more)) $config = $more;
 		else $config = array();
+
+		self::getAlipayConfigForWAP();
+
+		$config = self::$config;
+		$req_data = '<direct_trade_create_req><notify_url>' . self::getBaseUrl() . self::$ini_auth->alipay_notify_url . '</notify_url><call_back_url>' . self::getBaseUrl() . self::$ini_auth->alipay_notify_url . '</call_back_url><seller_account_name>' . self::$ini_auth->alipay_email . '</seller_account_name><out_trade_no>' . $order_no . '</out_trade_no><subject>' . $subject . '</subject><total_fee>' . $total_fee . '</total_fee></direct_trade_create_req>';
 		
 		$config['out_trade_no'] = $order_no;
 		$config['total_fee'] = $total_fee;
-		$config = self::getAlipayConfig();
+		$config['req_data'] = $req_data;
+
 		
 		$url = self::$http_verify_url;
 		foreach ($config as $key=>$value)
 		{
 			$url.= $key . '=' . urlencode($value) . '&';
 		}
+
+		self::$config = $config;
 		
-		return $url;
+		return $config;
+	}
+
+	public function getRequestToken()
+	{
+		$alipaySubmit = new AlipaySubmit(self::$ini);
+		$html_text = $alipaySubmit->buildRequestHttp(self::$config);
+
+		$html_text = urldecode($html_text);
+
+		echo "<pre>";
+		print_r($html_text);
+
+		$para_html_text = $alipaySubmit->parseResponse($html_text);
+
+		$request_token = $para_html_text['request_token'];
+
+		$req_data = '<auth_and_execute_req><request_token>' . $request_token . '</request_token></auth_and_execute_req>';
+
+		self::$config['service'] = self::$ini_auth->alipay_service_pay;
+		self::$config['req_data'] = $req_data;
+
+		// echo "<pre>";
+		// print_r(self::$ini);
+		// print_r($para_html_text);
+		// print_r(self::$config);
+		// exit();
+		$alipaySubmit = new AlipaySubmit(self::$ini);
+		$html_text = $alipaySubmit->buildRequestForm(self::$config, 'get', '确认');
+		
+		return $html_text;
 	}
 	
 	public static function validateAlipayResultSign()

@@ -9,7 +9,8 @@ body{background-color: #F5F4F2;margin: 0;padding: 0;line-height: 14px}
 
 /* Base */
 
-a:link {color: #6E6868}
+a {text-decoration:none;}
+a:link {color: #6E6868;text-decoration:none;}
 a:visited {color: #B74535}
 a:hover {color: #B74535}
 a:active {color: #B74535}
@@ -67,13 +68,16 @@ nav ul.inline > li {
     margin-left: -1px;
     background-color: #F6F5F0;
     border-bottom:1px solid #DCD9D7;
-    border-left:1px solid #FFFFFF;
     border-right:1px solid #DCD9D7;
     text-align: center;
     font-size: 14px;
     line-height: 46px;
     color: #6E6868;
     overflow:hidden;
+}
+nav ul.inline > li .nav-item-right
+{
+  border-right:none;
 }
 nav ul
 {
@@ -87,39 +91,39 @@ nav ul
 
 article {width:100%;margin: 0;padding: 0}
 section {width:100%;margin: 0;padding: 0}
-.book-item-article {border-bottom: 1px solid #ABABAB;border-top: 1px solid #FFFFFF;}
+.book-item-article {border-bottom: 1px solid #DCD9D7;}
 
 section .book-section-left {width: 26%;text-align: center;float: left;margin: 13px 10px 10px 13px;padding: 0}
 section .book-section-left img {}
 section .book-section-right {width:55%;float: left;margin: 5px 10px 10px 5px;padding: 0}
-section .book-section-right h3 {font-size: 20px;line-height: 20px;font-weight: 500;color:#333333;}
+section .book-section-right h3 {font-size: 18px;line-height: 20px;font-weight: 500;color:#333333;}
 section .book-section-right h5 {font-size: 12px;line-height: 12px;font-weight: 500;color:#666666;}
-section .book-section-right span {font-size: 12px;line-height: 16px;margin-bottom: 10px;color: #DF624B}
+section .book-section-right span {font-size: 12px;line-height: 16px;margin-bottom: 10px;color: #DF624A}
 section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;}
 
 
 /* Book*/
 
-#article-cover {height: 153px;display: block;background-color: #FFFFFF;padding: 12px;}
-#article-cover .article-cover-left {width: 100px;float: left;}
-#article-cover .article-cover-left img {max-width: 90px;}
-#article-cover .article-cover-center {float: left;margin-left: 8px;}
+#article-cover {height: 153px;display: block;background-color: #FFFFFF;padding: 18px;}
+#article-cover .article-cover-left {float: left;}
+#article-cover .article-cover-left img {max-width: 101px;}
+#article-cover .article-cover-center {float: left;margin-left: 10px;}
 #article-cover .article-cover-center h2{font-size: 16px;line-height: 18px;color: #333333;margin:0px;}
-#article-cover .article-cover-center h5{font-size: 12px;line-height: 14px;color: #333333}
-#article-cover .article-cover-center h5{font-size: 12px;line-height: 14px;color: #333333}
-#article-cover .article-cover-center span{font-size: 12px;line-height: 16px;color: #666666}
-#article-cover .article-cover-center .article-cover-span{margin-top: 55px;}
-#article-cover .article-cover-right {float: right;margin: 0}
-#article-cover .article-cover-right .btn{margin-top:95px;}
+#article-cover .article-cover-center h5{font-size: 12px;line-height: 14px;color: #333333;margin-bottom: 70px;}
+#article-cover .article-cover-center span{font-size: 12px;line-height: 18px;color: #666666}
+#article-cover .article-cover-right {float: right;margin: 0;margin-top:105px;}
+#article-cover .article-cover-right span {margin-right: 10px;color: #A5A4A3;line-height: 18px}
+#article-cover .article-cover-right .btn{}
 
-#article-menu,#article-info,#article-summary {padding: 12px;}
+#article-menu,#article-info,#article-summary {padding: 18px;}
 #article-menu h3,#article-info h3,#article-summary h3 {font-size: 16px;line-height: 22px;color:#333333;margin:0;}
 #article-menu ul,#article-info ul,#article-summary ul {margin-top: 10px;} 
 #article-menu li,#article-info li,#article-summary li {font-size: 14px;line-height: 22px;color:#17130B;margin:0;padding: 0;}
 
 #article-summary{border-top:1px solid #D0CECE;background-color: #F6F6F6;}
-#article-summary p {margin-top: 10px;line-height: 18px;color:#666666;}
+#article-summary p {margin-top: 10px;line-height: 22px;color:#666666;}
 #article-info {border-bottom:1px solid #D0CECE;}
+#article-info span {color: #666666;margin-right: 10px;}
 
 
 /* User */
@@ -133,16 +137,17 @@ section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;
 
 
 /* Purchased */
-.m-purchased-info {padding: 10px;background-color: #F6F5F0;font-size: 12px;line-height: 12px}
+.m-purchased-info {padding: 10px;padding-left:14px;background-color: #F6F5F0;font-size: 12px;line-height: 12px}
 .m-purchased-ul {min-height: 480px;background-color: #FFFFFF;position: relative;}
 .m-purchased-ul li{width: 100%;height: 47px;border-bottom: 1px solid #DCD9D7;}
 .m-purchased-left {width:50%;height: 47px;}
-.m-purchased-left h4 {font-size: 16px;line-height: 24px;font-weight: normal;margin: 12px;}
-.m-purchased-right {width: 48%;font-size: 12px;line-height: 14px;color: #999999;margin-top: 8px;}
+.m-purchased-left h4 {font-size: 16px;line-height: 24px;font-weight: normal;margin: 14px;}
+.m-purchased-right {width: 46%;font-size: 12px;line-height: 16px;color: #999999;margin-top: 8px;}
 .m-purchased-right span {margin-top: 12px;}
 
 /* Footer*/
 
-footer {margin:0 auto;text-align:center;width: 100%;padding: 0;}
+footer {margin:0 auto;text-align:center;width: 100%;padding: 0;color: #666666}
+footer a:link {color: #E16145;}
 footer .info {padding:20px;}
-#footer {margin:10px;}
+#footer {margin:10px; font-size: 12px;}

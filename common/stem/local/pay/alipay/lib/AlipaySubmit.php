@@ -9,11 +9,11 @@
  * 以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
  * 该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
  */
+namespace local\pay\alipay\lib;
+
 require_once("alipay_core.function.php");
 require_once("alipay_rsa.function.php");
 require_once("alipay_md5.function.php");
-
-namespace \local\pay\alipay\lib;
 
 class AlipaySubmit {
 
@@ -186,7 +186,7 @@ class AlipaySubmit {
 			}
 			
 			//token从res_data中解析出来（也就是说res_data中已经包含token的内容）
-			$doc = new DOMDocument();
+			$doc = new \DOMDocument();
 			$doc->loadXML($para_text['res_data']);
 			$para_text['request_token'] = $doc->getElementsByTagName( "request_token" )->item(0)->nodeValue;
 		}

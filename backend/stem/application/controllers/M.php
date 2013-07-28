@@ -22,6 +22,7 @@ use \lib\dao\BookControllers;
 use \lib\dao\MembersControl;
 use \lib\dao\ProductsControl;
 
+use \backend\payment\PaymentForMobile;
 use \backend\image\ImageControl;
 use \Yaf\Session;
 
@@ -51,7 +52,10 @@ class MController extends \Yaf\Controller_Abstract
         
         foreach ($menus as $key => $value)
         {
-        	if ($value['action'] == $action) $cid = $value['cid'];
+        	if ($value['action'] == $action) {
+                $cid = $value['cid'];
+                $title = $value['name'];
+            }
         }
 
         $limit = $data->isPost('limit') ? $data->getPost('limit') : 10;
@@ -64,7 +68,7 @@ class MController extends \Yaf\Controller_Abstract
         $display->assign('user',$userInfo);
         $display->assign('menus',$menus);
         $display->assign('current',$action);
-        $display->assign("title", "蠹鱼有书 - 荐书");
+        $display->assign("title", $title);
         $display->assign('topTitle',"蠹鱼有书");
         $display->assign('books',$list);
         $display->assign("pages",array('limit'=>$limit,'page'=>$page,'count'=>$count));
@@ -93,7 +97,7 @@ class MController extends \Yaf\Controller_Abstract
         $list = $book->getBooksRow(array('books.bid'=>$bid,'p.type'=>1));
 
         $display->assign('user',$userInfo);
-        $display->assign("title", "蠹鱼有书 - ".$list["title"]);
+        $display->assign("title", $list["title"]);
         $display->assign('topTitle',$list['title']);
         $display->assign('book',$list);
         $display->assign('menus',$menus);
@@ -110,14 +114,14 @@ class MController extends \Yaf\Controller_Abstract
         $member = new MembersControl();
         $user = Members::instance();
         
-        $title = "蠹鱼有书 - 登录";
+        $title = "登录";
         $topTitle = "登录";
         
         $purchasedList = array();
         
         if (isset($userInfo->id) and $userInfo->id)
         {
-        	$title = "蠹鱼有书 - " . $userInfo->username;
+        	$title = $userInfo->username;
         	$topTitle = "购买记录";
         	$action = $action == false ? "purchased" : $action;
         	
@@ -206,5 +210,15 @@ class MController extends \Yaf\Controller_Abstract
         $display->assign('action',$action);
         $display->assign("title", $title);
         $display->assign('topTitle',$topTitle);
+    }
+
+
+    public function paymentAction($productID = false)
+    {
+        $payment = new PaymentForMobile();
+        $html = $payment->payment($productID);
+
+
+        exit();
     }
 }
