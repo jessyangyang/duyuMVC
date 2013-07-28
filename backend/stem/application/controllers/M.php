@@ -85,6 +85,8 @@ class MController extends \Yaf\Controller_Abstract
         $userInfo = Members::getCurrentUser();
         $menu = BookMenu::instance();
 
+        $purchased = null;
+
         if(!$bid) 
         {
             header('Location: /m/index');
@@ -95,7 +97,7 @@ class MController extends \Yaf\Controller_Abstract
 
         $book = new BookControllers();
         $product = new ProductsControl();
-        $purchased = $product->getPurchasedForUserID($userInfo->id);
+        if (isset($userInfo->id) and $userInfo->id) $purchased = $product->getPurchasedForUserID($userInfo->id);
 
         $result = array();
 
