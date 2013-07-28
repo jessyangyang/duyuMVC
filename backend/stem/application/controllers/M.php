@@ -247,7 +247,7 @@ class MController extends \Yaf\Controller_Abstract
             exit();
         }
 
-
+        exit();
     }
 
     public function paymentHandleAction($action = false)

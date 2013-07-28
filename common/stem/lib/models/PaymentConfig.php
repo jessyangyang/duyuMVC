@@ -58,15 +58,7 @@ class PaymentConfig extends \local\db\ORM
         'alipay_body' => array(
             'type' => 'varchar',
             'default' => 0,
-            'comment' => 'alipay_body'),
-        'apple_sandbox_verifyurl' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'apple_sandbox_verifyurl'),
-        'apple_sell_veriyurl' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'apple_sell_veriyurl')
+            'comment' => 'alipay_body'))
         );
 
     public $primaryKey = "configid";
