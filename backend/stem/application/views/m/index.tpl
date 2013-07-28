@@ -1,12 +1,11 @@
 {include file = "m/header.tpl"}
     <nav>
-        <ul class="inline">
+        <div id="nav-menus">
         	{if $menus}
         	{foreach $menus as $key => $menu}
-            <li {if $current eq $menu.action}class="current"{/if}><a href="/m/index/{$menu.action}">{$menu.name}</a></li>
-            {/foreach}
+            {assign var='i' value = $key + 1}<a href="/m/index/{$menu.action}" {if $current eq $menu.action}class="current"{/if}><div class="nav-menu-item {if $i eq count($menus)}nav-item-right{/if}">{$menu.name}</div></a>{/foreach}
             {/if}
-        </ul>
+        </div>
     </nav>
     </div>
     <article>
