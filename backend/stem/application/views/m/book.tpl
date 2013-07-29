@@ -11,9 +11,9 @@
                 <h5>{$book.author}</h5>
                 <span>{$book.name}</span>
                 <span>{$book.copyright}</span>
+                <div class="article-cover-right">
+                {if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="http://api.duyu.cc/api/store/download/book/{$book.bid}" class='btn'>阅读</a>{else}<span>{$book.price} 元</span><a href="/m/payment/{$book.bid}" class='btn-pay'>购买全本</a>{/if}
              </div>
-             <div class="article-cover-right">
-                <span>￥{$book.price}</span>{if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="http://api.duyu.cc/api/store/download/book/{$book.bid}" class='btn'>阅读</a>{else}<a href="/m/payment/{$book.bid}" class='btn'>购买</a>{/if}
              </div>
         </div>
         <div id="article-summary">

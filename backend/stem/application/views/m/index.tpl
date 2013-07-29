@@ -3,7 +3,7 @@
         <div id="nav-menus">
         	{if $menus}
         	{foreach $menus as $key => $menu}
-            {assign var='i' value = $key + 1}<a href="/m/index/{$menu.action}"><div class="nav-menu-item {if $i eq count($menus)}nav-item-right{/if} {if $current eq $menu.action}current{/if}">{$menu.name}</div></a>{/foreach}
+            {assign var='i' value = $key + 1}<a href="/m/index/{$menu.action}" class="nav-menu-item {if $i eq count($menus)}nav-item-right{/if} {if $current eq $menu.action}current{/if}">{$menu.name}</a>{/foreach}
             {/if}
         </div>
     </nav>
@@ -17,7 +17,7 @@
             <div class="book-section-right">
                  <a href="/m/book/{$book.bid}"><h3>{$book.title}</h3></a>
                 <h5>{$book.author}</h5>
-                <span>{$book.price}</span>
+                <span>{if isset($book.price) && $book.price eq 0}免费{else}{$book.price}元{/if}</span>
                 <p>{$book.summary|truncate:70:"...":true}</p>
             </div>
         </section>

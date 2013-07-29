@@ -258,6 +258,7 @@ class MController extends \Yaf\Controller_Abstract
 
         $data = $this->getRequest();
 
+        
         $userInfo = Members::getCurrentUser();
 
         if (isset($userInfo->id) and $userInfo->id)  {
