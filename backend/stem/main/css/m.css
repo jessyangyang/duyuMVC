@@ -180,7 +180,7 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
 /* User */
 #user {margin: 0 auto;text-align: center;padding: 20px;}
 #user .input-prepend {margin-top:15px}
-#user input[type="text"],#user input[type="password"] {height: 44px;font-size: 14px;line-height: 16px}
+#user input[type="text"],#user input[type="password"] {height: 44px;font-size: 14px;line-height: 18px}
 #user .add-on {height: 22px;width:51px;font-size: 18px;line-height: 24px;color: #999999;text-align: center;padding: 10px;background-color: #F6F5F0;}
 #user .btn-user {
   width: 290px;margin: 10px 0;
@@ -189,7 +189,7 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
   padding: 12px 14px;
   margin-bottom: 0;
   *margin-left: .3em;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 20px;
   color: #555252;
   text-align: center;
@@ -225,4 +225,4 @@ footer a:link {color: #E16145;}
 footer .info {padding-top: 20px;}
 footer .info li {padding: 0 3px;}
 footer .user {color: #666666}
-#footer {margin:10px; font-size: 12px;color: #666666}
+#footer {margin:8px 0 12px; font-size: 12px;color: #666666}
