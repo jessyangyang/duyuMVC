@@ -1,154 +1,30 @@
 /*!
- * M For Duyu
+ * Style For Duyu
  *
  * Copyright 2012 Duyu, Inc
  */
 
 /* Base Style*/
-body{background-color: #F5F4F2;margin: 0;padding: 0;line-height: 14px}
+body{background-color: #F6F3F0;}
 
-/* Base */
-
-a {text-decoration:none;}
-a:link {color: #6E6868;text-decoration:none;}
-a:visited {color: #B74535}
-a:hover {color: #B74535}
-a:active {color: #B74535}
-
-.text-l {text-align: left;}
-.text-c {text-align: center;}
-.text-r {text-align: right;}
-
-.fl {float: left}
-.fr {float: right;}
-
-.block {display: inline-block;}
-
-/* Header */
-#header {width: 100%;}
-
-header{height: 43px;background-color: #B74535;margin: 0 auto;padding: 0;text-align:center;width:100%;border-bottom:1px solid #913926;z-index: 9999}
-
-header h1 {margin: 0;padding: 0;font-size: 20px;line-height: 45px; color: #F5F4F2}
-
-.header-back {
-  background:transparent url("../img/icon-button.png") no-repeat scroll -4px -3px;
-  background-size: auto;
-  text-indent:-9999px;
-  position:absolute;
-  top:13px;
-  left: 13px;
-  height: 19px;
-  width: 19px;
-}
-
-.header-user {
-  background:transparent url("../img/icon-button.png") no-repeat scroll 0px -24px;
-  background-size: auto;
-  text-indent:-9999px;
-  position:absolute;
-  top:11px;
-  right: 12px;
-  height: 22px;
-  width: 22px;
-}
-
-/* Nav */
-nav {width:100%;padding: 0;margin: 0;background-color: #F6F5F0;text-align: center;}
-
-.fixed-layer {position: fixed;top:0px;}
-#nav-menus {text-align: center;height: 43px;width:100%;margin: 0 auto;font-size:0;*word-spacing:-0.18em;}
-nav a {height: 43px;color: #6E6868}
-nav a .nav-menu-item{
-    display: inline-block;
-    *word-spacing:normal;
-    padding: 0;
-    margin: 0;
-    height: 43px;
-    width: 106px;
-    background-color: #F6F5F0;
-    border-bottom:1px solid #DCD9D7;
-    border-right:1px solid #DCD9D7;
+.container {
+    margin: 200px auto;
     text-align: center;
-    font-size: 14px;
-    line-height: 46px;
-    color: #6E6868;
-    overflow:hidden;
 }
-nav a .current {background-color: #EEECE2;color: #B54830}
-nav a .nav-item-right
+.watting {
+    display: block;
+    margin-top: 20px;
+    color: #b54434;
+    font-size: 26px;
+    line-height: 32px; 
+}
+footer
 {
-  border-right:none;
+    text-align: center;
+    margin-top: 300px;
+    margin-bottom: 10px;
+
 }
-nav ul
-{
-   padding: 0;
-   margin: 0 auto; 
-   list-style:none;
-   text-align: center;
+footer a {
+    color: #8c8686;
 }
-
-/* Article */
-
-article {width:100%;margin: 0;padding: 0}
-section {width:100%;margin: 0;padding: 0}
-article .book-item-article {border-bottom: 1px solid #DCD9D7;padding: 14px 0}
-
-section .book-section-left {float:left;width:25%;text-align: center;padding: 0;margin-left: 16px}
-section .book-section-left img {min-width: 81px;}
-section .book-section-right {float:left;width:60%;margin-left: 16px;padding: 0}
-section .book-section-right h3 {margin:0;font-size: 18px;line-height: 20px;font-weight: 500;color:#333333;}
-section .book-section-right h5 {font-size: 12px;line-height: 12px;font-weight: 500;color:#666666;}
-section .book-section-right span {font-size: 12px;line-height: 16px;margin-bottom: 10px;color: #DF624A}
-section .book-section-right p {margin-top: 10px;line-height: 18px;color:#666666;}
-
-
-/* Book*/
-
-#article-cover {height: 153px;display: block;background-color: #FFFFFF;padding: 18px;}
-#article-cover .article-cover-left {float: left;}
-#article-cover .article-cover-left img {max-width: 101px;}
-#article-cover .article-cover-center {float: left;margin-left: 10px;}
-#article-cover .article-cover-center h2{font-size: 16px;line-height: 18px;color: #333333;margin:0px;}
-#article-cover .article-cover-center h5{font-size: 12px;line-height: 14px;color: #333333;margin-bottom: 70px;}
-#article-cover .article-cover-center span{font-size: 12px;line-height: 18px;color: #666666;display: block;margin: 0;padding: 0;}
-#article-cover .article-cover-right {float: right;margin: 0;margin-top:105px;}
-#article-cover .article-cover-right span {margin-right: 10px;color: #A5A4A3;line-height: 18px}
-#article-cover .article-cover-right .btn{}
-
-#article-menu,#article-info,#article-summary {padding: 18px;}
-#article-menu h3,#article-info h3,#article-summary h3 {font-size: 16px;line-height: 22px;color:#333333;margin:0;}
-#article-menu ul,#article-info ul,#article-summary ul {margin-top: 10px;} 
-#article-menu li,#article-info li,#article-summary li {font-size: 14px;line-height: 22px;color:#17130B;margin:0;padding: 0;}
-
-#article-summary{border-top:1px solid #D0CECE;background-color: #F6F6F6;}
-#article-summary p {margin-top: 10px;line-height: 22px;color:#666666;}
-#article-info {border-bottom:1px solid #D0CECE;}
-#article-info span {color: #666666;margin-right: 10px;}
-
-
-/* User */
-#user {margin: 0 auto;text-align: center;padding: 20px;}
-#user .input-prepend {margin-top:15px}
-#user input[type="text"],#user input[type="password"] {height: 44px;font-size: 14px;line-height: 18px}
-#user .add-on {height: 22px;width:51px;font-size: 18px;line-height: 24px;color: #999999;text-align: center;padding: 10px;}
-#user .btn-large {width: 261px;margin: 10px;color: #565252}
-#user a {color: #6e6868}
-#user a:link {color: #6e6868}
-
-
-/* Purchased */
-.m-purchased-info {padding: 10px;padding-left:14px;background-color: #F6F5F0;font-size: 12px;line-height: 12px}
-.m-purchased-ul {min-height: 480px;background-color: #FFFFFF;position: relative;}
-.m-purchased-ul li{width: 100%;height: 47px;border-bottom: 1px solid #DCD9D7;}
-.m-purchased-left {width:50%;height: 47px;}
-.m-purchased-left h4 {font-size: 16px;line-height: 24px;font-weight: normal;margin: 14px;}
-.m-purchased-right {width: 46%;font-size: 12px;line-height: 16px;color: #999999;margin-top: 8px;}
-.m-purchased-right span {margin-top: 12px;}
-
-/* Footer*/
-
-footer {margin:0 auto;text-align:center;width: 100%;padding: 0;color: #666666}
-footer a:link {color: #E16145;}
-footer .info {padding:20px;}
-#footer {margin:10px; font-size: 12px;}

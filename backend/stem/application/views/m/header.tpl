@@ -21,7 +21,7 @@
         <!-- Base Styles -->
         <link href="/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-        <link href="/css/index.css" rel="stylesheet">
+        <link href="/css/m.css" rel="stylesheet">
 
         <!-- FOR IE6 ~ 8 support of HTML% elements -->
         <!--[if lt IE 9]>
