@@ -1,13 +1,14 @@
         <footer>
         	<ul class="unstyled inline info">
         		{if isset($user) && $user}
-        		<li>{$user->username}</li>
+        		<li class="user">{$user->username}</li>
         		<li><a href="/m/user/logout">退出</a></li>
                 <li>|</li>
+                {else}
+                <li><a href="/m/user">登录</a></li>
+                <li>|</li>
         		{/if}
-        		<li><a href="">手机版</a></li>
-        		<li>|</li>
-        		<li><a href="">网页版</a></li>
+        		<li class="user">手机版</li>
         		<div id="footer">©2013 Duyupress.com</div>
         	</ul>
         </footer>
