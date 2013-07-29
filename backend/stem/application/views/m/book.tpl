@@ -8,11 +8,11 @@
             </div>
             <div class="article-cover-center">
                 <h2>{$book.title}</h2>
-                <h5>{$book.author}</h5>
-                <span>{$book.name}</span>
-                <span>{$book.copyright}</span>
+                <h5><span>作者</span> {$book.author}</h5>
+                <p><span>体裁</span> {$book.name}</p>
+                <p><span>版权</span> {$book.copyright}</p>
                 <div class="article-cover-right">
-                {if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="http://api.duyu.cc/api/store/download/book/{$book.bid}" class='btn-pay'>阅读</a>{else}<span>{$book.price} 元</span><a href="/m/payment/{$book.bid}" class='btn-pay'>购买全本</a>{/if}
+                {if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="http://api.duyu.cc/api/store/download/book/{$book.bid}" class='btn-pay'>阅读</a>{else}<p class="price">{$book.price} 元</p><a href="/m/payment/{$book.bid}" class='btn-pay'>购买全本</a>{/if}
              </div>
              </div>
         </div>

@@ -110,11 +110,12 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
 #article-cover .article-cover-left {float: left;}
 #article-cover .article-cover-left img {max-width: 101px;}
 #article-cover .article-cover-center {float: left;margin: 0;margin-left: 15px;width: auto}
-#article-cover .article-cover-center h2{font-size: 16px;line-height: 18px;color: #333333;margin:0px;}
-#article-cover .article-cover-center h5{font-size: 12px;line-height: 14px;color: #333333;margin-bottom: 20px;}
-#article-cover .article-cover-center span{font-size: 12px;line-height: 18px;color: #666666;display: block;margin: 0;padding: 0;}
+#article-cover .article-cover-center h2{font-size: 18px;line-height: 18px;color: #333333;margin:0px;}
+#article-cover .article-cover-center h5{font-weight: normal;font-size: 12px;line-height: 12px;color: #333333;margin-bottom: 20px;}
+#article-cover .article-cover-center p{font-size: 12px;line-height: 18px;color: #666666;display: block;margin: 0;padding: 0;}
+#article-cover .article-cover-center span {color: #555555;font-weight: normal;margin-right: 5px;}
 #article-cover .article-cover-right {margin: 0;margin-top:10px;text-align: right;position: absolute;right: 20px;}
-#article-cover .article-cover-right span {margin-right: 10px;color: #A5A4A3;font-size:13px;line-height:14px;display: inline-block;}
+#article-cover .article-cover-right .price {margin-right: 10px;color: #A5A4A3;font-size:13px;line-height:14px;display: inline-block;}
 #article-cover .article-cover-right .btn-pay{}
 
 #article-menu,#article-info,#article-summary {padding: 18px;}
