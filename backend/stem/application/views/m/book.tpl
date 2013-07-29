@@ -12,7 +12,7 @@
                 <span>{$book.name}</span>
                 <span>{$book.copyright}</span>
                 <div class="article-cover-right">
-                {if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="http://api.duyu.cc/api/store/download/book/{$book.bid}" class='btn'>阅读</a>{else}<span>{$book.price} 元</span><a href="/m/payment/{$book.bid}" class='btn-pay'>购买全本</a>{/if}
+                {if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="http://api.duyu.cc/api/store/download/book/{$book.bid}" class='btn-pay'>阅读</a>{else}<span>{$book.price} 元</span><a href="/m/payment/{$book.bid}" class='btn-pay'>购买全本</a>{/if}
              </div>
              </div>
         </div>
