@@ -5,7 +5,7 @@
         		<li><a href="/user/logout">退出</a></li>
                 <li>|</li>
                 {else}
-                <li><a href="/user">登录</a></li>
+                <li><a href="/user/login">登录</a></li>
                 <li>|</li>
         		{/if}
         		<li class="user">手机版</li>
