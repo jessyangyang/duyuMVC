@@ -156,7 +156,7 @@ class IndexController extends \Yaf\Controller_Abstract
                         exit();
                     } 
                 } catch (OAuthException $e) {
-
+                    print_r($e);
                 }
                 break;
             case 'register':
