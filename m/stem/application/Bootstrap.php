@@ -11,7 +11,7 @@
 use \Yaf\Dispatcher;
 use \Yaf\Loader;
 use \local\db\MySQL;
-use \backend\common;
+use \local\base\Common;
 use \local\template\SmartyAdapter;
 use \duyum\rest\RegisterRest;
 
@@ -19,7 +19,7 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
 {
     public function _initConfig(Dispatcher $dispatcher)
     {
-        // Yaf\Registry::set("common", new common());
+        Yaf\Registry::set("common", new Common());
     }
 
     public function _initDataBase(Dispatcher $dispatcher)
