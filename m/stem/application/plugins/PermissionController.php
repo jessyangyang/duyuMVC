@@ -56,7 +56,7 @@ class PermissionControllerPlugin extends Plugin_Abstract
         foreach ($parms as $key => $value) {
             if (stripos($parms[$key],"?"))
             {
-                $parm = substr($parms[$key],0,stripos($parms[$key],"?")+1);
+                $parm = substr($parms[$key],0,stripos($parms[$key],"?"));
                 $request->setParam($key,$parm);
             }
         }
