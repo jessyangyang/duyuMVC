@@ -55,13 +55,14 @@ class PermissionControllerPlugin extends Plugin_Abstract
         // $parms = substr(stripos(,"?")+1);
 
         foreach ($request->getParams() as $key => $value) {
-            if (stripos($value['action'],"?"))
+            if (stripos($value[$key],"?"))
             {
-                $parm = substr($value['action'],stripos($value['action'],"?")+1);
-                $request->setParam($parm);
+                $parm = substr($value[$key],stripos($value['action'],"?")+1);
+                $request->setParam($key,$value[$key]);
             }
         }
         print_r($parm);
+        print_r($request);
 
         $error = new Exception();
 
