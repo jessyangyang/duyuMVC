@@ -1,0 +1,245 @@
+/*!
+ * Style For Duyu
+ *
+ * Copyright 2012 Duyu, Inc
+ */
+
+/* Base Style*/
+body{background-color: #F7F4F1;}
+
+a {color: #c25e54};
+
+.font-18 {font-size: 18px}
+.fl {float: left}
+.rl {float: right;}
+
+/* header*/
+.header-nav {
+  background-color: #EDEAE8;
+  height:86px;
+  border: 0px;
+  border-bottom: 0.5px;
+  border-style:solid;
+  border-color: #ffffff;
+  text-align: center;
+}
+.header-nav h1 {
+	font-size: 14px;
+	font-weight: 600;
+	margin: 0px;
+	padding: 0px;
+}
+
+.edit-box {
+	margin: 0 auto;
+	margin-top: 67px;
+	width: 800px;
+	min-height: 465px;
+	box-shadow:0px 0px 8px 2px #e0dcd8;
+	-moz-box-shadow:0px 0px 8px 2px #e0dcd8;
+	-webkit-box-shadow:0px 0px 8px 2px #e0dcd8;
+	-moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    border-radius:10px;
+    background-color: #f1edea;
+}
+.edit-box h2 {
+	font-size: 14px;
+	font-weight: 16px;
+	color:#333333;
+	font-weight: 500;
+	margin: 0px;
+	padding: 4px;
+	padding-left: 20px;
+}
+#edit-box
+{
+	background-color: #f8f6f3;
+	border-radius:10px;
+	box-shadow:0px -2px 8px 1px #e2deda;
+	-moz-box-shadow:0px -2px 8px 1px #e2deda;
+	-webkit-box-shadow:0px -2px 8px 1px #e2deda;
+}
+.edit-info {
+	min-height: 325px;
+	padding-top: 100px;
+}
+.edit-cover {
+	min-height: 325px;
+	padding-top: 56px;
+}
+.edit-content {
+	min-height: 330px;
+	background-color: #faf8f6;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	box-shadow:0px -2px 3px 1px #e2deda;
+	-moz-box-shadow:0px -2px 3px 1px #e2deda;
+	-webkit-box-shadow:0px -2px 3px 1px #e2deda;
+}
+.edit-chapter {
+	margin: 0 auto;
+	margin-top: 16px;
+	width: 800px;
+	height: 60px;
+	box-shadow:0px 0px 8px 2px #e0dcd8;
+	-moz-box-shadow:0px 0px 8px 2px #e0dcd8;
+	-webkit-box-shadow:0px 0px 8px 2px #e0dcd8;
+	border-top-right-radius:10px;
+	border-top-left-radius:10px;
+	-moz-border-top-right-radius:10px;
+    -webkit-border-top-right-radius:10px;
+    background-color: #FAF8F6;
+}
+.edit-chapter .edit-chapter-top {
+	position: relative;
+	top: 18px;
+	background: url("../img/top-chapter.gif") no-repeat;
+	margin: 0px 0px 15px 30px;
+	padding-left: 31px;
+	font-size: 14px;
+	line-height: 28px;
+	width: 150px;
+	height: 38px;
+}
+.edit-content input[type="text"]
+{
+	background-color:#F8F6F3;
+	border:0px;
+	box-shadow:0 0 0 rgba(0, 0, 0, 0.075) inset;
+	margin:12px 18px 12px 18px;
+	padding: 2px;
+	font-size: 18px;
+	line-height: 24px;
+	height: 24px;
+}
+.edit-content .edit-textarea {
+	width:745px;
+	min-height: 360px;
+	background-color:  #F8F6F3;
+	border: 0 none;
+	margin-left:18px;
+	margin-bottom: 10px;
+	box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075) inset;
+	text-indent:2em;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 28px;
+}
+.edit-title{
+	padding: 2px;
+	border-bottom: 1px solid #e2ddd9;
+}
+
+/***************************************
+ * Cover 
+ *****************************************/
+
+.edit-cover h4 {
+	font-size: 20px;
+}
+.edit-cover .edit-label {
+	height:32px;
+	width: 32px;
+	background-color: #999999;
+	-moz-border-radius:4em;
+    -webkit-border-radius:4em;
+    border-radius:4em;
+    float: left;
+    text-align: center;
+    display: block;
+    font-size: 28px;
+    color:#ffffff;
+    margin-left:10px; 
+}
+.edit-cover .controls{
+	margin-left:70px; 
+}
+.edit-cover .edit-label span {margin-top: 6px;display: inline-block;}
+.edit-cover .edit-cover-info{
+	width: 360px;
+	height: 154px;
+}
+.edit-cover .control-group-left {
+	width:600px;
+}
+.edit-cover .control-group-right {
+	width:180px;
+}
+.edit-cover .edit-cover-list {
+	display:inline-block;
+	background-color: #ececec;
+	width: 95px;
+	height: 95px;
+	box-shadow:0px 1px 1px 1px #e0dcd8;
+	-moz-box-shadow:0px 1px 1px 0px #e0dcd8;
+	-webkit-box-shadow:0px 1px 1px 0px #e0dcd8;
+	margin: 20px 0px 0px 0px;
+}
+.edit-cover .edit-cover-end
+{
+	margin-right: 0px;
+}
+.edit-cover .edit-cover-show
+{
+	margin: 15px;
+}
+.right-tools {
+	position: absolute;
+	text-align: right;
+	right: 18px;
+	top: 10px;
+}
+.right-tools ul.inline > li{
+	padding: 0px;
+}
+.right-button {
+	position: absolute;
+	text-align: right;
+	right: 35px;
+	top: 40px;
+}
+.right-button a {margin-right:8px; }
+.red-point {
+	width: 16px;
+	height:16px;
+	background-color:#bb4637; 
+	border: 1px solid #a01e1e;
+	-moz-border-radius:4em;
+    -webkit-border-radius:4em;
+    border-radius:4em;
+    -moz-border-bottom-colors: #a01e1e #c25e54;
+	-moz-border-top-colors: #a01e1e #c25e54;
+	-moz-border-left-colors: #a01e1e #c25e54;
+	-moz-border-right-colors: #a01e1e #c25e54;
+	-webkit-border-bottom-colors: #a01e1e #c25e54;
+	-webkit-border-top-colors: #a01e1e #c25e54;
+	-webkit-border-left-colors: #a01e1e #c25e54;
+	-webkit-border-right-colors: #a01e1e #c25e54;
+	box-shadow:0px 1px 2px #999999;
+	-moz-box-shadow:0px 1px 2px #999999;
+	-webkit-box-shadow:0px 1px 2px #999999;
+	position: relative;
+	top:0px;
+}
+.progress {margin:0 10px 0 10px;height:8px;margin-top: -14px}
+.p-bar {
+	width: 316px;
+	margin: 0 auto;
+	padding-top:0px; 
+}
+
+/*edit-content*/
+.title-hr , .edit-setting-chapter {margin:0 auto;padding: 0; width: 95%;overflow: hidden;}
+.edit-setting-chapter input[type="text"]{margin:0;font-size:14px;line-height: 18px;}
+.edit-setting-title {position:relative;float: right;margin: 15px;color:#333333;}
+.edit-setting-title span{position:relative;top: 3px;margin-right:1px;line-height: 20px;}
+.edit-title-subitem {display: none;}
+.edit-setting-title-img {
+	transform:rotate(0deg);
+	-webkit-transform:rotate(0deg);
+	-moz-transform:rotate(0deg);
+}
+.edit-setting-chapter {display: none;}
+
+#edit-delete-modal {display: none;}

@@ -1,0 +1,30 @@
+/*!
+ * Style For Duyu
+ *
+ * Copyright 2012 Duyu, Inc
+ */
+
+/* Base Style*/
+body{background-color: #F6F3F0;}
+
+.container {
+    margin: 200px auto;
+    text-align: center;
+}
+.watting {
+    display: block;
+    margin-top: 20px;
+    color: #b54434;
+    font-size: 26px;
+    line-height: 32px; 
+}
+footer
+{
+    text-align: center;
+    margin-top: 300px;
+    margin-bottom: 10px;
+
+}
+footer a {
+    color: #8c8686;
+}

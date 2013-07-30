@@ -68,4 +68,20 @@ class Members extends \local\db\ORM
     {
         return self::instance($id);
     }
+
+    /**
+     * [getCurrentUser description]
+     * @return [type] [description]
+     */
+    public static function getCurrentUser()
+    {
+        if (!isset(self::$instance)) {
+            $session = \Yaf\Session::getInstance();
+            if ($session->has('current_id')) {
+                $member = self::getByID($session->current_id);
+                self::$instance =  $member;
+            }
+        }
+        return self::$instance;
+    }
 }

@@ -10,10 +10,10 @@
 
 namespace lib\dao;
 
-use \backend\dao\Members;
-use \backend\dao\BookMenu;
-use \backend\dao\Books;
-use \backend\image\ImageControl;
+use \lib\models\Members;
+use \lib\models\BookMenu;
+use \lib\models\Books;
+use \lib\dao\ImageControl;
 
 use \lib\models\BookInfo;
 use \lib\models\BookRecommend;
@@ -279,7 +279,7 @@ class BookControllers
 
         if (is_array($list)) {
             if (isset($list[0]['cover']) and $list[0]['cover']) {
-                    $list[0]['cover'] = \backend\image\ImageControl::getRelativeImage($list[0]['cover']);
+                    $list[0]['cover'] = ImageControl::getRelativeImage($list[0]['cover']);
             }
             return $list[0];
         }
@@ -316,7 +316,7 @@ class BookControllers
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list;
@@ -364,7 +364,7 @@ class BookControllers
     	if (is_array($list)) {
     		foreach ($list as $key => $value) {
     			if (isset($value['cover']) and $value['cover']) {
-    				$list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+    				$list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
     			}
     		}
     		return $list;

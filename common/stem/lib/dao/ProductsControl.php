@@ -13,6 +13,7 @@ namespace lib\dao;
 use \lib\models\Products;
 use \lib\models\ProductCategory;
 use \lib\models\ProductPurchased;
+use \lib\dao\ImageControl;
 
 class ProductsControl
 {
@@ -121,7 +122,7 @@ class ProductsControl
     	if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
                 }
             }
 
