@@ -42,7 +42,7 @@
 <body>
     <div id="header">
     <header>
-        <a href="/index"><div class="header-back">上一页</div></a>
+        <a href="/index"><div class="header-back retina">上一页</div></a>
         <h1>{$topTitle}</h1>
-        <a href="/user/login"><div class="header-user">账户</div></a>
+        <a href="/user/login"><div class="header-user retina">账户</div></a>
     </header>

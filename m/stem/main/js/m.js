@@ -21,5 +21,5 @@
     //     }
     // })
     // 
-    $('img').retina();
+    $('.retina').retina();
 });
