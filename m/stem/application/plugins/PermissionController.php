@@ -56,19 +56,10 @@ class PermissionControllerPlugin extends Plugin_Abstract
         foreach ($parms as $key => $value) {
             if (stripos($parms[$key],"?"))
             {
-                $parm = substr($parms[$key],stripos($parms[$key],"?")+1);
+                $parm = substr($parms[$key],0,stripos($parms[$key],"?")+1);
                 $request->setParam($key,$parm);
             }
         }
-        print_r($request);
-
-        $error = new Exception();
-
-        // echo "<pre>";
-        // print_r($error);
-        // echo "<pre>";
-        // print_r($request);
-        // print_r($response);
 
         $session = Session::getInstance();
     }
