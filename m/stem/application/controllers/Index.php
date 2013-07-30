@@ -145,12 +145,14 @@ class IndexController extends \Yaf\Controller_Abstract
 
         switch ($action) {
             case 'callback':
+                echo "test";
+                print_r($_GET);
+                print_r($token);
                 $keys['code'] = $_GET['code'];
                 $keys['redirect_uri'] = $weiboConfig['weibo']['callback'];
                 try {
                     $token = $weibo->getAccessToken( 'code', $keys ) ;
-                    print_r($_GET);
-                    print_r($token);
+
                     if($token) 
                     {
                         $session->set('token',$token);
