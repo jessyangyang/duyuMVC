@@ -51,18 +51,15 @@ class PermissionControllerPlugin extends Plugin_Abstract
         if ($config and $config->get("permission") == false) {
             return;
         }
-        $parm = null;
-        // $parms = substr(stripos(,"?")+1);
+        $parms = $request->getParams();
 
-        foreach ($request->getParams() as $key => $value) {
-            print_r(stripos($value[$key],"?"));
-            if (stripos($value[$key],"?"))
+        foreach ($parms as $key => $value) {
+            if (stripos($parms[$key],"?"))
             {
-                $parm = substr($value[$key],stripos($value['action'],"?")+1);
-                $request->setParam($key,$value[$key]);
+                $parm = substr($parms[$key],stripos($parms[$key],"?")+1);
+                $request->setParam($key,$parm);
             }
         }
-        print_r($parm);
         print_r($request);
 
         $error = new Exception();
