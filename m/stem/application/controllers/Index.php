@@ -149,6 +149,8 @@ class IndexController extends \Yaf\Controller_Abstract
                 $keys['redirect_uri'] = $weiboConfig['weibo']['callback'];
                 try {
                     $token = $weibo->getAccessToken( 'code', $keys ) ;
+                    print_r($_GET);
+                    print_r($token);
                     if($token) 
                     {
                         $session->set('token',$token);
@@ -156,7 +158,6 @@ class IndexController extends \Yaf\Controller_Abstract
                         exit();
                     } 
                 } catch (OAuthException $e) {
-                    print_r($e);
                 }
                 break;
             case 'register':
