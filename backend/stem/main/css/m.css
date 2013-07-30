@@ -26,6 +26,7 @@ img {vertical-align:baseline;}
 
 .block {display: inline-block;}
 
+
 /* Header */
 #header {width: 100%;}
 
@@ -34,18 +35,18 @@ header{height: 43px;background-color: #B74535;margin: 0 auto;padding: 0;text-ali
 header h1 {margin: 0;padding: 0;font-size: 20px;line-height: 45px; color: #F5F4F2}
 
 .header-back {
-  background:transparent url("../img/icon-button.png") no-repeat scroll -4px -3px;
-  background-size: auto;
+  background:transparent url("../img/m/icon-setting.png") no-repeat fixed 12px 3px;
+  background-size: 168px 28px;
   text-indent:-9999px;
   position:absolute;
-  top:13px;
+  top:5px;
   left: 13px;
-  height: 19px;
-  width: 19px;
+  height: 36px;
+  width: 34px;
 }
 
 .header-user {
-  background:transparent url("../img/icon-button.png") no-repeat scroll 0px -24px;
+  background:transparent url("../img/m/icon-setting.png") no-repeat fixed 0px -24px;
   background-size: auto;
   text-indent:-9999px;
   position:absolute;
@@ -180,10 +181,10 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
 /* User */
 #user {margin: 0 auto;text-align: center;padding: 20px;}
 #user .input-prepend {margin-top:15px}
-#user input[type="text"],#user input[type="password"] {height: 44px;font-size: 14px;line-height: 18px;box-shadow:none;}
+#user input[type="text"],#user input[type="password"] {height: 44px;font-size: 14px;line-height: 18px;width: 220px;}
 #user .add-on {height: 22px;width:51px;font-size: 18px;line-height: 24px;color: #999999;text-align: center;padding: 10px;background-color: #F6F5F0;}
 #user .btn-user {
-  width: 286px;margin: 10px 0;
+  width: 290px;margin: 10px 0;
   display: inline-block;
   *display: inline;
   padding: 12px 0px;
