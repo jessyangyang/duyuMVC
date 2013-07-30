@@ -55,6 +55,7 @@ class PermissionControllerPlugin extends Plugin_Abstract
         // $parms = substr(stripos(,"?")+1);
 
         foreach ($request->getParams() as $key => $value) {
+            print_r(stripos($value[$key],"?"));
             if (stripos($value[$key],"?"))
             {
                 $parm = substr($value[$key],stripos($value['action'],"?")+1);
