@@ -20,6 +20,7 @@ class PermissionControllerPlugin extends Plugin_Abstract
 {
     public function routerStartup(Request_Abstract $request ,Response_Abstract $response)
     {
+
     }
     public function routerShutdown(Request_Abstract $request, Response_Abstract $response) 
     {
@@ -50,6 +51,9 @@ class PermissionControllerPlugin extends Plugin_Abstract
         if ($config and $config->get("permission") == false) {
             return;
         }
+
+        echo "<pre>";
+        print_r($request);
 
         $error = new Exception();
 
