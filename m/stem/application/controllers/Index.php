@@ -143,11 +143,12 @@ class IndexController extends \Yaf\Controller_Abstract
         
         $display->assign('weibo_url',$weiboUrl);
 
+        echo $action;
+        print_r($_GET);
+
         switch ($action) {
             case 'callback':
-                echo "test";
-                print_r($_GET);
-                print_r($token);
+
                 $keys['code'] = $_GET['code'];
                 $keys['redirect_uri'] = $weiboConfig['weibo']['callback'];
                 try {
