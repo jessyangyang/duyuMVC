@@ -25,7 +25,7 @@
     <form action="/user/register" method="POST" class="form-vertical" id="user">
         <div class="control-group">
         <div class="controls">
-            <input type="text" name="email" placeholder="填写你的邮箱（用作蠹鱼帐号）" size=""/>
+            <input type="text" name="email" placeholder="填写你的邮箱（用作蠹鱼帐号）"/>
             <input type="password" name="password" placeholder="设一个登录密码（不少于6位）"/>
         </div>
         <div class="controls">
