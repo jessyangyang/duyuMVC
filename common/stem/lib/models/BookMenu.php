@@ -63,8 +63,8 @@ class BookMenu extends \local\db\ORM
     {
         $menu = self::instance();
         $table = $this->table;
-
-        $list = $menu->field("$table.id,$table.bid,$table.type,$table.sort,$table.title,$table.summary")->where("bid=$bid")->order("sort")->fetchList();
+        $bid = $menu->escapeString($bid);
+        $list = $menu->field("$table.id,$table.bid,$table.type,$table.sort,$table.title,$table.summary")->where("bid='$bid'")->order("sort")->fetchList();
 
         $menu->joinTables = array();
         return $list;
