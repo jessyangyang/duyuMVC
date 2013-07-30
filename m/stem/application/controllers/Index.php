@@ -134,14 +134,7 @@ class IndexController extends \Yaf\Controller_Abstract
         
         $purchasedList = array();
         
-        if (isset($userInfo->id) and $userInfo->id)
-        {
-            $title = $userInfo->username;
-            $topTitle = "购买记录";
-            $action = "purchased";
-            
-//          goto show;
-        }
+        
 
         $weiboConfig = \Yaf\Application::app()->getConfig()->toArray();
         $weibo = new SaeTOAuthV2( $weiboConfig['weibo']['akey'] , $weiboConfig['weibo']['skey'] );
@@ -190,6 +183,13 @@ class IndexController extends \Yaf\Controller_Abstract
                 }
                 break;
             case 'login':
+                if (isset($userInfo->id) and $userInfo->id)
+                {
+                    $title = $userInfo->username;
+                    $topTitle = "购买记录";
+                    $action = "purchased";
+                    goto purchased;
+                }
                 if ($data->isPost()) {
                     if ($user->login($data->getPost('email'),$data->getPost('password')))
                     {
@@ -199,6 +199,7 @@ class IndexController extends \Yaf\Controller_Abstract
                 }
                 break;
             case 'purchased':
+                purchased:
                 $products = new ProductsControl();
                 $purchasedList = $products->getPurchasedForBooks(array(
                         'product_purchased.uid'=>$userInfo->id),50,1);

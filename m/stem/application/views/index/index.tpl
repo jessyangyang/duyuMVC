@@ -12,7 +12,7 @@
         {foreach $books as $key => $book}
         <section id="book-item-{$key}" class="row book-item-article" data="/book/{$book.cover}">
             <div class="book-section-left">
-                <a href="/book/{$book.bid}"><img src="{$book.cover}"/></a>
+                <a href="/book/{$book.bid}"><img src="{$book.cover}" class="retina"/></a>
             </div>
             <div class="book-section-right">
                  <a href="/book/{$book.bid}"><h3>{$book.title}</h3></a>

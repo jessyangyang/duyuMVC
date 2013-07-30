@@ -5,10 +5,10 @@
     <div class="control-group">
         <div class="controls">
             <div class="input-prepend">
-            <span class="add-on">邮箱</span><input type="text" name="email" class="span5">
+            <span class="add-on">邮箱</span><input type="text" name="email">
             </div>
             <div class="input-prepend">
-            <span class="add-on">密码</span><input type="password" name="password" class="span5">
+            <span class="add-on">密码</span><input type="password" name="password">
             </div>
         </div>
     </div>

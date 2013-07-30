@@ -4,7 +4,7 @@
         {if isset($book)}
         <div id="article-cover">
             <div class="article-cover-left">
-                <img src="{$book.cover}"/>
+                <img src="{$book.cover}" class="retina"/>
             </div>
             <div class="article-cover-center">
                 <h2>{$book.title}</h2>

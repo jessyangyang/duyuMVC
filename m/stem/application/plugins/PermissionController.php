@@ -13,22 +13,51 @@ use \Yaf\Response_Abstract;
 use \Yaf\Plugin_Abstract;
 use \Yaf\Application;
 use \Yaf\Session;
+use \Yaf\Exception;
 
 
 class PermissionControllerPlugin extends Plugin_Abstract 
 {
+    public function routerStartup(Request_Abstract $request ,Response_Abstract $response)
+    {
+    }
     public function routerShutdown(Request_Abstract $request, Response_Abstract $response) 
     {
         $this->checkPermission($request, $response);
     }
 
+    public function dispatchLoopStartup( Request_Abstract $request ,Response_Abstract $response )
+    {
+    }
+
+    public function preDispatch( Request_Abstract $request ,Response_Abstract $response )
+    {
+    }
+
+    public function postDispatch( Request_Abstract $request ,Response_Abstract $response )
+    {
+    }
+
+    public function dispatchLoopShutdown( Request_Abstract $request ,Response_Abstract $response )
+    {
+
+    }
+
     public function checkPermission(Request_Abstract $request, Response_Abstract $response)
     {
-        $config = Application::app()->getConfig('api');
+        $config = Application::app()->getConfig()->get('api');
 
         if ($config and $config->get("permission") == false) {
             return;
         }
+
+        $error = new Exception();
+
+        // echo "<pre>";
+        // print_r($error);
+        // echo "<pre>";
+        // print_r($request);
+        // print_r($response);
 
         $session = Session::getInstance();
     }

@@ -17,12 +17,6 @@ use \duyum\rest\RegisterRest;
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract 
 {
-    public function _initException(Dispatcher $dispatcher)
-    {
-        // $exception = new Exception();
-        // $dispatcher->setErrorHandler(array(get_class($this),'error_handler'));
-    }
-
     public function _initConfig(Dispatcher $dispatcher)
     {
         // Yaf\Registry::set("common", new common());
@@ -63,6 +57,12 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
         //     if ( 'index' == strtolower($module)) continue;
         // }
 
+    }
+
+    public function _initException(Dispatcher $dispatcher)
+    {
+        // $exception = new Exception();
+        // $dispatcher->setErrorHandler(array(get_class($this),'error_handler'));
     }
 
     /**
