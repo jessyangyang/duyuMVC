@@ -1,4 +1,6 @@
 /************* fixed **/
+
+
 @media screen and (-webkit-min-device-pixel-ratio: 2),
 screen and (min--moz-device-pixel-ratio: 2)
 {
@@ -17,3 +19,4 @@ screen and (min--moz-device-pixel-ratio: 2)
         background-size: 14px 14px;
     }
 }
+
