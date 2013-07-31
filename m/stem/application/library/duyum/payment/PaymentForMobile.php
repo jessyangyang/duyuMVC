@@ -147,7 +147,7 @@ class PaymentForMobile
             'trade_no' => $trade_no,
             'out_trade_no' => $out_trade_no,
             'uid' => $this->member->id,
-            'oldid' => $old_id
+            'old_id' => $old_id
             );
     }
 }
