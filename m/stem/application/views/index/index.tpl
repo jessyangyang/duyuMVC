@@ -18,7 +18,7 @@
                  <a href="/book/{$book.bid}"><h3>{$book.title}</h3></a>
                 <h5>{$book.author}</h5>
                 <span>{if isset($book.price) && $book.price eq 0}免费{else}{$book.price}元{/if}</span>
-                <p>{$book.summary|truncate:70:"...":true}</p>
+                <p>{$book.summary|truncate:45:"...":true}</p>
             </div>
         </section>
         {/foreach}
