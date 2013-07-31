@@ -46,14 +46,10 @@
         </div>
         <div id="article-comment">
             <h3>书评</h3>
-        
-        </div>
-        {/if}
-    </article>
-    <script type="text/javascript">
+            <script type="text/javascript">
             (function(){
             var url = "http://widget.weibo.com/distribution/comments.php?width=0&url=http%3A%2F%2Fopen.weibo.com%2Fwidget%2Fcomments.php&color=dcd9d7,f5f4f1,4c4c4c,b54434,dcd9d7,ffffff&colordiy=1&ralateuid=2905648385&appkey=3175998203&iframskin=1&dpc=1";
-            document.write('<iframe id="WBCommentFrame" src="' + url + '" scrolling="no" frameborder="0" style="width:100%"></iframe>');
+            document.write('<iframe id="WBCommentFrame" src="' + url + '" scrolling="yes" frameborder="0" style="width:98%"></iframe>');
             })();
             </script>
             <script src="http://tjs.sjs.sinajs.cn/open/widget/js/widget/comment.js" type="text/javascript" charset="utf-8"></script>
@@ -61,5 +57,8 @@
             window.WBComment.init({
                 "id": "WBCommentFrame"
             });
-        </script>
+    </script>
+        </div>
+        {/if}
+    </article>
 {include file = "index/footer.tpl"}
