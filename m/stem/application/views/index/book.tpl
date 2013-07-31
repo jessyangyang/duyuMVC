@@ -43,7 +43,6 @@
                 <li><span>字数</span> {$book.wordcount}</li>
                 <li><span>上架</span> {$book.dateline}</li>
             </ul>
-            <a href="#article-info" class="article-show-button retina">展开</a>
         </div>
         {/if}
     </article>
