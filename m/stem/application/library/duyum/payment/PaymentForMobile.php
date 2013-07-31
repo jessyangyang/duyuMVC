@@ -131,7 +131,7 @@ class PaymentForMobile
 
         if ($product)
         {
-            $result = $this->products->addPurchased($this->initPurchasedFields($product['pid'],$product['old_id'],$out_trade_no,$trade_no,$trade_status));
+            $result = $this->products->addPurchased($this->initPurchasedFields($product['pid'],$product['oldid'],$out_trade_no,$trade_no,$trade_status));
             if ($result) return $product;
         }
 
@@ -147,7 +147,7 @@ class PaymentForMobile
             'trade_no' => $trade_no,
             'out_trade_no' => $out_trade_no,
             'uid' => $this->member->id,
-            'old_id' => $old_id
+            'oldid' => $old_id
             );
     }
 }
