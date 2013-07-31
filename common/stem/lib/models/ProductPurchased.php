@@ -38,7 +38,11 @@ class ProductPurchased extends \local\db\ORM
         'published' => array(
             'type' => 'int',
             'default' => 0,
-            'comment' => 'published')
+            'comment' => 'published'),
+        'old_id' => array(
+            'type' => 'int',
+            'default' => 0,
+            'comment' => 'old_id')
         );
 
     public $primaryKey = "pid";
