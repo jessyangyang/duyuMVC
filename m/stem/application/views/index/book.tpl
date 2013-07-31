@@ -34,7 +34,7 @@
         </div>
         <div id="article-info">
             <h3>信息</h3>
-            <ul class="unstyled article-show-content">
+            <ul class="unstyled">
                 <li><span>体裁</span> {$book.name}</li>
                 <li><span>版权</span> {$book.copyright}</li>
                 <li><span>标签</span> {$book.tags}</li>

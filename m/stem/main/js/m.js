@@ -28,11 +28,11 @@
     $(".article-show-button").on('click',function(){
         var button = $(this);
         var content = button.parent("div").find(".article-show-content");
-        if (content.height() > 90)
+        if (content.height() > 135)
         {
             button.html('展开');
             button.css ('background-image',"url('../img/m/more-2x.png')");
-            content.css ("height","84px");
+            content.css ("height","132px");
         }
         else
         {
