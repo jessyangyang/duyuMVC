@@ -107,7 +107,7 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
 
 /* Book*/
 
-#article-cover {height: 153px;display: block;background-color: #FFFFFF;padding: 12px;padding-top:18px }
+#article-cover {height: 153px;clear:both;background-color: #FFFFFF;padding: 12px;padding-top:18px }
 #article-cover .article-cover-left {float: left;}
 #article-cover .article-cover-left img {max-width: 101px;}
 #article-cover .article-cover-center {float: left;margin: 0;margin-left: 12px;}
@@ -182,7 +182,7 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
 #article-info span {color: #555555;margin-right: 15px;}
 #article-info li {color:#17130B;}
 #article-comment {padding: 12px 0px;margin: 0;}
-/*#article-comment h3 {padding-left: 12px;}*/
+#article-comment h3 {padding-left: 12px;}
 
 .article-show-content {clear: both;overflow:hidden;height: 132px;}
 .article-show-button{

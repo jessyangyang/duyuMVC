@@ -19,6 +19,6 @@
         <script type="text/javascript" src="/js/jquery.form.js"></script>
         <script type="text/javascript" src="/js/jquery.ajax.js"></script>
         <script type="text/javascript" src="/js/m.js"></script>
-        <link href="/css/fixed.css" rel="stylesheet">
+        
     </body>
 </html>
