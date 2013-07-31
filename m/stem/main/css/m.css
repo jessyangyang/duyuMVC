@@ -190,7 +190,7 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
   right: 10px;
   color: #666666;
   background:transparent url("../img/m/more.png") no-repeat right;
-  background-size: auto;
+  background-size: 14px 14px;
   height: 14px;
   width: 28px;
   padding: 0 18px;

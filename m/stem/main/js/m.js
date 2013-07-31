@@ -31,13 +31,13 @@
         if (content.height() > 90)
         {
             button.html('展开');
-            button.css ('background-image',"url('../img/m/more.png')");
+            button.css ('background-image',"url('../img/m/more-2x.png')");
             content.css ("height","84px");
         }
         else
         {
             button.html('收起');
-            button.css ('background-image',"url('../img/m/less.png')");
+            button.css ('background-image',"url('../img/m/less-2x.png')");
             content.css ("height","auto");
         }
         return false;

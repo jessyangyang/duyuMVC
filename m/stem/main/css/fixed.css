@@ -11,4 +11,9 @@ screen and (min--moz-device-pixel-ratio: 2)
       background-image:url("../img/m/account-2x.png");
       background-size: 24px 24px;
     }
+    .article-show-button
+    {
+        background-image: url("../img/m/more-2x.png");
+        background-size: 14px 14px;
+    }
 }
