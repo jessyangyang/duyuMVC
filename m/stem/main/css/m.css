@@ -118,18 +118,6 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
 #article-cover .article-cover-right {margin: 0;margin-top:10px;text-align: right;position: absolute;right: 20px;}
 #article-cover .article-cover-right .price {margin-right: 10px;color: #A5A4A3;font-size:13px;line-height:14px;display: inline-block;}
 #article-cover .article-cover-right .btn-pay{}
-
-#article-menu,#article-info,#article-summary {padding: 18px;}
-#article-menu h3,#article-info h3,#article-summary h3 {font-size: 16px;line-height: 22px;color:#333333;margin:0;}
-#article-menu ul,#article-info ul,#article-summary ul {margin-top: 10px;} 
-#article-menu li,#article-info li,#article-summary li {font-size: 14px;line-height: 22px;color:#555555;margin:0;padding: 0;}
-
-#article-summary{border-top:1px solid #D0CECE;background-color: #F6F6F6;}
-#article-summary p {margin-top: 10px;line-height: 22px;color:#555555;}
-#article-info {border-bottom:1px solid #D0CECE;}
-#article-info span {color: #555555;margin-right: 15px;}
-#article-info li {color:#17130B}
-
 #article-cover .btn-pay {
   display: inline-block;
   *display: inline;
@@ -177,6 +165,39 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
     opacity: 0.65;
 }
 
+
+
+#article-menu,#article-info,#article-summary {padding: 18px;background-color: #F4F5F1;border-bottom: 1px solid #D0CECE;}
+#article-menu h3,#article-info h3,#article-summary h3 {font-size: 16px;line-height: 22px;color:#333333;margin:0;}
+#article-menu ul,#article-info ul,#article-summary ul {margin-top: 10px;} 
+#article-menu li,#article-info li,#article-summary li {font-size: 14px;line-height: 22px;color:#555555;margin:0;padding: 0;}
+
+#article-menu li {
+  background:transparent url("../img/m/circle.png") no-repeat left;
+  background-size: 10px 10px;
+  padding-left:16px;
+}
+#article-summary{border-top:1px solid #D0CECE;}
+#article-summary p {margin-top: 10px;line-height: 22px;color:#555555;}
+#article-info {border-bottom:1px solid #D0CECE;}
+#article-info span {color: #555555;margin-right: 15px;}
+#article-info li {color:#17130B;}
+
+
+.article-show-content {clear: both;overflow:hidden;height: 84px;}
+.article-show-button{
+  position: absolute;
+  right: 10px;
+  color: #666666;
+  background:transparent url("../img/m/more.png") no-repeat right;
+  background-size: auto;
+  height: 14px;
+  width: 28px;
+  padding: 0 18px;
+}
+.article-show-button:hover,.article-show-button:active,.article-show-button:focus,.article-show-button:link {
+  color: #666666;
+}
 
 /* User */
 #user {margin: 0 auto;text-align: center;padding: 20px;}

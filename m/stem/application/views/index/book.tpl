@@ -18,23 +18,23 @@
         </div>
         <div id="article-summary">
             <h3>导言</h3>
-            <p>{$book.summary}</p>
-            <a href=""></a>
+            <p class="article-show-content">{$book.summary}</p>
+            <a href="#article-summary" class="article-show-button retina">展开</a>
         </div>
         <div id="article-menu">
             <h3>目录</h3>
             {if isset($menus)}
-            <ul class="unstyled">
+            <ul class="unstyled article-show-content">
                 {foreach $menus as $key => $menu}
                 <li>{$menu.title}</li>
                 {/foreach}
             </ul>
             {/if}
-            <a href=""></a>
+           <a href="#article-menu" class="article-show-button retina">展开</a>
         </div>
         <div id="article-info">
             <h3>信息</h3>
-            <ul class="unstyled">
+            <ul class="unstyled article-show-content">
                 <li><span>体裁</span> {$book.name}</li>
                 <li><span>版权</span> {$book.copyright}</li>
                 <li><span>标签</span> {$book.tags}</li>
@@ -43,7 +43,7 @@
                 <li><span>字数</span> {$book.wordcount}</li>
                 <li><span>上架</span> {$book.dateline}</li>
             </ul>
-            <a href=""></a>
+            <a href="#article-info" class="article-show-button retina">展开</a>
         </div>
         {/if}
     </article>

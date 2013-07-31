@@ -168,7 +168,7 @@ class IndexController extends \Yaf\Controller_Abstract
                     $uid_get = $client->get_uid();
                     $uid = $uid_get['uid'];
                     $weiboMessage = $client->show_user_by_id($uid);
-                    $topTitle = "欢迎你， ".$weiboMessage['name'];
+                    $topTitle = "你好， ".$weiboMessage['name'];
                 
                 if ($data->isPost()) {
                     if ($user->isRegistered($data->getPost('email')))

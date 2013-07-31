@@ -10,7 +10,7 @@
     </div>
     <article>
         {foreach $books as $key => $book}
-        <section id="book-item-{$key}" class="row book-item-article" data="/book/{$book.cover}">
+        <section id="book-item-{$key}" class="row book-item-article" data="/book/{$book.bid}">
             <div class="book-section-left">
                 <a href="/book/{$book.bid}"><img src="{$book.cover}" class="retina"/></a>
             </div>
@@ -18,7 +18,7 @@
                  <a href="/book/{$book.bid}"><h3>{$book.title}</h3></a>
                 <h5>{$book.author}</h5>
                 <span>{if isset($book.price) && $book.price eq 0}免费{else}{$book.price}元{/if}</span>
-                <p>{$book.summary|truncate:45:"...":true}</p>
+                <p>{$book.summary|truncate:50:"...":true}</p>
             </div>
         </section>
         {/foreach}
