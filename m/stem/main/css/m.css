@@ -201,7 +201,7 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
 }
 
 /* User */
-#user {margin: 0 auto;text-align: center;padding: 16px;}
+#user {margin: 0 auto;text-align: center;padding: 3px 16px;}
 #user .input-prepend {margin-top:15px}
 #user input[type="text"],#user input[type="password"] {height: 34px;font-size: 14px;line-height: 18px;width: 276px;margin-top:10px; }
 #user .input-prepend input[type="text"],#user .input-prepend input[type="password"] {height: 34px;font-size: 14px;line-height: 18px;width: 200px;margin: 0}
@@ -230,18 +230,18 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
   *zoom: 1;
 }
 #user .weibo-block {margin: 26px 0;}
-#user a {color: #6e6868}
-#user a:link {color: #6e6868}
+#user .weibo-block a {padding:0 14px;background:transparent url("../img/m/go_2x.png") no-repeat right;background-size: 7px 13px;}
 
 
 /* Purchased */
 .m-purchased-info {padding: 10px;padding-left:14px;background-color: #F6F5F0;font-size: 12px;line-height: 12px}
 .m-purchased-ul {min-height: 480px;background-color: #FFFFFF;position: relative;}
 .m-purchased-ul li{width: 100%;height: 47px;border-bottom: 1px solid #DCD9D7;}
-.m-purchased-left {width:50%;height: 47px;}
+.m-purchased-left {height: 47px;}
 .m-purchased-left h4 {font-size: 16px;line-height: 24px;font-weight: normal;margin: 14px;}
-.m-purchased-right {width: 46%;font-size: 12px;line-height: 16px;color: #999999;margin-top: 8px;}
-.m-purchased-right span {margin-top: 12px;}
+.m-purchased-right {position: absolute;right: 10px; margin-top:7px;font-size: 12px;line-height: 16px;color: #999999;}
+.m-purchased-right span {}
+.m-purchased-message {margin:125px 0;margin-bottom:220px;text-align: center;font-size: 16px;line-height: 14px;color: #888888;}
 
 /* Footer*/
 
@@ -250,4 +250,4 @@ footer a:link {color: #E16145;}
 footer .info {padding-top: 20px;}
 footer .info li {padding: 0 3px;}
 footer .user {color: #666666}
-#footer {margin:8px 0 12px; font-size: 12px;color: #666666}
+#footer {margin:6px 0 12px; font-size: 11px;color: #888888}
