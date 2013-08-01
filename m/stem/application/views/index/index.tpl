@@ -7,20 +7,24 @@
             {/if}
         </div>
     </nav>
-    </div>
+</div>
+<div data-role="content">
     <article>
         {foreach $books as $key => $book}
-        <section id="book-item-{$key}" class="row book-item-article" data="/book/{$book.bid}" data-transition="slide">
+        <a href="/book/{$book.bid}" data-transition="slide">
+        <section id="book-item-{$key}" class="row book-item-article" data-transition="slide">
             <div class="book-section-left">
-                <a href="/book/{$book.bid}" data-transition="slide"><img src="{$book.cover}" class="retina"/></a>
+                <img src="{$book.cover}" class="retina"/>
             </div>
             <div class="book-section-right">
-                 <a href="/book/{$book.bid}" data-transition="slide"><h3>{$book.title}</h3></a>
+                 <h3>{$book.title}</h3>
                 <h5>{$book.author}</h5>
                 <span>{if isset($book.price) && $book.price eq 0}免费{else}{$book.price}元{/if}</span>
                 <p>{$book.summary|truncate:50:"...":true}</p>
             </div>
         </section>
+        </a>
         {/foreach}
     </article>
+</div>
 {include file = "index/footer.tpl"}

@@ -1,5 +1,6 @@
 {include file = "index/header.tpl"}
 </div>
+<div data-role="content">
     <article>
         {if isset($book)}
         <div id="article-cover">
@@ -12,7 +13,7 @@
                 <p><span>体裁</span> {$book.name}</p>
                 <p><span>版权</span> {$book.copyright}</p>
                 <div class="article-cover-right">
-                {if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="http://api.duyu.cc/api/store/download/book/{$book.bid}" class='btn-pay'>下载阅读</a>{else}<p class="price">{$book.price} 元</p><a href="/payment/{$book.bid}" class='btn-pay'>购买全本</a>{/if}
+                {if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="http://api.duyu.cc/api/store/download/book/{$book.bid}" class='btn-pay' rel="external">下载阅读</a>{else}<p class="price">{$book.price} 元</p><a href="/payment/{$book.bid}" class='btn-pay'>购买全本</a>{/if}
              </div>
              </div>
         </div>
@@ -61,4 +62,5 @@
         </div>
         {/if}
     </article>
+</div>
 {include file = "index/footer.tpl"}

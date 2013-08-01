@@ -1,9 +1,9 @@
 ;$(function(){
 
 
-    $(".book-item-article").on('click',function(){
-        $('.form-horizontal').attr('action',$(this).attr('data'));
-    });
+    // $(".book-item-article").on('click',function(){
+    //     $('.form-horizontal').attr('action',$(this).attr('data'));
+    // });
 
     // var WindowsMenuH = $("header").height();
     // //获取要定位元素距离浏览器顶部的距离
@@ -22,7 +22,7 @@
     // })
     
     $(".book-item-article").on('click',function(){
-        window.location.href = $(this).attr('data');
+        // location.href = $(this).attr('href');
     });
 
     $(".article-show-button").on('click',function(){
@@ -57,6 +57,14 @@
         //     });
         // });
     });
+
+    $(document).bind("mobileinit", function()  
+    {  
+       if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1 || navigator.userAgent.indexOf('Blackberry') != -1 || navigator.userAgent.indexOf('Android') != -1) {
+            $.mobile.defaultPageTransition = 'none'; 
+            $.mobile.defaultDialogTransition = 'none'; 
+        } 
+    });  
 
     $('.retina').retina();
 });

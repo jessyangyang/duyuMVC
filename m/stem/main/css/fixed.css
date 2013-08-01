@@ -1,5 +1,6 @@
 /************* fixed **/
 
+.ui-content {padding: 0;}
 
 @media screen and (-webkit-min-device-pixel-ratio: 2),
 screen and (min--moz-device-pixel-ratio: 2)

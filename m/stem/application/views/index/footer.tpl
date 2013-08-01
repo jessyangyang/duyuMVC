@@ -1,4 +1,4 @@
-        <footer>
+        <footer data-role="footer">
         	<ul class="unstyled inline info">
         		{if isset($user) && $user}
         		<li class="user">{$user->username}</li>
@@ -17,9 +17,8 @@
         =============================================== -->
 
         <!-- Placed at the end of the document so the pages load faster -->
-        <script type="text/javascript" src="/js/jquery.form.js"></script>
-        <script type="text/javascript" src="/js/jquery.ajax.js"></script>
         <script type="text/javascript" src="/js/m.js"></script>
+        <link href="/css/fixed.css" rel="stylesheet">
 </div>       
     </body>
 </html>

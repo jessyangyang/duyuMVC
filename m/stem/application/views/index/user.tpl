@@ -1,5 +1,6 @@
 {include file = "index/header.tpl"}
 </div>
+<div data-role="content">
     {if $action eq login}
     <form action="/user/login" method="POST" class="form-vertical" id="user">
     <div class="control-group">
@@ -34,4 +35,5 @@
     </div>
     </form>
     {/if}
+</div>
 {include file = "index/footer.tpl"}
