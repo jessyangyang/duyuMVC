@@ -13,7 +13,6 @@
         		<div id="footer">©2013 Duyupress.com</div>
         	</ul>
         </footer>
-</div>
         <!-- Javascript
         =============================================== -->
 
@@ -21,6 +20,6 @@
         <script type="text/javascript" src="/js/jquery.form.js"></script>
         <script type="text/javascript" src="/js/jquery.ajax.js"></script>
         <script type="text/javascript" src="/js/m.js"></script>
-        
+</div>       
     </body>
 </html>
