@@ -1,7 +1,7 @@
 {include file = "index/header.tpl"}
 </div>
-<div class="m-purchased-info row">付费书籍2部，免费书籍1部，共花费12.00元</div>
 {if $purchased}
+<div class="m-purchased-info row">付费书籍2部，免费书籍1部，共花费12.00元</div>
 <ul class="unstyled m-purchased-ul row">
 	{foreach $purchased as $key => $val}
 	<li>
@@ -11,6 +11,6 @@
 	{/foreach}
 </ul>
 {else}
-<div class="m-purchased-message">你尚未购买任何内容。</div>
+<div class="m-purchased-message">你尚未购买任何内容</div>
 {/if}
 {include file = "index/footer.tpl"}

@@ -8,7 +8,7 @@
 */
 *}
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" xmlns:wb="http://open.weibo.com/wb">
     <head>
         <meta charset="utf-8">
         <title>{$title}</title>
@@ -21,6 +21,7 @@
         <!-- Base Styles -->
         <link href="/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/css/jquery.mobile.min.css" rel="stylesheet" />
         <link href="/css/m.css" rel="stylesheet">
         <link href="/css/fixed.css" rel="stylesheet">
 
@@ -34,15 +35,18 @@
         <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href=""/> -->
         <!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href=""/> -->
         <!-- <link rel="apple-touch-icon-precomposed" href=""/> -->
+        <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" src="/js/jquery.min.js"></script>
         <script type="text/javascript" src="/js/jquery.hotkeys.js"></script>
         <script type="text/javascript" src="/js/jquery.retina.js"></script>
-        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <!-- <script type="text/javascript" src="/js/bootstrap.min.js"></script>-->
+        <script type="text/javascript" src="/js/jquery.mobile.min.js"></script>
     </head>
 <body>
-    <div id="header">
+<div data-role="page" id="home">
+    <div id="header" data-role="header">
     <header>
-        <a href="/index"><div class="header-back retina">上一页</div></a>
+        <a href="/index" data-rel="back"><div class="header-back retina">上一页</div></a>
         <h1>{$topTitle}</h1>
-        <a href="/user/login"><div class="header-user retina">账户</div></a>
+        <a href="/user/login" data-transition="slideup"><div class="header-user retina">账户</div></a>
     </header>
