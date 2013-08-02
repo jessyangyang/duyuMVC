@@ -138,7 +138,7 @@ class IndexController extends \Yaf\Controller_Abstract
 
         $weiboConfig = \Yaf\Application::app()->getConfig()->toArray();
         $weibo = new SaeTOAuthV2( $weiboConfig['weibo']['akey'] , $weiboConfig['weibo']['skey'] );
-        $weiboUrl = $weibo->getAuthorizeURL($weiboConfig['weibo']['callback']);
+        $weiboUrl = $weibo->getAuthorizeURL($weiboConfig['weibo']['callback'],'code', NULL, "mobile");
         $keys = $weiboMessage = array();
         
         $display->assign('weibo_url',$weiboUrl);
@@ -169,8 +169,10 @@ class IndexController extends \Yaf\Controller_Abstract
                     $uid = $uid_get['uid'];
                     $weiboMessage = $client->show_user_by_id($uid);
                     $topTitle = "你好， ".$weiboMessage['name'];
+
                 
                 if ($data->isPost()) {
+                    
                     if ($user->isRegistered($data->getPost('email')))
                     {
                         header('Location: /user/register');
@@ -215,6 +217,10 @@ class IndexController extends \Yaf\Controller_Abstract
             case 'logout':
                 $user->logout();
                 header('Location: /index');
+                exit();
+                break;
+            case 'cancel':
+                header("Location:/user/login");
                 exit();
                 break;
             default:
