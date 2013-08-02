@@ -12,6 +12,7 @@
                 <li class="weibo_plugn"><wb:follow-button uid="2991975565" type="red_1" width="67" height="24" ></wb:follow-button></li>
         		<div id="footer">©2013 Duyupress.com</div>
         	</ul>
+            <a href="#" onclick="$.mobile.silentScroll(0)"><div id="m-move-top"></div></a>
             <!-- Javascript
             =============================================== -->
 
