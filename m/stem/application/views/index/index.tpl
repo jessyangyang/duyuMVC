@@ -14,7 +14,7 @@
         <a href="/book/{$book.bid}" data-transition="slide">
         <section id="book-item-{$key}" class="row book-item-article" data-transition="slide">
             <div class="book-section-left">
-                <img src="{$book.cover}" class="retina"/>
+                <img src="../img/loading.gif" class="scrollLoading" data-url="{$book.cover}"/>
             </div>
             <div class="book-section-right">
                  <h3>{$book.title}</h3>
@@ -27,4 +27,5 @@
         {/foreach}
     </article>
 </div>
+<script type="text/javascript" src="/js/jquery/jquery.scrollloading.min.js"></script>
 {include file = "index/footer.tpl"}
