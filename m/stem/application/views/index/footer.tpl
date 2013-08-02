@@ -12,13 +12,15 @@
                 <li class="weibo_plugn"><wb:follow-button uid="2991975565" type="red_1" width="67" height="24" ></wb:follow-button></li>
         		<div id="footer">©2013 Duyupress.com</div>
         	</ul>
-        </footer>
-        <!-- Javascript
-        =============================================== -->
+            <!-- Javascript
+            =============================================== -->
 
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script type="text/javascript" src="/js/m.js"></script>
+            <!-- Placed at the end of the document so the pages load faster -->
+            
+            
+            
+        </footer>
         <link href="/css/fixed.css" rel="stylesheet">
-</div>       
+</div>
     </body>
 </html>

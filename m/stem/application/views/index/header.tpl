@@ -19,9 +19,9 @@
         <meta name="author" content=""/>
 
         <!-- Base Styles -->
+        <link href="/css/jquery.mobile.min.css" rel="stylesheet">
         <link href="/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-        <link href="/css/jquery.mobile.min.css" rel="stylesheet" />
         <link href="/css/m.css" rel="stylesheet">
 
         <!-- FOR IE6 ~ 8 support of HTML% elements -->
@@ -34,9 +34,10 @@
         <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href=""/> -->
         <!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href=""/> -->
         <!-- <link rel="apple-touch-icon-precomposed" href=""/> -->
-        
+        <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" src="/js/jquery.min.js"></script>
         <script type="text/javascript" src="/js/jquery.retina.js"></script>
+        <script type="text/javascript" src="/js/m.js"></script>
         <script type="text/javascript" src="/js/jquery.mobile.min.js"></script>
         
     </head>

@@ -6,15 +6,15 @@
     <div class="control-group">
         <div class="controls">
             <div class="input-prepend">
-            <span class="add-on">邮箱</span><input type="text" name="email">
+            <span class="add-on">邮箱</span><input type="text" name="email" data-role="none"/>
             </div>
             <div class="input-prepend">
-            <span class="add-on">密码</span><input type="password" name="password">
+            <span class="add-on">密码</span><input type="password" name="password"data-role="none"/>
             </div>
         </div>
     </div>
     <div class="control-group">
-        <button class="btn-user" type="submit">登 录</button>
+        <button class="btn-user" type="submit" data-role="none"/>登 录</button>
     </div>
     <div class="control-group">
         <p class="weibo-block">
@@ -30,7 +30,7 @@
             <input type="password" name="password" placeholder="设一个登录密码（不少于6位）"/>
         </div>
         <div class="controls">
-            <button class="btn-user" type="submit">登录</button>
+            <button class="btn-user" type="submit" data-role="none"/>登录</button>
         </div>
     </div>
     </form>

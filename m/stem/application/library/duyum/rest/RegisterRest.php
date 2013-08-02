@@ -32,6 +32,12 @@ class RegisterRest extends \local\rest\Restful{
         self::regRestURL('mUser','/user/:action','index','user');
         self::regRestURL('mPayment','/payment/:bid','index','payment');
         self::regRestURL('mPaymentHandle','/paymenthandle/:action','index','paymenthandle');
+
+
+        ///////////
+        // Test  //
+        ///////////
+        self::regRestURL('testIndex','/test/:action','test','index');
         
         return self::$restURL;
     }
