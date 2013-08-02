@@ -35,10 +35,10 @@
         <!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href=""/> -->
         <!-- <link rel="apple-touch-icon-precomposed" href=""/> -->
         <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript" src="/js/jquery.min.js"></script>
-        <script type="text/javascript" src="/js/jquery.retina.js"></script>
-        <script type="text/javascript" src="/js/m.js"></script>
-        <script type="text/javascript" src="/js/jquery.mobile.min.js"></script>
+        <script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/jquery/jquery.retina.js"></script>
+        <script type="text/javascript" src="/js/jquery/jquery.mobile.custom.js"></script>
+        <script type="text/javascript" src="/js/jquery/jquery.mobile.min.js"></script>
         
     </head>
 <body>
