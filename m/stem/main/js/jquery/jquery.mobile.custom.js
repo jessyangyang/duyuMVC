@@ -6,11 +6,5 @@
             $.mobile.defaultDialogTransition = 'none';
         }
         $.mobile.page.prototype.options.keepNative = "input, textarea";
-        $.mobile.loading( 'show', {
-            text: 'foo',
-            textVisible: true,
-            theme: 'a',
-            html: ""
-        });
     }); 
 });
