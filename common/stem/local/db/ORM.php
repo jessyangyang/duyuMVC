@@ -243,7 +243,7 @@ class ORM extends MySQL{
         if ($dbData[$this->primaryKey]) {
             return $this->update($dbData) ? $dbData[$this->primaryKey] : 0;
         }
-        elseif (isset($this->$tKey)) {
+        elseif (isset($tKey)) {
            foreach ($this->fields as $key => $value) {
                if (isset($this->$key)) {
                    $sqlArr[$key] = $this->$key; 
@@ -349,7 +349,7 @@ class ORM extends MySQL{
      * @return Array 
      */
     function fetchRow($key = false) {
-        $tmpOption = $key ? $this->_options(array('where' => $this->primaryKey.'='.$key)): $this->_options();
+        $tmpOption = $key ? $this->_options(array('where' => $this->primaryKey."='$key'")): $this->_options();
 
         $tmpOption['where'] = empty($tmpOption['where'])? '': ' WHERE '.$tmpOption['where'];
         //Return record of wrong sql in base,when the sql make wrong.
@@ -392,7 +392,7 @@ class ORM extends MySQL{
 
         if($debug) echo $tmpSql;
 
-//         echo $tmpSql;
+        // echo $tmpSql;
         $this->joinTables = array();
         return self::$db->query($tmpSql);
     }
@@ -402,5 +402,8 @@ class ORM extends MySQL{
      * @param string $dbField
      * @return array
      */
-    function fetchHash() {}
+    function fetchHash() 
+    {
+
+    }
 }

@@ -15,6 +15,7 @@ use \lib\dao\PaymentUtil;
 use \lib\dao\ProductsControl;
 
 use \lib\models\Members;
+use \lib\models\MemberFields;
 
 class PaymentForMobile
 {
@@ -99,6 +100,7 @@ class PaymentForMobile
 
                 if ($this->addToPurchased($out_trade_no,$trade_no,$trade_status))
                 {
+                    $this->updateCount($this->member->id);
                     PaymentUtil::sendLog("type:notify;model:TRADE_SUCCESS;out_trade_no:$out_trade_no;trade_no:$trade_no;trade_status:$trade_status");
                     echo "success";     //请不要修改或删除
                 }
@@ -111,6 +113,7 @@ class PaymentForMobile
             else if ($_POST['trade_status'] == 'TRADE_SUCCESS' and $this->member->id) {
                 if ($this->addToPurchased($out_trade_no,$trade_no,$trade_status))
                 {
+                    $this->updateCount($this->member->id);
                     PaymentUtil::sendLog("type:notify;model:TRADE_SUCCESS;out_trade_no:$out_trade_no;trade_no:$trade_no;trade_status:$trade_status");
                     echo "success";     //请不要修改或删除
                 }
@@ -149,5 +152,19 @@ class PaymentForMobile
             'uid' => $this->member->id,
             'old_id' => $old_id
             );
+    }
+
+    public function updateCount($user_id)
+    {
+        $fields = MemberFields::instance($user_id);
+        if($fields->id)
+        {
+            $fields->purchased_count += 1;
+            $fields->save();
+        }
+        else
+        {
+            $fields->insert(array('id'=>$user_id,'purchased_count'=> '1'));
+        }
     }
 }

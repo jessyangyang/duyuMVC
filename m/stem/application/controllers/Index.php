@@ -10,6 +10,7 @@
 
 use \lib\models\Members;
 use \lib\models\MemberInfo;
+use \lib\models\MemberFields;
 use \lib\models\Images;
 use \lib\models\Books;
 use \lib\models\BookCategory;
@@ -275,6 +276,32 @@ class IndexController extends \Yaf\Controller_Abstract
         }
 
 
+        exit();
+    }
+
+    public function downloadAction($id = false)
+    {
+        $display = $this->getView();
+
+        $data = $this->getRequest();
+
+        $userInfo = Members::getCurrentUser();
+
+        if (isset($userInfo->id) and $userInfo->id) {
+            $fields = MemberFields::instance($userInfo->id);
+            if($fields->id)
+            {
+                $fields->download_count += 1;
+                $fields->save();
+            }
+            else
+            {
+                $fields->insert(array('id'=>$userInfo->id,'download_count'=> '1'));
+            }
+
+            
+        }
+        header('Location: http://api.duyu.cc/api/store/download/book/'.$id);
         exit();
     }
 }
