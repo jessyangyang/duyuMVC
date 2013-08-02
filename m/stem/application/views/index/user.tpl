@@ -18,7 +18,7 @@
     </div>
     <div class="control-group">
         <p class="weibo-block">
-            <a href="{$weibo_url}">用微博帐号注册</a>
+            <a href="{$weibo_url}" rel="external">用微博帐号注册</a>
         </p>
     </div>
     </form>
