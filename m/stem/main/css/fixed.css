@@ -49,5 +49,22 @@ screen and (min--moz-device-pixel-ratio: 2)
         background-image: url("../img/m/more-2x.png");
         background-size: 14px 14px;
     }
+    .ui-loader .ui-icon {
+        border-radius: 18px 18px 18px 18px;
+        display: block;
+        height: 22px;
+        margin: 0;
+        padding: 1px;
+        width: 22px;
+    }
+
+    .ui-loader .ui-icon-loading {
+        background:transparent url("../img/loading.gif") repeat scroll;
+        background-size: 23px 23px;
+        padding: 0px;
+        margin:0px;
+        height: 22px;
+        width: 22px;
+    }
 }
 
