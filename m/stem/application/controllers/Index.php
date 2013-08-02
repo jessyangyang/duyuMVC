@@ -197,14 +197,15 @@ class IndexController extends \Yaf\Controller_Abstract
                     goto purchased;
                 }
                 if ($data->isPost()) {
-                    if ($user->login($data->getPost('email'),$data->getPost('password')))
+                    $check = $user->checkUser($data->getPost('email'),$data->getPost('password'));
+                    if ($check['title'] == false)
+                    {
+                        $message = $check['message'];
+                    }
+                    else if ($user->login($data->getPost('email'),$data->getPost('password')))
                     {
                         header('Location: /index');
                         exit();
-                    }
-                    else
-                    {
-                        $message = "邮箱或密码不正确!";
                     }
                 }
                 break;
