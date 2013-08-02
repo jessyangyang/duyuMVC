@@ -14,7 +14,7 @@
         <a href="/book/{$book.bid}" data-transition="slide">
         <section id="book-item-{$key}" class="row book-item-article" data-transition="slide">
             <div class="book-section-left">
-                <img src="../img/loading.gif" class="scrollLoading" data-url="{$book.cover}"/>
+                <img src="../img/m/cover_bg.png" class="scrollLoading" data-url="{$book.cover}"/>
             </div>
             <div class="book-section-right">
                  <h3>{$book.title}</h3>
