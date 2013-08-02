@@ -197,7 +197,7 @@ class IndexController extends \Yaf\Controller_Abstract
                     goto purchased;
                 }
                 if ($data->isPost()) {
-                    $check = $user->checkUser($data->getPost('email'),$data->getPost('password'));
+                    $check = $user->checkUser($data->getPost('email'),$data->getPost('password'),false);
                     if ($check['title'] == false)
                     {
                         $message = $check['message'];
@@ -214,8 +214,16 @@ class IndexController extends \Yaf\Controller_Abstract
                 $products = new ProductsControl();
                 $purchasedList = $products->getPurchasedForBooks(array(
                         'product_purchased.uid'=>$userInfo->id),50,1);
-                
+                $download = MemberFields::instance($userInfo->id);
+                $download_count = isset($download->download_count) ? $download->download_count : 0;
+
+                $count = array('purchased'=>count($purchasedList),'download'=>$download_count);
+                foreach ($purchasedList as $key => $value) {
+                    $count['count'] += $value['price'];
+                }
+
                 $display->assign('user',$userInfo);
+                $display->assign('count',$count);
                 $display->assign('purchased',$purchasedList);
                 $display->assign('action',$action);
                 $display->assign("title", $title);

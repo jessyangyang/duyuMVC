@@ -142,7 +142,7 @@ class MembersControl
      * @param  [type] $password [description]
      * @return [type]           [description]
      */
-    public function checkUser($email,$password)
+    public function checkUser($email,$password,$isRegistered = true)
     {
         $message = array();
         $message['title'] = false;
@@ -159,7 +159,7 @@ class MembersControl
         {
             $message['message'] = "邮箱格式不正确!";
         }
-        else if ($this->isRegistered($email))
+        else if ($isRegistered and $this->isRegistered($email))
         {
             $message['message'] = "邮箱已注册!";
         }
