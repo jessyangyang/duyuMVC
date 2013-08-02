@@ -144,6 +144,10 @@ class IndexController extends \Yaf\Controller_Abstract
         
         $display->assign('weibo_url',$weiboUrl);
 
+        $message = '';
+
+
+
         switch ($action) {
             case 'callback':
 
@@ -170,16 +174,14 @@ class IndexController extends \Yaf\Controller_Abstract
                     $uid = $uid_get['uid'];
                     $weiboMessage = $client->show_user_by_id($uid);
                     $topTitle = "你好， ".$weiboMessage['name'];
-
                 
                 if ($data->isPost()) {
-                    
-                    if ($user->isRegistered($data->getPost('email')))
+                    $check = $user->checkUser($data->getPost('email'),$data->getPost('password'));
+                    if ($check['title'] == false)
                     {
-                        header('Location: /user/register');
-                        exit();
+                        $message = $check['message'];
                     }
-                    if($member->register($data->getPost('email'),$weiboMessage['name'],$data->getPost('password'),$weiboMessage['avatar_large']))
+                    else if($member->register($data->getPost('email'),$weiboMessage['name'],$data->getPost('password'),$weiboMessage['avatar_large']))
                     {
                         header('Location: /index');
                         exit();
@@ -199,6 +201,10 @@ class IndexController extends \Yaf\Controller_Abstract
                     {
                         header('Location: /index');
                         exit();
+                    }
+                    else
+                    {
+                        $message = "邮箱或密码不正确!";
                     }
                 }
                 break;
@@ -230,6 +236,7 @@ class IndexController extends \Yaf\Controller_Abstract
         }
         
         show:
+        $display->assign('message',$message);
         $display->assign('user',$userInfo);
         $display->assign('action',$action);
         $display->assign("title", $title);

@@ -132,8 +132,42 @@ class MembersControl
     public function isRegistered($email)
     {
         $email = $this->members->escapeString($email);
-        if ($data = $this->members->field('id')->where("email='" . $email ."'")->group("published")->fetchRow()) return $data;
+        if ($data = $this->members->where("email='" . $email ."'")->fetchRow()) return $data;
         return false;
+    }
+
+    /**
+     * [checkUser description]
+     * @param  [type] $email    [description]
+     * @param  [type] $password [description]
+     * @return [type]           [description]
+     */
+    public function checkUser($email,$password)
+    {
+        $message = array();
+        $message['title'] = false;
+
+        if ($email == '' || $password == '')
+        {
+            $message['message'] = "邮箱或密码不能为空!";
+        }
+        else if (strlen($password) < 6)
+        {
+            $message['message'] = "密码长度需大于6!";
+        }
+        else if (!ereg("^[-a-zA-Z0-9_.]+@([0-9A-Za-z][0-9A-Za-z-]+\.)+[A-Za-z]{2,5}$",$email))
+        {
+            $message['message'] = "邮箱格式不正确!";
+        }
+        else if ($this->isRegistered($email))
+        {
+            $message['message'] = "邮箱已注册!";
+        }
+        else
+        {
+            $message['title'] = true;
+        }
+        return $message;
     }
 
     /**

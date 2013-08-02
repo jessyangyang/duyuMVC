@@ -15,7 +15,11 @@
             <a href="#" onclick="$.mobile.silentScroll(0)"><div id="m-move-top"></div></a>
             <!-- Javascript
             =============================================== -->
-
+            {if isset($message) && $message}
+            <script type="text/javascript">
+                alert('{$message}');
+            </script>
+            {/if}
             <!-- Placed at the end of the document so the pages load faster -->
             <script type="text/javascript" src="/js/m.js"></script>
             

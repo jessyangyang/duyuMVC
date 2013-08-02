@@ -353,7 +353,8 @@ class ORM extends MySQL{
 
         $tmpOption['where'] = empty($tmpOption['where'])? '': ' WHERE '.$tmpOption['where'];
         //Return record of wrong sql in base,when the sql make wrong.
-        if($resule = self::$db->query('SELECT '.$tmpOption['field'].' FROM '.$tmpOption['table'].' '.$tmpOption['where'].' LIMIT 0,1'))
+        $sql = 'SELECT '.$tmpOption['field'].' FROM '.$tmpOption['table'].' '.$tmpOption['where'].' LIMIT 0,1';
+        if($resule = self::$db->query($sql))
         {
             return $resule[0];
         }
