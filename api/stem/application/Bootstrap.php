@@ -31,8 +31,8 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
 
     public function _initException(Dispatcher $dispatcher)
     {
-        $exception = new APIException();
-        $dispatcher->setErrorHandler(array(get_class($exception),'exceptionMessage'));
+        // $exception = new APIException();
+        // $dispatcher->setErrorHandler(array(get_class($exception),'exceptionMessage'));
     }
 
     public function _initSmarty(Dispatcher $dispatcher)
