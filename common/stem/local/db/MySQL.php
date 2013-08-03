@@ -279,13 +279,8 @@ class MySQL extends Database
     static function printDebug($message = '' , $sql = '') {
         $dberror = self::$db->error;
         $dberrno = self::$db->errno;
-        echo "<div style=\"position:absolute;font-size:12px;font-family:arial;background:#EBEBEB;padding:0.5em;\">
-             <b>MySQL Error</b><br>
-             <b>Message</b>: $message<br>
-             <b>From SQL</b>: $sql<br>
-             <b>Error</b>: $dberror<br>
-             <b>Errno.</b>: $dberrno<br>
-             </div>";
+        $debug = 1;
+        echo json_encode(array('code'=>$dberrno,'message'=>$dberror,'row'=>$sql,'debug'=>$debug,'other'=>$message));
         exit();
     }
 
