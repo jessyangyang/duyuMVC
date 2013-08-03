@@ -11,7 +11,7 @@
 use \Yaf\Dispatcher;
 use \local\db\MySQL;
 use \duyuu\rest\RegisterRest;
-use \duyuu\Exception;
+use \duyuu\APIException;
 use \local\template\SmartyAdapter;
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract 
@@ -31,8 +31,8 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
 
     public function _initException(Dispatcher $dispatcher)
     {
-        // $exception = new Exception();
-        // $dispatcher->setErrorHandler($exception->exceptionMessage());
+        $exception = new APIException();
+        $dispatcher->setErrorHandler(array(get_class($exception),'exceptionMessage'));
     }
 
     public function _initSmarty(Dispatcher $dispatcher)

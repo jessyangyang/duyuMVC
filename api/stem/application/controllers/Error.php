@@ -19,25 +19,15 @@ class ErrorController extends \Yaf\Controller_Abstract {
         /* error occurs */
         $rest = Restful::instance();
 
-        $code = 200;
-        $message = "ok";
-
-        switch ($exception->getCode()) {
-            case YAF_ERR_NOTFOUND_MODULE:
-            case YAF_ERR_NOTFOUND_CONTROLLER:
-            case YAF_ERR_NOTFOUND_ACTION:
-            case YAF_ERR_NOTFOUND_VIEW:
-                $code = 404;
-                $message = $exception->getMessage();
-                break;
-            default :
-                $code = 0;
-                $message = $exception->getMessage();
-                break;
-        }
+        $message = $exception->getMessage();
+        $code = $exception->getCode();
 
         $rest->assign('code',$code);
         $rest->assign('message',$message);
+        $rest->assign('error_no',$exception->getCode());
+        $rest->assign('line',$exception->getLine());
+        $rest->assign('file',$exception->getFile());
+        $rest->assign('trace',$exception->getTraceAsString());
         $rest->response();
      } 
 }
