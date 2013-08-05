@@ -370,7 +370,7 @@ class testController extends \Yaf\Controller_Abstract
         $access_token = $session->get('access_token');
         $content = http_build_query(array('access_token' =>$access_token));
         $opt  = array('http'=> array('method'=>"POST",'header' => "Content-Type:application/x-www-form-urlencoded\r\n",'content' => $content));
-        if($content = file_get_contents($url,false,stream_context_create($opt))) 
+        if(function_exists('file_get_contents') and $content = file_get_contents($url,false,stream_context_create($opt))) 
         {
             echo "以下是获取到的受保护内容:<br />",$content;
             exit();
