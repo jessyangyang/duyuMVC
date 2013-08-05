@@ -17,6 +17,7 @@ use \duyuu\dao\MemberStateTemp;
 use \local\rest\Restful;
 use \Yaf\Session;
 use \lib\dao\OAuth2Storage;
+use \lib\models\MemberFields;
 
 use local\oauth2\OAuth2;
 use local\oauth2\OAuth2ServerException;
@@ -28,12 +29,15 @@ class testController extends \Yaf\Controller_Abstract
     {
         $display = $this->getView();
 
+        $data = $this->getRequest();
+
+        $host = $data->getServer("HTTP_HOST");
         $session = Session::getInstance();
 
         $session->set('state',md5(uniqid(rand(),TRUE)));
 
         $state = $session->get('state');
-        $url = "http://api.duyu.dev/api/test/authorize?response_type=code&client_id=2751354540&redirect_uri=http://api.duyu.dev/api/test/callback&state=$state";
+        $url = "http://$host/api/test/authorize?response_type=code&client_id=2751354540&redirect_uri=http://api.duyu.dev/api/test/callback&state=$state";
 
         $display->assign("title", "start");
         $display->assign("url", $url);
@@ -236,14 +240,30 @@ class testController extends \Yaf\Controller_Abstract
 
             if ($uid) {
                 $user = Members::instance($uid);
+                
                 if ($user->id) {
                     $appkey = time()+time();
                     
                     $secret = $user->id . $user->email;
 
                     $oauth = new OAuth2Storage();
+                    $fields = MemberFields::instance($user->id);
 
-                    if ($oauth->addClient($appkey,$secret)) $message = "yes";
+                    $result = $oauth->addClient($appkey,$secret);
+                    if ($result) {
+                        if (isset($fields->app_key) and $fields->app_key)
+                        {
+                            $fields->app_key .= "," . $result['client_id'];
+
+                        }
+                        else 
+                        {
+                            $fields->id = $user->id;
+                            $fields->app_key = $result['client_id'];
+                        }
+                        $fields->save();
+                        $message = "yes";
+                    }
 
 
                 }
@@ -287,9 +307,13 @@ class testController extends \Yaf\Controller_Abstract
 
         $oauth = new OAuth2(new OAuth2Storage());
 
-        if ($_POST) {
-          $userId = 17; // Use whatever method you have for identifying users.
-          try { 
+        $user = Members::getCurrentUser();
+        if ($_POST and isset($user->id) and $user->id) {
+          $userId = $user->id; // Use whatever method you have for identifying users.
+          try {
+            $session = Session::getInstance();
+            $session->set('client_id',$_GET['client_id']);
+
             $oauth->finishClientAuthorization($_POST["accept"] == "Yep", $userId, $_POST);
           } catch(OAuth2ServerException $e) {
             $e->sendHttpResponse();
@@ -326,7 +350,10 @@ class testController extends \Yaf\Controller_Abstract
     public function finishAction()
     {
         $session = Session::getInstance();
-        $url = "http://api.duyu.dev/api/test/resource";
+        $data = $this->getRequest();
+
+        $host = $data->getServer("HTTP_HOST");
+        $url = "http://$host/api/test/resource";
 
         $access_token = $session->get('access_token');
         $content = http_build_query(array('access_token' =>$access_token));
@@ -341,15 +368,25 @@ class testController extends \Yaf\Controller_Abstract
 
     public function callbackAction()
     {
-        $app_id = '2751354540';
-        $app_secret = 'b040f8905242b7c3bf27';
 
         $session = Session::getInstance();
+        $session->get('client_id');
+
+        $oauth = new OAuth2Storage();
+
+        $app_id = $session->get('client_id');
+
+        $client = $oauth->getClient($app_id);
+        $app_secret = $client['client_secret'];
+
+        $data = $this->getRequest();
+
+        $host = $data->getServer("HTTP_HOST");
         // code是服务端返回的临时令牌
         $code = $_REQUEST ["code"];
         // Step2：通过Authorization Code获取Access Token
         if ($_REQUEST ['state'] and $_REQUEST ['state'] == $session->get('state')) {
-            $re = $this->http_post ( "http://api.duyu.dev/api/test/token", 
+            $re = $this->http_post ( "http://$host/api/test/token", 
                 array (
                     'client_id' => $app_id, 
                     'client_secret' => $app_secret, 
@@ -363,7 +400,7 @@ class testController extends \Yaf\Controller_Abstract
             if(isset($re['access_token']) and $re['access_token'])
             {
                 $session->set('access_token',$re['access_token']);
-                echo "访问令牌是:".$re ['access_token'],"<br /><a href='http://api.duyu.dev/api/test/finish'>访问受保护的资源</a>";
+                echo "访问令牌是:".$re ['access_token'],"<br /><a href='http://$host/api/test/finish'>访问受保护的资源</a>";
             }
             else
             {

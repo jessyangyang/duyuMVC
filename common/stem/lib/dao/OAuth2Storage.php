@@ -86,7 +86,20 @@ class OAuth2Storage implements IOAuth2GrantCode, IOAuth2RefreshTokens
             'client_id'=> $this->oauthclient->escapeString($client_id),
             'client_secret' => $this->oauthclient->escapeString($client_secret),
             'redirect_uri' => $this->oauthclient->escapeString($redirect_uri));
-        if ($this->oauthclient->insert($data)) return true;
+        if ($this->oauthclient->insert($data)) return $data;
+        return false;
+    }
+
+    /**
+     * [getClient description]
+     * @param  [type] $client_id [description]
+     * @return [type]            [description]
+     */
+    public function getClient($client_id)
+    {
+        if (!$client_id) return false;
+
+        return $this->oauthclient->where("client_id='$client_id'")->fetchRow();
     }
 
     /**
