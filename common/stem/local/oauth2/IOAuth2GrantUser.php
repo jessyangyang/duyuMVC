@@ -1,18 +1,15 @@
 <?php
 
+namespace local\oauth2;
+
+use local\oauth2\IOAuth2Storage;
 /**
  * Storage engines that support the "Resource Owner Password Credentials"
  * grant type should implement this interface
  * 
- * @package     DuyuMvc
- * @author      Jess
- * @version     1.0
- * @license     http://wiki.duyu.com/duyuMvc
+ * @author Dave Rochwerger <catch.dave@gmail.com>
  * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.3
  */
-
-namespace local\oauth2;
-
 interface IOAuth2GrantUser extends IOAuth2Storage {
 
 	/**

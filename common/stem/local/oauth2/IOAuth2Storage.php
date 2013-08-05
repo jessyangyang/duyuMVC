@@ -1,16 +1,12 @@
 <?php
 
+namespace local\oauth2;
+
 /**
  * All storage engines need to implement this interface in order to use OAuth2 server
  * 
- * @package     DuyuMvc
- * @author      Jess
- * @version     1.0
- * @license     http://wiki.duyu.com/duyuMvc
+ * @author David Rochwerger <catch.dave@gmail.com>
  */
-
-namespace local\oauth2;
-
 interface IOAuth2Storage {
 
 	/**

@@ -16,13 +16,18 @@ class RegisterRest extends \local\rest\Restful{
     public static function initRegister()
     {
         //test
-        self::regRestURL('testIndex','/api/test/test/:id','test','test');
+        self::regRestURL('testIndex','/api/test/index','test','index');
         self::regRestURL('testReg','/api/test/reg','test','reg');
         self::regRestURL('testLogin','/api/test/login','test','login');
-        self::regRestURL('testAdd','/api/test/addClient','test','addClient');
+        self::regRestURL('testAdd','/api/test/addclient','test','addclient');
+        self::regRestURL('testToken','/api/test/token','test','token');
+        self::regRestURL('testAuthorize','/api/test/authorize','test','authorize');
+        self::regRestURL('testCallback','/api/test/callback','test','callback');
         self::regRestURL('testAuth','/api/test/auth','test','auth');
-        self::regRestURL('testAuth','/api/test/upload','test','upload');
+        self::regRestURL('testUpload','/api/test/upload','test','upload');
         self::regRestURL('testAuth','/api/test/addComment','test','addComment');
+        self::regRestURL('testResource','/api/test/resource','test','resource');
+        self::regRestURL('testFinish','/api/test/finish','test','finish');
 
         /**User
         ************************/

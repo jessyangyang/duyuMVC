@@ -34,7 +34,7 @@ class OAuthAccessTokens extends \local\db\ORM
         'user_id' => array(
             'type' => 'int',
             'default' => 0,
-            'comment' => 'uid')
+            'comment' => 'user_id')
         );
 
     public $primaryKey = "oauth_token";

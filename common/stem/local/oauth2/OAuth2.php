@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @mainpage
  * OAuth 2.0 server in PHP, originally written for
@@ -19,10 +18,10 @@
  * now, your best bet is to view the oauth.php source - it has lots of
  * comments.
  *
- * @package     DuyuMvc
- * @author      Jess
- * @version     1.0
- * @license     http://wiki.duyu.com/duyuMvc
+ * @author Tim Ridgely <tim.ridgely@gmail.com>
+ * @author Aaron Parecki <aaron@parecki.com>
+ * @author Edison Wong <hswong3i@pantarei-design.com>
+ * @author David Rochwerger <catch.dave@gmail.com>
  *
  * @see http://code.google.com/p/oauth2-php/
  * @see https://github.com/quizlet/oauth2-php
@@ -44,6 +43,7 @@ namespace local\oauth2;
 use local\oauth2\OAuth2ServerException;
 use local\oauth2\OAuth2AuthenticateException;
 use local\oauth2\OAuth2RedirectException;
+
 
 class OAuth2 {
 	
@@ -74,7 +74,7 @@ class OAuth2 {
 	 * @see OAuth2::setDefaultOptions()
 	 */
 	const DEFAULT_ACCESS_TOKEN_LIFETIME = 3600;
-	const DEFAULT_REFRESH_TOKEN_LIFETIME = 1209600;
+	const DEFAULT_REFRESH_TOKEN_LIFETIME = 30758400;
 	const DEFAULT_AUTH_CODE_LIFETIME = 30;
 	const DEFAULT_WWW_REALM = 'Service';
 	
@@ -486,6 +486,7 @@ class OAuth2 {
 	 * @codeCoverageIgnoreStart
 	 */
 	public function getBearerToken() {
+		$headers = null;
 		if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
 			$headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
 		} elseif (function_exists('apache_request_headers')) {
@@ -501,9 +502,12 @@ class OAuth2 {
 		
 		$tokenType = $this->getVariable(self::CONFIG_TOKEN_TYPE);
 		$realm = $this->getVariable(self::CONFIG_WWW_REALM);
+
+
 		
 		// Check that exactly one method was used
 		$methodsUsed = !empty($headers) + isset($_GET[self::TOKEN_PARAM_NAME]) + isset($_POST[self::TOKEN_PARAM_NAME]);
+
 		if ($methodsUsed > 1) {
 			throw new OAuth2AuthenticateException(self::HTTP_BAD_REQUEST, $tokenType, $realm, self::ERROR_INVALID_REQUEST, 'Only one method may be used to authenticate at a time (Auth header, GET or POST).');
 		} elseif ($methodsUsed == 0) {
@@ -915,6 +919,7 @@ class OAuth2 {
 		if ($state !== NULL) {
 			$result["query"]["state"] = $state;
 		}
+		
 		
 		if ($is_authorized === FALSE) {
 			throw new OAuth2RedirectException($redirect_uri, self::ERROR_USER_DENIED, "The user denied access to your application", $state);

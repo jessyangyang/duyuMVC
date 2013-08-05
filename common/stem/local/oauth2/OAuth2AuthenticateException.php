@@ -1,20 +1,16 @@
 <?php
 
+namespace local\oauth2;
+
+use local\oauth2\OAuth2ServerException;
 /**
  * Send an error header with the given realm and an error, if provided.
  * Suitable for the bearer token type.
- * 
- * @package     DuyuMvc
- * @author      Jess
- * @version     1.0
- * @license     http://wiki.duyu.com/duyuMvc
+ *
  * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-04#section-2.4
  *
  * @ingroup oauth2_error
  */
-
-namespace local\oauth2;
-
 class OAuth2AuthenticateException extends OAuth2ServerException {
 	
 	protected $header;

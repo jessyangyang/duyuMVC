@@ -8,7 +8,7 @@
 
 namespace local\oauth2;
 
-class OAuth2ServerException extends Exception {
+class OAuth2ServerException extends \Exception {
 	
 	protected $httpCode;
 	protected $errorData = array();

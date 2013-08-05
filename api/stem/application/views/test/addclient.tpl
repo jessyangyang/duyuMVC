@@ -6,15 +6,11 @@
     </head>
     <body>
         <h1>addClient</h1>
-        <form action="/api/test/addClient" method="POST">
-            <label for="title">title :</label>
-            <input type="text" name="title"/><br/>
-            <label for="summary">summary : </label>
-            <input type="text" name="summary"/><br/>
-            <label for="redirect_url">redirect_url :</label>
-            <input type="text" name="redirect_url"/><br/>
-            <input type="submit" value="commit"/>
+        <form action="/api/test/addclient" method="POST">
+            <label for="title">uid :</label>
+            <input type="text" name="uid"/><br/>
             <input type="hidden" name="state" value="add"/>
+            <input type="submit" value="Yes"/>
         </form>
         <h3>{$message}</h3>
 

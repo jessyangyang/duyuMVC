@@ -16,14 +16,27 @@ use \duyuu\dao\OAuthAccessTokens;
 use \duyuu\dao\MemberStateTemp;
 use \local\rest\Restful;
 use \Yaf\Session;
+use \lib\dao\OAuth2Storage;
+
+use local\oauth2\OAuth2;
+use local\oauth2\OAuth2ServerException;
 
 class testController extends \Yaf\Controller_Abstract 
 {
 
     public function indexAction() 
     {
-        echo "index";
-        exit();
+        $display = $this->getView();
+
+        $session = Session::getInstance();
+
+        $session->set('state',md5(uniqid(rand(),TRUE)));
+
+        $state = $session->get('state');
+        $url = "http://api.duyu.dev/api/test/authorize?response_type=code&client_id=2751354540&redirect_uri=http://api.duyu.dev/api/test/callback&state=$state";
+
+        $display->assign("title", "start");
+        $display->assign("url", $url);
     }
 
     public function testAction($id = false)
@@ -97,39 +110,6 @@ class testController extends \Yaf\Controller_Abstract
 
         $display->assign("title", "Hello Wrold");
         $display->assign("message", $message);
-    }
-
-    public function addClientAction()
-    {
-        $display = $this->getView();
-
-        $client = new \duyuu\dao\OAuthClient();
-        $message = '';
-
-        $data = $this->getRequest();
-
-        if ($data->isPost() and $data->getPost('state') == "add") {
-            $title = $data->getPost('title');
-            $summary = $data->getPost('summary');
-            $summary = $data->getPost('summary');
-            $redirectUrl = $data->getPost('redirect_url');
-            $user = Members::getCurrentUser();
-
-            if ($user) {
-                $data = array(
-                    'client_id' => md5($user->email),
-                    'client_secret' => md5($user->email.$user->password),
-                    'redirect_url' => $redirectUrl);
-                
-                if ($client->insert($data)) {
-                    $message = "success!!";
-                }
-            }
-            
-        }
-
-        $display->assign('title',"addClient");
-        $display->assign('message',$message);
     }
 
     public function loginAction()
@@ -242,6 +222,174 @@ class testController extends \Yaf\Controller_Abstract
         
     }
 
+    public function addclientAction()
+    {
+        $display = $this->getView();
+
+        $data = $this->getRequest();
+        
+        $message = "";
+
+        if ($data->isPost()) 
+        {
+            $uid = $data->getPost('uid') ? $data->getPost('uid') : '';
+
+            if ($uid) {
+                $user = Members::instance($uid);
+                if ($user->id) {
+                    $appkey = time()+time();
+                    
+                    $secret = $user->id . $user->email;
+
+                    $oauth = new OAuth2Storage();
+
+                    if ($oauth->addClient($appkey,$secret)) $message = "yes";
+
+
+                }
+                
+            }
+
+        }
+
+        $display->assign('message',$message);
+        $display->assign('title','addclient');
+    }
+
+    public function tokenAction()
+    {
+        $display = $this->getView();
+
+        $data = $this->getRequest();
+
+        $oauth = new OAuth2(new OAuth2Storage());
+        try {
+            $oauth->grantAccessToken();
+        }
+        catch (OAuth2ServerException $oauthError) {
+          $oauthError->sendHttpResponse();
+        }
+
+        exit();
+    }
+
+    /**
+     * http://api.duyu.dev/api/test/authorize?response_type=code&client_id=2751354540&redirect_uri=http://api.duyu.dev/api/test/callback&state=23872023
+     * 
+     * [authorizeAction description]
+     * @return [type] [description]
+     */
+    public function authorizeAction()
+    {
+        $display = $this->getView();
+
+        $data = $this->getRequest();
+
+        $oauth = new OAuth2(new OAuth2Storage());
+
+        if ($_POST) {
+          $userId = 17; // Use whatever method you have for identifying users.
+          try { 
+            $oauth->finishClientAuthorization($_POST["accept"] == "Yep", $userId, $_POST);
+          } catch(OAuth2ServerException $e) {
+            $e->sendHttpResponse();
+          }
+          exit;
+        }
+
+        $auth_params = null;
+        try {
+            $auth_params = $oauth->getAuthorizeParams();
+        } catch (OAuth2ServerException $oauthError) {
+            $oauthError->sendHttpResponse();
+        }
+        
+
+
+        $display->assign('auth_params',$auth_params);
+    }
+
+    public function resourceAction()
+    {
+        try {
+            $oauth = new OAuth2(new OAuth2Storage());
+            $token = $oauth->getBearerToken();
+            $token = $oauth->verifyAccessToken($token);
+            print_r($token);
+            exit();
+        } catch (OAuth2ServerException $oauthError) {
+            $oauthError->sendHttpResponse();
+        }
+
+    }
+
+    public function finishAction()
+    {
+        $session = Session::getInstance();
+        $url = "http://api.duyu.dev/api/test/resource";
+
+        $access_token = $session->get('access_token');
+        $content = http_build_query(array('access_token' =>$access_token));
+        $opt  = array('http'=> array('method'=>"POST",'header' => "Content-Type:application/x-www-form-urlencoded\r\n",'content' => $content));
+        if($content = file_get_contents($url,false,stream_context_create($opt))) 
+        {
+            echo "以下是获取到的受保护内容:<br />",$content;
+            exit();
+        }
+        exit();
+    }
+
+    public function callbackAction()
+    {
+        $app_id = '2751354540';
+        $app_secret = 'b040f8905242b7c3bf27';
+
+        $session = Session::getInstance();
+        // code是服务端返回的临时令牌
+        $code = $_REQUEST ["code"];
+        // Step2：通过Authorization Code获取Access Token
+        if ($_REQUEST ['state'] and $_REQUEST ['state'] == $session->get('state')) {
+            $re = $this->http_post ( "http://api.duyu.dev/api/test/token", 
+                array (
+                    'client_id' => $app_id, 
+                    'client_secret' => $app_secret, 
+                    'code' => $code, 
+                    'grant_type' => 'authorization_code', 
+                    // redirect_uri一定要是当前页面的地址,否则会认证失败
+                    'redirect_uri' => 'http://api.duyu.dev/api/test/callback' 
+                )
+             );
+            $re = (array)json_decode($re ['content']);
+            if(isset($re['access_token']) and $re['access_token'])
+            {
+                $session->set('access_token',$re['access_token']);
+                echo "访问令牌是:".$re ['access_token'],"<br /><a href='http://api.duyu.dev/api/test/finish'>访问受保护的资源</a>";
+            }
+            else
+            {
+                echo "获取令牌失败!";
+            }
+        }
+
+        exit();
+    }
+
+    public function http_post($url, $data) {
+            $data_url = http_build_query ($data);
+            $data_len = strlen ($data_url);
+            
+            $context = stream_context_create (array(
+                                    'http' => array(
+                                        'method' => 'POST', 
+                                        'header' => "Connection: close\r\nContent-Length: $data_len\r\n",
+                                        'timeout' => 60, 
+                                        'content' => $data_url)));
+            $file = file_get_contents ($url, false, $context);
+            print_r($file);
+            return array (
+                'content' => $file, 
+                'headers' => $http_response_header);
+    }
 }
 
 ?>

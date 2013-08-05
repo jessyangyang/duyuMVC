@@ -1,19 +1,17 @@
 <?php
 
+namespace local\oauth2;
+
+use local\oauth2\IOAuth2Storage;
+
 /**
  * Storage engines that want to support refresh tokens should
  * implement this interface.
  * 
- * @package     DuyuMvc
- * @author      Jess
- * @version     1.0
- * @license     http://wiki.duyu.com/duyuMvc
+ * @author Dave Rochwerger <catch.dave@gmail.com>
  * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-6
  * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-1.5
  */
-
-namespace local\oauth2;
-
 interface IOAuth2RefreshTokens extends IOAuth2Storage {
 
 	/**

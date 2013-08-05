@@ -1,19 +1,16 @@
 <?php
 
+namespace local\oauth2;
+
 /**
  * OAuth2.0 draft v10 exception handling.
  *
- * @package     DuyuMvc
- * @author      Jess
- * @version     1.0
- * @license     http://wiki.duyu.com/duyuMvc
+ * @author Originally written by Naitik Shah <naitik@facebook.com>.
+ * @author Update to draft v10 by Edison Wong <hswong3i@pantarei-design.com>.
  *
  * @sa <a href="https://github.com/facebook/php-sdk">Facebook PHP SDK</a>.
  */
-
-namespace local\oauth2;
-
-class OAuth2Exception extends Exception {
+class OAuth2Exception extends \Exception {
 	
 	/**
 	 * The result from the API server that represents the exception information.

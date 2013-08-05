@@ -1,18 +1,14 @@
 <?php
 
+namespace local\oauth2;
+
 /**
  * Storage engines that support the "Client Credentials"
  * grant type should implement this interface
  * 
- * @package     DuyuMvc
- * @author      Jess
- * @version     1.0
- * @license     http://wiki.duyu.com/duyuMvc
+ * @author Dave Rochwerger <catch.dave@gmail.com>
  * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.4
  */
-
-namespace local\oauth2;
-
 interface IOAuth2GrantClient extends IOAuth2Storage {
 
 	/**

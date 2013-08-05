@@ -10,6 +10,7 @@
 
 namespace local\oauth2;
 
+use local\oauth2\OAuth2ServerException;
 
 class OAuth2RedirectException extends OAuth2ServerException {
 	
