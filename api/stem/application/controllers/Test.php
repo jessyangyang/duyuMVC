@@ -32,12 +32,23 @@ class testController extends \Yaf\Controller_Abstract
         $data = $this->getRequest();
 
         $host = $data->getServer("HTTP_HOST");
-        $session = Session::getInstance();
 
-        $session->set('state',md5(uniqid(rand(),TRUE)));
+        $user = Members::getCurrentUser();
 
-        $state = $session->get('state');
-        $url = "http://$host/api/test/authorize?response_type=code&client_id=2751354540&redirect_uri=http://api.duyu.dev/api/test/callback&state=$state";
+        $url = '';
+
+        if (isset($user->id) and $user->id) {
+            $fields = MemberFields::instance($user->id);
+            $session = Session::getInstance();
+
+            $session->set('state',md5(uniqid(rand(),TRUE)));
+
+            $oauth = new OAuth2Storage();
+
+            $client = $oauth->getClient($fields->app_key);
+            $state = $session->get('state');
+            $url = "http://$host/api/test/authorize?response_type=code&client_id=" .$client['client_id']. "&redirect_uri=" . $client['redirect_uri']. "&state=$state";
+        }
 
         $display->assign("title", "start");
         $display->assign("url", $url);
@@ -238,6 +249,7 @@ class testController extends \Yaf\Controller_Abstract
         {
             $uid = $data->getPost('uid') ? $data->getPost('uid') : '';
 
+            $host = $data->getServer("HTTP_HOST");
             if ($uid) {
                 $user = Members::instance($uid);
                 
@@ -249,7 +261,7 @@ class testController extends \Yaf\Controller_Abstract
                     $oauth = new OAuth2Storage();
                     $fields = MemberFields::instance($user->id);
 
-                    $result = $oauth->addClient($appkey,$secret);
+                    $result = $oauth->addClient($appkey,$secret,"http://$host/api/test/callback");
                     if ($result) {
                         if (isset($fields->app_key) and $fields->app_key)
                         {
