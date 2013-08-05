@@ -431,7 +431,7 @@ class testController extends \Yaf\Controller_Abstract
             $context = stream_context_create (array(
                                     'http' => array(
                                         'method' => 'POST', 
-                                        'header' => "Connection: close\r\nContent-Length: $data_len\r\n",
+                                        'header' => "Content-Type:application/x-www-form-urlencoded\r\nConnection: close\r\nContent-Length: $data_len\r\n",
                                         'timeout' => 60, 
                                         'content' => $data_url)));
             $file = file_get_contents ($url, false, $context);
