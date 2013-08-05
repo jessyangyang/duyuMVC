@@ -398,7 +398,7 @@ class testController extends \Yaf\Controller_Abstract
         $code = $_REQUEST ["code"];
         // Step2：通过Authorization Code获取Access Token
         if ($_REQUEST ['state'] and $_REQUEST ['state'] == $session->get('state')) {
-            $re = $this->http_post ( "http://$host/api/test/token", 
+            $re = $this->http_post("http://$host/api/test/token", 
                 array (
                     'client_id' => $app_id, 
                     'client_secret' => $app_secret, 
