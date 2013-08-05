@@ -30,8 +30,12 @@ class MemberFields extends \local\db\ORM
         'purchased_count' => array(
             'type' => 'varchar',
             'default' => 0,
-            'comment' => 'purchased_count')
-        );
+            'comment' => 'purchased_count'),
+        'app_key' => array(
+            'type' => 'varchar',
+            'default' => 0,
+            'comment' => 'app_key')
+    );
 
     public $primaryKey = "id";
 
