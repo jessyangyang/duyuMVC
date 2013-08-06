@@ -652,6 +652,7 @@ class OAuth2 {
 				print_r($stored);
 				print_r($input);
 				print_r($this->validateRedirectUri($input["redirect_uri"], $stored["redirect_uri"]));
+				echo "end";
 
 				// Validate the redirect URI. If a redirect URI has been provided on input, it must be validated
 				if ($input["redirect_uri"] && !$this->validateRedirectUri($input["redirect_uri"], $stored["redirect_uri"])) {
