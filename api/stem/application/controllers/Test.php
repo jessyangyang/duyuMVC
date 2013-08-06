@@ -431,6 +431,9 @@ class testController extends \Yaf\Controller_Abstract
             //     )
             //  );
             $re = (array)json_decode($result);
+            echo "$result";
+            print_r($result);
+
             if(isset($re['access_token']) and $re['access_token'])
             {
                 $session->set('access_token',$re['access_token']);
