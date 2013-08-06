@@ -177,13 +177,6 @@ class testController extends \Yaf\Controller_Abstract
         $display->assign('title','login');
     }
 
-    public function authAction()
-    {
-        $appKey = $_SERVER[''];
-
-        exit();
-    }
-
     public function uploadAction()
     {
         $display = $this->getView();
@@ -237,7 +230,7 @@ class testController extends \Yaf\Controller_Abstract
         
     }
 
-    public function addclientAction()
+    public function addClientAction()
     {
         $display = $this->getView();
 
@@ -398,18 +391,36 @@ class testController extends \Yaf\Controller_Abstract
         // code是服务端返回的临时令牌
         $code = $_REQUEST ["code"];
         // Step2：通过Authorization Code获取Access Token
-        if ($_REQUEST ['state'] and $_REQUEST ['state'] == $session->get('state')) {
-            $re = $this->http_post("http://$host/api/test/token", 
-                array (
+        if ($_REQUEST ['state'] and $_REQUEST ['state'] == $session->get('state')) 
+        {
+            $curlPost = http_build_query(array(
                     'client_id' => $app_id, 
                     'client_secret' => $app_secret, 
                     'code' => $code, 
                     'grant_type' => 'authorization_code', 
                     // redirect_uri一定要是当前页面的地址,否则会认证失败
                     'redirect_uri' => 'http://api.duyu.dev/api/test/callback' 
-                )
-             );
-            $re = (array)json_decode($re ['content']);
+            ));
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "http://$host/api/test/token");
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //如果把这行注释掉的话，就会直接输出
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
+            $result=curl_exec($ch);
+            curl_close($ch);
+            // $re = $this->http_post("http://$host/api/test/token", 
+            //     array (
+            //         'client_id' => $app_id, 
+            //         'client_secret' => $app_secret, 
+            //         'code' => $code, 
+            //         'grant_type' => 'authorization_code', 
+            //         // redirect_uri一定要是当前页面的地址,否则会认证失败
+            //         'redirect_uri' => 'http://api.duyu.dev/api/test/callback' 
+            //     )
+            //  );
+            $re = (array)json_decode($result);
             if(isset($re['access_token']) and $re['access_token'])
             {
                 $session->set('access_token',$re['access_token']);

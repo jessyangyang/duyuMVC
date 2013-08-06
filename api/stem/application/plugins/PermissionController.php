@@ -24,10 +24,19 @@ class PermissionControllerPlugin extends Plugin_Abstract
 
     public function checkPermission(Request_Abstract $request, Response_Abstract $response)
     {
-        $config = Application::app()->getConfig('api');
+        $config = Application::app()->getConfig()->get('api');
 
         if ($config and $config->get("permission") == false) {
             return;
+        }
+        $parms = $request->getParams();
+
+        foreach ($parms as $key => $value) {
+            if (stripos($parms[$key],"?"))
+            {
+                $parm = substr($parms[$key],0,stripos($parms[$key],"?"));
+                $request->setParam($key,$parm);
+            }
         }
 
         $session = Session::getInstance();

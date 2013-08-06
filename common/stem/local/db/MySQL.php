@@ -12,7 +12,7 @@
 
 namespace local\db;
 
-class MySQL extends Database 
+class MySQL
 {
 
     // Database connection object
@@ -80,7 +80,7 @@ class MySQL extends Database
     * @param Boolean | dbConfigName
     * @return  Object | mysqli
     */
-    static function instance($primary_key = 0,$dbConfigName = false) 
+    static function init($primary_key = 0,$dbConfigName = false) 
     {
         $socket = & self::$config;
         $param = $mysql = array();

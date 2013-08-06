@@ -43,7 +43,7 @@ class ORM extends MySQL
     */
     public function __construct($dbPrimaryKey = false ,$dbConfigName = "default" ) {
 
-        self::$db = Mysql::instance($dbPrimaryKey,$dbConfigName);
+        self::$db = Mysql::init($dbPrimaryKey,$dbConfigName);
 
         if ($dbPrimaryKey) {    
             if ($tmpRow = $this->fetchRow($dbPrimaryKey)) {
