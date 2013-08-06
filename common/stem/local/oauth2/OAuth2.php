@@ -1144,10 +1144,9 @@ class OAuth2 {
 	 * @param string $inputUri
 	 * @param string $storedUri
 	 */
-	protected function validateRedirectUri($inputUri, $storedUri) {
-		if (!$inputUri || !$storedUri) {
-			return false; // if either one is missing, assume INVALID
-		}
-		return strcasecmp($inputUri, $storedUri) === 0;
+	protected function validateRedirectUri($inputUri, $storedUri)
+	{
+		if (!$inputUri || !$storedUri) return false; // if either one is missing, assume INVALID
+		return substr_compare($inputUri, $storedUri,0) === 0;
 	}
 }
