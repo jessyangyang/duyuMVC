@@ -394,7 +394,7 @@ class testController extends \Yaf\Controller_Abstract
 
         $client = $oauth->getClient($app_id);
         $app_secret = $client['client_secret'];
-
+        $callback = $client['redirect_uri'];
         $data = $this->getRequest();
 
         $host = $data->getServer("HTTP_HOST");
@@ -409,7 +409,7 @@ class testController extends \Yaf\Controller_Abstract
                     'code' => $code, 
                     'grant_type' => 'authorization_code', 
                     // redirect_uri一定要是当前页面的地址,否则会认证失败
-                    'redirect_uri' => 'http://api.duyu.dev/api/test/callback' 
+                    'redirect_uri' => $callback 
             ));
 
             $ch = curl_init();
