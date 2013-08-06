@@ -59,7 +59,8 @@ class OAuth2ServerException extends \Exception {
 	public function sendHttpResponse() {
 		header("HTTP/1.1 " . $this->httpCode);
 		$this->sendHeaders();
-		echo (string) $this;
+		// echo (string) $this;
+		print(json_encode(array('code'=>$this->httpCode , 'message' =>$this->errorData['error_description'], 'error' =>$this->errorData['error'])));
 		exit();
 	}
 
