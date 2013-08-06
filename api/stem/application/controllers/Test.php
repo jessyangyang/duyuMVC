@@ -256,8 +256,11 @@ class testController extends \Yaf\Controller_Abstract
 
                     $result = $oauth->addClient($appkey,$secret,"http://$host/api/test/callback");
                     if ($result) {
-                        if (isset($fields->app_key) and $fields->app_key)
+                        $userInfo = Members::getCurrentUser();
+                        if (isset($userInfo->id) and isset($fields->app_key) and $fields->app_key and $userInfo->id)
                         {
+                            
+                            $fields->id = $userInfo->id;
                             $fields->app_key .= "," . $result['client_id'];
 
                         }
