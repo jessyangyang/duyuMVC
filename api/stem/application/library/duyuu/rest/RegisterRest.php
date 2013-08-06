@@ -25,7 +25,7 @@ class RegisterRest extends \local\rest\Restful{
         self::regRestURL('testCallback','/api/test/callback','test','callback');
         self::regRestURL('testAuth','/api/test/auth','test','auth');
         self::regRestURL('testUpload','/api/test/upload','test','upload');
-        self::regRestURL('testAuth','/api/test/addComment','test','addComment');
+        self::regRestURL('testComment','/api/test/addComment','test','addComment');
         self::regRestURL('testResource','/api/test/resource','test','resource');
         self::regRestURL('testFinish','/api/test/finish','test','finish');
 
