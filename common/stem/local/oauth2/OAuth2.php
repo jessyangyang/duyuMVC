@@ -651,7 +651,8 @@ class OAuth2 {
 				echo "<pre>";
 				print_r($stored);
 				print_r($input);
-				print_r($input["redirect_uri"] == $stored["redirect_uri"]);
+				print_r($input["redirect_uri"]);
+				print_r($stored["redirect_uri"]);
 				echo "end";
 
 				// Validate the redirect URI. If a redirect URI has been provided on input, it must be validated
