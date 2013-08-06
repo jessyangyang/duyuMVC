@@ -363,10 +363,20 @@ class testController extends \Yaf\Controller_Abstract
         $access_token = $session->get('access_token');
         $content = http_build_query(array('access_token' =>$access_token));
         $length = strlen($content);
-        $opt  = array('http'=> array('method'=>"POST",'header' => "Content-Type:application/x-www-form-urlencoded\r\nContent-Length:$length\r\n",'content' => $content));
-        if(function_exists('file_get_contents') and $content = file_get_contents($url,false,stream_context_create($opt))) 
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //如果把这行注释掉的话，就会直接输出
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
+        $result=curl_exec($ch);
+        curl_close($ch);
+
+        if($result) 
         {
-            echo "以下是获取到的受保护内容:<br />",$content;
+            echo "以下是获取到的受保护内容:<br />",$result;
             exit();
         }
         exit();
@@ -404,7 +414,7 @@ class testController extends \Yaf\Controller_Abstract
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "http://$host/api/test/token");
-            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //如果把这行注释掉的话，就会直接输出
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
