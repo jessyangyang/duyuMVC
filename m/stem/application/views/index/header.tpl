@@ -45,7 +45,7 @@
 <div data-role="page" id="home">
     <div id="header" data-role="header">
     <header>
-        <a href="/index" data-rel="back"><div class="header-back retina">上一页</div></a>
+        <a href="/index"><div class="header-back retina">上一页</div></a>
         <h1>{$topTitle}</h1>
         <a href="{if isset($user->id)}/user/purchased{else}/user/login{/if}" data-transition="slideup"><div class="header-user retina">账户</div></a>
     </header>

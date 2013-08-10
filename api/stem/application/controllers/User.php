@@ -12,7 +12,6 @@ use \duyuu\dao\Members;
 use \duyuu\dao\MemberInfo;
 use \duyuu\dao\MemberStateTemp;
 use \duyuu\dao\Images;
-use \duyuu\dao\OAuthAccessTokens;
 use \local\rest\Restful;
 use \Yaf\Session;
 use \lib\dao\ProductsControl;
@@ -59,9 +58,18 @@ class UserController extends \Yaf\Controller_Abstract
 
         if ($userState)
         {
-            $code = 203;
-            $message = "already login.";
-            $authToken = isset($userState['authtoken']) ? $userState['authtoken'] : "";
+            if (MemberStateTemp::isExpired($userState['expired'])) {
+               $code = 205;
+               $message = "登录过期，请重新登录";
+            }
+            else {
+                $code = 203;
+                $message = "已登录.";
+                $authToken = isset($userState['authtoken']) ? $userState['authtoken'] : "";
+                $session->set('current_id',$userState['uid']);
+                $session->set('authToken',$authToken);
+                header("Auth-Token:".$authToken);
+            }
         }
         elseif ($data->isPost()) 
         {
@@ -70,36 +78,26 @@ class UserController extends \Yaf\Controller_Abstract
 
             $userInfo = $user->login($data);
 
-            if ($userInfo) {
-                $auth = OAuthAccessTokens::instance();
+            if (!$data->isPost('email') || !$data->isPost('password')) 
+            {
+                $code = 206;
+                $message = "参数不完整";
+            }
+            elseif ($userInfo) {
 
                 $authToken = md5($userInfo['id'].$userInfo['email']);
 
-                if ($state = $auth->hasArrow($authToken)) {
-                    $session->set('current_id',$state['user_id']);
-                    $session->set('authToken',$state['oauth_token']);
-                }
-                else
-                {
-
-                    $authArr = array(
-                            'oauth_token' => md5($userInfo['id']),
-                            'client_id' => $userInfo['id'],
-                            'user_id' => $userInfo['id'],
-                            'expires' => strtotime("next Monday"));
-                    $auth->insert($authArr);
-                    $session->set('current_id',$userInfo['id']);
-                    $session->set('authToken',$authToken);
-                }
+                $session->set('current_id',$userInfo['id']);
+                $session->set('authToken',$authToken);
 
                 $userState->addAuthToken($userInfo['id'],$authToken);
 
                 $code = 200;
-                $message = "ok";
+                $message = "登录成功";
+                header("Auth-Token:".$authToken);
             }
         }
 
-        header("Auth-Token:".$authToken);
 
         $rest->assign('code',$code);
         $rest->assign('message',$message);
@@ -127,7 +125,16 @@ class UserController extends \Yaf\Controller_Abstract
         if ($data->isPost()) {
             $file = $data->getFiles();
 
-            if($user->isRegistered($data->getPost('email'))) 
+            if (!$data->isPost('email') || !$data->isPost('username') || !$data->isPost('password') || !$file) {
+                $code = 206;
+                $message = "参数不完整";
+            }
+            elseif (!$data->getPost('email') || !$data->getPost('username') || !$data->getPost('password'))
+            {
+                $code = 207;
+                $message = "参数不能为空";
+            }
+            elseif($user->isRegistered($data->getPost('email'))) 
             {
                 $code = 204;
                 $message = "already register!!";
@@ -147,7 +154,6 @@ class UserController extends \Yaf\Controller_Abstract
                 
                 if ($userId = $user->insert($arr)) {
 
-                    $file  = $data->getFiles();
                     $avatarId = $image->storeFiles($file['avatar'],$userId , 2,'head');
 
                     $avatarId = $avatarId ? $avatarId : 0;
@@ -161,16 +167,8 @@ class UserController extends \Yaf\Controller_Abstract
 
                     if ($memberInfo->insert($infoArr)) {
                         $message = "sussceful!!";
-
-                        $auth = OAuthAccessTokens::instance();
                         
                         $authToken = md5($userId.$email);
-                        $authArr = array(
-                            'oauth_token' => $authToken,
-                            'client_id' => $userId,
-                            'user_id' => $userId,
-                            'expires' => strtotime("next Monday"));
-                        $auth->insert($authArr);
 
                         //temp
                         $memberState->addAuthToken($userId,$authToken);
@@ -197,14 +195,21 @@ class UserController extends \Yaf\Controller_Abstract
     {
         $rest = Restful::instance();
         $session = Session::getInstance();
+        $userState = MemberStateTemp::instance();
+        $current = MemberStateTemp::getCurrentUserForAuth();
 
         $code = 201;
         $message = "No Data";
+        $uid = false;
+        if ($session->has("current_id")) {
+            $uid = $session->get('current_id');
+            $session->del('current_id');
+            $session->del('authToken');
+        }
 
-        if ($session->isset("current_id")) {
-            $session->__unset('current_id');
-            $session->__unset('authToken');
-
+        if (isset($current['uid']) and $current['uid'])
+        {
+            $userState->deleteTokenForUserId($current['uid']);
             $code = 200;
             $message = "ok";
         }

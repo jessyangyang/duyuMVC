@@ -27,14 +27,10 @@ class MemberStateTemp extends \local\db\ORM
             'type' => 'varchar',
             'default' => 0,
             'comment' => 'authtoken'),
-        'published' => array(
+        'expired' => array(
             'type' => 'int',
             'default' => 0,
-            'comment' => 'published'),
-        'role_id' => array(
-            'type' => 'int',
-            'default' => 0,
-            'comment' => 'role_id')
+            'comment' => 'expired')
         );
 
     public $primaryKey = "id";
@@ -63,18 +59,33 @@ class MemberStateTemp extends \local\db\ORM
 
     /**
      * [getCurrentUser description]
+     * @param String , $token
      * @return [type] [description]
      */
-    public static function getCurrentUserForAuth()
+    public static function getCurrentUserForAuth($token = false)
     {
         $memberState  = self::instance();
 
-        if (isset($_SERVER['HTTP_AUTH_TOKEN']) and $_SERVER['HTTP_AUTH_TOKEN']) {
-            $wherearr = "authtoken='" .$_SERVER['HTTP_AUTH_TOKEN']. "'";
-            if($row = $memberState->field("uid,authtoken")->where($wherearr)->fetchRow()) return $row;
+        $wherearr = false;
+        if ($token) {
+            $wherearr = "authtoken='" .$memberState->escapeString($token). "'";
         }
-        else return false;
-        
+        elseif (isset($_SERVER['HTTP_AUTH_TOKEN']) and $_SERVER['HTTP_AUTH_TOKEN']) {
+            $wherearr = "authtoken='" .$_SERVER['HTTP_AUTH_TOKEN']. "'";
+        }
+        if($wherearr) return  $memberState->field("uid,authtoken,expired")->where($wherearr)->fetchRow();
+        return false;
+    }
+
+    /**
+     * [isExpired description]
+     * @param  [type]  $time [description]
+     * @return boolean       [description]
+     */
+    public static function isExpired($time)
+    {
+        if(time() > $time) return true;
+        return false;
     }
 
     public function addAuthToken($uid,$authtoken)
@@ -86,10 +97,17 @@ class MemberStateTemp extends \local\db\ORM
             }
             else
             {
-                if($memberState->insert(array('uid' => $uid,'authtoken' => $authtoken,'published' => UPDATE_TIME))) return true;
+                if($memberState->insert(array('uid' => $memberState->escapeString($uid),'authtoken' => $memberState->escapeString($authtoken),'expired' => strtotime('next month')))) return true;
             }
         }
         return false;
+    }
+
+    public function deleteTokenForUserId($uid)
+    {
+        $memberState = self::instance();
+        $uid = $memberState->escapeString($uid);
+        return $memberState->where("uid='$uid'")->delete();
     }
 
     public function __get($fieldName)

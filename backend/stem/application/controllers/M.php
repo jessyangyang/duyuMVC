@@ -41,7 +41,7 @@ class MController extends \Yaf\Controller_Abstract
         $data = $this->getRequest();
 
         $session = Session::getInstance();
-        $userInfo = Members::getCurrentUser();
+        $userInfo = MembersControl::getCurrentUser();
 
         $book = new BookControllers();
         

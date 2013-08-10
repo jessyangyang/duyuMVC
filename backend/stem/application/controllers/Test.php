@@ -533,10 +533,11 @@ class TestController extends \Yaf\Controller_Abstract
 
     public function test4Action()
     {
-        $type = "images?CKEditor=textarea-content&CKEditorFuncNum=1&langCode=zh-cn";
-        $type = mb_substr($type,0,stripos($type,'?'), 'utf-8');
-        echo $type;
-
+        $trade_no = "MP2PBO134340930";
+        echo substr($trade_no, 0 , strrpos($trade_no,"O") + 1);
+        echo FILES_PATH."/log/alipay_log.txt";
+        echo "<pre>";
+        print_r($_SERVER);
         exit();
     }
 

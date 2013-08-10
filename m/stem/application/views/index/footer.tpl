@@ -1,6 +1,6 @@
         <footer data-role="footer">
         	<ul class="unstyled inline info">
-        		{if isset($user) && $user}
+        		{if isset($user->id) && $user->id}
         		<li class="user">{$user->username}</li>
         		<li><a href="/user/logout">退出</a></li>
                 <li>|</li>

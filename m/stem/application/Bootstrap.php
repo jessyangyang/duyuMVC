@@ -80,7 +80,6 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
         
         if (error_reporting() === 0) return;
 
-        echo "<pre>";
         throw new ErrorException($errstr,0,$errno,$errfile,$errline);
     }
 }

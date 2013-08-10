@@ -35,10 +35,6 @@ class Members extends \local\db\ORM
             'type' => 'int',
             'default' => 0,
             'comment' => 'published'),
-        'avatar_id' => array(
-            'type' => 'int',
-            'default' => 0,
-            'comment' => 'avatar_id'),
         'role_id' => array(
             'type' => 'int',
             'default' => 0,
@@ -82,7 +78,7 @@ class Members extends \local\db\ORM
                 self::$instance =  $member;
             }
         }
-        return self::$instance;
+        return self::instance();
     }
 
     /**
@@ -107,33 +103,29 @@ class Members extends \local\db\ORM
     public function login($email,$password)
     {
         $wherearr = "email='" . $this->escapeString(trim($email)) . "' AND password='" . md5($this->escapeString($password)) . "'";
-        $user = self::instance();
-        $row = $user->where($wherearr)->fetchRow();
+        $user = self::getCurrentUser();
+        echo "user";
+        print_r($user);
+        $session = \Yaf\Session::getInstance();
 
-        if ($row) {
-            $auth = \backend\dao\OAuthAccessTokens::instance();
-            $session = \Yaf\Session::getInstance();
-            if ($state = $auth->hasArrow(md5($row['id'].$email))) {
-                $session->set('current_id',$state['user_id']);
-                $session->set('authToken',$state['oauth_token']);
-                return $state;
-            }
-            else
-            {
-                $authArr = array(
-                        'oauth_token' => md5($row['id'].$email),
-                        'client_id' => $row['id'],
-                        'user_id' => $row['id'],
-                        'expires' => strtotime("next Monday"));
-                $auth->insert($authArr);
-                
+        if (isset($user->id) and $user->id) {
+            return true;
+        }
+        else
+        {
+            $row = $user->field("id,email,username,role_id")->where($wherearr)->fetchRow();
+            if ($row) {
+                $image = \backend\dao\Images::instance();
+
+                $cover = $image->getImageForUser($row['id']);
+                $row['cover'] = \backend\image\ImageControl::getRelativeImage($cover);
+
                 $session->set('current_id',$row['id']);
-                $session->set('authToken',md5($row['id'].$email));
+                $session->set('authToken',md5($email,$password));
 
-                return true;
+                header("Auth-Token:".$session->get('authToken'));
+                return $row;
             }
-
-            header("Auth-Token:".$session->get('authToken'));
         }
         return false;
     }
