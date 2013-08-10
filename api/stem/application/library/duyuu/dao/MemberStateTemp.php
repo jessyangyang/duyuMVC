@@ -30,7 +30,11 @@ class MemberStateTemp extends \local\db\ORM
         'published' => array(
             'type' => 'int',
             'default' => 0,
-            'comment' => 'published')
+            'comment' => 'published'),
+        'role_id' => array(
+            'type' => 'int',
+            'default' => 0,
+            'comment' => 'role_id')
         );
 
     public $primaryKey = "id";
