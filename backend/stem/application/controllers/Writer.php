@@ -34,7 +34,6 @@ class WriterController extends \Yaf\Controller_Abstract
 
         $session = Session::getInstance();
         $userInfo = Members::getCurrentUser();
-        $user = Members::instance();
         $bookfield = BookFields::instance();
 
         $book = Books::instance();
@@ -49,7 +48,7 @@ class WriterController extends \Yaf\Controller_Abstract
         // logout from the get field.
         switch ($action) {
             case 'logout':
-                if ($user->logout()) {
+                if ($userInfo->logout()) {
                     header('Location: /writer/index');
                     exit();
                 }
@@ -92,7 +91,7 @@ class WriterController extends \Yaf\Controller_Abstract
         
         if ($isPost AND $data->getPost('state') != NULL) 
         {
-            if ($data->getPost('state') == 'index') $user->login($data->getPost('email') , $data->getPost('password'));
+            if ($data->getPost('state') == 'index') $userInfo->login($data->getPost('email') , $data->getPost('password'));
 
             header('Location: /writer/'. $data->getPost('state'));
             exit();

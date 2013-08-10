@@ -104,8 +104,6 @@ class Members extends \local\db\ORM
     {
         $wherearr = "email='" . $this->escapeString(trim($email)) . "' AND password='" . md5($this->escapeString($password)) . "'";
         $user = self::getCurrentUser();
-        echo "user";
-        print_r($user);
         $session = \Yaf\Session::getInstance();
 
         if (isset($user->id) and $user->id) {

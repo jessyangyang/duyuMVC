@@ -2,7 +2,7 @@
     <header>
             <div class="right-tools">
                 <ul class="inline">
-                {if $member}
+                {if isset($member->id) && $member->id}
                     <li><a href="" title="{$member->email}">{$member->username}</a></li>
                     <li> | </li>
                     <li><a href="">帮助</a></li>

@@ -125,11 +125,11 @@ class UserController extends \Yaf\Controller_Abstract
         if ($data->isPost()) {
             $file = $data->getFiles();
 
-            if (!$data->isPost('email') || !$data->isPost('username') || !$data->isPost('password') || !$file) {
+            if (!$data->isPost('email') || !$data->isPost('name') || !$data->isPost('password') || !$file) {
                 $code = 206;
                 $message = "参数不完整";
             }
-            elseif (!$data->getPost('email') || !$data->getPost('username') || !$data->getPost('password'))
+            elseif (!$data->getPost('email') || !$data->getPost('name') || !$data->getPost('password'))
             {
                 $code = 207;
                 $message = "参数不能为空";
@@ -146,7 +146,7 @@ class UserController extends \Yaf\Controller_Abstract
 
                 $arr = array(
                         'email' => $email,
-                        'username' => addslashes($data->getPost('username')),
+                        'username' => addslashes($data->getPost('name')),
                         'password' => md5(trim($data->getPost('password'))),
                         'published' => time(),
                         'role_id' => 500
