@@ -12,9 +12,11 @@ use \duyuu\dao\Members;
 use \duyuu\dao\MemberInfo;
 use \duyuu\dao\MemberStateTemp;
 use \duyuu\dao\Images;
+
 use \local\rest\Restful;
 use \Yaf\Session;
 use \lib\dao\ProductsControl;
+use \lib\dao\DownloadControl;
 
 class UserController extends \Yaf\Controller_Abstract 
 {
@@ -248,7 +250,27 @@ class UserController extends \Yaf\Controller_Abstract
         else
         {
             $purchased = new ProductsControl();
-            $list = $purchased->getPurchasedForBooks(array('product_purchased.uid'=> $userState["uid"]),$limit,$page);
+            $downloads = new DownloadControl();
+            $downloadList = $downloads->getDownloadForUserid($userState["uid"],$limit,$page);
+            $purchasedList = $purchased->getPurchasedForBooks(array('product_purchased.uid'=> $userState["uid"]),$limit,$page);
+
+            $bids = array();
+
+            foreach ($downloadList as $key => $value) {
+                if (!in_array($value['bid'], $bids))
+                {
+                    $bids[] = $value['bid'];
+                    $list[] = $value;
+                }
+            }
+
+            foreach ($purchasedList as $key => $value) {
+                if (!in_array($value['bid'], $bids))
+                {
+                    $bids[] = $value['bid'];
+                    $list[] = $value;
+                }
+            }
         }
 
         $rest->assign('code',$code);

@@ -73,15 +73,6 @@ class Images extends \local\db\ORM
     }
 
     /**
-     * Insert ImageURL to Database
-     * @return [type] [description]
-     */
-    public function save()
-    {
-
-    }
-
-    /**
      * [getThumb description]
      * @return [type] [description]
      */
