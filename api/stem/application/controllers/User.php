@@ -260,6 +260,10 @@ class UserController extends \Yaf\Controller_Abstract
                 if (!in_array($value['bid'], $bids))
                 {
                     $bids[] = $value['bid'];
+                    unset($value['uid']);
+                    unset($value['did']);
+                    unset($value['old_id']);
+                    $value['price'] = 0;
                     $list[] = $value;
                 }
             }
@@ -268,6 +272,8 @@ class UserController extends \Yaf\Controller_Abstract
                 if (!in_array($value['bid'], $bids))
                 {
                     $bids[] = $value['bid'];
+                    unset($value['pid']);
+                    unset($value['status']);
                     $list[] = $value;
                 }
             }
