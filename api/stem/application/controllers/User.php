@@ -73,7 +73,6 @@ class UserController extends \Yaf\Controller_Abstract
         }
         elseif ($data->isPost()) 
         {
-            $user = Members::instance();
             $userState = MemberStateTemp::instance();
 
             $userInfo = $user->login($data);
@@ -95,6 +94,11 @@ class UserController extends \Yaf\Controller_Abstract
                 $code = 200;
                 $message = "登录成功";
                 header("Auth-Token:".$authToken);
+            }
+            else
+            {
+                $code = 202;
+                $message = "用户名或密码错误";
             }
         }
 
