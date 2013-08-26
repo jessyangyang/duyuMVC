@@ -60,18 +60,17 @@ class UserController extends \Yaf\Controller_Abstract
 
         if ($userState)
         {
-            if (MemberStateTemp::isExpired($userState['expired'])) {
-               $code = 205;
-               $message = "登录过期，请重新登录";
-            }
-            else {
-                $code = 203;
-                $message = "已登录.";
-                $authToken = isset($userState['authtoken']) ? $userState['authtoken'] : "";
-                $session->set('current_id',$userState['uid']);
-                $session->set('authToken',$authToken);
-                header("Auth-Token:".$authToken);
-            }
+            // if (MemberStateTemp::isExpired($userState['expired'])) {
+            //    $code = 205;
+            //    $message = "登录过期，请重新登录";
+            // }
+            
+            $code = 203;
+            $message = "已登录.";
+            $authToken = isset($userState['authtoken']) ? $userState['authtoken'] : "";
+            $session->set('current_id',$userState['uid']);
+            $session->set('authToken',$authToken);
+            header("Auth-Token:".$authToken);
         }
         elseif ($data->isPost()) 
         {
