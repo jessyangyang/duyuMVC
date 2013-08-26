@@ -255,25 +255,28 @@ class UserController extends \Yaf\Controller_Abstract
 
             $bids = array();
 
-            foreach ($downloadList as $key => $value) {
-                if (!in_array($value['bid'], $bids))
-                {
-                    $bids[] = $value['bid'];
-                    unset($value['uid']);
-                    unset($value['did']);
-                    unset($value['old_id']);
-                    $value['price'] = 0;
-                    $list[] = $value;
+            if (is_array($downloadList)) {
+                foreach ($downloadList as $key => $value) {
+                    if (!in_array($value['bid'], $bids))
+                    {
+                        $bids[] = $value['bid'];
+                        unset($value['uid']);
+                        unset($value['did']);
+                        unset($value['old_id']);
+                        $value['price'] = 0;
+                        $list[] = $value;
+                    }
                 }
             }
-
-            foreach ($purchasedList as $key => $value) {
-                if (!in_array($value['bid'], $bids))
-                {
-                    $bids[] = $value['bid'];
-                    unset($value['pid']);
-                    unset($value['status']);
-                    $list[] = $value;
+            if (is_array($purchasedList)) {
+                foreach ($purchasedList as $key => $value) {
+                    if (!in_array($value['bid'], $bids))
+                    {
+                        $bids[] = $value['bid'];
+                        unset($value['pid']);
+                        unset($value['status']);
+                        $list[] = $value;
+                    }
                 }
             }
         }
