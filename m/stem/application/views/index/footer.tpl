@@ -22,7 +22,7 @@
             {/if}
             <!-- Placed at the end of the document so the pages load faster -->
             <script type="text/javascript" src="/js/m.js"></script>
-            
+            <script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
             
         </footer>
         <link href="/css/fixed.css" rel="stylesheet">
