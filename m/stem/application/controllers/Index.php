@@ -22,6 +22,7 @@ use \lib\models\BookChapter;
 use \lib\dao\BookControllers;
 use \lib\dao\MembersControl;
 use \lib\dao\ProductsControl;
+use \lib\dao\DownloadControl;
 
 use \duyum\payment\PaymentForMobile;
 use \lib\models\ImageControl;
@@ -214,12 +215,18 @@ class IndexController extends \Yaf\Controller_Abstract
                 $products = new ProductsControl();
                 $purchasedList = $products->getPurchasedForBooks(array(
                         'product_purchased.uid'=>$userInfo->id),50,1);
-                $download = MemberFields::instance($userInfo->id);
-                $download_count = isset($download->download_count) ? $download->download_count : 0;
 
+                $downloads = new DownloadControl();
+                $downloadList = $downloads->getDownloadForUserid($userInfo->id,100,1);
+                $download_count = $downloadList ? count($downloadList) : 0;
                 $count = array('purchased'=>count($purchasedList),'download'=>$download_count);
                 foreach ($purchasedList as $key => $value) {
                     $count['count'] += $value['price'];
+                }
+
+                foreach ($downloadList as $key => $value) {
+                    $value['price'] = 0;
+                    $purchasedList[] = $value;
                 }
 
                 $display->assign('user',$userInfo);
@@ -315,7 +322,8 @@ class IndexController extends \Yaf\Controller_Abstract
                 $fields->insert(array('id'=>$userInfo->id,'download_count'=> '1'));
             }
 
-            
+            $download = new DownloadControl();
+            $download->addDownload($userInfo->id,$id);
         }
         header('Location: http://api.duyu.cc/api/store/download/book/'.$id);
         exit();

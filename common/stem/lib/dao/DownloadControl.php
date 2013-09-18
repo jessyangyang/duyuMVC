@@ -78,4 +78,25 @@ class DownloadControl
         return false;
     }
 
+    public function addDownload($uid,$old_id,$type = 1)
+    {
+        if (!$uid or !$old_id) return false;
+        
+        $download = $this->downloads->where("uid = '$uid' AND old_id = '$old_id' AND type = '$type'")->fetchRow();
+        if ($download and $download['did']) {
+           return $this->downloads->where("uid = '$uid' AND old_id = '$old_id' AND type = '$type'")->update(array('count' => $download['count'] + 1));
+
+        }
+        else
+        {
+            return $this->downloads->insert(array(
+                'uid' => $uid,
+                'old_id' => $old_id,
+                'type' => $type,
+                'published' => time(),
+                'count' => 1
+                ));
+        }
+    }
+
 }

@@ -347,42 +347,53 @@ class WriterController extends \Yaf\Controller_Abstract
 
             if ($data->isPost() and $data->getPost('state') == "cover") 
             {
-                $file = $data->getFiles();
-                $path = '';
-                switch ($type) {
-                    case 'cover':
-                        $code = 3;
-                        $path = "book";
-                        break;
-                    case 'thumb':
-                        $code = 1;
-                        $path = "image";
-                        break;
-                    default:
-                        # code...
-                        break;
+
+                $files = $data->getFiles();
+
+                // if file null. return false
+                if (count($files) < 0) {
+                    return false;
                 }
 
-                if($file and $type and $code > 0)
-                {
-                    $item = $image->getBookImageRow(array(
-                            'bid'=>$bid,
-                            'type'=> $code));
+                foreach ($files as $key => $file) {
+                    $path = '';
+                    $type = $key;
+                    switch ($type) {
+                        case 'cover':
+                            $code = 3;
+                            $path = "book";
+                            break;
+                        case 'thumb':
+                            $code = 1;
+                            $path = "image";
+                            break;
+                        default:
+                            # code...
+                            break;
+                    }
 
-                    if($item)
+                    if($file['size'] > 0 and $type and $code > 0)
                     {
-                        if($image->deleteImagesForPid($item['pid']))
+                        $item = $image->getBookImageRow(array(
+                                'bid'=>$bid,
+                                'type'=> $code));
+
+                        if($item)
                         {
-                            $avatarId = $image->save($file["$type"],$userInfo->id,$code,$path);
-                            $image->updateBookImage($item['id'],array('pid' => $avatarId));
+                            if($image->deleteImagesForPid($item['pid']))
+                            {
+                                $avatarId = $image->save($file,$userInfo->id,$code,$path);
+                                $image->updateBookImage($item['id'],array('pid' => $avatarId));
+                            }
+                        }
+                        else
+                        {
+                            $avatarId = $image->save($file,$userInfo->id , $code,$path);
+                            $image->addBookImage($avatarId,$bid,$code);
                         }
                     }
-                    else
-                    {
-                        $avatarId = $image->save($file["$type"],$userInfo->id , $code,$path);
-                        $image->addBookImage($avatarId,$bid,$code);
-                    }
                 }
+                
 
                 header('Location: /writer/end');
                 exit();

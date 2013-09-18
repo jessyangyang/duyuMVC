@@ -174,6 +174,21 @@ class BookControllers
     }
 
     /**
+     * Add Cover to EPub
+     *
+     * @param  Array
+     */
+    public function addCover($bid = false)
+    {
+        if (!$bid) return false;
+        $image = $this->images->getImagesForBookid($bid,3);
+        if ($image) {
+            $this->epub->setCoverImage("Cover.png", file_get_contents(FILES_PATH . '/files' . $image[0]['path']), "image/png");
+        }
+        return false;
+    }
+
+    /**
      * Add Chapter to EPub 
      *
      * @param string $chapter_title
@@ -199,6 +214,8 @@ class BookControllers
         if (!$books or !$menus) return false;
         $this->addMetaData($books['title'],'urn:uuid:'.$books['isbn'] ? $books['isbn'] : md5($books['bid']),'zh-cn',$books['summary'],$books['author'],'蠹鱼有书',$books['pubtime'],'http://www.duyu.cc');
 
+        $this->addCover($bid);
+
         foreach ($menus as $key => $value) {
             switch ($value['type']) {
                 case 1:
@@ -216,7 +233,8 @@ class BookControllers
             }
             $this->chapterTitle = $value['title'];
             $header = $this->header;
-            $this->addChapter($this->chapterTitle,'content/'.$title,$header . $value['body'] . $this->footer,false,EPub::EXTERNAL_REF_ADD,'/OEBPS/content');
+
+            $this->addChapter($this->chapterTitle,'content/'.$title, $header . "<h1>" . $value['title'] . "</h1>" . $value['body'] . $this->footer,false,EPub::EXTERNAL_REF_ADD,'/OEBPS/content');
         }
 
         // if($images)

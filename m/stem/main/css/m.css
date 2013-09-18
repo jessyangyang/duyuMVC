@@ -235,9 +235,10 @@ section .book-section-right p {margin:0;margin-top: 10px;line-height: 18px;color
 
 
 /* Purchased */
-.m-purchased-info {padding: 10px;padding-left:14px;background-color: #F6F5F0;font-size: 12px;line-height: 12px}
+.m-purchased-info {padding: 10px;padding-left:15px;background-color: #F6F5F0;font-size: 12px;line-height: 12px}
 .m-purchased-ul {min-height: 480px;background-color: #FFFFFF;position: relative;}
 .m-purchased-ul li{width: 100%;height: 47px;border-bottom: 1px solid #DCD9D7;}
+.m-purchased-ul li a{color: #888888;}
 .m-purchased-left {height: 47px;}
 .m-purchased-left h4 {font-size: 16px;line-height: 24px;font-weight: normal;margin: 14px;}
 .m-purchased-right {position: absolute;right: 10px; margin-top:7px;font-size: 12px;line-height: 16px;color: #999999;}

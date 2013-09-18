@@ -117,7 +117,7 @@ class ImageControl extends \local\image\Images
     public function unlink($path)
     {
         $filepath = FILES_PATH . '/files' . $path;
-        if(is_dir($filepath)) return unlink($filepath);
+        if(file_exists($filepath)) return unlink($filepath);
         return false;
     }
 

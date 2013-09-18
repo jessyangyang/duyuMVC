@@ -507,8 +507,8 @@ private $htmlContentFooter = "</body>\n</html>\n";
         . $imgPath . "\" alt=\"Cover image\" style=\"height: 100%\"/>\n\t\t</div>\n\t</body>\n</html>\n";
 
 
-        $this->addFile($imgPath, "CoverImage", $imageData, $mimetype);
-$this->addReferencePage("CoverPage", "CoverPage.xhtml", $coverPage, "cover");
+        $this->addFile($imgPath, "cover", $imageData, $mimetype);
+        $this->addReferencePage("CoverPage", "CoverPage.xhtml", $coverPage, "cover");
         $this->isCoverImageSet = TRUE;
         return TRUE;
     }
@@ -1531,7 +1531,7 @@ $this->addReferencePage("CoverPage", "CoverPage.xhtml", $coverPage, "cover");
         }
 
         if ($this->isCoverImageSet) {
-            $this->opf->addMeta("cover", "coverImage");
+            $this->opf->addMeta("cover", "cover");
         }
 
         if ($this->EPubMark) {

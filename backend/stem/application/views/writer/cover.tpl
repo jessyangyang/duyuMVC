@@ -44,7 +44,7 @@
 					        </div>
 							<div class="inline">
 							 	<input type="file" name="thumb" data="/writer/cover/thumb" class="edit-action-button"/>上传商店封面
-								<input type="file" name="cover" data="/writer/cover/cover" class="edit-action-button"/>上传图书封面
+								<input type="file" name="cover" data="/writer/cover/cover" class="edit-action-button"/>上传epub封面
 							</div>
 						</div>
 						<div class="controls">
