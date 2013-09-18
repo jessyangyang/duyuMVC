@@ -1,13 +1,12 @@
 <?php
 /**
- * Index Controllers
+ * ErrorController
  *
  * @package     DuyuMvc
  * @author      Jess
  * @version     1.0
  * @license     http://wiki.duyu.com/duyuMvc
  */
-
 
 class ErrorController extends \Yaf\Controller_Abstract 
 {
