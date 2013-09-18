@@ -26,6 +26,11 @@ class RegisterRest extends \local\rest\Restful{
         self::regRestURL('testAuth','/api/test/upload','test','upload');
         self::regRestURL('testAuth','/api/test/addComment','test','addComment');
 
+        /**
+         * Index System
+         */
+        self::regRestURL('webIndex','/index','index','index');
+
         /**Writer System
         ************************/
 

@@ -13,7 +13,11 @@ class IndexController extends \Yaf\Controller_Abstract
 
     public function indexAction() 
     {
-        $this->getView()->assign("title", "Hello Wrold");
+        $display = $this->getView();
+
+        $data = $this->getRequest();
+
+        $display->assign('title',"蠹鱼有书");
     }
 
 }
