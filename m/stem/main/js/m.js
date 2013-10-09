@@ -25,12 +25,12 @@
         // location.href = $(this).attr('href');
     });
 
-    $(".app-close").on('click',function(){
+    $("#app-download").on('click',function(){
         $("#app-download").fadeOut();
         $.cookie('isFirst', 1);
     });
 
-    if ($.cookie('isFirst') && $.cookie('isFirst') == 1) {
+    if ($.cookie('isFirst') == 1) {
         $("#app-download").remove();
     } else {
         $.cookie('isFirst', 0);
