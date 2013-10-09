@@ -66,5 +66,7 @@ screen and (min--moz-device-pixel-ratio: 2)
         height: 22px;
         width: 22px;
     }
+    .app-close{background:transparent url("../img/m/delect-export-2x.png") no-repeat right;background-size: 23px 23px;}
+    .app-logo{background:transparent url("../img/m/logo-export-2x.png") no-repeat right;background-size: 38px 38px;}
 }
 
