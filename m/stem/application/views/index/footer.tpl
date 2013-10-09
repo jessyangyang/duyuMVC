@@ -1,4 +1,12 @@
+        
         <footer data-role="footer">
+            <div id="app-download">
+                <div class="app-logo">
+                    <img src="/img/m/logo-export.png"/>
+                    <span>  到 App Store 下载蠹鱼阅读器。</span>
+                    <div class="app-close"></div>
+                </div>
+            </div>
         	<ul class="unstyled inline info">
         		{if isset($user->id) && $user->id}
         		<li class="user">{$user->username}</li>
@@ -13,6 +21,8 @@
         		<div id="footer">©2013 Duyupress.com</div>
         	</ul>
             <a href="#" onclick="$.mobile.silentScroll(0)"><div id="m-move-top"></div></a>
+
+
             <!-- Javascript
             =============================================== -->
             {if isset($message) && $message}

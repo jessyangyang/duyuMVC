@@ -255,3 +255,8 @@ footer .user {color: #666666}
 #footer {margin:6px 0 12px; font-size: 11px;color: #888888}
 footer .weibo_plugn {margin-top:0px;padding: 0; position: absolute;}
 #m-move-top {position: fixed;bottom: 20px;right: 10px;background:transparent url("../img/m/gototop-2x.png") no-repeat right;background-size: 36px 36px;height: 36px;width: 36px;}
+
+#app-download {width: 100%;height: 32px;background-color:#E96253;position: fixed; padding: 20px;z-index: 9999;left:0;bottom: 0;}
+#app-download img{text-align: center;vertical-align: middle;cursor: pointer;}
+.app-close{height: 23px;width: 23px; background:transparent url("../img/m/delect-export.png") no-repeat right;background-size: 23px 23px;display: inline-block;vertical-align: middle;cursor: pointer;}
+#app-download span{color: #FFFFFF;margin:0 10px;}

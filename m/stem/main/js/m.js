@@ -25,6 +25,10 @@
         // location.href = $(this).attr('href');
     });
 
+    $(".app-close").on('click',function(){
+        $("#app-download").fadeOut();
+    });
+
     $(".article-show-button").on('click',function(){
         var button = $(this);
         var content = button.parent("div").find(".article-show-content");

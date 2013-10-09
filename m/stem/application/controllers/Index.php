@@ -86,7 +86,8 @@ class IndexController extends \Yaf\Controller_Abstract
         $session = Session::getInstance();
         $userInfo = Members::getCurrentUser();
         $menu = BookMenu::instance();
-
+        $isLogin = isset($userInfo->id) and $userInfo->id ? true : false;
+        
         $purchased = null;
 
         if(!$bid) 
@@ -118,6 +119,7 @@ class IndexController extends \Yaf\Controller_Abstract
         $display->assign('purchased',$result);
         $display->assign('book',$list);
         $display->assign('menus',$menus);
+        $display->assign('isLogin',$isLogin);
     }
 
     public function userAction($action = false)
@@ -325,7 +327,7 @@ class IndexController extends \Yaf\Controller_Abstract
             $download = new DownloadControl();
             $download->addDownload($userInfo->id,$id);
         }
-        header('Location: http://api.duyu.cc/api/store/download/book/'.$id);
-        exit();
+        // header('Location: http://api.duyu.cc/api/store/download/book/'.$id);
+        // exit();
     }
 }
