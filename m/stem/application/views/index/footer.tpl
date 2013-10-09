@@ -1,9 +1,9 @@
         
         <footer data-role="footer">
             <div id="app-download">
-                <div class="app-logo">
-                    <img src="/img/m/logo-export.png"/>
-                    <span>  到 App Store 下载蠹鱼阅读器。</span>
+                <div id="app-logo">
+                    <div class="app-logo"></div>
+                    <span>  到 App Store 下载蠹鱼阅读器。 </span>
                     <div class="app-close"></div>
                 </div>
             </div>
