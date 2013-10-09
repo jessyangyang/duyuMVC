@@ -27,7 +27,14 @@
 
     $(".app-close").on('click',function(){
         $("#app-download").fadeOut();
+        $.cookie('isFirst', 1);
     });
+
+    if ($.cookie('isFirst') && $.cookie('isFirst') == 1) {
+        $("#app-download").remove();
+    } else {
+        $.cookie('isFirst', 0);
+    };
 
     $(".article-show-button").on('click',function(){
         var button = $(this);

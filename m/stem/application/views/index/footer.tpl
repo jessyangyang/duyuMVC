@@ -1,11 +1,13 @@
         
         <footer data-role="footer">
             <div id="app-download">
+                <a href="https://itunes.apple.com/cn/artist/duyu/id641401789?mt=8">
                 <div id="app-logo">
                     <div class="app-logo"></div>
                     <span>  到 App Store 下载蠹鱼阅读器。 </span>
                     <div class="app-close"></div>
                 </div>
+                </a>
             </div>
         	<ul class="unstyled inline info">
         		{if isset($user->id) && $user->id}
@@ -31,6 +33,7 @@
             </script>
             {/if}
             <!-- Placed at the end of the document so the pages load faster -->
+            <script type="text/javascript" src="/js/jquery/jquery.cookie.js"></script>
             <script type="text/javascript" src="/js/m.js"></script>
             <script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
             

@@ -259,5 +259,5 @@ footer .weibo_plugn {margin-top:0px;padding: 0; position: absolute;}
 #app-download {width: 100%;height: 32px;background-color:#E96253;position: fixed; padding: 20px 0;z-index: 9999;left:0;bottom: 0;opacity:0.95;display: inline-block;}
 #app-logo {width: 100%;display: inline-block;}
 .app-logo {height: 38px;width: 38px; background:transparent url("../img/m/logo-export-2x.png") no-repeat right;background-size: 38px 38px;display: inline-block;vertical-align: middle;cursor: pointer;}
-.app-close{height: 23px;width: 23px; background:transparent url("../img/m/delect-export-2x.png") no-repeat right;background-size: 23px 23px;display: inline-block;vertical-align: middle;cursor: pointer;display: inline-block;}
+.app-close{height: 28px;width: 28px; background:transparent url("../img/m/delect-export-2x.png") no-repeat right;background-size: 23px 23px;display: inline-block;vertical-align: middle;cursor: pointer;display: inline-block;}
 #app-download span{color: #FFFFFF;display: inline-block;}
