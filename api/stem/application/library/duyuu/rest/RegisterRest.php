@@ -59,6 +59,9 @@ class RegisterRest extends \local\rest\Restful{
         // store top list
         self::regRestURL('storeTopList','/api/store/top/:sortID','store','top');
 
+        // store menu list
+        self::regRestURL('storeMenuList','/api/store/menu/:mid/:limit/:page','store','menu');
+
         // store The Book of category
         self::regRestURL('storeCategory','/api/store/category','store','category');
         // store Sub category

@@ -329,7 +329,7 @@ class BookControllers
         $offset = $page == 1 ? 0 : ($page - 1)*$limit; 
         $table = $this->book->table;
 
-        $list = $this->book->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags")->joinQuery("book_info as f","$table.bid=f.bid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->joinQuery('book_fields as bf',"$table.bid=bf.bid")->where($sql)->order("$table.published")->limit($offset,$limit)->fetchList();
+        $list = $this->book->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags,bi.price,bi.apple_price")->joinQuery("book_info as f","$table.bid=f.bid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->joinQuery('book_fields as bf',"$table.bid=bf.bid")->joinQuery('book_info as bi',"$table.bid=bi.bid")->where($sql)->order("$table.published")->limit($offset,$limit)->fetchList();
 
         if (is_array($list)) {
             foreach ($list as $key => $value) {

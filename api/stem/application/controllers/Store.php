@@ -11,6 +11,7 @@
 use \duyuu\dao\Books;
 use \duyuu\dao\BookRecommend;
 use \duyuu\dao\BookCategory;
+use \lib\dao\BookControllers;
 use \local\rest\Restful;
 
 class StoreController extends \Yaf\Controller_Abstract 
@@ -93,6 +94,45 @@ class StoreController extends \Yaf\Controller_Abstract
         $rest->assign('message',$message);
         $rest->assign('pages',$list['pages']);
         $rest->assign('subList',$list['list']);
+
+        $rest->response();
+    }
+
+    public function menuAction($mid = false,$limit = 10,$page = 1)
+    {
+        $rest = Restful::instance();
+        $bookControl = new BookControllers();
+
+        $code = 200;
+        $message = "ok";
+
+        $list = array();
+
+        switch ($mid) {
+            case '1':
+                $list = $bookControl->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),7,$limit,$page);
+                break;
+            case '2':
+                $list = $bookControl->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),$limit,$page);
+                break;
+            case '3':
+                $list = $bookControl->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),9,$limit,$page);
+                break;
+            case '4':
+                $list = $bookControl->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1,'bi.apple_price' => 0),$limit,$page);
+                break;
+            case '11':
+                break;
+            default:
+                # code...
+                break;
+        }
+
+        $list = $list == false ? array() : $list;
+
+        $rest->assign('code',$code);
+        $rest->assign('message',$message);
+        $rest->assign('books',$list);
 
         $rest->response();
     }
