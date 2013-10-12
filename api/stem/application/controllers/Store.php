@@ -132,6 +132,7 @@ class StoreController extends \Yaf\Controller_Abstract
 
         $rest->assign('code',$code);
         $rest->assign('message',$message);
+        $rest->assign('menu',array());
         $rest->assign('books',$list);
 
         $rest->response();
