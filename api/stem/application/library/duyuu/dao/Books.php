@@ -10,60 +10,10 @@
 
 namespace duyuu\dao;
 
-class Books extends \local\db\ORM 
+use lib\dao\ImageControl;
+
+class Books extends \lib\models\Books
 {
-    public $table = 'books';
-
-    public $fields = array(
-        'bid' => array(
-            'type' => 'int',
-            'default' => 0,
-            'comment' => 'bookID'),
-        'title' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'title'),
-        'category' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'category'),
-        'cover' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'couverURL'),
-        'author' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'author'),
-        'press' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'press'),
-        'published' => array(
-            'type' => 'int',
-            'default' => 0,
-            'comment' => 'publishing time'),
-        'isbn' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'idbn'),
-        'summary' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'summary')
-        );
-
-    public $primaryKey = "bid";
-
-    // Instance Self
-    protected static $instance;
-
-
-    public static function instance($key = 0)
-    {
-        return self::$instance ? self::$instance : new Books($key);
-    }
-
     /**
      * [topList description]
      * @return [type] [description]
@@ -73,17 +23,18 @@ class Books extends \local\db\ORM
         $books = self::instance();
         $table = $this->table;
 
-        $list =  $books->field("books.bid,books.cid,i.path as cover,books.title,books.author,bi.apple_price as price")
+        $list = $books->field("books.bid,books.cid,i.path as cover,books.title,books.author,bi.apple_price as price,ps.product_id")
             ->joinQuery('book_category as c',"c.cid=$table.cid")
             ->joinQuery('book_image as p',"$table.bid=p.bid")
             ->joinQuery('images as i','i.pid=p.pid')
             ->joinQuery('book_info as bi','bi.bid=books.bid')
+            ->joinQuery('products as ps',"ps.oldid=$table.bid")
             ->where("p.type = 1")->limit(10)->fetchList();
         
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
                 }
             }
 
@@ -126,7 +77,7 @@ class Books extends \local\db\ORM
         if (is_array($list["list"])) {
             foreach ($list["list"] as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list["list"][$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                    $list["list"][$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list;
@@ -140,22 +91,144 @@ class Books extends \local\db\ORM
         $books = self::instance();
         $table = $books->table;
 
-        $list = $books->field("$table.bid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.press,f.apple_price as price,$table.summary,c.name as cname,f.wordcount,f.tags,f.copyright,f.proofreader")
+        $config = \Yaf\Application::app()->getConfig()->toArray();
+
+        $list = $books->field("$table.bid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.press,f.apple_price as price,$table.summary,c.name as cname,f.wordcount,f.tags,f.copyright,f.proofreader,ps.product_id")
             ->joinQuery("book_info as f","$table.bid=f.bid")
             ->joinQuery('book_image as p',"$table.bid=p.bid")
             ->joinQuery('images as i','i.pid=p.pid')
             ->joinQuery('book_category as c',"$table.cid=c.cid")
+            ->joinQuery('products as ps',"ps.oldid=$table.bid")
             ->where("p.type = 1 AND $table.bid='$bid'")->order("$table.published")->limit(1)->fetchList();
 
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \duyuu\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
+                }
+                if (isset($value['product_id']) and $value['product_id']) {
+                    $list[$key]['product_id'] = $config['products']["IAPName"] . $value['product_id'];
+                }
+                else
+                {
+                    $list[$key]['product_id'] = "";
                 }
             }
             return $list[0];
         }
 
-        return "";
+        return array();
+    }
+
+    /**
+     * Get Books List
+     *
+     * @param Array , $option
+     * @param int , $limit
+     * @param int , $page
+     * @return Array
+     */
+    public function getBooksList($option = array(),$limit = 10,$page = 1)
+    {
+        if (!is_array($option) or !$option) return false;
+
+        $sql = '';
+        $i = 1;
+        $count = count($option);
+        foreach ($option as $key => $value) {
+            if($i == $count) $sql .= "$key='" . $value . "'";
+            else $sql .= "$key='" . $value . "' AND ";
+            $i ++;
+        }
+
+        $offset = $page == 1 ? 0 : ($page - 1)*$limit; 
+        $table = $this->table;
+
+        $config = \Yaf\Application::app()->getConfig()->toArray();
+
+        $list = $this->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags,bi.price,bi.apple_price,ps.product_id")
+            ->joinQuery("book_info as f","$table.bid=f.bid")
+            ->joinQuery('book_image as p',"$table.bid=p.bid")
+            ->joinQuery('images as i','i.pid=p.pid')
+            ->joinQuery('book_fields as bf',"$table.bid=bf.bid")
+            ->joinQuery('book_info as bi',"$table.bid=bi.bid")
+            ->joinQuery('products as ps',"ps.oldid=$table.bid")
+            ->where($sql)->order("$table.published")
+            ->limit($offset,$limit)->fetchList();
+
+        if (is_array($list)) {
+            foreach ($list as $key => $value) {
+                if (isset($value['cover']) and $value['cover']) {
+                    $list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
+                }
+                if (isset($value['product_id']) and $value['product_id']) {
+                    $list[$key]['product_id'] = $config['products']["IAPName"] . $value['product_id'];
+                }
+                else
+                {
+                    $list[$key]['product_id'] = "";
+                }
+            }
+            return $list;
+        }
+
+        return false;
+    }
+    
+    /**
+     * Get BookRecommand List 
+     * 
+     * @param Array, $option
+     * @param Int, $limit
+     * @param Int, $page
+     * @param Int, $type
+     * @return Array
+     * */
+    public function getBookRecommendList($option = array(),$cid = false,$limit = 10,$page = 1)
+    {
+        if (!is_array($option) or !$option) return false;
+        
+        $option['br.cid'] = $cid;
+        
+        $sql = '';
+        $i = 1;
+        $count = count($option);
+        foreach ($option as $key => $value) {
+            if($i == $count) $sql .= "$key='" . $value . "'";
+            else $sql .= "$key='" . $value . "' AND ";
+            $i ++;
+        }
+        
+        $offset = $page == 1 ? 0 : ($page - 1)*$limit;
+        $table = $this->table;
+
+        $config = \Yaf\Application::app()->getConfig()->toArray();
+        
+        $list = $this->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags")
+            ->joinQuery("book_info as f","$table.bid=f.bid")
+            ->joinQuery('book_image as p',"$table.bid=p.bid")
+            ->joinQuery('images as i','i.pid=p.pid')
+            ->joinQuery('book_fields as bf',"$table.bid=bf.bid")
+            ->joinQuery('book_recommend as br',"$table.bid=br.bid")
+            ->joinQuery('products as ps',"ps.oldid=$table.bid")
+            ->where($sql)->order("br.sort")
+            ->limit($offset,$limit)->fetchList();
+        
+        if (is_array($list)) {
+            foreach ($list as $key => $value) {
+                if (isset($value['cover']) and $value['cover']) {
+                    $list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
+                }
+                if (isset($value['product_id']) and $value['product_id']) {
+                    $list[$key]['product_id'] = $config['products']["IAPName"] . $value['product_id'];
+                }
+                else
+                {
+                    $list[$key]['product_id'] = "";
+                }
+            }
+            return $list;
+        }
+        return false;
     }
 }

@@ -12,6 +12,7 @@ namespace lib\models;
 
 use lib\models\Members;
 use lib\models\BookFields;
+use lib\dao\ImageControl;
 
 class Books extends \local\db\ORM 
 {
@@ -113,7 +114,7 @@ class Books extends \local\db\ORM
         if (is_array($list["list"])) {
             foreach ($list["list"] as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list["list"][$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+                    $list["list"][$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list;
@@ -143,7 +144,7 @@ class Books extends \local\db\ORM
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list;
@@ -171,13 +172,21 @@ class Books extends \local\db\ORM
         $table = $books->table;
         $userStatus = Members::getCurrentUser();
 
-        $list = $books->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags")->joinQuery("book_info as f","$table.bid=f.bid")->joinQuery('book_image as p',"$table.bid=p.bid")->joinQuery('images as i','i.pid=p.pid')->joinQuery('book_fields as bf',"$table.bid=bf.bid AND bf.uid=$userStatus->id")->where("$table.bid='$bid'")->order("$table.published")->limit(1)->fetchList();
+        $userID = isset($userStatus->id) ? $userStatus->id : 0;
+
+        $list = $books->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags")
+            ->joinQuery("book_info as f","$table.bid=f.bid")
+            ->joinQuery('book_image as p',"$table.bid=p.bid")
+            ->joinQuery('images as i','i.pid=p.pid')
+            ->joinQuery('book_fields as bf',"$table.bid=bf.bid AND bf.uid=$userID")
+            ->where("$table.bid='$bid'")
+            ->order("$table.published")->limit(1)->fetchList();
 
 
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list[0];
