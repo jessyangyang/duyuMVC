@@ -101,7 +101,7 @@ class StoreController extends \Yaf\Controller_Abstract
     public function menuAction($mid = false,$limit = 10,$page = 1)
     {
         $rest = Restful::instance();
-        $bookControl = new BookControllers();
+        $book = new Books();
 
         $code = 200;
         $message = "ok";
@@ -110,16 +110,16 @@ class StoreController extends \Yaf\Controller_Abstract
 
         switch ($mid) {
             case '1':
-                $list = $bookControl->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),7,$limit,$page);
+                $list = $book->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),7,$limit,$page);
                 break;
             case '2':
-                $list = $bookControl->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),$limit,$page);
+                $list = $book->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),$limit,$page);
                 break;
             case '3':
-                $list = $bookControl->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),9,$limit,$page);
+                $list = $book->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),9,$limit,$page);
                 break;
             case '4':
-                $list = $bookControl->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1,'bi.apple_price' => 0),$limit,$page);
+                $list = $book->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1,'bi.apple_price' => 0),$limit,$page);
                 break;
             case '11':
                 break;
