@@ -49,7 +49,7 @@ class BookMenu extends \local\db\ORM
         $bookmenu = self::instance();
         $table = $bookmenu->table;
 
-        $list = $bookmenu->field("title,sort")->where("bid = '$bid'")->order("sort")->fetchList();
+        $list = $bookmenu->field("title,sort as mid")->where("bid = '$bid'")->order("sort")->fetchList();
 
         if (is_array($list)) {
             return $list;
