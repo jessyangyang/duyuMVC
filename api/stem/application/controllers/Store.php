@@ -11,6 +11,7 @@
 use \duyuu\dao\Books;
 use \duyuu\dao\BookRecommend;
 use \duyuu\dao\BookCategory;
+use \duyuu\dao\Comments;
 use \lib\dao\BookControllers;
 use \local\rest\Restful;
 
@@ -121,7 +122,9 @@ class StoreController extends \Yaf\Controller_Abstract
             case '4':
                 $list = $book->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1,'bi.apple_price' => 0),$limit,$page);
                 break;
-            case '11':
+            case '5':
+                $comment = Comments::instance();
+                $list = $comment->getCommentsForStick($limit,$page);
                 break;
             default:
                 # code...
@@ -132,6 +135,7 @@ class StoreController extends \Yaf\Controller_Abstract
 
         $rest->assign('code',$code);
         $rest->assign('message',$message);
+
         $rest->assign('menu',array());
         $rest->assign('books',$list);
 

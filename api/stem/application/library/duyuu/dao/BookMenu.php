@@ -55,6 +55,6 @@ class BookMenu extends \local\db\ORM
             return $list;
         }
 
-        return "";
+        return array();
     }
 }
