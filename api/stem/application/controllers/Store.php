@@ -102,7 +102,7 @@ class StoreController extends \Yaf\Controller_Abstract
     public function menuAction($mid = false,$limit = 10,$page = 1)
     {
         $rest = Restful::instance();
-        $book = new Books();
+        $book = Books::instance();
 
         $code = 200;
         $message = "ok";
@@ -111,13 +111,13 @@ class StoreController extends \Yaf\Controller_Abstract
 
         switch ($mid) {
             case '1':
-                $list = $book->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),7,$limit,$page);
+                $list = $book->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1,'br.cid' => '7'),$limit,$page);
                 break;
             case '2':
                 $list = $book->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),$limit,$page);
                 break;
             case '3':
-                $list = $book->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),9,$limit,$page);
+                $list = $book->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),$limit,$page);
                 break;
             case '4':
                 $list = $book->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1,'bi.apple_price' => 0),$limit,$page);

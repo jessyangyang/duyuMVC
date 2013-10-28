@@ -385,16 +385,17 @@ class ORM extends MySQL
             $option = array('where' => $this->primaryKey.(strpos($option, ',')? ' IN('.$option.')': '='.$option));
         }
         $tmpOption = $this->_options($option);
-        $tmpSql = 'SELECT '.$tmpOption['field'].' FROM '.$tmpOption['table'];
+        $distinct = empty($tmpOption['distinct']) ? "" : 'DISTINCT ';
+        $tmpSql = 'SELECT ' . $distinct;
+        $tmpSql .= $tmpOption['field'].' FROM '.$tmpOption['table'];
         $this->joinTables and $tmpSql.= implode($this->joinTables);
         empty($tmpOption['where']) || $tmpSql.= ' WHERE '.$tmpOption['where'];
         empty($tmpOption['group']) || $tmpSql.= ' GROUP BY '.$tmpOption['group'];
         empty($tmpOption['order']) || $tmpSql.= ' ORDER BY '.$tmpOption['order'];
         empty($tmpOption['limit']) || $tmpSql.= ' LIMIT '.$tmpOption['limit'];
 
-        if($debug) echo $tmpSql;
+        // if($debug) echo $tmpSql;
 
-        // echo $tmpSql;
         $this->joinTables = array();
         return self::$db->query($tmpSql);
     }

@@ -14,6 +14,12 @@ use lib\dao\ImageControl;
 
 class Books extends \lib\models\Books
 {
+
+    public static function instance($key = 0)
+    {
+        return self::$instance ? self::$instance : new Books($key);
+    }
+
     /**
      * [topList description]
      * @return [type] [description]
@@ -184,11 +190,9 @@ class Books extends \lib\models\Books
      * @param Int, $type
      * @return Array
      * */
-    public function getBookRecommendList($option = array(),$cid = false,$limit = 10,$page = 1)
+    public function getBookRecommendList($option = array(),$limit = 10,$page = 1)
     {
         if (!is_array($option) or !$option) return false;
-        
-        $option['br.cid'] = $cid;
         
         $sql = '';
         $i = 1;
@@ -211,8 +215,8 @@ class Books extends \lib\models\Books
             ->joinQuery('book_fields as bf',"$table.bid=bf.bid")
             ->joinQuery('book_recommend as br',"$table.bid=br.bid")
             ->joinQuery('products as ps',"ps.oldid=$table.bid")
-            ->where($sql)->order("br.sort")
-            ->limit($offset,$limit)->fetchList();
+            ->where($sql)->order("br.sort AND $table.published DESC")
+            ->limit($offset,$limit)->distinct('YES')->fetchList();
         
         if (is_array($list)) {
             foreach ($list as $key => $value) {
