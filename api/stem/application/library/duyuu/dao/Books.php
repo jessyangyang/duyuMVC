@@ -207,8 +207,8 @@ class Books extends \lib\models\Books
 
         $config = \Yaf\Application::app()->getConfig()->toArray();
         
-        $list = $this->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags,ps.product_id")
-            ->joinQuery("book_info as f","$table.bid=f.bid")
+        $list = $this->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,bi.apple_price as price,$table.summary,bi.tags,ps.product_id")
+            ->joinQuery("book_info as bi","$table.bid=bi.bid")
             ->joinQuery('book_image as p',"$table.bid=p.bid")
             ->joinQuery('images as i','i.pid=p.pid')
             ->joinQuery('book_fields as bf',"$table.bid=bf.bid")

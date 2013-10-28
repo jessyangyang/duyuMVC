@@ -120,7 +120,7 @@ class StoreController extends \Yaf\Controller_Abstract
                 $list = $book->getBookRecommendList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1),$limit,$page);
                 break;
             case '4':
-                $list = $book->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1,'bi.apple_price' => 0),$limit,$page);
+                $list = $book->getBooksList(array('status' => BookControllers::BOOK_PUBLISHED_STATE,'p.type'=>1,'apple_price' => 0),$limit,$page);
                 break;
             case '5':
                 $comment = Comments::instance();
