@@ -31,10 +31,6 @@ class Books extends \local\db\ORM
             'type' => 'int',
             'default' => 0,
             'comment' => 'cid'),
-        'cover' => array(
-            'type' => 'varchar',
-            'default' => 0,
-            'comment' => 'couverURL'),
         'author' => array(
             'type' => 'varchar',
             'default' => 0,

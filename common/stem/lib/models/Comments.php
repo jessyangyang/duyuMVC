@@ -53,7 +53,11 @@ class Comments extends \local\db\ORM
         'parent' => array(
             'type' => 'int',
             'default' => 0,
-            'comment' => 'parent')
+            'comment' => 'parent'),
+        'stick' => array(
+            'type' => 'int',
+            'default' => 0,
+            'comment' => 'stick')
     );
 
     public $primaryKey = "id";
