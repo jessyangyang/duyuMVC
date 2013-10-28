@@ -152,12 +152,11 @@ class Books extends \lib\models\Books
 
         $config = \Yaf\Application::app()->getConfig()->toArray();
 
-        $list = $this->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags,bi.price,bi.apple_price,ps.product_id")
+        $list = $this->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags,ps.product_id")
             ->joinQuery("book_info as f","$table.bid=f.bid")
             ->joinQuery('book_image as p',"$table.bid=p.bid")
             ->joinQuery('images as i','i.pid=p.pid')
             ->joinQuery('book_fields as bf',"$table.bid=bf.bid")
-            ->joinQuery('book_info as bi',"$table.bid=bi.bid")
             ->joinQuery('products as ps',"ps.oldid=$table.bid")
             ->where($sql)->order("$table.published")
             ->limit($offset,$limit)->fetchList();
