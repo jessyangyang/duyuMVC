@@ -12,6 +12,7 @@ namespace backend\dao;
 
 use backend\dao\Members;
 use backend\dao\BookFields;
+use lib\dao\ImageControl;
 
 class Books extends \local\db\ORM 
 {
@@ -113,7 +114,7 @@ class Books extends \local\db\ORM
         if (is_array($list["list"])) {
             foreach ($list["list"] as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list["list"][$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+                    $list["list"][$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list;
@@ -134,16 +135,18 @@ class Books extends \local\db\ORM
         $userStatus = Members::getCurrentUser();
         if (!$userStatus->id) return false;
 
-
-
-        $list = $books->field("$table.bid,$table.title,$table.cover,$table.author,$table.press,$table.published,$table.isbn,$table.summary,bf.uid,bf.status,bc.name")->joinQuery('book_fields as bf',"$table.bid=bf.bid")->joinQuery('book_category as bc',"bc.cid=books.cid")->where("bf.uid='".$userStatus->id."'")->order("$table.published")->fetchList();
-
-        // print_r($list);
+        $list = $books->field("$table.bid,$table.title,$table.author,$table.press,$table.published,$table.isbn,$table.summary,i.path as cover,bf.uid,bf.status,bc.name")
+            ->joinQuery('book_fields as bf',"$table.bid=bf.bid")
+            ->joinQuery('book_image as p',"$table.bid=p.bid")
+            ->joinQuery('images as i','i.pid=p.pid')
+            ->joinQuery('book_category as bc',"bc.cid=books.cid")
+            ->where("bf.uid='".$userStatus->id."'")
+            ->order("$table.published")->fetchList();
 
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list;
@@ -177,7 +180,7 @@ class Books extends \local\db\ORM
         if (is_array($list)) {
             foreach ($list as $key => $value) {
                 if (isset($value['cover']) and $value['cover']) {
-                    $list[$key]['cover'] = \backend\image\ImageControl::getRelativeImage($value['cover']);
+                    $list[$key]['cover'] = ImageControl::getRelativeImage($value['cover']);
                 }
             }
             return $list[0];
