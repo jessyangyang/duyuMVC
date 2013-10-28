@@ -7,7 +7,12 @@
 				<form class="form-horizontal" action="/writer/end" method="POST">
 					<input type="text" name="title" class="span5 edit-title" placeholder="导言"/>
 					<hr class='title-hr'/>
-					<textarea id="textarea-content" name="summary" class="edit-textarea">{if $summary}{$summary}{/if}</textarea>
+					<script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
+					<textarea id="textarea-content" name="summary" class="ckeditor edit-textarea" placeholder="输入你的内容">{if $summary}{$summary}{/if}
+					</textarea>
+					<script>
+                        CKEDITOR.replace( 'textarea-content' );
+                    </script>
 					<input type="hidden" value="end" name="state"/>
 				</form>
 				
