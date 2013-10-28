@@ -136,7 +136,7 @@ class Books extends \local\db\ORM
             ->joinQuery('book_image as p',"$table.bid=p.bid")
             ->joinQuery('images as i','i.pid=p.pid')
             ->joinQuery('book_category as bc',"bc.cid=books.cid")
-            ->where("bf.uid='".$userStatus->id."'")
+            ->where("bf.uid='".$userStatus->id."' AND p.type = 1")
             ->order("$table.published")->fetchList();
 
         if (is_array($list)) {
