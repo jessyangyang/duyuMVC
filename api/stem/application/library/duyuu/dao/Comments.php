@@ -44,7 +44,8 @@ class Comments extends \lib\models\Comments
 
         $offset = $limit * ($page - 1);
 
-        $list   = $comment->field("$table.id,post_id as bid,$table.uid,u.username,u.email,$table.content,$table.published,$table.parent,i.path as avatar")
+        $list   = $comment->field("$table.id,post_id as bid,b.title,$table.uid,u.username,u.email,$table.content,$table.published,$table.parent,i.path as avatar")
+            ->joinQuery('books as b',"$table.post_id = b.bid")
             ->joinQuery('members as u',"$table.uid = u.id")
             ->joinQuery('images as i',"i.uid = $table.uid")
             ->where("$table.type = 1 AND i.class = 2 AND $table.stick > 0")
