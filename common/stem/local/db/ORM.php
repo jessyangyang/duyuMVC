@@ -395,7 +395,6 @@ class ORM extends MySQL
         empty($tmpOption['limit']) || $tmpSql.= ' LIMIT '.$tmpOption['limit'];
 
         // if($debug) echo $tmpSql;
-
         $this->joinTables = array();
         return self::$db->query($tmpSql);
     }

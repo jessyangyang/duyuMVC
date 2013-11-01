@@ -31,6 +31,7 @@ use \Yaf\Session;
 use \local\social\OAuthException;
 use \local\social\SaeTOAuthV2;
 use \local\social\SaeTClientV2;
+use \local\base\Common;
 
 
 class IndexController extends \Yaf\Controller_Abstract 
@@ -87,6 +88,7 @@ class IndexController extends \Yaf\Controller_Abstract
         $userInfo = Members::getCurrentUser();
         $menu = BookMenu::instance();
         $isLogin = isset($userInfo->id) and $userInfo->id ? true : false;
+        $isMobile = Common::is_mobile();
         
         $purchased = null;
 
@@ -114,6 +116,7 @@ class IndexController extends \Yaf\Controller_Abstract
         $list = $book->getBooksRow(array('books.bid'=>$bid,'p.type'=>1));
 
         $display->assign('user',$userInfo);
+        $display->assign('isMobile',$isMobile);
         $display->assign("title", $list["title"]);
         $display->assign('topTitle',$list['title']);
         $display->assign('purchased',$result);

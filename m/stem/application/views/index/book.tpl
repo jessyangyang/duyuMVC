@@ -13,7 +13,7 @@
                 <p><span>体裁</span> {$book.name}</p>
                 <p><span>版权</span> {$book.copyright}</p>
                 <div class="article-cover-right">
-                {if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="{if $isLogin}/download/{$book.bid}{else}/user/login{/if}" class='btn-pay' rel="external" target="_blank">同步到App</a>{else}<p class="price">{$book.price} 元</p><a href="/payment/{$book.bid}" class='btn-pay' rel="external" target="_blank">购买全本</a>{/if}
+                {if isset($purchased) && in_array($book.bid,$purchased) || $book.price eq 0}<a href="{if $isLogin && $isMobile eq 0}/download/{$book.bid}{elseif $isMobile eq 1}duyu://?sync={$book.bid}&open={$book.bid}{else}/user/login{/if}" class='btn-pay' rel="external" target="_blank">同步到App</a>{else}<p class="price">{$book.price} 元</p><a href="/payment/{$book.bid}" class='btn-pay' rel="external" target="_blank">购买全本</a>{/if}
              </div>
              </div>
         </div>
