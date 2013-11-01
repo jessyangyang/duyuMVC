@@ -330,8 +330,9 @@ class IndexController extends \Yaf\Controller_Abstract
             $download->addDownload($userInfo->id,$id);
         }
         if ($isMobile) {
-            header("duyu://?sync=$id&open=$id");
-            exit();
-        }  
+            header("Location: duyu://?sync=$id&open=$id");
+        }
+        // header('Location: http://api.duyu.cc/api/store/download/book/'.$id);
+        exit();
     }
 }
