@@ -8,7 +8,7 @@
 * @license     http://wiki.duyu.com/duyuMvc
 */
 
-namespace lib\dao;
+namespace lib\models;
 
 class MemberStateTemp extends \local\db\ORM 
 {
