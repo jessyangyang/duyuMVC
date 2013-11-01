@@ -88,7 +88,6 @@ class IndexController extends \Yaf\Controller_Abstract
         $userInfo = Members::getCurrentUser();
         $menu = BookMenu::instance();
         $isLogin = isset($userInfo->id) and $userInfo->id ? true : false;
-        $isMobile = Common::is_mobile();
         
         $purchased = null;
 
@@ -116,7 +115,6 @@ class IndexController extends \Yaf\Controller_Abstract
         $list = $book->getBooksRow(array('books.bid'=>$bid,'p.type'=>1));
 
         $display->assign('user',$userInfo);
-        $display->assign('isMobile',$isMobile);
         $display->assign("title", $list["title"]);
         $display->assign('topTitle',$list['title']);
         $display->assign('purchased',$result);
@@ -314,6 +312,7 @@ class IndexController extends \Yaf\Controller_Abstract
         $data = $this->getRequest();
 
         $userInfo = Members::getCurrentUser();
+        $isMobile = Common::is_mobile();
 
         if (isset($userInfo->id) and $userInfo->id) {
             $fields = MemberFields::instance($userInfo->id);
@@ -330,7 +329,9 @@ class IndexController extends \Yaf\Controller_Abstract
             $download = new DownloadControl();
             $download->addDownload($userInfo->id,$id);
         }
-        // header('Location: http://api.duyu.cc/api/store/download/book/'.$id);
-        // exit();
+        if ($isMobile) {
+            header("duyu://?sync=$id&open=$id");
+            exit();
+        }  
     }
 }

@@ -30,6 +30,10 @@
         $.cookie('isFirst', 1);
     });
 
+    $(".app-close").on('click',function(){
+        $("#app-download").fadeOut();
+    });
+
     if ($.cookie('isFirst') == 1) {
         $("#app-download").remove();
     } else {
