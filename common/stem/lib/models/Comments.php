@@ -197,7 +197,11 @@ class Comments extends \local\db\ORM
         $list['count']  = $count;
         $list['page']   = $page;
         $list['pages']  = $pages;
-        $list["list"]   = $comment->field("$table.id,$table.post_id as bid,$table.uid,u.username,u.email,content,$table.published,$table.parent")->joinQuery('members as u',"$table.uid = u.id")->where("u.id = '$uid' AND $table.type = 1")->limit("$offset,$limit")->fetchList();
+        $list["list"]   = $comment->field("$table.id,$table.post_id as bid,b.title,b.author,$table.uid,u.username,u.email,content,$table.published,$table.parent")
+            ->joinQuery('members as u',"$table.uid = u.id")
+            ->joinQuery('books as b',"$table.post_id = b.bid")
+            ->where("u.id = '$uid' AND $table.type = 1")
+            ->limit("$offset,$limit")->fetchList();
 
         if (is_array($list["list"])) {
             return $list;
