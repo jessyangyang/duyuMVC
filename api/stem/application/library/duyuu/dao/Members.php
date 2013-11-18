@@ -115,15 +115,4 @@ class Members extends \local\db\ORM
         if ($data = $this->field('id')->where("email='" . $email ."'")->group("published")->fetchRow()) return $data;
         return false;
     }
-
-
-    public function __get($fieldName)
-    {
-        return $this->$fieldName;
-    }
-
-    public function __set($fieldName, $value)
-    {
-        $this->$fieldName = $value;
-    }
 }

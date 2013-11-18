@@ -57,7 +57,6 @@ class UserController extends \Yaf\Controller_Abstract
 
         $code = 201;
         $message = "invild!";
-
         if ($userState)
         {
             // if (MemberStateTemp::isExpired($userState['expired'])) {

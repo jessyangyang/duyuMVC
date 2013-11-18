@@ -116,7 +116,7 @@ class CommentsController extends \Yaf\Controller_Abstract
     /**
      *  The list of comment for the user.
      */
-    public function bookCommentListForUserAction($uid, $limit = 10, $page = 1)
+    public function bookCommentListForUserAction($limit = 10, $page = 1)
     {
         $rest = Restful::instance();
         $comments = Comments::instance();
@@ -124,10 +124,18 @@ class CommentsController extends \Yaf\Controller_Abstract
         $code = 200;
         $message = "ok";
 
-        $list = $comments->getCommentListForUser($uid,$limit,$page);
+        $userState = MemberStateTemp::getCurrentUserForAuth();
 
-        $rest->assign('code',$code);
-        $rest->assign('message',$message);
+        $list = array();
+
+        if (!$userState) {
+            $code = 402;
+            $message = "No Login.";
+        }
+        else {
+            $list = $comments->getCommentListForUser($userState['uid'],$limit,$page);
+        }
+
         if ($list) {
             $rest->assign('pages',$list['pages']);
             $rest->assign('commentList',$list['list']);
@@ -135,9 +143,11 @@ class CommentsController extends \Yaf\Controller_Abstract
         else
         {
             $rest->assign('pages',0);
-            $rest->assign('commentList',"");
+            $rest->assign('commentList',array());
         }
 
+        $rest->assign('code',$code);
+        $rest->assign('message',$message);
         $rest->response();
     }
 }

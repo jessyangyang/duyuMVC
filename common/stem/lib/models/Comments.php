@@ -180,7 +180,7 @@ class Comments extends \local\db\ORM
         $comment = self::instance();
         $table = $this->table;
 
-        $count = $comment->field("count(*) as count")->where("type = 1 AND post_id='$key'")->fetchList();
+        $count = $comment->field("count(*) as count")->where("type = 1 AND uid='$uid'")->fetchList();
 
         $count = $count ? $count[0]['count'] : 0;
         $offset = 0;
@@ -197,7 +197,7 @@ class Comments extends \local\db\ORM
         $list['count']  = $count;
         $list['page']   = $page;
         $list['pages']  = $pages;
-        $list["list"]   = $comment->field('comments.id,post_id as bid,uid,u.username,u.email,content,comments.published,comments.parent')->joinQuery('members as u',"$table.uid = u.id")->where("u.id = '$uid' AND type = 1")->limit("$offset,$limit")->fetchList();
+        $list["list"]   = $comment->field("$table.id,$table.post_id as bid,$table.uid,u.username,u.email,content,$table.published,$table.parent")->joinQuery('members as u',"$table.uid = u.id")->where("u.id = '$uid' AND $table.type = 1")->limit("$offset,$limit")->fetchList();
 
         if (is_array($list["list"])) {
             return $list;

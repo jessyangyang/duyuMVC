@@ -163,7 +163,7 @@ class testController extends \Yaf\Controller_Abstract
 
         $userInfo = Members::getCurrentUser();
 
-        if ($userInfo) {
+        if (isset($userInfo->id)) {
             $display->assign('user',array(
                 'id' => $userInfo->id,
                 'email' => $userInfo->email));

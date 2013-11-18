@@ -87,7 +87,7 @@ class RegisterRest extends \local\rest\Restful{
         self::regRestURL('storeBookCommentList','/api/comments/bid/:bid/:limit/:page','Comments','bookCommentList');
 
         // book Comments list for user
-        self::regRestURL('storeBookCommentListForUser','/api/comments/uid/:uid/:limit/:page','Comments','bookCommentListForUser');
+        self::regRestURL('storeBookCommentListForUser','/api/comments/uid/:limit/:page','Comments','bookCommentListForUser');
 
         /** Payment
         *************************/
