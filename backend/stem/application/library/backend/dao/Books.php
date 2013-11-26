@@ -133,7 +133,7 @@ class Books extends \local\db\ORM
         if (!$userStatus->id) return false;
 
         $where = "bf.uid='".$userStatus->id."' AND p.type = 1";
-        if ($userStatus->role_id > 101)
+        if ($userStatus->role_id <= 101)
         {
             $where = "p.type = 1";
         }
