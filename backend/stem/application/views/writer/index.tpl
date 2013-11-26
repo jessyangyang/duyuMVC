@@ -53,7 +53,7 @@
                                         </ul>
                                     </div>
                                 </td>
-                                <td><a href="javascript:void(0)"  class="btn edit-delete-button" data-toggle="modal">删除</a></td>
+                                <td><a href="javascript:void(0)"  class="edit-delete-button" data-toggle="modal">删除</a></td>
                             </tr>
                             {/foreach}
                         </tbody>
