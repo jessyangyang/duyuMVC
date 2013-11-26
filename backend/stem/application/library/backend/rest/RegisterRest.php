@@ -53,6 +53,11 @@ class RegisterRest extends \local\rest\Restful{
         // writer end
         self::regRestURL('writerEnd','/writer/end','writer','end');
 
+
+        // Files Upload
+        self::regRestURL('writerFilesUpload','/files/upload/:type','files','upload');
+        self::regRestURL('writerFilesLoad','/files/load/:type','files','load');
+        self::regRestURL('writerFilesSend','/files/send/:fileName','files','send');
         
         return self::$restURL;
     }
