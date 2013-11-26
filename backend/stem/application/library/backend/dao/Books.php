@@ -132,18 +132,17 @@ class Books extends \local\db\ORM
 
         if (!$userStatus->id) return false;
 
-        $where = "bf.uid='".$userStatus->id."' AND p.type = 1";
+        $sql = "bf.uid='".$userStatus->id;
+
         if ($userStatus->role_id <= 101)
         {
-            $where = "p.type = 1";
+            $sql = "";
         }
 
-        $list = $books->field("$table.bid,$table.title,$table.author,$table.press,$table.published,$table.isbn,$table.summary,i.path as cover,bf.uid,bf.status,bc.name")
+        $list = $books->field("$table.bid,$table.title,$table.author,$table.press,$table.published,$table.isbn,$table.summary,bf.uid,bf.status,bc.name")
             ->joinQuery('book_fields as bf',"$table.bid=bf.bid")
-            ->joinQuery('book_image as p',"$table.bid=p.bid")
-            ->joinQuery('images as i','i.pid=p.pid')
             ->joinQuery('book_category as bc',"bc.cid=books.cid")
-            ->where($where)
+            ->where($sql)
             ->order("$table.published")->fetchList();
 
         if (is_array($list)) {
