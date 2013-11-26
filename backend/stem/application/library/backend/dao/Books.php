@@ -129,14 +129,21 @@ class Books extends \local\db\ORM
         $books = self::instance();
         $table = $books->table;
         $userStatus = Members::getCurrentUser();
+
         if (!$userStatus->id) return false;
+
+        $where = "bf.uid='".$userStatus->id."' AND p.type = 1";
+        if ($userStatus->role_id > 101)
+        {
+            $where = "p.type = 1";
+        }
 
         $list = $books->field("$table.bid,$table.title,$table.author,$table.press,$table.published,$table.isbn,$table.summary,i.path as cover,bf.uid,bf.status,bc.name")
             ->joinQuery('book_fields as bf',"$table.bid=bf.bid")
             ->joinQuery('book_image as p',"$table.bid=p.bid")
             ->joinQuery('images as i','i.pid=p.pid')
             ->joinQuery('book_category as bc',"bc.cid=books.cid")
-            ->where("bf.uid='".$userStatus->id."' AND p.type = 1")
+            ->where($where)
             ->order("$table.published")->fetchList();
 
         if (is_array($list)) {

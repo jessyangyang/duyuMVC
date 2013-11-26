@@ -17,14 +17,22 @@ class RegisterRest extends \local\rest\Restful{
 
     public static function initRegister()
     {
-        //test
-        self::regRestURL('testIndex','/api/test/test/:id','test','test');
-        self::regRestURL('testReg','/api/test/reg','test','reg');
-        self::regRestURL('testLogin','/api/test/login','test','login');
-        self::regRestURL('testAdd','/api/test/addClient','test','addClient');
-        self::regRestURL('testAuth','/api/test/auth','test','auth');
-        self::regRestURL('testAuth','/api/test/upload','test','upload');
-        self::regRestURL('testAuth','/api/test/addComment','test','addComment');
+        //*** backend Admin 
+        //***************/
+        self::regRestURL('adminIndex','/admin/index/:mid','admin','index');
+
+        self::regRestURL('adminAllBook','/admin/allbook/:limit/:page','admin','allbook');
+        self::regRestURL('adminPost','/admin/post/:type/:post_id','admin','post');
+
+        
+        //admin Test
+        self::regRestURL('adminTestIndex','/api/test/test/:id','test','test');
+        self::regRestURL('adminTestReg','/api/test/reg','test','reg');
+        self::regRestURL('adminTestLogin','/api/test/login','test','login');
+        self::regRestURL('adminTestAdd','/api/test/addClient','test','addClient');
+        self::regRestURL('adminTestAuth','/api/test/auth','test','auth');
+        self::regRestURL('adminTestUpload','/api/test/upload','test','upload');
+        self::regRestURL('adminTestComment','/api/test/addComment','test','addComment');
 
         /**
          * Index System
@@ -45,24 +53,6 @@ class RegisterRest extends \local\rest\Restful{
         // writer end
         self::regRestURL('writerEnd','/writer/end','writer','end');
 
-
-        /**
-         * Files System
-         */
-        
-        // Upload Image
-        self::regRestURL('filesUpload','/files/upload/:type','files','upload');
-        self::regRestURL('filesLoad','/files/load/:type','files','load');
-        self::regRestURL('filesSend','/files/send/:fileName','files','send');
-
-        /////////////////////
-        // Mobile WebSite  //
-        /////////////////////
-        self::regRestURL('mIndex','/m/index/:action','m','index');
-        self::regRestURL('mBook','/m/book/:bid','m','book');
-        self::regRestURL('mUser','/m/user/:action','m','user');
-        self::regRestURL('mPayment','/m/payment/:bid','m','payment');
-        self::regRestURL('mPaymentHandle','/m/paymenthandle/:action','m','paymenthandle');
         
         return self::$restURL;
     }

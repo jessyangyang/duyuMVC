@@ -321,26 +321,29 @@ class BookControllers
      */
     public function getBooksList($option = array(),$limit = 10,$page = 1)
     {
-        if (!is_array($option) or !$option) return false;
-
         $sql = '';
-        $i = 1;
-        $count = count($option);
-        foreach ($option as $key => $value) {
-            if($i == $count) $sql .= "$key='" . $value . "'";
-            else $sql .= "$key='" . $value . "' AND ";
-            $i ++;
+
+        if (is_array($option) or $option)
+        {
+            $i = 1;
+            $count = count($option);
+            foreach ($option as $key => $value) {
+                if($i == $count) $sql .= "$key='" . $value . "'";
+                else $sql .= "$key='" . $value . "' AND ";
+                $i ++;
+            }
         }
 
         $offset = $page == 1 ? 0 : ($page - 1)*$limit; 
         $table = $this->book->table;
 
-        $list = $this->book->field("$table.bid,$table.cid,$table.title,$table.author,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags,bi.price,bi.apple_price")
+        $list = $this->book->field("$table.bid,$table.cid,$table.title,$table.author,bc.name as category,i.path as cover,$table.pubtime,$table.isbn,$table.press,f.apple_price as price,$table.summary,f.tags,bi.price,bi.apple_price")
             ->joinQuery("book_info as f","$table.bid=f.bid")
             ->joinQuery('book_image as p',"$table.bid=p.bid")
             ->joinQuery('images as i','i.pid=p.pid')
             ->joinQuery('book_fields as bf',"$table.bid=bf.bid")
             ->joinQuery('book_info as bi',"$table.bid=bi.bid")
+            ->joinQuery('book_category as bc',"$table.cid=bc.cid")
             ->where($sql)->order("$table.published")
             ->limit($offset,$limit)->fetchList();
 

@@ -18,6 +18,7 @@ use \local\rest\Restful;
 use \Yaf\Session;
 use \lib\dao\OAuth2Storage;
 use \lib\models\MemberFields;
+use \duyuu\dao\Roles;
 
 use local\oauth2\OAuth2;
 use local\oauth2\OAuth2ServerException;
@@ -464,6 +465,13 @@ class testController extends \Yaf\Controller_Abstract
             return array (
                 'content' => $file, 
                 'headers' => $http_response_header);
+    }
+
+    public function rolesAction() 
+    {
+        $roles = new Roles();
+        $roles->initRoles();
+        exit();
     }
 }
 

@@ -57,7 +57,7 @@ class BookCategory extends \local\db\ORM
         $category = self::instance();
         $table = $this->table;
 
-        $list = $category->field("$table.cid,$table.name,i.path as cover")->joinQuery("images as i","$table.pid=i.pid")->limit(20)->fetchList();
+        $list = $category->field("$table.cid,$table.name,i.path as cover")->joinQuery("images as i","$table.pid=i.pid")->fetchList();
 
         if (is_array($list)) {
             foreach ($list as $key => $value) {

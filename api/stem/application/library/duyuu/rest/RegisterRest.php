@@ -16,38 +16,38 @@ class RegisterRest extends \local\rest\Restful{
     public static function initRegister()
     {
         //test
-        self::regRestURL('testIndex','/api/test/index','test','index');
-        self::regRestURL('testReg','/api/test/reg','test','reg');
-        self::regRestURL('testLogin','/api/test/login','test','login');
-        self::regRestURL('testAddClient','/api/test/addclient','test','addClient');
-        self::regRestURL('testToken','/api/test/token','test','token');
-        self::regRestURL('testAuthorize','/api/test/authorize','test','authorize');
-        self::regRestURL('testCallback','/api/test/callback','test','callback');
-        self::regRestURL('testUpload','/api/test/upload','test','upload');
-        self::regRestURL('testAddComment','/api/test/addComment','test','addComment');
-        self::regRestURL('testResource','/api/test/resource','test','resource');
-        self::regRestURL('testFinish','/api/test/finish','test','finish');
+        self::regRestURL('apiTestIndex','/api/test/index','test','index');
+        self::regRestURL('apiTestReg','/api/test/reg','test','reg');
+        self::regRestURL('apiTestLogin','/api/test/login','test','login');
+        self::regRestURL('apiTestAddClient','/api/test/addclient','test','addClient');
+        self::regRestURL('apiTestToken','/api/test/token','test','token');
+        self::regRestURL('apiTestAuthorize','/api/test/authorize','test','authorize');
+        self::regRestURL('apiTestCallback','/api/test/callback','test','callback');
+        self::regRestURL('apiTestUpload','/api/test/upload','test','upload');
+        self::regRestURL('apiTestAddComment','/api/test/addComment','test','addComment');
+        self::regRestURL('apiTestResource','/api/test/resource','test','resource');
+        self::regRestURL('apiTestFinish','/api/test/finish','test','finish');
 
         /**User
         ************************/
 
         // userLogin
-        self::regRestURL('userLogin','/api/user/login','user','login');
+        self::regRestURL('apiUserLogin','/api/user/login','user','login');
         // userRegister
-        self::regRestURL('userRegister','/api/user/register','user','register');
+        self::regRestURL('apiUserRegister','/api/user/register','user','register');
         // userLogout
-        self::regRestURL('userLogout','/api/user/logout','user','logout');
+        self::regRestURL('apiUserLogout','/api/user/logout','user','logout');
         // userProfile
-        self::regRestURL('userProfile','/api/user/profile','user','profile');
+        self::regRestURL('apiUserProfile','/api/user/profile','user','profile');
         // userPurchased
-        self::regRestURL('userPurchased','/api/user/purchased/:page/:limit','user','purchased');
+        self::regRestURL('apiUserPurchased','/api/user/purchased/:page/:limit','user','purchased');
         
         // user Buylist
-        self::regRestURL('userBuyList','/api/user/buyList/:offset/:limit','userShelf','buyList');
+        self::regRestURL('apiUserBuyList','/api/user/buyList/:offset/:limit','userShelf','buyList');
         // user Anthor BuyList
-        self::regRestURL('userOtherBuyList','/api/user/otherList/:type','userShelf','otherList');
+        self::regRestURL('apiUserOtherBuyList','/api/user/otherList/:type','userShelf','otherList');
         // user Delete book
-        self::regRestURL('userDeleteBook','/api/user/book/delete/:bid','userShelf','delete');
+        self::regRestURL('apiUserDeleteBook','/api/user/book/delete/:bid','userShelf','delete');
 
 
 
@@ -55,56 +55,56 @@ class RegisterRest extends \local\rest\Restful{
         ************************/
         
         // store recommond books
-        self::regRestURL('storeIndexRecommend','/api/store/recommend','store','recommend');
+        self::regRestURL('apiStoreIndexRecommend','/api/store/recommend','store','recommend');
         // store top list
-        self::regRestURL('storeTopList','/api/store/top/:sortID','store','top');
+        self::regRestURL('apiStoreTopList','/api/store/top/:sortID','store','top');
 
         // store menu list
-        self::regRestURL('storeMenuList','/api/store/menu/:mid/:limit/:page','store','menu');
+        self::regRestURL('apiStoreMenuList','/api/store/menu/:mid/:limit/:page','store','menu');
 
         // store The Book of category
-        self::regRestURL('storeCategory','/api/store/category','store','category');
+        self::regRestURL('apiStoreCategory','/api/store/category','store','category');
         // store Sub category
-        self::regRestURL('storeSubCategory','/api/store/category/:cid/:limit/:page','store','subCategory');
+        self::regRestURL('apiStoreSubCategory','/api/store/category/:cid/:limit/:page','store','subCategory');
         // store Book Infomation
-        self::regRestURL('storeBookInfo','/api/store/book/:bid','storeBook','book');
+        self::regRestURL('apiStoreBookInfo','/api/store/book/:bid','storeBook','book');
         // store Book Menu
-        self::regRestURL('storeBookMenu','/api/store/book/menu/:bid','storeBook','bookMenu');
+        self::regRestURL('apiStoreBookMenu','/api/store/book/menu/:bid','storeBook','bookMenu');
         // store Book Chapter
-        self::regRestURL('storeBookChapter','/api/store/book/chapter/:bid','store','bookChapter');
+        self::regRestURL('apiStoreBookChapter','/api/store/book/chapter/:bid','store','bookChapter');
 
         // store Download Book
-        self::regRestURL('storeDownLoadBook','/api/store/download/book/:bid','Download','book');
+        self::regRestURL('apiStoreDownLoadBook','/api/store/download/book/:bid','Download','book');
 
         /** Comments
         *************************/
 
         // add comment
-        self::regRestURL('storeAddComment','/api/comments/add','Comments','addComment');
+        self::regRestURL('apiStoreAddComment','/api/comments/add','Comments','addComment');
         // delete comment
-        self::regRestURL('storeDeleteComment','/api/comments/delete/:bid','Comments','deleteComment');
+        self::regRestURL('apiStoreDeleteComment','/api/comments/delete/:bid','Comments','deleteComment');
         // book Comments List
-        self::regRestURL('storeBookCommentList','/api/comments/bid/:bid/:limit/:page','Comments','bookCommentList');
+        self::regRestURL('apiStoreBookCommentList','/api/comments/bid/:bid/:limit/:page','Comments','bookCommentList');
 
         // book Comments list for user
-        self::regRestURL('storeBookCommentListForUser','/api/comments/uid/:limit/:page','Comments','bookCommentListForUser');
+        self::regRestURL('apiStoreBookCommentListForUser','/api/comments/uid/:limit/:page','Comments','bookCommentListForUser');
 
         /** Payment
         *************************/
 
         // Payment For Apple
-        self::regRestURL('paymentForApple','/api/payment/apple/feedback','store','paymentForApple');
+        self::regRestURL('apiPaymentForApple','/api/payment/apple/feedback','store','paymentForApple');
         
         
         // Payment For Alipay
         
-        self::regRestURL('paymentForAlipayTo', '/api/payment/alipay/pay/:productID', 'payment', 'alipayTo');
-        self::regRestURL('paymentForAlipayNotify', '/api/payment/alipay/notify', 'payment', 'alipayNotify');
-        self::regRestURL('paymentForAlipayCallback', '/api/payment/alipay/callback', 'payment', 'alipayReturn');
+        self::regRestURL('apiPaymentForAlipayTo', '/api/payment/alipay/pay/:productID', 'payment', 'alipayTo');
+        self::regRestURL('apiPaymentForAlipayNotify', '/api/payment/alipay/notify', 'payment', 'alipayNotify');
+        self::regRestURL('apiPaymentForAlipayCallback', '/api/payment/alipay/callback', 'payment', 'alipayReturn');
 
         // WeChaT
-        self::regRestURL('wechatIndex', '/api/wechat/index', 'wechat', 'index');
-        self::regRestURL('wechatToken', '/api/wechat/token', 'wechat', 'token');
+        self::regRestURL('apiWechatIndex', '/api/wechat/index', 'wechat', 'index');
+        self::regRestURL('apiWechatToken', '/api/wechat/token', 'wechat', 'token');
         
         return self::$restURL;
     }

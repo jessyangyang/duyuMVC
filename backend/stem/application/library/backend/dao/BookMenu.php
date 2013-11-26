@@ -80,7 +80,9 @@ class BookMenu extends \local\db\ORM
         $menu = self::instance();
         $table = $this->table;
 
-        $list = $menu->field("$table.id,$table.bid,$table.type,$table.sort,$table.title,$table.summary,bc.body")->joinQuery('book_chapter as bc',"$table.id=bc.menu_id")->where("$table.id='$menu_id'")->limit(1)->fetchList();
+        $list = $menu->field("$table.id,$table.bid,$table.type,$table.sort,$table.title,$table.summary,bc.body")
+            ->joinQuery('book_chapter as bc',"$table.id=bc.menu_id")
+            ->where("$table.id='$menu_id'")->limit(1)->fetchList();
 
         $menu->joinTables = array();
         return $list;

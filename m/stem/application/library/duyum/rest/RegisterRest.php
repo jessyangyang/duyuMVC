@@ -20,9 +20,9 @@ class RegisterRest extends \local\rest\Restful{
          */
         
         // Upload Image
-        self::regRestURL('filesUpload','/files/upload/:type','files','upload');
-        self::regRestURL('filesLoad','/files/load/:type','files','load');
-        self::regRestURL('filesSend','/files/send/:fileName','files','send');
+        self::regRestURL('mFilesUpload','/files/upload/:type','files','upload');
+        self::regRestURL('mFilesLoad','/files/load/:type','files','load');
+        self::regRestURL('mFilesSend','/files/send/:fileName','files','send');
 
         /////////////////////
         // Mobile WebSite  //
@@ -38,7 +38,8 @@ class RegisterRest extends \local\rest\Restful{
         ///////////
         // Test  //
         ///////////
-        self::regRestURL('testIndex','/test/:action','test','index');
+        self::regRestURL('mTestIndex','/test/:action','test','index');
+        self::regRestURL('mTestRoles','/test/:action','test','roles');
         
         return self::$restURL;
     }

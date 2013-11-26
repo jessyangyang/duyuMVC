@@ -8,7 +8,7 @@
  * @license     http://wiki.duyu.com/duyuMvc
  */
 
-
+use \duyum\dao\Roles;
 
 class TestController extends \Yaf\Controller_Abstract 
 {
@@ -30,5 +30,12 @@ class TestController extends \Yaf\Controller_Abstract
                 # code...
                 break;
         }
+    }
+
+    public function rolesAction() 
+    {
+        $roles = new Roles();
+        $roles->initRoles();
+        exit();
     }
 }
