@@ -13,7 +13,7 @@ use \lib\models\BookInfo;
 use \lib\dao\DownloadControl;
 use \local\rest\Restful;
 use \duyuu\dao\MemberStateTemp;
-use \duyuu\dao\MemberFields;
+use \lib\models\MemberFields;
 
 
 
