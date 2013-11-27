@@ -123,6 +123,7 @@ class ORM extends MySQL
         $tmpIntType = array('int','tinyint','smallint','mediumint','integer','bigint');
         $tmpFloatType = array('float','double');
         $tmpFloatType = array('bit');
+
         // query condition
         if(isset($tmpOption['where']) and is_array($tmpOption['where']))
         {
@@ -160,6 +161,9 @@ class ORM extends MySQL
                     }
                 }
             }
+        }
+        elseif (isset($tmpOption['where'])) {
+            $tmpOption['where'] = $this->escapeString($tmpOption['where']);
         }
         // elseif (isset($tmpOption['where']))
         // {
