@@ -158,7 +158,7 @@ class Books extends \lib\models\Books
             ->joinQuery('images as i','i.pid=p.pid')
             ->joinQuery('book_fields as bf',"$table.bid=bf.bid")
             ->joinQuery('products as ps',"ps.oldid=$table.bid")
-            ->where($sql)->order("$table.published")
+            ->where($sql)->order("$table.published DESC")
             ->limit($offset,$limit)->fetchList();
 
         if (is_array($list)) {
