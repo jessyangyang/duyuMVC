@@ -154,27 +154,27 @@ class WriterController extends \Yaf\Controller_Abstract
 
                 if ($bid){
                     $book ->where("bid=$bid")->update(array(
-                        'title' => $data->getPost('title'),
-                        'author' => $data->getPost('author'),
-                        'cid' => $data->getPost('category')));
+                        'title' => $book->escapeString($data->getPost('title')),
+                        'author' => $book->escapeString($data->getPost('author')),
+                        'cid' => $book->escapeString($data->getPost('category'))));
                     
                     $bookinfo->where("bid='$bid'")->update(array(
-                            'tags' => $data->getPost('tags'))
+                            'tags' => $book->escapeString($data->getPost('tags')))
                     );
                     $bookfield->where("bid='$bid'")->update(array('bid' => $bid,'uid' => $userInfo->id,'modified' => UPDATE_TIME));
                 }
                 else
                 {
                     $arr = array(
-                        'cid' => $data->getPost('category'),
-                        'title' => $data->getPost('title'),
-                        'author' => $data->getPost('author'),
+                        'cid' => $book->escapeString($data->getPost('category')),
+                        'title' => $book->escapeString($data->getPost('title')),
+                        'author' => $book->escapeString($data->getPost('author')),
                         'published' => UPDATE_TIME);
                     if ($bookid = $book->insert($arr)) 
                     {
                         $bookinfo ->insert(array(
                             'bid' => $bookid,
-                            'tags' => $data->getPost('tags')
+                            'tags' => $book->escapeString($data->getPost('tags'))
                         ));
 
                         $bookfield->insert(array(
