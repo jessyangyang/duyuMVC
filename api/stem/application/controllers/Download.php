@@ -12,6 +12,8 @@ use \local\download\Download;
 use \lib\models\BookInfo;
 use \local\rest\Restful;
 use \duyuu\dao\MemberStateTemp;
+use \duyuu\dao\MemberFields;
+
 
 class DownloadController extends \Yaf\Controller_Abstract 
 {
@@ -29,6 +31,24 @@ class DownloadController extends \Yaf\Controller_Abstract
             'Content-Transfer-Encoding: binary');
 
         $bookinfo = BookInfo::instance();
+
+        $userInfo = MemberStateTemp::getCurrentUserForAuth();
+
+        if ($userInfo) {
+            $fields = MemberFields::instance($userInfo['uid']);
+            if($fields->id)
+            {
+                $fields->download_count += 1;
+                $fields->save();
+            }
+            else
+            {
+                $fields->insert(array('id'=>$userInfo['uid'],'download_count'=> '1'));
+            }
+
+            $download = new DownloadControl();
+            $download->addDownload($userInfo['uid'],$bid);
+        }
 
         $list = $bookinfo->field('download_path')->where("bid='$bid'")->fetchRow();
 
