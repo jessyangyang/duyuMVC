@@ -275,9 +275,9 @@ class WriterController extends \Yaf\Controller_Abstract
                     {
                         $menu_arr = array(
                             'bid' => $bid,
-                            'title' => $data->getPost('menu-title'),
+                            'title' => $menu->escapeString($data->getPost('menu-title')),
                             // 'author' => $data->getPost('menu-author'),
-                            'summary' => $data->getPost('menu-summary'));
+                            'summary' => $menu->escapeString($data->getPost('menu-summary')));
 
                         if($menuid || $session->get('current_menu_id')){
                             $menu_arr['id'] = $menuid ? $menuid : $session->get('current_menu_id');
@@ -286,7 +286,7 @@ class WriterController extends \Yaf\Controller_Abstract
                             $menu->where("id='$menuid'")->update($menu_arr);
                         }
                         else{
-                            $menu_arr['sort'] = $data->getPost('sort-count') + 1;
+                            $menu_arr['sort'] = $menu->escapeString($data->getPost('sort-count') + 1);
                             $menuid = $menu->insert($menu_arr);
                         };
 

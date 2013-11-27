@@ -162,9 +162,6 @@ class ORM extends MySQL
                 }
             }
         }
-        elseif (isset($tmpOption['where'])) {
-            $tmpOption['where'] = $this->escapeString($tmpOption['where']);
-        }
         // elseif (isset($tmpOption['where']))
         // {
         //     $isFilter = array();
