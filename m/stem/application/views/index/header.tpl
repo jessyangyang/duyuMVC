@@ -39,7 +39,7 @@
         <script type="text/javascript" src="/js/jquery/jquery.retina.js"></script>
         <script type="text/javascript" src="/js/jquery/jquery.mobile.custom.js"></script>
         <script type="text/javascript" src="/js/jquery/jquery.mobile.min.js"></script>
-        
+        <meta name="baidu-tc-cerfication" content="3da39df14e14b2e955b254384a50cdf1" />
     </head>
 <body>
 <div data-role="page" id="home">
