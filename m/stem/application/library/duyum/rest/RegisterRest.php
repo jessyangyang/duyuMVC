@@ -39,7 +39,12 @@ class RegisterRest extends \local\rest\Restful{
         // Test  //
         ///////////
         self::regRestURL('mTestIndex','/test/:action','test','index');
-        self::regRestURL('mTestRoles','/test/:action','test','roles');
+        self::regRestURL('mTestRoles','/test/roles/:action','test','roles');
+        self::regRestURL('mTestTest','/test/test/:action','test','test');
+
+        // Rss
+        self::regRestURL('mRssIndex','/rss/:action','rss','index');
+        self::regRestURL('mRssInit','/rss/init','rss','init');
         
         return self::$restURL;
     }
