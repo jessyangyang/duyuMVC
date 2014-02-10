@@ -35,6 +35,9 @@ define("BASE_PATH", realpath((phpversion() >= "5.3"? __DIR__: dirname(__FILE__))
 // FILES PATH for SERVER
 define('FILES_PATH',realpath((phpversion() >= "5.3"? __DIR__: dirname(__FILE__)).'/../../../'));
 
+// SITE PATH
+define("SITE_PATH", realpath((phpversion() >= "5.3"? __DIR__: dirname(__FILE__)).'/../../').'/stem/main');
+
 // Is this an AJAX request?
 define('AJAX_REQUEST', strtolower(getenv('HTTP_X_REQUESTED_WITH')) === 'xmlhttprequest');
 
